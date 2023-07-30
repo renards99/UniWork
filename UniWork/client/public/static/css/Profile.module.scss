@@ -1,0 +1,7 @@
+.spinner-input:checked + div {
+	background-color: #54c694;
+	.spinner {
+		transform: translateX(36px);
+		background-color: white;
+	}
+}
