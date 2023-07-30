@@ -407,12 +407,10 @@ module.exports = {
       service_id: {
         type: Sequelize.INTEGER(11),
         primaryKey: true,
-        autoIncrement: true
       },
       job_post_id: {
         type: Sequelize.INTEGER(11),
         primaryKey: true,
-        autoIncrement: true
       },
       bill_date: {
         type: Sequelize.DATE,

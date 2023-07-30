@@ -1,4 +1,4 @@
-const bill = this.require('./bill');
+const bill = require('./bill');
 
 module.exports = {
     bill
