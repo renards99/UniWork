@@ -1,6 +1,6 @@
 Setup môi trường chung cho dự án bus official (BE) 
 1 .env ( chứa các thông tin như port, db information )
-2. các thư viện hiện tại đã cài : npm install express sequelize mysql2 cors --save
+2. các thư viện hiện tại đã cài : npm install express sequelize mysql2 cors --save cookie-parser
 3. extension để format code : prettier
 4. Ngoài ra đã setup các tutorial tại mỗi file để mọi người đọc và code theo flow có sẵn 
 
