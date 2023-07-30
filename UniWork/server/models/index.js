@@ -40,4 +40,13 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+db.job_types = require('./job_types')(sequelize, Sequelize);
+db.bill = require('./bill')(sequelize, Sequelize);
+db.experience_detail = require('./experience_detail')(sequelize, Sequelize);
+db.job_location = require('./job_location')(sequelize, Sequelize);
+db.job_post_activity = require('./job_post_activity')(sequelize, Sequelize);
+db.job_post = require('./job_post')(sequelize, Sequelize);
+db.service = require('./service')(sequelize, Sequelize);
+db.company = require('./company')(sequelize, Sequelize);
+
 module.exports = db;

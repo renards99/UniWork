@@ -226,6 +226,30 @@ module.exports = {
       }
     });
 
+    await queryInterface.createTable('service', {
+      id: {
+        type: Sequelize.INTEGER(11),
+        primaryKey: true,
+        autoIncrement: true
+      },
+      service_name: {
+        type: Sequelize.STRING(100),
+        allowNull: true
+      },
+      description: {
+        type: Sequelize.STRING(100),
+        allowNull: true
+      },
+      price: {
+        type: Sequelize.DOUBLE,
+        allowNull: false
+      },
+      job_post_id: {
+        type: Sequelize.INTEGER(11),
+        allowNull: false
+      },
+    });
+
     await queryInterface.createTable('job_post_activity', {
       id: {
         type: Sequelize.INTEGER(11),
@@ -373,6 +397,32 @@ module.exports = {
         allowNull: false
       }
     });
+
+    await queryInterface.createTable('bill', {
+      id: {
+        type: Sequelize.INTEGER(11),
+        primaryKey: true,
+        autoIncrement: true
+      },
+      service_id: {
+        type: Sequelize.INTEGER(11),
+        primaryKey: true,
+        autoIncrement: true
+      },
+      job_post_id: {
+        type: Sequelize.INTEGER(11),
+        primaryKey: true,
+        autoIncrement: true
+      },
+      bill_date: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      total: {
+        type: Sequelize.DOUBLE,
+        allowNull: false
+      }
+    })
 
     await queryInterface.createTable('company', {
       id: {
