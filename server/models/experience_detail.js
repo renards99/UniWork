@@ -7,21 +7,35 @@ module.exports = (sequelize, Sequelize) => {
           primaryKey: true,
           autoIncrement: true,
         },
-        job_type_name: {
+        user_account_id: {
+          type: Sequelize.INTEGER(11),
+          allowNull: false,
+          references: {
+            model: {
+              tableName: "user_account",
+            },
+            key: "id",
+          },
+          onDelete: "cascade",
+        },
+        start_date: {
+          type: Sequelize.DATE,
+          allowNull: false,
+        },
+        end_date: {
+          type: Sequelize.DATE,
+          allowNull: true,
+        },
+        job_title: {
           type: Sequelize.STRING(100),
-          allowNull: false
+          allowNull: true,
         },
-        createdAt: {
-          type: Sequelize.DATE,
-          allowNull: false
+        company_name: {
+          type: Sequelize.STRING(100),
+          allowNull: false,
         },
-        updatedAt: {
-          type: Sequelize.DATE,
-          allowNull: false
-        }
       },
       {
-        timestamps: false,
         freezeTableName: true,
       }
     );

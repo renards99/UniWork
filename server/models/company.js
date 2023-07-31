@@ -3,33 +3,24 @@ module.exports = (sequelize, Sequelize) => {
       'company',
       {
         id: {
-            type: Sequelize.INTEGER(11),
-            primaryKey: true,
-            autoIncrement: true
-          },
-          company_name: {
-            type: Sequelize.STRING(100),
-            allowNull: false
-          },
-          company_description: {
-            type: Sequelize.STRING(100),
-            allowNull: false
-          },
-          company_website_url: {
-            type: Sequelize.STRING(100),
-            allowNull: true
-          },
-          createdAt: {
-            type: Sequelize.DATE,
-            allowNull: false
-          },
-          updatedAt: {
-            type: Sequelize.DATE,
-            allowNull: false
-          }
+          type: Sequelize.INTEGER(11),
+          primaryKey: true,
+          autoIncrement: true,
+        },
+        company_name: {
+          type: Sequelize.STRING(100),
+          allowNull: false,
+        },
+        company_description: {
+          type: Sequelize.STRING(100),
+          allowNull: false,
+        },
+        company_website_url: {
+          type: Sequelize.STRING(100),
+          allowNull: true,
+        },
       },
       {
-        timestamps: false,
         freezeTableName: true,
       }
     );

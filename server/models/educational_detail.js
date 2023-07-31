@@ -7,6 +7,21 @@ module.exports = (sequelize, Sequelize) => {
         primaryKey: true,
         autoIncrement: true,
       },
+      user_account_id: {
+        type: Sequelize.INTEGER(11),
+        allowNull: false,
+        references: {
+          model: {
+            tableName: "user_account",
+          },
+          key: "id",
+        },
+        onDelete: "cascade",
+      },
+      educational_detail: {
+        type: Sequelize.INTEGER(11),
+        allowNull: false,
+      },
       major: {
         type: Sequelize.INTEGER(11),
         allowNull: false,
@@ -27,17 +42,8 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING(10),
         allowNull: false,
       },
-      createdAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-      },
-      updatedAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-      },
     },
     {
-      timestamps: false,
       freezeTableName: true,
     }
   );

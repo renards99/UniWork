@@ -1,1 +1,2 @@
-module.exports = [require("./bill"), require("./role")];
+module.exports = [require("./bill"), require("./role"), require("./user_account")];
+

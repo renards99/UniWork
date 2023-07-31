@@ -9,16 +9,8 @@ module.exports = (sequelize, Sequelize) => {
         },
         job_type_name: {
           type: Sequelize.STRING(100),
-          allowNull: false
+          allowNull: false,
         },
-        createdAt: {
-          type: Sequelize.DATE,
-          allowNull: false
-        },
-        updatedAt: {
-          type: Sequelize.DATE,
-          allowNull: false
-        }
       },
       {
         timestamps: false,
