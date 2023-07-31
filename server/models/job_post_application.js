@@ -1,18 +1,19 @@
+
 module.exports = (sequelize, Sequelize) => {
-    const Bill = sequelize.define(
-      'bill',
+    const JobPostApplication = sequelize.define(
+      'job_post_application',
       {
         id: {
           type: Sequelize.INTEGER(11),
           primaryKey: true,
           autoIncrement: true,
         },
-        service_id: {
+        user_account_id: {
           type: Sequelize.INTEGER(11),
-          primaryKey: true,
+          allowNull: false,
           references: {
             model: {
-              tableName: "service",
+              tableName: "user_account",
             },
             key: "id",
           },
@@ -20,7 +21,7 @@ module.exports = (sequelize, Sequelize) => {
         },
         job_post_id: {
           type: Sequelize.INTEGER(11),
-          primaryKey: true,
+          allowNull: false,
           references: {
             model: {
               tableName: "job_post",
@@ -29,21 +30,13 @@ module.exports = (sequelize, Sequelize) => {
           },
           onDelete: "cascade",
         },
-        bill_date: {
-          type: Sequelize.DATE,
+        apply_at: {
+          type: Sequelize.STRING(20),
           allowNull: false,
         },
-        total: {
-          type: Sequelize.DOUBLE,
-          allowNull: false,
-        },
-        created_at: {
-          type: Sequelize.DATE,
-          allowNull: false,
-        },
-        updated_at: {
-          type: Sequelize.DATE,
-          allowNull: false,
+        state: {
+          type: Sequelize.STRING(20),
+          allowNull: true,
         },
       },
       {
@@ -51,5 +44,5 @@ module.exports = (sequelize, Sequelize) => {
       }
     );
   
-    return Bill;
+    return JobPostApplication;
   };

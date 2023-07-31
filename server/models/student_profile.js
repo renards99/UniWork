@@ -7,6 +7,17 @@ module.exports = (sequelize, Sequelize) => {
         primaryKey: true,
         autoIncrement: true,
       },
+      user_account_id: {
+        type: Sequelize.INTEGER(11),
+        allowNull: false,
+        references: {
+          model: {
+            tableName: "user_account",
+          },
+          key: "id",
+        },
+        onDelete: "cascade",
+      },
       first_name: {
         type: Sequelize.STRING(20),
         allowNull: false,
@@ -15,21 +26,12 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING(20),
         allowNull: true,
       },
-      short_des: {
+      cv: {
         type: Sequelize.STRING(100),
         allowNull: true,
       },
-      createdAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-      },
-      updatedAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-      },
     },
     {
-      timestamps: false,
       freezeTableName: true,
     }
   );

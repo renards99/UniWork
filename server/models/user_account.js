@@ -8,10 +8,21 @@ module.exports = (sequelize, Sequelize) => {
         autoIncrement: true,
       },
       role_id: {
+        type: Sequelize.INTEGER(11),
+        allowNull: false,
+        references: {
+          model: {
+            tableName: "role",
+          },
+          key: "id",
+        },
+        onDelete: "cascade",
+      },
+      email: {
         type: Sequelize.STRING(20),
         allowNull: false,
       },
-      email: {
+      password: {
         type: Sequelize.STRING(20),
         allowNull: false,
       },
@@ -31,14 +42,25 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.DATE,
         allowNull: false,
       },
-      createdAt: {
+      is_verified: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+      },
+      is_banned: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+      },
+      user_image: {
         type: Sequelize.DATE,
         allowNull: false,
       },
-      updatedAt: {
-        type: Sequelize.DATE,
+      short_des: {
+        type: Sequelize.STRING(1000),
         allowNull: false,
       },
+      refresh_access_token: {
+        type: Sequelize.STRING(1000)
+      }
     },
     {
       timestamps: false,
