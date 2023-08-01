@@ -8,7 +8,7 @@ const cookieParser = require('cookie-parser');
 const app = express();
 
 const corsOptions = {
-  origin: `http://localhost:${process.env.FRONT_END_PORT}`,
+  origin: `http://localhost:${process.env.CLIENT_PORT}`,
   credentials: true,
   optionSuccessStatus: 200,
 };
