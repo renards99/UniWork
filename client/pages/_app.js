@@ -6,18 +6,16 @@ import Footer from '../components/layout/footer';
 import { ChakraProvider } from '@chakra-ui/react'
 
 import '../public/static/css/style.css';
-import '../public/static/css/test.css';
+import '../public/static/css/nav_bar.css';
+
 
 function MyApp({ Component, pageProps }) {
+	const BACK_END_PORT = "http://localhost:5000";
 	return (
 		<ChakraProvider>
-			<Head>
-				<title>Uniwork</title>
-				<meta charSet='utf-8' />
-			</Head>
-			<Header></Header>
+			<Header back_end_port={BACK_END_PORT}/>
 			<Component {...pageProps} />
-			<Footer></Footer>
+			<Footer/>
 		</ChakraProvider>
 	);
 }

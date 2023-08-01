@@ -159,6 +159,7 @@ module.exports = {
               );
             }
           } catch (err) {
+            console.log(err);
             return responsehandler.error(res);
           }
         }
@@ -166,6 +167,7 @@ module.exports = {
         return responsehandler.badRequest(res, "User not found");
       }
     } catch (error) {
+      console.log(error)
       return responsehandler.error(res);
     }
   },

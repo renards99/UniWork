@@ -39,13 +39,11 @@ export default function HomePage() {
 	const toggleTab = (index) => {
 		setTabState(index);
 	};
-	const Navbar = <></>
 	const HomeContent = <>
 	
 	</>
 	return (
 		<>
-			<Navbar />
 			{HomeContent}
 		</>
 		//Slider

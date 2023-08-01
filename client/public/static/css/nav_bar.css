@@ -1,0 +1,27 @@
+.unw-navbar .item {
+    padding: 0 15px
+}
+.unw-navbar .item p{
+    cursor: pointer;
+}
+.unw-login-form .title {
+    font-size: 16px;
+}
+.unw-login-form .unw-input {
+    height: 40px;
+}
+.unw-login-form .unw-forget-password-button {
+    width: 100%;
+    color: #fff;
+    height: 36px; 
+    font-size: 16px; 
+    background-color: #F98820;
+    margin: 0 auto;
+}
+.unw-forget-password-return {
+    text-decoration: underline; 
+    font-size: 1.125rem; 
+    text-align: center; 
+    cursor: pointer;
+    font-weight: 500;
+}
