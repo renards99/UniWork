@@ -1,6 +1,6 @@
 Setup môi trường chung cho dự án bus official (BE) 
 1 .env ( chứa các thông tin như port, db information )
-2. các thư viện hiện tại đã cài : npm install express sequelize mysql2 cors --save cookie-parser
+2. các thư viện hiện tại đã cài : npm install express sequelize mysql2 cors --save cookie-parser  bcrypt
 3. extension để format code : prettier
 4. Ngoài ra đã setup các tutorial tại mỗi file để mọi người đọc và code theo flow có sẵn 
 
@@ -17,10 +17,6 @@ npx sequelize-cli db:migrate:undo; // revert lại data thay đổi trong folder
 
 Lệnh tạo mới file migration: "npx sequelize-cli migration:generate --name DayLaTenFile"
 
-
-
-Setup môi trường testing 
-1. cài các thử viện test : npm i -D jest supertest
-2. npm test để chạy test 
+Lệnh tạo file seeder: "npx sequelize-cli seed:generate --name DayLaTenFile"
 
 --------------------- SẼ UPDATE THÊM SAU ---------------------

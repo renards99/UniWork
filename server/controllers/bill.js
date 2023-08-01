@@ -10,7 +10,7 @@ module.exports = {
         const createBill = await Bill.create(params);
         try {
             if (createBill) {
-                return responsehandler.responseWithData(res, "Add Bill successfully!");
+                return responsehandler.responseWithData(res, 200, "Add Bill successfully!");
             } else {
                 return responsehandler.badRequest(res, "Cannot add bill! Try again!");
             }
@@ -28,7 +28,7 @@ module.exports = {
         });
         try {
             if (destroyBill) {
-                return responsehandler.responseWithData(res, "Delete Bill successfully!");
+                return responsehandler.responseWithData(res, 200, "Delete Bill successfully!");
             } else {
                 return responsehandler.badRequest(res, "Cannot delete bill! Try again!");
             }
@@ -46,7 +46,7 @@ module.exports = {
         });
         try {
             if (updateB) {
-                return responsehandler.responseWithData(res, "Update Bill successfully!");
+                return responsehandler.responseWithData(res, 200, "Update Bill successfully!");
             } else {
                 return responsehandler.badRequest(res, "Cannot update bill! Try again!");
             }
@@ -64,7 +64,7 @@ module.exports = {
         });
         try {
             if (getBillById) {
-                return responsehandler.responseWithData(res, "Get Bill successfully!");
+                return responsehandler.responseWithData(res, 200, "Get Bill successfully!");
             } else {
                 return responsehandler.badRequest(res, "Cannot get bill! Try again!");
             }
@@ -78,7 +78,7 @@ module.exports = {
         const getBill = await Bill.findAll();
         try {
             if (getBill) {
-                return responsehandler.responseWithData(res, "Get list bill successfully!");
+                return responsehandler.responseWithData(res, 200, "Get list bill successfully!");
             } else {
                 return responsehandler.badRequest(res, "Cannot get list bill! Try again!");
             }

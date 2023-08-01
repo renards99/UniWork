@@ -32,13 +32,13 @@ module.exports = (sequelize, Sequelize) => {
         post_by_id: {
           type: Sequelize.INTEGER(11),
           allowNull: false,
-          // references: {
-          //   model: {
-          //     tableName: "job_post_application",
-          //   },
-          //   key: "id",
-          // },
-          // onDelete: "cascade",
+          references: {
+            model: {
+              tableName: "user_account",
+            },
+            key: "id",
+          },
+          onDelete: "cascade",
         },
         company_id: {
           type: Sequelize.INTEGER(20),

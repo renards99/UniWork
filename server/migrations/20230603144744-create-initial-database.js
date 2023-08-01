@@ -121,14 +121,6 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false,
       },
-      created_at: {
-        type: Sequelize.DATE,
-        allowNull: false,
-      },
-      updated_at: {
-        type: Sequelize.DATE,
-        allowNull: false,
-      },
     });
 
     await queryInterface.createTable("request", {
@@ -199,14 +191,6 @@ module.exports = {
         type: Sequelize.STRING(100),
         allowNull: true,
       },
-      created_at: {
-        type: Sequelize.DATE,
-        allowNull: false,
-      },
-      updated_at: {
-        type: Sequelize.DATE,
-        allowNull: false,
-      },
     });
 
     await queryInterface.createTable("educational_detail", {
@@ -250,14 +234,6 @@ module.exports = {
         type: Sequelize.STRING(10),
         allowNull: false,
       },
-      created_at: {
-        type: Sequelize.DATE,
-        allowNull: false,
-      },
-      updated_at: {
-        type: Sequelize.DATE,
-        allowNull: false,
-      },
     });
 
     await queryInterface.createTable("experience_detail", {
@@ -291,14 +267,6 @@ module.exports = {
       },
       company_name: {
         type: Sequelize.STRING(100),
-        allowNull: false,
-      },
-      created_at: {
-        type: Sequelize.DATE,
-        allowNull: false,
-      },
-      updated_at: {
-        type: Sequelize.DATE,
         allowNull: false,
       },
     });
@@ -390,13 +358,13 @@ module.exports = {
       post_by_id: {
         type: Sequelize.INTEGER(11),
         allowNull: false,
-        // references: {
-        //   model: {
-        //     tableName: "job_post_application",
-        //   },
-        //   key: "id",
-        // },
-        // onDelete: "cascade",
+        references: {
+          model: {
+            tableName: "user_account",
+          },
+          key: "id",
+        },
+        onDelete: "cascade",
       },
       company_id: {
         type: Sequelize.INTEGER(20),
@@ -459,14 +427,6 @@ module.exports = {
       tag: {
         type: Sequelize.STRING(100),
         allowNull: true,
-      },
-      created_at: {
-        type: Sequelize.DATE,
-        allowNull: false,
-      },
-      updated_at: {
-        type: Sequelize.DATE,
-        allowNull: false,
       },
     });
 
