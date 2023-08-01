@@ -34,6 +34,10 @@ function HomePage() {
 	const goToSlide = (slideIndex) => {
 		setCurrentIndex(slideIndex);
 	};
+	const [tabState, setTabState] = useState(1);
+	const toggleTab = (index) => {
+		setTabState(index);
+	};
 	return (
 		//Slider
 		<div className='max-w-[1240px] h-[420px] w-full m-auto py-16 px-4 relative group'>
@@ -57,6 +61,46 @@ function HomePage() {
 						<RxDotFilled />
 					</div>
 				))}
+			</div>
+			<div>
+				<div className='bg-white grid-cols-4 grid items-center text-center'>
+					<div
+						className={
+							tabState === 1
+								? 'border-t-2 text-2xl p-4 cursor-pointer border-t-[#7dd7ad] text-[#7dd7ad] font-medium'
+								: 'border-t-2 text-2xl p-4 hover:border-t-gray-400 cursor-pointer font-medium'
+						}
+						onClick={() => toggleTab(1)}>
+						Tin tuyển dụng mới nhất
+					</div>
+					<div
+						className={
+							tabState === 2
+								? 'border-t-2 text-2xl p-4 cursor-pointer border-t-[#7dd7ad] text-[#7dd7ad] font-medium'
+								: 'border-t-2 text-2xl p-4 hover:border-t-gray-400 cursor-pointer font-medium'
+						}
+						onClick={() => toggleTab(2)}>
+						Tin tuyển dụng mới nhất
+					</div>
+					<div
+						className={
+							tabState === 3
+								? 'border-t-2 text-2xl p-4 cursor-pointer border-t-[#7dd7ad] text-[#7dd7ad] font-medium'
+								: 'border-t-2 text-2xl p-4 hover:border-t-gray-400 cursor-pointer font-medium'
+						}
+						onClick={() => toggleTab(3)}>
+						Tin tuyển dụng mới nhất
+					</div>
+					<div
+						className={
+							tabState === 4
+								? 'border-t-2 text-2xl p-4 cursor-pointer border-t-[#7dd7ad] text-[#7dd7ad] font-medium'
+								: 'border-t-2 text-2xl p-4 hover:border-t-gray-400 cursor-pointer font-medium'
+						}
+						onClick={() => toggleTab(4)}>
+						Tin tuyển dụng mới nhất
+					</div>
+				</div>
 			</div>
 		</div>
 	);
