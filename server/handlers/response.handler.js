@@ -1,6 +1,6 @@
-const responseWithData = (res, data) =>
-  res.status(200).send({
-    statusCode: 200,
+const responseWithData = (res, statusCode, data) =>
+  res.status(statusCode).send({
+    statusCode: statusCode,
     data: data,
   });
 const error = (res) =>
@@ -17,7 +17,10 @@ const unauthorized = (res) =>
   responseWithData(res, 401, {
     message: "Unauthorized",
   });
-
+const ok = (res, message) =>
+  responseWithData(res, 200, {
+    message,
+  });
 const notfound = (res) =>
   responseWithData(res, 404, {
     message: "Resource not found ",
@@ -29,4 +32,5 @@ module.exports = {
   badRequest,
   unauthorized,
   notfound,
+  ok,
 };
