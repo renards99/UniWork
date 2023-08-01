@@ -116,7 +116,7 @@ module.exports = {
                           delete getUser.dataValues.refresh_access_token;
                           delete getUser._previousDataValues.refresh_access_token;
       
-                          return responsehandler.responseWithData(res, {
+                          return responsehandler.responseWithData(res, 200, {
                               ...getUser,
                               accessToken,
                               message: 'Login successful!',
