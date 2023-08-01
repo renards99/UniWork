@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
   const Company = sequelize.define(
-    "company",
+    'company',
     {
       id: {
         type: Sequelize.INTEGER(11),
@@ -23,7 +23,7 @@ module.exports = (sequelize, Sequelize) => {
     {
       timestamps: false,
       freezeTableName: true,
-    }
+    },
   );
 
   return Company;

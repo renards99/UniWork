@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
   const JobLocation = sequelize.define(
-    "job_location",
+    'job_location',
     {
       id: {
         type: Sequelize.INTEGER(11),
@@ -27,7 +27,7 @@ module.exports = (sequelize, Sequelize) => {
     {
       freezeTableName: true,
       timestamps: false,
-    }
+    },
   );
 
   return JobLocation;

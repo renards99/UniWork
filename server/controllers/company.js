@@ -1,9 +1,9 @@
 //todo Company profile
-const db = require("../models");
+const db = require('../models');
 const Company = db.company;
 const Op = db.Sequelize.Op;
 const QueryTypes = db.Sequelize.QueryTypes;
-const responseHandler = require("../handlers/response.handler");
+const responseHandler = require('../handlers/response.handler');
 
 module.exports = {
   async addCompany(req, res) {
@@ -12,16 +12,9 @@ module.exports = {
 
       const create_company = await Company.create(params);
       if (create_company) {
-        return responseHandler.responseWithData(
-          res,
-          200,
-          "Create company successfully!"
-        );
+        return responseHandler.responseWithData(res, 200, 'Create company successfully!');
       } else {
-        return responseHandler.badRequest(
-          res,
-          "Can not create company, try again!"
-        );
+        return responseHandler.badRequest(res, 'Can not create company, try again!');
       }
     } catch (e) {
       console.log(e);
@@ -38,13 +31,9 @@ module.exports = {
         },
       });
       if (delete_company) {
-        return responseHandler.responseWithData(
-          res,
-          200,
-          "Company deleted successfully!"
-        );
+        return responseHandler.responseWithData(res, 200, 'Company deleted successfully!');
       } else {
-        return responseHandler.badRequest(res, "Company does not exist!");
+        return responseHandler.badRequest(res, 'Company does not exist!');
       }
     } catch (e) {
       console.log(e);
@@ -61,31 +50,23 @@ module.exports = {
           id: company_id,
         },
       });
-      if (!get_company)
-        return responseHandler.badRequest(res, "Company does not exist");
+      if (!get_company) return responseHandler.badRequest(res, 'Company does not exist');
       const updateCompany = await Company.update(
         { company_name, company_description, company_website_url },
         {
           where: {
             id: company_id,
           },
-        }
+        },
       );
       if (updateCompany) {
-        return responseHandler.responseWithData(
-          res,
-          200,
-          "Update Company successfully!"
-        );
+        return responseHandler.responseWithData(res, 200, 'Update Company successfully!');
       } else {
-        return responseHandler.badRequest(res, "Can not update Company!");
+        return responseHandler.badRequest(res, 'Can not update Company!');
       }
     } catch (e) {
       console.log(e);
-      return responseHandler.badRequest(
-        res,
-        "There is something wrong with your request!"
-      );
+      return responseHandler.badRequest(res, 'There is something wrong with your request!');
     }
   },
   async getCompanyById(req, res) {
@@ -97,9 +78,8 @@ module.exports = {
           id: company_id,
         },
       });
-      if (get_company)
-        return responseHandler.responseWithData(res, 200, get_company);
-      else return responseHandler.badRequest(res, "Company does not exist!");
+      if (get_company) return responseHandler.responseWithData(res, 200, get_company);
+      else return responseHandler.badRequest(res, 'Company does not exist!');
     } catch (e) {}
   },
   async getAllCompany(req, res) {
@@ -108,14 +88,11 @@ module.exports = {
       if (get_all_company) {
         return responseHandler.responseWithData(res, 200, get_all_company);
       } else {
-        return responseHandler.badRequest(res, "Can not get all Company!");
+        return responseHandler.badRequest(res, 'Can not get all Company!');
       }
     } catch (e) {
       console.log(e);
-      return responseHandler.badRequest(
-        res,
-        "There is something wrong with your request!"
-      );
+      return responseHandler.badRequest(res, 'There is something wrong with your request!');
     }
   },
 };

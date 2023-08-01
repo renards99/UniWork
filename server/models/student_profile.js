@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
   const Student_profile = sequelize.define(
-    "student_profile",
+    'student_profile',
     {
       id: {
         type: Sequelize.INTEGER(11),
@@ -12,11 +12,11 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
         references: {
           model: {
-            tableName: "user_account",
+            tableName: 'user_account',
           },
-          key: "id",
+          key: 'id',
         },
-        onDelete: "cascade",
+        onDelete: 'cascade',
       },
       first_name: {
         type: Sequelize.STRING(20),
@@ -34,7 +34,7 @@ module.exports = (sequelize, Sequelize) => {
     {
       timestamps: false,
       freezeTableName: true,
-    }
+    },
   );
 
   return Student_profile;

@@ -1,8 +1,8 @@
-const db = require("../models");
+const db = require('../models');
 const Request = db.request;
 const Op = db.Sequelize.Op;
 const QueryTypes = db.Sequelize.QueryTypes;
-const responseHandler = require("../handlers/response.handler");
+const responseHandler = require('../handlers/response.handler');
 
 module.exports = {
   async addRequest(req, res) {
@@ -13,16 +13,9 @@ module.exports = {
 
       const createRequest = await Request.create(params);
       if (createRequest) {
-        return responseHandler.responseWithData(
-          res,
-          200,
-          "Create request successfully!"
-        );
+        return responseHandler.responseWithData(res, 200, 'Create request successfully!');
       } else {
-        return responseHandler.badRequest(
-          res,
-          "Cannot create request, try again!"
-        );
+        return responseHandler.badRequest(res, 'Cannot create request, try again!');
       }
     } catch (e) {
       console.log(e);
@@ -39,14 +32,10 @@ module.exports = {
         },
       });
       if (delete_request) {
-        return responseHandler.responseWithData(
-          res,
-          200,
-          "Request deleted successfully!"
-        );
+        return responseHandler.responseWithData(res, 200, 'Request deleted successfully!');
       } else {
         console.log(e);
-        return responseHandler.badRequest(res, "Request does not exist!");
+        return responseHandler.badRequest(res, 'Request does not exist!');
       }
     } catch (e) {
       return responseHandler.error(res);
@@ -56,7 +45,7 @@ module.exports = {
   async updateRequest(req, res) {
     const params = req.body;
     try {
-      console.log("in update");
+      console.log('in update');
       const { request_name, request_description, state } = params;
       const request_id = params.id;
       const getRequest = await Request.findOne({
@@ -64,32 +53,24 @@ module.exports = {
           id: request_id,
         },
       });
-      if (!getRequest)
-        return responseHandler.badRequest(res, "Request does not exist!");
+      if (!getRequest) return responseHandler.badRequest(res, 'Request does not exist!');
       const updateRequest = await Request.update(
         { request_name, request_description, state },
         {
           where: {
             id: request_id,
           },
-        }
+        },
       );
-      console.log("in update");
+      console.log('in update');
       if (updateRequest) {
-        return responseHandler.responseWithData(
-          res,
-          200,
-          "Update request successfully!"
-        );
+        return responseHandler.responseWithData(res, 200, 'Update request successfully!');
       } else {
-        return responseHandler.badRequest(res, "Cannot update request!");
+        return responseHandler.badRequest(res, 'Cannot update request!');
       }
     } catch (e) {
       console.log(e);
-      return responseHandler.badRequest(
-        res,
-        "There is something wrong with your request!"
-      );
+      return responseHandler.badRequest(res, 'There is something wrong with your request!');
     }
   },
   async showRequestById(req, res) {
@@ -105,13 +86,10 @@ module.exports = {
       if (getRequestById) {
         return responseHandler.responseWithData(res, 200, getRequestById);
       } else {
-        return responseHandler.badRequest(res, "Request does not exist!");
+        return responseHandler.badRequest(res, 'Request does not exist!');
       }
     } catch (error) {
-      return responseHandler.badRequest(
-        res,
-        "There is something wrong with your request!"
-      );
+      return responseHandler.badRequest(res, 'There is something wrong with your request!');
     }
   },
   async ShowAllRequestByUserAcountId(req, res) {
@@ -126,13 +104,10 @@ module.exports = {
       if (getRequestByUserId) {
         return responseHandler.responseWithData(res, 200, getRequestByUserId);
       } else {
-        return responseHandler.badRequest(res, "Cannot get request!");
+        return responseHandler.badRequest(res, 'Cannot get request!');
       }
     } catch (error) {
-      return responseHandler.badRequest(
-        res,
-        "There is something wrong with your request!"
-      );
+      return responseHandler.badRequest(res, 'There is something wrong with your request!');
     }
   },
 };

@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
   const User_log = sequelize.define(
-    "user_log",
+    'user_log',
     {
       id: {
         type: Sequelize.INTEGER(11),
@@ -12,11 +12,11 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
         references: {
           model: {
-            tableName: "user_account",
+            tableName: 'user_account',
           },
-          key: "id",
+          key: 'id',
         },
-        onDelete: "cascade",
+        onDelete: 'cascade',
       },
       last_login_date: {
         type: Sequelize.DATE,
@@ -30,7 +30,7 @@ module.exports = (sequelize, Sequelize) => {
     {
       timestamps: false,
       freezeTableName: true,
-    }
+    },
   );
 
   return User_log;

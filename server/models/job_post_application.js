@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
   const JobPostApplication = sequelize.define(
-    "job_post_application",
+    'job_post_application',
     {
       id: {
         type: Sequelize.INTEGER(11),
@@ -12,22 +12,22 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
         references: {
           model: {
-            tableName: "user_account",
+            tableName: 'user_account',
           },
-          key: "id",
+          key: 'id',
         },
-        onDelete: "cascade",
+        onDelete: 'cascade',
       },
       job_post_id: {
         type: Sequelize.INTEGER(11),
         allowNull: false,
         references: {
           model: {
-            tableName: "job_post",
+            tableName: 'job_post',
           },
-          key: "id",
+          key: 'id',
         },
-        onDelete: "cascade",
+        onDelete: 'cascade',
       },
       apply_at: {
         type: Sequelize.STRING(20),
@@ -37,13 +37,13 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING(20),
         allowNull: true,
       },
-      createdAt: { type: Sequelize.DATE, field: "created_at" },
-      updatedAt: { type: Sequelize.DATE, field: "updated_at" },
+      createdAt: { type: Sequelize.DATE, field: 'created_at' },
+      updatedAt: { type: Sequelize.DATE, field: 'updated_at' },
     },
     {
       timestamps: true,
       freezeTableName: true,
-    }
+    },
   );
 
   return JobPostApplication;

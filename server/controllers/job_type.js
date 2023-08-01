@@ -1,8 +1,8 @@
-const db = require("../models");
+const db = require('../models');
 const Job_type = db.job_type;
 const Op = db.Sequelize.Op;
 const QueryTypes = db.Sequelize.QueryTypes;
-const responseHandler = require("../handlers/response.handler");
+const responseHandler = require('../handlers/response.handler');
 
 module.exports = {
   async addJobType(req, res) {
@@ -10,16 +10,9 @@ module.exports = {
       const params = req.body;
       const create_job_type = await Job_type.create(params);
       if (create_job_type) {
-        return responseHandler.responseWithData(
-          res,
-          200,
-          "Create job type successfully!"
-        );
+        return responseHandler.responseWithData(res, 200, 'Create job type successfully!');
       } else {
-        return responseHandler.badRequest(
-          res,
-          "Can not create job type , try again!"
-        );
+        return responseHandler.badRequest(res, 'Can not create job type , try again!');
       }
     } catch (e) {
       console.log(e);
@@ -36,13 +29,9 @@ module.exports = {
         },
       });
       if (delete_job_type) {
-        return responseHandler.responseWithData(
-          res,
-          200,
-          "Job type deleted successfully!"
-        );
+        return responseHandler.responseWithData(res, 200, 'Job type deleted successfully!');
       } else {
-        return responseHandler.badRequest(res, "Job type does not exist!");
+        return responseHandler.badRequest(res, 'Job type does not exist!');
       }
     } catch (e) {
       console.log(e);
@@ -59,31 +48,23 @@ module.exports = {
           id: job_type_id,
         },
       });
-      if (!getJobType)
-        return responseHandler.badRequest(res, "Job type does not exist!");
+      if (!getJobType) return responseHandler.badRequest(res, 'Job type does not exist!');
       const updateJobType = await Job_type.update(
         { job_type_name },
         {
           where: {
             id: job_type_id,
           },
-        }
+        },
       );
       if (updateJobType) {
-        return responseHandler.responseWithData(
-          res,
-          200,
-          "Update job type successfully!"
-        );
+        return responseHandler.responseWithData(res, 200, 'Update job type successfully!');
       } else {
-        return responseHandler.badRequest(res, "Can not update job type!");
+        return responseHandler.badRequest(res, 'Can not update job type!');
       }
     } catch (e) {
       console.log(e);
-      return responseHandler.badRequest(
-        res,
-        "There is something wrong with your request!"
-      );
+      return responseHandler.badRequest(res, 'There is something wrong with your request!');
     }
   },
   async jobTypeById(req, res) {
@@ -95,9 +76,8 @@ module.exports = {
           id: job_type_id,
         },
       });
-      if (getJobType)
-        return responseHandler.responseWithData(res, 200, getJobType);
-      else return responseHandler.badRequest(res, "Can not get job type!");
+      if (getJobType) return responseHandler.responseWithData(res, 200, getJobType);
+      else return responseHandler.badRequest(res, 'Can not get job type!');
     } catch (e) {}
   },
   async getAllJobType(req, res) {
@@ -106,14 +86,11 @@ module.exports = {
       if (get_all_job_type) {
         return responseHandler.responseWithData(res, 200, get_all_job_type);
       } else {
-        return responseHandler.badRequest(res, "Can not get all job type!");
+        return responseHandler.badRequest(res, 'Can not get all job type!');
       }
     } catch (e) {
       console.log(e);
-      return responseHandler.badRequest(
-        res,
-        "There is something wrong with your request!"
-      );
+      return responseHandler.badRequest(res, 'There is something wrong with your request!');
     }
   },
 };

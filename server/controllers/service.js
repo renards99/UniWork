@@ -1,8 +1,8 @@
-const db = require("../models");
+const db = require('../models');
 const Service = db.service;
 const Op = db.Sequelize.Op;
 const QueryTypes = db.Sequelize.QueryTypes;
-const responseHandler = require("../handlers/response.handler");
+const responseHandler = require('../handlers/response.handler');
 
 module.exports = {
   async addService(req, res) {
@@ -10,16 +10,9 @@ module.exports = {
     const createService = await Service.create(params);
     try {
       if (createService) {
-        return responseHandler.responseWithData(
-          res,
-          200,
-          "Add Service successfully!"
-        );
+        return responseHandler.responseWithData(res, 200, 'Add Service successfully!');
       } else {
-        return responseHandler.badRequest(
-          res,
-          "Cannot add Service! Try again!"
-        );
+        return responseHandler.badRequest(res, 'Cannot add Service! Try again!');
       }
     } catch (e) {
       console.log(e);
@@ -36,16 +29,9 @@ module.exports = {
     });
     try {
       if (destroyService) {
-        return responseHandler.responseWithData(
-          res,
-          200,
-          "Delete Service successfully!"
-        );
+        return responseHandler.responseWithData(res, 200, 'Delete Service successfully!');
       } else {
-        return responseHandler.badRequest(
-          res,
-          "Cannot delete Service! Try again!"
-        );
+        return responseHandler.badRequest(res, 'Cannot delete Service! Try again!');
       }
     } catch (e) {
       return responseHandler.error(res);
@@ -61,16 +47,9 @@ module.exports = {
     });
     try {
       if (updateB) {
-        return responseHandler.responseWithData(
-          res,
-          200,
-          "Update Service successfully!"
-        );
+        return responseHandler.responseWithData(res, 200, 'Update Service successfully!');
       } else {
-        return responseHandler.badRequest(
-          res,
-          "Cannot update Service! Try again!"
-        );
+        return responseHandler.badRequest(res, 'Cannot update Service! Try again!');
       }
     } catch (e) {
       return responseHandler.error(res);
@@ -88,10 +67,7 @@ module.exports = {
       if (get_service_by_id) {
         return responseHandler.responseWithData(res, 200, get_service_by_id);
       } else {
-        return responseHandler.badRequest(
-          res,
-          "Cannot get Service! Try again!"
-        );
+        return responseHandler.badRequest(res, 'Cannot get Service! Try again!');
       }
     } catch (e) {
       return responseHandler.error(res);
@@ -105,10 +81,7 @@ module.exports = {
       if (get_all_service) {
         return responseHandler.responseWithData(res, 200, get_all_service);
       } else {
-        return responseHandler.badRequest(
-          res,
-          "Cannot get list Service! Try again!"
-        );
+        return responseHandler.badRequest(res, 'Cannot get list Service! Try again!');
       }
     } catch (e) {
       return responseHandler.error(res);

@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
   const Request = sequelize.define(
-    "request",
+    'request',
     {
       id: {
         type: Sequelize.INTEGER(11),
@@ -12,11 +12,11 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
         references: {
           model: {
-            tableName: "user_account",
+            tableName: 'user_account',
           },
-          key: "id",
+          key: 'id',
         },
-        onDelete: "cascade",
+        onDelete: 'cascade',
       },
       request_name: {
         type: Sequelize.STRING(20),
@@ -30,13 +30,13 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING(20),
         allowNull: true,
       },
-      createdAt: { type: Sequelize.DATE, field: "created_at" },
-      updatedAt: { type: Sequelize.DATE, field: "updated_at" },
+      createdAt: { type: Sequelize.DATE, field: 'created_at' },
+      updatedAt: { type: Sequelize.DATE, field: 'updated_at' },
     },
     {
       freezeTableName: true,
       timestamps: true,
-    }
+    },
   );
 
   return Request;

@@ -46,7 +46,11 @@ const middleWareController = {
   },
   verifyTokenForAllUser(req, res, next) {
     middleWareController.verifyToken(req, res, () => {
-      if (req.user_account.role_id == 1 || req.user_account.role_id == 3 || req.user_account.role_id == 2) {
+      if (
+        req.user_account.role_id == 1 ||
+        req.user_account.role_id == 3 ||
+        req.user_account.role_id == 2
+      ) {
         next();
       } else {
         return responseHandler.unauthorized(res);

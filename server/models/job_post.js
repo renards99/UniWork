@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
   const JobPost = sequelize.define(
-    "job_post",
+    'job_post',
     {
       id: {
         type: Sequelize.INTEGER(11),
@@ -12,44 +12,44 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
         references: {
           model: {
-            tableName: "service",
+            tableName: 'service',
           },
-          key: "id",
+          key: 'id',
         },
-        onDelete: "cascade",
+        onDelete: 'cascade',
       },
       job_type_id: {
         type: Sequelize.INTEGER(11),
         allowNull: false,
         references: {
           model: {
-            tableName: "job_type",
+            tableName: 'job_type',
           },
-          key: "id",
+          key: 'id',
         },
-        onDelete: "cascade",
+        onDelete: 'cascade',
       },
       post_by_id: {
         type: Sequelize.INTEGER(11),
         allowNull: false,
         references: {
           model: {
-            tableName: "user_account",
+            tableName: 'user_account',
           },
-          key: "id",
+          key: 'id',
         },
-        onDelete: "cascade",
+        onDelete: 'cascade',
       },
       company_id: {
         type: Sequelize.INTEGER(20),
         allowNull: true,
         references: {
           model: {
-            tableName: "company",
+            tableName: 'company',
           },
-          key: "id",
+          key: 'id',
         },
-        onDelete: "cascade",
+        onDelete: 'cascade',
       },
       hire_number: {
         type: Sequelize.STRING(20),
@@ -64,11 +64,11 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
         references: {
           model: {
-            tableName: "job_location",
+            tableName: 'job_location',
           },
-          key: "id",
+          key: 'id',
         },
-        onDelete: "cascade",
+        onDelete: 'cascade',
       },
       is_active: {
         type: Sequelize.STRING(10),
@@ -98,13 +98,13 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING(100),
         allowNull: true,
       },
-      createdAt: { type: Sequelize.DATE, field: "created_at" },
-      updatedAt: { type: Sequelize.DATE, field: "updated_at" },
+      createdAt: { type: Sequelize.DATE, field: 'created_at' },
+      updatedAt: { type: Sequelize.DATE, field: 'updated_at' },
     },
     {
       timestamps: true,
       freezeTableName: true,
-    }
+    },
   );
 
   return JobPost;

@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
   const User_account = sequelize.define(
-    "user_account",
+    'user_account',
     {
       id: {
         type: Sequelize.INTEGER(11),
@@ -12,11 +12,11 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
         references: {
           model: {
-            tableName: "role",
+            tableName: 'role',
           },
-          key: "id",
+          key: 'id',
         },
-        onDelete: "cascade",
+        onDelete: 'cascade',
       },
       email: {
         type: Sequelize.STRING(20),
@@ -59,13 +59,13 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
       },
       refresh_access_token: {
-        type: Sequelize.STRING(1000)
-      }
+        type: Sequelize.STRING(1000),
+      },
     },
     {
       timestamps: false,
       freezeTableName: true,
-    }
+    },
   );
 
   return User_account;
