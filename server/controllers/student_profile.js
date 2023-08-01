@@ -65,9 +65,9 @@ module.exports = {
       }
     } catch (e) {
       return responsehandler.error(res);
-    }
+    } 
   },
-  async ShowAllStudentProfile(req, res) {
+  async showAllStudentProfile(req, res) {
     const params = req.body;
     const { user_account_id } = params;
 

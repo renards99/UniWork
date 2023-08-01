@@ -1,2 +1,15 @@
-module.exports = [require("./bill"), require("./role"), require("./user_account"), require("./user_log"), require("./student_profile"), require("./education_detail"), require('./experience_detail')];
-
+module.exports = [
+  require("./bill"),
+  require("./role"),
+  require("./user_account"),
+  require("./user_log"), require("./student_profile"), 
+  require("./education_detail"), 
+  require('./experience_detail'),
+  require("./request"),
+  require("./job_type"),
+  require("./company"),
+  require("./job_location"),
+  require("./service"),
+  require("./job_post"),
+  require("./job_post_application"),
+];

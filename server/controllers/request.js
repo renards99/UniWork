@@ -1,51 +1,138 @@
-//todo
 const db = require("../models");
 const Request = db.request;
 const Op = db.Sequelize.Op;
 const QueryTypes = db.Sequelize.QueryTypes;
-const responsehandler = require("../handlers/response.handler");
+const responseHandler = require("../handlers/response.handler");
 
 module.exports = {
   async addRequest(req, res) {
-    const params = req.body;
-    const { request_name, request_description } = params;
-    const createRequest = await Request.create(params);
     try {
+      const params = req.body;
+      // const { user_account_id, request_name, request_description, state } =
+      //   params;
+
+      const createRequest = await Request.create(params);
       if (createRequest) {
-        return responsehandler.responseWithData(
+        return responseHandler.responseWithData(
           res,
+          200,
           "Create request successfully!"
         );
       } else {
-        return responsehandler.badRequest(
+        return responseHandler.badRequest(
           res,
           "Cannot create request, try again!"
         );
       }
     } catch (e) {
-      return responsehandler.error(res);
+      console.log(e);
+      return responseHandler.error(res);
     }
   },
   async deleteRequest(req, res) {
     const params = req.body;
-    const request_id = params.request_id;
-    const createRequest = await Request.create(params);
+    const request_id = params.id;
     try {
       const delete_request = await Request.destroy({
         where: {
-          request_id: request_id,
+          id: request_id,
         },
       });
       if (delete_request) {
-        return responseHandler.ok(res, "Request deleted successfully!");
+        return responseHandler.responseWithData(
+          res,
+          200,
+          "Request deleted successfully!"
+        );
       } else {
+        console.log(e);
         return responseHandler.badRequest(res, "Request does not exist!");
       }
     } catch (e) {
-      return responsehandler.error(res);
+      return responseHandler.error(res);
     }
   },
-  async updateRequest(req, res) {},
-  async showBillById(req, res) {},
-  async ShowAllBill(req, res) {},
+
+  async updateRequest(req, res) {
+    const params = req.body;
+    try {
+      console.log("in update");
+      const { request_name, request_description, state } = params;
+      const request_id = params.id;
+      const getRequest = await Request.findOne({
+        where: {
+          id: request_id,
+        },
+      });
+      if (!getRequest)
+        return responseHandler.badRequest(res, "Request does not exist!");
+      const updateRequest = await Request.update(
+        { request_name, request_description, state },
+        {
+          where: {
+            id: request_id,
+          },
+        }
+      );
+      console.log("in update");
+      if (updateRequest) {
+        return responseHandler.responseWithData(
+          res,
+          200,
+          "Update request successfully!"
+        );
+      } else {
+        return responseHandler.badRequest(res, "Cannot update request!");
+      }
+    } catch (e) {
+      console.log(e);
+      return responseHandler.badRequest(
+        res,
+        "There is something wrong with your request!"
+      );
+    }
+  },
+  async showRequestById(req, res) {
+    const params = req.body;
+    try {
+      const request_id = params.id;
+
+      const getRequestById = await Request.findOne({
+        where: {
+          id: request_id,
+        },
+      });
+      if (getRequestById) {
+        return responseHandler.responseWithData(res, 200, getRequestById);
+      } else {
+        return responseHandler.badRequest(res, "Request does not exist!");
+      }
+    } catch (error) {
+      return responseHandler.badRequest(
+        res,
+        "There is something wrong with your request!"
+      );
+    }
+  },
+  async ShowAllRequestByUserAcountId(req, res) {
+    const params = req.body;
+    try {
+      const user_account_id = params.user_account_id;
+      const getRequestByUserId = await Request.findAll({
+        where: {
+          user_account_id: user_account_id,
+        },
+      });
+      if (getRequestByUserId) {
+        return responseHandler.responseWithData(res, 200, getRequestByUserId);
+      } else {
+        return responseHandler.badRequest(res, "Cannot get request!");
+      }
+    } catch (error) {
+      return responseHandler.badRequest(
+        res,
+        "There is something wrong with your request!"
+      );
+    }
+  },
 };
