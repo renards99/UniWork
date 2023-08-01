@@ -1,6 +1,6 @@
-const responseWithData = (res, data) =>
-  res.status(200).send({
-    statusCode: 200,
+const responseWithData = (res, statusCode, data) =>
+  res.status(statusCode).send({
+    statusCode: statusCode,
     data: data,
   });
 const error = (res) =>

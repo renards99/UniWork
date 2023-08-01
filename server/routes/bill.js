@@ -1,5 +1,6 @@
 const bills = require('../controllers').bill;
 var router = require('express').Router();
+const middleWare = require('../middleware/permission.middleware');
 
 router.post("/bill/create-bill", bills.addBill);
 router.put("/bill/update-bill", bills.updateBill);
