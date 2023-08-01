@@ -1,8 +1,8 @@
-const db = require("../models");
+const db = require('../models');
 const Job_post = db.job_post;
 const Op = db.Sequelize.Op;
 const QueryTypes = db.Sequelize.QueryTypes;
-const responseHandler = require("../handlers/response.handler");
+const responseHandler = require('../handlers/response.handler');
 
 module.exports = {
   async addJobPost(req, res) {
@@ -10,16 +10,9 @@ module.exports = {
       const params = req.body;
       const create_Job_post = await Job_post.create(params);
       if (create_Job_post) {
-        return responseHandler.responseWithData(
-          res,
-          200,
-          "Create job post successfully!"
-        );
+        return responseHandler.responseWithData(res, 200, 'Create job post successfully!');
       } else {
-        return responseHandler.badRequest(
-          res,
-          "Can not create job post , try again!"
-        );
+        return responseHandler.badRequest(res, 'Can not create job post , try again!');
       }
     } catch (e) {
       console.log(e);
@@ -36,13 +29,9 @@ module.exports = {
         },
       });
       if (delete_Job_post) {
-        return responseHandler.responseWithData(
-          res,
-          200,
-          "job post deleted successfully!"
-        );
+        return responseHandler.responseWithData(res, 200, 'job post deleted successfully!');
       } else {
-        return responseHandler.badRequest(res, "job post does not exist!");
+        return responseHandler.badRequest(res, 'job post does not exist!');
       }
     } catch (e) {
       console.log(e);
@@ -58,28 +47,20 @@ module.exports = {
           id: job_post_id,
         },
       });
-      if (!getJobPost)
-        return responseHandler.badRequest(res, "job post does not exist!");
+      if (!getJobPost) return responseHandler.badRequest(res, 'job post does not exist!');
       const updateJobPost = await Job_post.update(params, {
         where: {
           id: job_post_id,
         },
       });
       if (updateJobPost) {
-        return responseHandler.responseWithData(
-          res,
-          200,
-          "Update job post successfully!"
-        );
+        return responseHandler.responseWithData(res, 200, 'Update job post successfully!');
       } else {
-        return responseHandler.badRequest(res, "Can not update job post!");
+        return responseHandler.badRequest(res, 'Can not update job post!');
       }
     } catch (e) {
       console.log(e);
-      return responseHandler.badRequest(
-        res,
-        "There is something wrong with your request!"
-      );
+      return responseHandler.badRequest(res, 'There is something wrong with your request!');
     }
   },
   async getJobPostById(req, res) {
@@ -91,9 +72,8 @@ module.exports = {
           id: Job_post_id,
         },
       });
-      if (get_job_post)
-        return responseHandler.responseWithData(res, 200, get_job_post);
-      else return responseHandler.badRequest(res, "Can not get job post!");
+      if (get_job_post) return responseHandler.responseWithData(res, 200, get_job_post);
+      else return responseHandler.badRequest(res, 'Can not get job post!');
     } catch (e) {}
   },
   async getAllJobPost(req, res) {
@@ -102,14 +82,11 @@ module.exports = {
       if (get_all_Job_post) {
         return responseHandler.responseWithData(res, 200, get_all_Job_post);
       } else {
-        return responseHandler.badRequest(res, "Can not get all job post!");
+        return responseHandler.badRequest(res, 'Can not get all job post!');
       }
     } catch (e) {
       console.log(e);
-      return responseHandler.badRequest(
-        res,
-        "There is something wrong with your request!"
-      );
+      return responseHandler.badRequest(res, 'There is something wrong with your request!');
     }
   },
 };

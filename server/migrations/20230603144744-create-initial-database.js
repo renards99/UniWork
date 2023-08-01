@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable("role", {
+    await queryInterface.createTable('role', {
       id: {
         type: Sequelize.INTEGER(11),
         primaryKey: true,
@@ -14,7 +14,7 @@ module.exports = {
       },
     });
 
-    await queryInterface.createTable("company", {
+    await queryInterface.createTable('company', {
       id: {
         type: Sequelize.INTEGER(11),
         primaryKey: true,
@@ -34,7 +34,7 @@ module.exports = {
       },
     });
 
-    await queryInterface.createTable("user_account", {
+    await queryInterface.createTable('user_account', {
       id: {
         type: Sequelize.INTEGER(11),
         primaryKey: true,
@@ -45,11 +45,11 @@ module.exports = {
         allowNull: false,
         references: {
           model: {
-            tableName: "role",
+            tableName: 'role',
           },
-          key: "id",
+          key: 'id',
         },
-        onDelete: "cascade",
+        onDelete: 'cascade',
       },
       email: {
         type: Sequelize.STRING(20),
@@ -96,7 +96,7 @@ module.exports = {
       },
     });
 
-    await queryInterface.createTable("user_log", {
+    await queryInterface.createTable('user_log', {
       id: {
         type: Sequelize.INTEGER(11),
         primaryKey: true,
@@ -107,11 +107,11 @@ module.exports = {
         allowNull: false,
         references: {
           model: {
-            tableName: "user_account",
+            tableName: 'user_account',
           },
-          key: "id",
+          key: 'id',
         },
-        onDelete: "cascade",
+        onDelete: 'cascade',
       },
       last_login_date: {
         type: Sequelize.DATE,
@@ -123,7 +123,7 @@ module.exports = {
       },
     });
 
-    await queryInterface.createTable("request", {
+    await queryInterface.createTable('request', {
       id: {
         type: Sequelize.INTEGER(11),
         primaryKey: true,
@@ -134,11 +134,11 @@ module.exports = {
         allowNull: false,
         references: {
           model: {
-            tableName: "user_account",
+            tableName: 'user_account',
           },
-          key: "id",
+          key: 'id',
         },
-        onDelete: "cascade",
+        onDelete: 'cascade',
       },
       request_name: {
         type: Sequelize.STRING(20),
@@ -162,7 +162,7 @@ module.exports = {
       },
     });
 
-    await queryInterface.createTable("student_profile", {
+    await queryInterface.createTable('student_profile', {
       id: {
         type: Sequelize.INTEGER(11),
         primaryKey: true,
@@ -173,11 +173,11 @@ module.exports = {
         allowNull: false,
         references: {
           model: {
-            tableName: "user_account",
+            tableName: 'user_account',
           },
-          key: "id",
+          key: 'id',
         },
-        onDelete: "cascade",
+        onDelete: 'cascade',
       },
       first_name: {
         type: Sequelize.STRING(20),
@@ -193,7 +193,7 @@ module.exports = {
       },
     });
 
-    await queryInterface.createTable("educational_detail", {
+    await queryInterface.createTable('educational_detail', {
       id: {
         type: Sequelize.INTEGER(11),
         primaryKey: true,
@@ -204,11 +204,11 @@ module.exports = {
         allowNull: false,
         references: {
           model: {
-            tableName: "user_account",
+            tableName: 'user_account',
           },
-          key: "id",
+          key: 'id',
         },
-        onDelete: "cascade",
+        onDelete: 'cascade',
       },
       educational_detail: {
         type: Sequelize.INTEGER(11),
@@ -236,7 +236,7 @@ module.exports = {
       },
     });
 
-    await queryInterface.createTable("experience_detail", {
+    await queryInterface.createTable('experience_detail', {
       id: {
         type: Sequelize.INTEGER(11),
         primaryKey: true,
@@ -247,11 +247,11 @@ module.exports = {
         allowNull: false,
         references: {
           model: {
-            tableName: "user_account",
+            tableName: 'user_account',
           },
-          key: "id",
+          key: 'id',
         },
-        onDelete: "cascade",
+        onDelete: 'cascade',
       },
       start_date: {
         type: Sequelize.DATE,
@@ -271,7 +271,7 @@ module.exports = {
       },
     });
 
-    await queryInterface.createTable("service", {
+    await queryInterface.createTable('service', {
       id: {
         type: Sequelize.INTEGER(11),
         primaryKey: true,
@@ -291,7 +291,7 @@ module.exports = {
       },
     });
 
-    await queryInterface.createTable("job_type", {
+    await queryInterface.createTable('job_type', {
       id: {
         type: Sequelize.INTEGER(11),
         primaryKey: true,
@@ -303,7 +303,7 @@ module.exports = {
       },
     });
 
-    await queryInterface.createTable("job_location", {
+    await queryInterface.createTable('job_location', {
       id: {
         type: Sequelize.INTEGER(11),
         primaryKey: true,
@@ -327,7 +327,7 @@ module.exports = {
       },
     });
 
-    await queryInterface.createTable("job_post", {
+    await queryInterface.createTable('job_post', {
       id: {
         type: Sequelize.INTEGER(11),
         primaryKey: true,
@@ -338,44 +338,44 @@ module.exports = {
         allowNull: false,
         references: {
           model: {
-            tableName: "service",
+            tableName: 'service',
           },
-          key: "id",
+          key: 'id',
         },
-        onDelete: "cascade",
+        onDelete: 'cascade',
       },
       job_type_id: {
         type: Sequelize.INTEGER(11),
         allowNull: false,
         references: {
           model: {
-            tableName: "job_type",
+            tableName: 'job_type',
           },
-          key: "id",
+          key: 'id',
         },
-        onDelete: "cascade",
+        onDelete: 'cascade',
       },
       post_by_id: {
         type: Sequelize.INTEGER(11),
         allowNull: false,
         references: {
           model: {
-            tableName: "user_account",
+            tableName: 'user_account',
           },
-          key: "id",
+          key: 'id',
         },
-        onDelete: "cascade",
+        onDelete: 'cascade',
       },
       company_id: {
         type: Sequelize.INTEGER(20),
         allowNull: true,
         references: {
           model: {
-            tableName: "company",
+            tableName: 'company',
           },
-          key: "id",
+          key: 'id',
         },
-        onDelete: "cascade",
+        onDelete: 'cascade',
       },
       hire_number: {
         type: Sequelize.STRING(20),
@@ -390,11 +390,11 @@ module.exports = {
         allowNull: false,
         references: {
           model: {
-            tableName: "job_location",
+            tableName: 'job_location',
           },
-          key: "id",
+          key: 'id',
         },
-        onDelete: "cascade",
+        onDelete: 'cascade',
       },
       is_active: {
         type: Sequelize.STRING(10),
@@ -423,7 +423,7 @@ module.exports = {
       },
     });
 
-    await queryInterface.createTable("job_post_application", {
+    await queryInterface.createTable('job_post_application', {
       id: {
         type: Sequelize.INTEGER(11),
         primaryKey: true,
@@ -434,22 +434,22 @@ module.exports = {
         allowNull: false,
         references: {
           model: {
-            tableName: "user_account",
+            tableName: 'user_account',
           },
-          key: "id",
+          key: 'id',
         },
-        onDelete: "cascade",
+        onDelete: 'cascade',
       },
       job_post_id: {
         type: Sequelize.INTEGER(11),
         allowNull: false,
         references: {
           model: {
-            tableName: "job_post",
+            tableName: 'job_post',
           },
-          key: "id",
+          key: 'id',
         },
-        onDelete: "cascade",
+        onDelete: 'cascade',
       },
       apply_at: {
         type: Sequelize.STRING(20),
@@ -469,7 +469,7 @@ module.exports = {
       },
     });
 
-    await queryInterface.createTable("bill", {
+    await queryInterface.createTable('bill', {
       id: {
         type: Sequelize.INTEGER(11),
         primaryKey: true,
@@ -480,22 +480,22 @@ module.exports = {
         primaryKey: true,
         references: {
           model: {
-            tableName: "service",
+            tableName: 'service',
           },
-          key: "id",
+          key: 'id',
         },
-        onDelete: "cascade",
+        onDelete: 'cascade',
       },
       job_post_id: {
         type: Sequelize.INTEGER(11),
         primaryKey: true,
         references: {
           model: {
-            tableName: "job_post",
+            tableName: 'job_post',
           },
-          key: "id",
+          key: 'id',
         },
-        onDelete: "cascade",
+        onDelete: 'cascade',
       },
       bill_date: {
         type: Sequelize.DATE,

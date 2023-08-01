@@ -5,7 +5,7 @@ const responseWithData = (res, statusCode, data) =>
   });
 const error = (res) =>
   responseWithData(res, 500, {
-    message: "Oops! Something wrong in Server!",
+    message: 'Oops! Something wrong in Server!',
   });
 
 const badRequest = (res, message) =>
@@ -15,7 +15,7 @@ const badRequest = (res, message) =>
 
 const unauthorized = (res) =>
   responseWithData(res, 401, {
-    message: "Unauthorized",
+    message: 'Unauthorized',
   });
 const ok = (res, message) =>
   responseWithData(res, 200, {
@@ -23,7 +23,7 @@ const ok = (res, message) =>
   });
 const notfound = (res) =>
   responseWithData(res, 404, {
-    message: "Resource not found ",
+    message: 'Resource not found ',
   });
 
 module.exports = {

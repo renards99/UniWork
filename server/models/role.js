@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
   const Role = sequelize.define(
-    "role",
+    'role',
     {
       id: {
         type: Sequelize.INTEGER(11),
@@ -16,7 +16,7 @@ module.exports = (sequelize, Sequelize) => {
     {
       timestamps: false,
       freezeTableName: true,
-    }
+    },
   );
 
   return Role;

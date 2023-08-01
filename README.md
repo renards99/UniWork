@@ -19,4 +19,9 @@ Lệnh tạo mới file migration: "npx sequelize-cli migration:generate --name 
 
 Lệnh tạo file seeder: "npx sequelize-cli seed:generate --name DayLaTenFile"
 
+6. Format code: 
+Vào extension tải prettier sau đó 
+- Ấn CTRL + SHIFT + P tìm  Format Document chọn Prettier - Code Formatter
+- Settings tìm Editor: Format On Save set default thành prettier tick vào format on save 
+
 --------------------- SẼ UPDATE THÊM SAU ---------------------
