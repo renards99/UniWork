@@ -7,6 +7,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 
 import '../public/static/css/style.css';
 import '../public/static/css/nav_bar.css';
+import '../public/static/css/home_page.css';
 
 
 function MyApp({ Component, pageProps }) {
