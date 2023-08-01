@@ -10,9 +10,9 @@
 		"cors": "^2.8.5",
 		"dotenv": "^16.1.4",
 		"isomorphic-fetch": "^3.0.0",
-		"next": "latest",
-		"react": "18.2.0",
-		"react-dom": "18.2.0",
+		"next": "^13.4.12",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
 		"react-icons": "^4.10.1",
 		"webpack": "^5.86.0"
 	},
