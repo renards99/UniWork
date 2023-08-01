@@ -30,9 +30,12 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING(20),
         allowNull: true,
       },
+      createdAt: { type: Sequelize.DATE, field: "created_at" },
+      updatedAt: { type: Sequelize.DATE, field: "updated_at" },
     },
     {
       freezeTableName: true,
+      timestamps: true,
     }
   );
 

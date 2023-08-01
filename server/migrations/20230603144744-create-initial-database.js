@@ -92,8 +92,8 @@ module.exports = {
         allowNull: false,
       },
       refresh_access_token: {
-        type: Sequelize.STRING(1000)
-      }
+        type: Sequelize.STRING(1000),
+      },
     });
 
     await queryInterface.createTable("user_log", {
@@ -400,14 +400,7 @@ module.exports = {
         type: Sequelize.STRING(10),
         allowNull: false,
       },
-      created_date: {
-        type: Sequelize.DATE,
-        allowNull: false,
-      },
-      expired_at: {
-        type: Sequelize.DATE,
-        allowNull: false,
-      },
+
       salary_from: {
         type: Sequelize.DOUBLE,
         allowNull: false,
@@ -521,7 +514,6 @@ module.exports = {
         allowNull: false,
       },
     });
-
   },
 
   down: async (queryInterface, Sequelize) => {},
