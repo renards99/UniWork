@@ -6,6 +6,7 @@ import Footer from '../components/layout/footer';
 import { ChakraProvider } from '@chakra-ui/react'
 
 import '../public/static/css/style.css';
+import '../public/static/css/test.css';
 
 function MyApp({ Component, pageProps }) {
 	return (

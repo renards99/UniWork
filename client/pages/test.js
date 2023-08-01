@@ -1,15 +1,18 @@
-import { Input, Button, Container } from '@chakra-ui/react'
+import {useState, useCallback, useEffect} from "react"
 
-export default function TestPage() {
-    return (
-        <>
-            <Input/>
-            <Button>Xem</Button>
+export default function HomePage() {
+    const[name, setName] = useState("");
 
-            <Box></Box>
-            <Flex></Flex>
-            <Stack></Stack>
-            <Container></Container>
-        </>
+    function ClickMe() {
+        
+    }
+
+    useEffect(()=> {
+
+    },[])
+
+
+    return(
+        <div></div>
     )
 }
