@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { BsChevronCompactLeft, BsChevronCompactRight, BsChevronDown } from 'react-icons/bs';
+import Paging from '../components/paging';
 import { RxDotFilled } from 'react-icons/rx';
 import { Box, Input, Button, Icon, Text, Stack, Grid } from '@chakra-ui/react';
 import Image from 'next/image';
@@ -26,6 +27,120 @@ export default function HomePage() {
       Name: 'Ảnh Cưới Lan Anh',
       Role: 'Chụp Ảnh',
       salary: '200k/1h',
+    },
+    {
+      image: '/static/images/food_store.png',
+      Name: 'Tạp Hóa Sky Mart',
+      Role: 'Nhân Viên bán hàng',
+      salary: '70k/1h',
+    },
+    {
+      image: '/static/images/food_store.png',
+      Name: 'Tạp Hóa Sky Mart',
+      Role: 'Nhân Viên bán hàng',
+      salary: '70k/1h',
+    },
+    {
+      image: '/static/images/food_store.png',
+      Name: 'Tạp Hóa Sky Mart',
+      Role: 'Nhân Viên bán hàng',
+      salary: '70k/1h',
+    },
+    {
+      image: '/static/images/food_store.png',
+      Name: 'Tạp Hóa Sky Mart',
+      Role: 'Nhân Viên bán hàng',
+      salary: '70k/1h',
+    },
+    {
+      image: '/static/images/food_store.png',
+      Name: 'Tạp Hóa Sky Mart',
+      Role: 'Nhân Viên bán hàng',
+      salary: '70k/1h',
+    },
+    {
+      image: '/static/images/food_store.png',
+      Name: 'Tạp Hóa Sky Mart',
+      Role: 'Nhân Viên bán hàng',
+      salary: '70k/1h',
+    },
+    {
+      image: '/static/images/food_store.png',
+      Name: 'Tạp Hóa Sky Mart',
+      Role: 'Nhân Viên bán hàng',
+      salary: '70k/1h',
+    },
+    {
+      image: '/static/images/food_store.png',
+      Name: 'Tạp Hóa Sky Mart',
+      Role: 'Nhân Viên bán hàng',
+      salary: '70k/1h',
+    },
+    {
+      image: '/static/images/food_store.png',
+      Name: 'Tạp Hóa Sky Mart',
+      Role: 'Nhân Viên bán hàng',
+      salary: '70k/1h',
+    },
+    {
+      image: '/static/images/food_store.png',
+      Name: 'Tạp Hóa Sky Mart',
+      Role: 'Nhân Viên bán hàng',
+      salary: '70k/1h',
+    },
+    {
+      image: '/static/images/food_store.png',
+      Name: 'Tạp Hóa Sky Mart',
+      Role: 'Nhân Viên bán hàng',
+      salary: '70k/1h',
+    },
+    {
+      image: '/static/images/food_store.png',
+      Name: 'Tạp Hóa Sky Mart',
+      Role: 'Nhân Viên bán hàng',
+      salary: '70k/1h',
+    },
+    {
+      image: '/static/images/food_store.png',
+      Name: 'Tạp Hóa Sky Mart',
+      Role: 'Nhân Viên bán hàng',
+      salary: '70k/1h',
+    },
+    {
+      image: '/static/images/food_store.png',
+      Name: 'Tạp Hóa Sky Mart',
+      Role: 'Nhân Viên bán hàng',
+      salary: '70k/1h',
+    },
+    {
+      image: '/static/images/food_store.png',
+      Name: 'Tạp Hóa Sky Mart',
+      Role: 'Nhân Viên bán hàng',
+      salary: '70k/1h',
+    },
+    {
+      image: '/static/images/food_store.png',
+      Name: 'Tạp Hóa Sky Mart',
+      Role: 'Nhân Viên bán hàng',
+      salary: '70k/1h',
+    },
+    {
+      image: '/static/images/food_store.png',
+      Name: 'Tạp Hóa Sky Mart',
+      Role: 'Nhân Viên bán hàng',
+      salary: '70k/1h',
+    },
+    {
+      image: '/static/images/food_store.png',
+      Name: 'Tạp Hóa Sky Mart',
+      Role: 'Nhân Viên bán hàng',
+      salary: '70k/1h',
+    },
+    {
+      image: '/static/images/food_store.png',
+      Name: 'Tạp Hóa Sky Mart',
+      Role: 'Nhân Viên bán hàng',
+      salary: '70k/1h',
     },
     {
       image: '/static/images/food_store.png',
@@ -100,6 +215,15 @@ export default function HomePage() {
   const toggleTab = (index) => {
     setTabState(index);
   };
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 12;
+  //get current Posts
+  const lastItemIndex = currentPage * itemsPerPage;
+  const firstItemIndex = lastItemIndex - itemsPerPage;
+  const currentEmployers = employers.slice(firstItemIndex, lastItemIndex);
+
+  //change page
+  const changePage = (pageNumber) => setCurrentPage(pageNumber);
 
   const HomeContent = (
     <div>
@@ -178,12 +302,12 @@ export default function HomePage() {
           <Image width='600' height='600' src='/static/images/home_page1.png' />
         </Box>
       </Box>
-      <Box px='305px' py='50px'>
+      <Box px='305px' py='50px' h='1300px'>
         <Text fontSize='4xl' fontWeight='semibold '>
           Thông tin tuyển dụng
         </Text>
         <Grid templateColumns='repeat(4, 1fr)' gap={6}>
-          {employers.map((employer) => {
+          {currentEmployers.map((employer) => {
             return (
               <Stack minH='380px' maxH='380px' minW='250px' maxW='250px' textAlign='center'>
                 <Image className='mx-auto' width='250' height='100' src={employer.image}></Image>
@@ -197,6 +321,11 @@ export default function HomePage() {
           })}
         </Grid>
       </Box>
+      <Paging
+        itemsPerPage={itemsPerPage}
+        totalEmployers={employers.length}
+        changePage={changePage}
+      />
     </div>
   );
   return <div>{HomeContent}</div>;
