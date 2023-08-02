@@ -1,4 +1,4 @@
-import { HStack, Button } from '@chakra-ui/react';
+import { HStack, Button, Hide, Flex } from '@chakra-ui/react';
 import { number } from 'prop-types';
 import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs';
 import { useState } from 'react';
@@ -24,12 +24,20 @@ function Paging(props) {
 		setCurrentPage(currentPage + 1);
 		changePage(currentPage + 1);
 	};
+	console.log(currentPage);
 	return (
-		<div>
-			<HStack justifyContent='center'>
-				<Button rounded='full' boxSize={16} fontSize='2xl' onClick={prevPage}>
-					<BsChevronCompactLeft />
-				</Button>
+		<Flex justifyContent='center' gap={12}>
+			<Button
+				sx={currentPage === 1 ? { visibility: 'hidden ' } : ''}
+				rounded='full'
+				boxSize={16}
+				fontSize='2xl'
+				onClick={prevPage}>
+				<BsChevronCompactLeft />
+			</Button>
+			<HStack
+				sx={totalPages < 2 ? { visibility: 'hidden ' } : ''}
+				justifyContent='center'>
 				{pageNumbers.map((number) => (
 					<Button
 						key={number}
@@ -44,12 +52,16 @@ function Paging(props) {
 						{number}
 					</Button>
 				))}
-
-				<Button rounded='full' boxSize={16} fontSize='2xl' onClick={nextPage}>
-					<BsChevronCompactRight />
-				</Button>
 			</HStack>
-		</div>
+			<Button
+				sx={currentPage === totalPages ? { visibility: 'hidden ' } : ''}
+				rounded='full'
+				boxSize={16}
+				fontSize='2xl'
+				onClick={nextPage}>
+				<BsChevronCompactRight />
+			</Button>
+		</Flex>
 	);
 }
 

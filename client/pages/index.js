@@ -98,6 +98,90 @@ export default function HomePage() {
 			Role: 'Nhân Viên bán hàng',
 			salary: '70k/1h',
 		},
+		{
+			image: '/static/images/food_store.png',
+			Name: 'Tạp Hóa Sky Mart',
+			Role: 'Nhân Viên bán hàng',
+			salary: '70k/1h',
+		},
+		{
+			image: '/static/images/food_store.png',
+			Name: 'Tạp Hóa Sky Mart',
+			Role: 'Nhân Viên bán hàng',
+			salary: '70k/1h',
+		},
+		{
+			image: '/static/images/food_store.png',
+			Name: 'Tạp Hóa Sky Mart',
+			Role: 'Nhân Viên bán hàng',
+			salary: '70k/1h',
+		},
+		{
+			image: '/static/images/food_store.png',
+			Name: 'Tạp Hóa Sky Mart',
+			Role: 'Nhân Viên bán hàng',
+			salary: '70k/1h',
+		},
+		{
+			image: '/static/images/food_store.png',
+			Name: 'Tạp Hóa Sky Mart',
+			Role: 'Nhân Viên bán hàng',
+			salary: '70k/1h',
+		},
+		{
+			image: '/static/images/food_store.png',
+			Name: 'Tạp Hóa Sky Mart',
+			Role: 'Nhân Viên bán hàng',
+			salary: '70k/1h',
+		},
+		{
+			image: '/static/images/food_store.png',
+			Name: 'Tạp Hóa Sky Mart',
+			Role: 'Nhân Viên bán hàng',
+			salary: '70k/1h',
+		},
+		{
+			image: '/static/images/food_store.png',
+			Name: 'Tạp Hóa Sky Mart',
+			Role: 'Nhân Viên bán hàng',
+			salary: '70k/1h',
+		},
+		{
+			image: '/static/images/food_store.png',
+			Name: 'Tạp Hóa Sky Mart',
+			Role: 'Nhân Viên bán hàng',
+			salary: '70k/1h',
+		},
+		{
+			image: '/static/images/food_store.png',
+			Name: 'Tạp Hóa Sky Mart',
+			Role: 'Nhân Viên bán hàng',
+			salary: '70k/1h',
+		},
+		{
+			image: '/static/images/food_store.png',
+			Name: 'Tạp Hóa Sky Mart',
+			Role: 'Nhân Viên bán hàng',
+			salary: '70k/1h',
+		},
+		{
+			image: '/static/images/food_store.png',
+			Name: 'Tạp Hóa Sky Mart',
+			Role: 'Nhân Viên bán hàng',
+			salary: '70k/1h',
+		},
+		{
+			image: '/static/images/food_store.png',
+			Name: 'Tạp Hóa Sky Mart',
+			Role: 'Nhân Viên bán hàng',
+			salary: '70k/1h',
+		},
+		{
+			image: '/static/images/food_store.png',
+			Name: 'Tạp Hóa Sky Mart',
+			Role: 'Nhân Viên bán hàng',
+			salary: '70k/1h',
+		},
 	];
 	const slides = [
 		{
