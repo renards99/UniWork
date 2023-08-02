@@ -9,6 +9,7 @@ import '../public/static/css/style.css';
 import '../public/static/css/nav_bar.css';
 import '../public/static/css/home_page.css';
 import '../public/static/css/paging.css';
+import '../public/static/css/register.css';
 
 function MyApp({ Component, pageProps }) {
 	const BACK_END_PORT = 'http://localhost:5000';
@@ -16,7 +17,7 @@ function MyApp({ Component, pageProps }) {
 		<ChakraProvider>
 			<Header back_end_port={BACK_END_PORT} />
 			<Component {...pageProps} />
-			<Footer />
+			{/* <Footer /> */}
 		</ChakraProvider>
 	);
 }
