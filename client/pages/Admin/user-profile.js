@@ -6,6 +6,7 @@ import { BsExclamationCircle, BsCalendar4, BsGenderMale, BsGenderFemale } from '
 import { FiPhone } from 'react-icons/fi';
 import Image from 'next/image';
 import TempAvatar from '../../public/static/images/temporary_avatar.png';
+import PdfImage from '../../public/static/images/pdf.png';
 
 function UserProfile() {
   const profile = {
@@ -125,11 +126,13 @@ function UserProfile() {
               </Stack>
             </GridItem>
             <GridItem colSpan='2' rounded='xl' overflow='hidden'>
-              <Stack>
-                <Box bg='black' p='12px' fontSize='18px'>
-                  <Text color='white'>CV Link: CV-My IT CV</Text>
+              <Box bg='black' p='12px' fontSize='18px'>
+                <Text color='white'>CV Link: CV-My IT CV</Text>
+              </Box>
+              <Stack justifyContent='center' alignItems='center'>
+                <Box>
+                  <Image src={PdfImage} objectFit='fill'></Image>
                 </Box>
-                <Box p='12px'>PDF Here</Box>
                 <Button
                   color='white'
                   bg='black'
