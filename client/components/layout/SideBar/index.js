@@ -70,8 +70,8 @@ export default function SideBarAdmin(props) {
   }, []);
   return (
     <Flex
-      pos='fixed'
       h='100vh'
+      float='left'
       boxShadow='0 4px 12px 0 #888'
       w={navSize == 'small' ? '75px' : '312px'}
       flexDir='column'
@@ -80,8 +80,8 @@ export default function SideBarAdmin(props) {
       backgroundColor={'#323541'}
     >
       <Stack>
-        <Link href={'/'} style={{margin: "36px 0 95px"}}>
-            <Image src={LogoAdmin} height={'40'} width={'170'} style={{margin: "0 auto"}}/>
+        <Link href={'/'} style={{ margin: '36px 0 95px' }}>
+          <Image src={LogoAdmin} height={'40'} width={'170'} style={{ margin: '0 auto' }} />
         </Link>
         <Flex
           p='0 10%'
@@ -131,7 +131,7 @@ export default function SideBarAdmin(props) {
         </Flex>
       </Stack>
 
-      <Flex padding='5% 10%' flexDirection={"column"}>
+      <Flex padding='5% 10%' flexDirection={'column'}>
         <SideItem
           navSize={navSize}
           icon={CiLogout}
@@ -141,7 +141,7 @@ export default function SideBarAdmin(props) {
           sideBarActive={sideBarActive}
           href={path}
         />
-        <Box h={"30px"}></Box>
+        <Box h={'30px'}></Box>
       </Flex>
     </Flex>
   );
