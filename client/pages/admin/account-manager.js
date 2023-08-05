@@ -31,8 +31,11 @@ import { FaCircleUser } from 'react-icons/fa6';
 import { CiSearch } from 'react-icons/ci';
 import ShieldCheck from '../../public/static/images/icon/shield_check.svg';
 import ShieldWarning from '../../public/static/images/icon/shield_warning.svg';
+import Pagination from '../../components/paging';
 
 export default function AccountManager() {
+  const itemsPerPage = 12;
+  const changePage = (pageNumber) => setCurrentPage(pageNumber);
   const data = [
     {
       id: 1,
@@ -63,7 +66,7 @@ export default function AccountManager() {
     },
   ];
 
-  const TableContent = data.map((item, index)=>{
+  const TableContent = data.map((item, index) => {
     return (
       <Tr>
         <Td fontSize={'14px'} fontWeight={'500'} textAlign={'center'}>
@@ -121,8 +124,7 @@ export default function AccountManager() {
         </Td>
       </Tr>
     );
-  })
-
+  });
 
   return (
     <Box>
@@ -215,7 +217,6 @@ export default function AccountManager() {
             Quản trị viên
           </Tab>
         </TabList>
-
         <TableContainer marginTop={'16px'} p={'0 24px'}>
           <Table variant='simple' marginTop={'16px'} p={'0 24px'}>
             <Thead>
@@ -322,11 +323,10 @@ export default function AccountManager() {
                 </th>
               </Tr>
             </Thead>
-            <Tbody>
-             {TableContent}
-            </Tbody>
+            <Tbody>{TableContent}</Tbody>
           </Table>
         </TableContainer>
+        <Pagination itemsPerPage={itemsPerPage} totalItems={data.length} changePage={changePage} />;
       </Tabs>
     </Box>
   );
