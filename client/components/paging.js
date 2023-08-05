@@ -24,7 +24,6 @@ function Paging(props) {
 		setCurrentPage(currentPage + 1);
 		changePage(currentPage + 1);
 	};
-	console.log(currentPage);
 	return (
 		<Flex justifyContent='center' gap={12}>
 			<Button

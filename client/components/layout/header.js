@@ -190,7 +190,7 @@ export default function Header(props) {
         justifyContent={'space-between'}
         padding={'20px 43px'}
         alignItems={'center'}
-        className='unw-navbar'
+        className={router.pathname.includes("admin") ? 'unw-navbar admin' : 'unw-navbar'}
       >
         <Box>
           <Link href={'/'}>
