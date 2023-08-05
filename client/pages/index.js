@@ -321,11 +321,7 @@ export default function HomePage() {
           })}
         </Grid>
       </Box>
-      <Paging
-        itemsPerPage={itemsPerPage}
-        totalEmployers={employers.length}
-        changePage={changePage}
-      />
+      <Paging itemsPerPage={itemsPerPage} totalItems={employers.length} changePage={changePage} />
     </div>
   );
   return <div>{HomeContent}</div>;
