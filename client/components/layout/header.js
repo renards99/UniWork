@@ -22,6 +22,7 @@ import Avatar from '../../public/static/images/avatar_icon.png';
 import { FcGoogle } from 'react-icons/fc';
 import { BsFacebook } from 'react-icons/bs';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 export default function Header(props) {
   const router = useRouter();
@@ -68,6 +69,7 @@ export default function Header(props) {
         );
       }
       if (login.data.data.dataValues.role_id == 1) {
+        Cookies.set('sideBarActive', 0);
         router.push('/admin');
       }
       if (login.data.data.dataValues.role_id == 2) {
