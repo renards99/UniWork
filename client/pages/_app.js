@@ -12,15 +12,15 @@ import '../public/static/css/nav_bar.css';
 import '../public/static/css/home_page.css';
 
 function MyApp({ Component, pageProps }) {
-  const router = useRouter()
+  const router = useRouter();
 
   const BACK_END_PORT = 'http://localhost:5000';
   return (
     <ChakraProvider>
-      {router.pathname.includes('/admin') && <SideBarAdmin back_end_port={BACK_END_PORT} />}
-      {!router.pathname.includes('/admin') && <Header back_end_port={BACK_END_PORT} />}
+      {router.pathname.includes('/Admin') && <SideBarAdmin back_end_port={BACK_END_PORT} />}
+      {!router.pathname.includes('/Admin') && <Header back_end_port={BACK_END_PORT} />}
       <Component {...pageProps} />
-      <Footer />
+      {/* <Footer /> */}
     </ChakraProvider>
   );
 }
