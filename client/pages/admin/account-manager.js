@@ -1,3 +1,3 @@
 export default function AccountManager() {
-  return <></>;
+  return <Box></Box>;
 }
