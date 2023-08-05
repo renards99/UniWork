@@ -1,0 +1,12 @@
+.unw-register-avatar {
+	overflow: hidden;
+}
+.unw-register-image {
+	object-fit: contain;
+	width: 100% !important;
+	position: relative !important;
+	height: unset !important;
+}
+.unw-register-logo {
+	margin: 0 auto;
+}
