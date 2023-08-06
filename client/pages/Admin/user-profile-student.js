@@ -2,6 +2,7 @@ import { Box, Flex, Button, Text, Input, Stack, Checkbox, Grid, GridItem } from 
 import { HiChevronRight, HiChevronDown, HiOutlineMail } from 'react-icons/hi';
 import { LuBellDot } from 'react-icons/lu';
 import { IoPersonCircle } from 'react-icons/io5';
+import AdminHeader from '../../components/layout/admin/header';
 import { BsExclamationCircle, BsCalendar4, BsGenderMale, BsGenderFemale } from 'react-icons/bs';
 import { FiPhone } from 'react-icons/fi';
 import Image from 'next/image';
@@ -27,54 +28,10 @@ function UserProfileStudent() {
     <div>
       {/*Header*/}
 
-      <Flex
-        h='10vh'
-        justifyContent='space-between'
-        alignItems='center'
-        border='1px'
-        borderColor='#D7D7D7'
-        px='36px'
-      >
-        <Text fontSize='30px' fontWeight='700' lineHeight='38px'>
-          Quản lý tài khoản
-          <Text as='span' fontSize='24px' fontWeight='800' lineHeight='32px'>
-            &gt;
-          </Text>
-          <Text as='span' fontSize='20px' fontWeight='600' lineHeight='20px' letterSpacing='0.2px'>
-            Thông tin tài khoản
-          </Text>
-        </Text>
-        <Flex gap='24px' justifyContent='flex-end' alignItems='flex-start'>
-          <Flex
-            alignItems='flex-start'
-            fontSize='24px'
-            bg='#E8E8EB'
-            p='12px'
-            rounded='40px'
-            cursor='pointer'
-            gap='10px'
-          >
-            <LuBellDot />
-          </Flex>
-          <Flex
-            rounded='40px'
-            fontSize='24px'
-            p='12px'
-            alignItems='flex-start'
-            gap='18px'
-            bg='#E8E8EB'
-          >
-            <IoPersonCircle />
-            <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
-              Administrator
-            </Text>
-            <HiChevronDown />
-          </Flex>
-        </Flex>
-      </Flex>
+      <AdminHeader />
       {/*Profile Content*/}
 
-      <Grid templateColumns='repeat(3, 1fr)' h='90vh' gap='20px'>
+      <Grid templateColumns='repeat(3, 1fr)' h='90vh'>
         <GridItem colSpan='2' border='1px' borderColor='#D7D7D7'>
           {/*Left */}
           <Grid templateColumns='repeat(2, 1fr)' gap={6} px='16px' py='24px'>
