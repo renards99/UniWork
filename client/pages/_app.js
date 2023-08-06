@@ -10,6 +10,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import '../public/static/css/style.css';
 import '../public/static/css/nav_bar.css';
 import '../public/static/css/home_page.css';
+import '../public/static/css/unw_table.css';
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
