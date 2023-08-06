@@ -2,36 +2,24 @@ import {
   Table,
   Thead,
   Tbody,
-  Tfoot,
   Tr,
-  Th,
   Td,
-  TableCaption,
   TableContainer,
   Flex,
   Text,
-  IconButton,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
   Input,
   Button,
   Box,
   Tabs,
   TabList,
-  TabPanels,
   Tab,
-  TabPanel,
 } from '@chakra-ui/react';
 import Image from 'next/image';
-import { LuBellDot } from 'react-icons/lu';
-import { HiChevronDown } from 'react-icons/hi';
-import { FaCircleUser } from 'react-icons/fa6';
 import { CiSearch } from 'react-icons/ci';
 import ShieldCheck from '../../public/static/images/icon/shield_check.svg';
 import ShieldWarning from '../../public/static/images/icon/shield_warning.svg';
 import Pagination from '../../components/paging';
+import HeaderAdmins from '../../components/layout/header_admin';
 
 export default function AccountManager() {
   const itemsPerPage = 12;
@@ -69,22 +57,14 @@ export default function AccountManager() {
   const TableContent = data.map((item, index) => {
     return (
       <Tr>
-        <Td fontSize={'14px'} fontWeight={'500'} textAlign={'center'}>
-          {index}
-        </Td>
-        <Td fontSize={'14px'} fontWeight={'500'}>
-          {item.job_name}
-        </Td>
-        <Td fontSize={'14px'} fontWeight={'500'}>
-          {item.email}
-        </Td>
-        <Td fontSize={'14px'} fontWeight={'500'}>
+        <Td textAlign={'center'}>{index}</Td>
+        <Td>{item.job_name}</Td>
+        <Td>{item.email}</Td>
+        <Td>
           {item.role == 0 ? 'Quản trị viên' : item.role == 1 ? 'Nhà tuyển dụng' : 'Sinh viên'}
         </Td>
-        <Td fontSize={'14px'} fontWeight={'500'} textAlign={'center'}>
-          {item.date}
-        </Td>
-        <Td fontSize={'14px'} fontWeight={'500'} textAlign={'center'}>
+        <Td textAlign={'center'}>{item.date}</Td>
+        <Td textAlign={'center'}>
           {item.status ? (
             <Box
               backgroundColor={'#C7F5D9'}
@@ -115,7 +95,7 @@ export default function AccountManager() {
             </Box>
           )}
         </Td>
-        <Td fontSize={'14px'} fontWeight={'500'} textAlign={'center'}>
+        <Td textAlign={'center'}>
           {item.ban ? (
             <Image src={ShieldCheck} style={{ margin: '0 auto' }} />
           ) : (
@@ -126,208 +106,87 @@ export default function AccountManager() {
     );
   });
 
+  const TableUNW = (
+    <>
+      <TableContainer marginTop={'28px'} p={'0 40px'}>
+        <Table variant='simple' className='unw-table-custom'>
+          <Thead>
+            <Tr>
+              <th style={{ width: '5%' }}>STT</th>
+              <th style={{ width: '20%' }}>Tên</th>
+              <th style={{ width: '25%' }}>Email</th>
+              <th>Chức năng</th>
+              <th>Ngày đăng kí</th>
+              <th style={{ width: '15%' }}>Trạng thái</th>
+              <th style={{ width: '5%' }}>Cấm</th>
+            </Tr>
+          </Thead>
+          <Tbody>{TableContent}</Tbody>
+        </Table>
+      </TableContainer>
+      <Pagination itemsPerPage={itemsPerPage} totalItems={data.length} changePage={changePage} />;
+    </>
+  );
+
+  const TabUNW = (
+    <Tabs marginTop={'28px'}>
+      <TabList paddingLeft={'24px'} borderBottom={'none'}>
+        <Tab fontSize={'16px'} fontWeight={'600'} color={'#323541'}>
+          Tất cả tài khoản
+        </Tab>
+        <Tab fontSize={'16px'} fontWeight={'600'} color={'#323541'}>
+          Nhà tuyển dụng
+        </Tab>
+        <Tab fontSize={'16px'} fontWeight={'600'} color={'#323541'}>
+          Ứng viên
+        </Tab>
+        <Tab fontSize={'16px'} fontWeight={'600'} color={'#323541'}>
+          Quản trị viên
+        </Tab>
+      </TabList>
+    </Tabs>
+  );
+
+  const ActionUNW = (
+    <Flex p={'24px 0 0 24px'}>
+      <Flex
+        w={'406px'}
+        h={'40px'}
+        p={'8px 12px'}
+        backgroundColor={'#e7e7ea'}
+        borderRadius={'40px'}
+        alignItems={'center'}
+      >
+        <CiSearch color={'#323541'} style={{ width: '28px', height: '24px' }} />
+        <Input
+          placeHolder={'Tìm kiếm'}
+          backgroundColor={'#e7e7ea'}
+          fontSize={'16px'}
+          _hover={{ outline: 'none' }}
+          _focusVisible={{ outline: 'none' }}
+        />
+      </Flex>
+      <Box w={'24px'}></Box>
+      <Button
+        w={'132px'}
+        h={'40px'}
+        backgroundColor={'#323541'}
+        color={'#fff'}
+        borderRadius={'20px'}
+        fontSize={'14px'}
+        fontWeight={'600'}
+      >
+        Tìm kiếm
+      </Button>
+    </Flex>
+  );
+
   return (
     <Box>
-      <Flex
-        justifyContent={'space-between'}
-        padding={'28px 24px 14px 24px'}
-        borderBottom={'2px solid #D7D7D7'}
-      >
-        <Text fontSize={30} fontWeight={'bold'}>
-          Quản lí tài khoản
-        </Text>
-        <Flex>
-          <IconButton
-            icon={<LuBellDot style={{ width: '24px', height: '24px' }} />}
-            w={'48px'}
-            h={'48px'}
-            borderRadius={'50%'}
-            backgroundColor={'var(--black-10, rgba(19, 17, 49, 0.10))'}
-          />
-          <Box w={'30px'}></Box>
-          <Menu>
-            <MenuButton
-              as={Button}
-              rightIcon={<HiChevronDown style={{ width: '24px', height: '24px' }} />}
-              leftIcon={<FaCircleUser style={{ width: '24px', height: '24px' }} />}
-              h={'48px'}
-              w={'218px'}
-              borderRadius={'40px'}
-              fontSize={'16px'}
-              fontFamily={'500'}
-              lineHeight={'24px'}
-              backgroundColor={'var(--black-10, rgba(19, 17, 49, 0.10))'}
-            >
-              Administrator
-            </MenuButton>
-            <MenuList>
-              <MenuItem>Download</MenuItem>
-              <MenuItem>Create a Copy</MenuItem>
-              <MenuItem>Mark as Draft</MenuItem>
-              <MenuItem>Delete</MenuItem>
-              <MenuItem>Attend a Workshop</MenuItem>
-            </MenuList>
-          </Menu>
-        </Flex>
-      </Flex>
-      <Flex p={'24px 0 0 24px'}>
-        <Flex
-          w={'406px'}
-          h={'40px'}
-          p={'8px 12px'}
-          backgroundColor={'#e7e7ea'}
-          borderRadius={'40px'}
-          alignItems={'center'}
-        >
-          <CiSearch color={'#323541'} style={{ width: '28px', height: '24px' }} />
-          <Input
-            placeHolder={'Tìm kiếm'}
-            backgroundColor={'#e7e7ea'}
-            fontSize={'16px'}
-            _hover={{ outline: 'none' }}
-            _focusVisible={{ outline: 'none' }}
-          />
-        </Flex>
-        <Box w={'24px'}></Box>
-        <Button
-          w={'132px'}
-          h={'40px'}
-          backgroundColor={'#323541'}
-          color={'#fff'}
-          borderRadius={'20px'}
-          fontSize={'14px'}
-          fontWeight={'600'}
-        >
-          Tìm kiếm
-        </Button>
-      </Flex>
-
-      <Tabs marginTop={'28px'}>
-        <TabList paddingLeft={'24px'} borderBottom={'none'}>
-          <Tab fontSize={'16px'} fontWeight={'600'} color={'#323541'}>
-            Tất cả tài khoản
-          </Tab>
-          <Tab fontSize={'16px'} fontWeight={'600'} color={'#323541'}>
-            Nhà tuyển dụng
-          </Tab>
-          <Tab fontSize={'16px'} fontWeight={'600'} color={'#323541'}>
-            Ứng viên
-          </Tab>
-          <Tab fontSize={'16px'} fontWeight={'600'} color={'#323541'}>
-            Quản trị viên
-          </Tab>
-        </TabList>
-        <TableContainer marginTop={'16px'} p={'0 24px'}>
-          <Table variant='simple' marginTop={'16px'} p={'0 24px'}>
-            <Thead>
-              <Tr>
-                <th
-                  style={{
-                    fontSize: '14px',
-                    fontWeight: '600',
-                    color: '#fff',
-                    backgroundColor: '#323541',
-                    textAlign: 'center',
-                    padding: '10px 2px',
-                    border: '1px solid',
-                    borderTopLeftRadius: '12px',
-                    width: '5%',
-                  }}
-                >
-                  STT
-                </th>
-                <th
-                  style={{
-                    fontSize: '14px',
-                    fontWeight: '600',
-                    color: '#fff',
-                    backgroundColor: '#323541',
-                    textAlign: 'center',
-                    padding: '10px 2px',
-                    border: '1px solid',
-                    width: '20%',
-                  }}
-                >
-                  Tên
-                </th>
-                <th
-                  style={{
-                    fontSize: '14px',
-                    fontWeight: '600',
-                    color: '#fff',
-                    backgroundColor: '#323541',
-                    textAlign: 'center',
-                    padding: '10px 2px',
-                    border: '1px solid',
-                    width: '25%',
-                  }}
-                >
-                  Email
-                </th>
-                <th
-                  style={{
-                    fontSize: '14px',
-                    fontWeight: '600',
-                    color: '#fff',
-                    backgroundColor: '#323541',
-                    textAlign: 'center',
-                    padding: '10px 2px',
-                    border: '1px solid',
-                    width: '10%',
-                  }}
-                >
-                  Chức năng
-                </th>
-                <th
-                  style={{
-                    fontSize: '14px',
-                    fontWeight: '600',
-                    color: '#fff',
-                    backgroundColor: '#323541',
-                    textAlign: 'center',
-                    padding: '10px 2px',
-                    border: '1px solid',
-                    width: '10%',
-                  }}
-                >
-                  Ngày đăng kí
-                </th>
-                <th
-                  style={{
-                    fontSize: '14px',
-                    fontWeight: '600',
-                    color: '#fff',
-                    backgroundColor: '#323541',
-                    textAlign: 'center',
-                    padding: '10px 2px',
-                    border: '1px solid',
-                    width: '15%',
-                  }}
-                >
-                  Trạng thái
-                </th>
-                <th
-                  style={{
-                    fontSize: '14px',
-                    fontWeight: '600',
-                    color: '#fff',
-                    backgroundColor: '#323541',
-                    textAlign: 'center',
-                    padding: '10px 2px',
-                    border: '1px solid',
-                    borderTopRightRadius: '12px',
-                    width: '5%',
-                  }}
-                >
-                  Cấm
-                </th>
-              </Tr>
-            </Thead>
-            <Tbody>{TableContent}</Tbody>
-          </Table>
-        </TableContainer>
-        <Pagination itemsPerPage={itemsPerPage} totalItems={data.length} changePage={changePage} />;
-      </Tabs>
+      <HeaderAdmins title={'Quản lí tài khoản'} />
+      {ActionUNW}
+      {TabUNW}
+      {TableUNW}
     </Box>
   );
 }
