@@ -1,0 +1,19 @@
+.unw-table-custom thead th:first-child {
+  border-top-left-radius: 12px;
+}
+.unw-table-custom thead th:last-child {
+  border-top-right-radius: 12px;
+}
+.unw-table-custom thead th {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  background-color: #323541;
+  text-align: center;
+  padding: 10px 2px;
+  border: 1px solid;
+}
+.unw-table-custom tbody {
+    font-size: 14px;
+    font-weight: 500;
+}

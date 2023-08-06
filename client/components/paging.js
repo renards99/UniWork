@@ -12,8 +12,8 @@ function Paging(props) {
   const changePage = props.changePage;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-  const bgColor = router.pathname.includes('/Admin') ? '#D7D7D7' : '#F98820';
-  const tColor = router.pathname.includes('/Admin') ? '#323541' : 'White';
+  const bgColor = router.pathname.includes('/admin') ? '#D7D7D7' : '#F98820';
+  const tColor = router.pathname.includes('/admin') ? '#323541' : 'White';
 
   for (let i = 1; i <= totalPages; i++) pageNumbers.push(i);
   const [currentPage, setCurrentPage] = useState(1);

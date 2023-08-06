@@ -20,7 +20,7 @@ export default function SideBarAdmin(props) {
   const router = useRouter();
   const path = {
     revenue: '/admin/revenue',
-    account: '/admin/acoount-manager',
+    account: '/admin/account-manager',
     job: '/admin/job-manager',
     setting: '/admin/setting',
   };
