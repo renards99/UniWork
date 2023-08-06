@@ -187,6 +187,7 @@ export default function JobManager() {
           borderRadius={'50%'}
           w={'40px'}
           h={'40px'}
+          backgroundColor={'#e7e7ea'}
         />
         <Box w={'20px'}></Box>
         <IconButton
@@ -194,6 +195,7 @@ export default function JobManager() {
           borderRadius={'50%'}
           w={'40px'}
           h={'40px'}
+          backgroundColor={'#e7e7ea'}
         />
       </Flex>
     </Flex>
