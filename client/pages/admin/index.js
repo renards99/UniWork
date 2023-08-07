@@ -13,7 +13,7 @@ export default function AdminPage(props) {
 
   let dayInMonth = new Date(year, month + 1, 0).getDate();
   let prevDayInMonth = new Date(year, month, 0).getDate();
-  let firstDay = new Date(year, month, 1).getDay();
+  let firstDay = new Date(year, month, 1).getDay(); 
 
   const WeekHTML = dayInWeek.map((item) => {
     return (
