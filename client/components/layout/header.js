@@ -69,7 +69,7 @@ export default function Header(props) {
         );
       }
       if (login.data.data.dataValues.role_id == 1) {
-        Cookies.set('sideBarActive', 0);
+        Cookies.set('sideBarActive', 2);
         router.push('/admin');
       }
       if (login.data.data.dataValues.role_id == 2) {

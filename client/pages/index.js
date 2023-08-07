@@ -321,7 +321,13 @@ export default function HomePage() {
           })}
         </Grid>
       </Box>
-      <Paging itemsPerPage={itemsPerPage} totalItems={employers.length} changePage={changePage} />
+      <Paging
+        itemsPerPage={itemsPerPage}
+        totalItems={employers.length}
+        changePage={changePage}
+        bgColor='#F98820'
+        tColor='white'
+      />
     </div>
   );
   return <div>{HomeContent}</div>;

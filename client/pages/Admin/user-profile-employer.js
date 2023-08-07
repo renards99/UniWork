@@ -1,15 +1,14 @@
 import { Box, Flex, Text, Stack, Grid, GridItem, Collapse } from '@chakra-ui/react';
 import { HiChevronDown, HiOutlineMail } from 'react-icons/hi';
 import { HiOutlineMapPin } from 'react-icons/hi2';
-import { LuBellDot } from 'react-icons/lu';
-import { IoPersonCircle } from 'react-icons/io5';
+
 import { LiaNewspaperSolid } from 'react-icons/lia';
 import { BsExclamationCircle, BsGlobe } from 'react-icons/bs';
 import { FiPhone } from 'react-icons/fi';
 import { HiOutlineBuildingOffice2 } from 'react-icons/hi2';
 import Image from 'next/image';
 import TempAvatar from '../../public/static/images/temporary_avatar.png';
-
+import AdminHeader from '../../components/layout/admin/header';
 import { useState } from 'react';
 import PostImage from '../../public/static/images/applicationPost.png';
 import Paging from '../../components/paging';
@@ -24,6 +23,8 @@ function UserProfileEmployer() {
     employees: '125-199',
     link: 'DMO.vn',
     address: 'Tòa nhà Toyota Thanh Xuân, 315 Trường Chinh, Thanh Xuân, Hà Nội',
+    description:
+      'Công ty Cổ phần Công nghệ eUp (eUp) là một Công ty Công nghệ hàng đầu tại Việt Nam trong lĩnh vực cung cấp Giải pháp Học tập. Tới nay, eUp đã cho ra mắt nhiều ứng dụng học tập được hàng triệu triệu người dùng tại Việt Nam và trên toàn Thế giới yêu thích và sử dụng hằng ngày như ứng dụng Từ điển tiếng Nhật Mazii; Từ vựng và Ngữ pháp HeyJapanese; Từ điển tiếng Trung Hanzii; Đọc báo TODAI; Luyện thi Migii,… và rất nhiều ứng dụng rất thiết thực dành cho các ngôn ngữ khác như tiếng Pháp; Tây Ban Nha;... Với hơn 7 năm trong ngành Công nghệ Giáo dục, eUp luôn nỗ lực không ngừng để thực hiện sứ mệnh giúp hàng triệu triệu người học tiếp cận với hệ thống giải pháp học tập đơn giản, thông minh và tiện ích hơn bao giờ hết.',
   };
   const posts = [
     {
@@ -106,51 +107,8 @@ function UserProfileEmployer() {
   return (
     <div>
       {/*Header*/}
-      <Flex
-        h='10vh'
-        justifyContent='space-between'
-        alignItems='center'
-        border='1px'
-        borderColor='#D7D7D7'
-        px='36px'
-      >
-        <Text fontSize='30px' fontWeight='700' lineHeight='38px'>
-          Quản lý tài khoản
-          <Text as='span' fontSize='24px' fontWeight='800' lineHeight='32px'>
-            &gt;
-          </Text>
-          <Text as='span' fontSize='20px' fontWeight='600' lineHeight='20px' letterSpacing='0.2px'>
-            Thông tin tài khoản
-          </Text>
-        </Text>
-        <Flex gap='24px' justifyContent='flex-end' alignItems='flex-start'>
-          <Flex
-            alignItems='flex-start'
-            fontSize='24px'
-            bg='#E8E8EB'
-            p='12px'
-            rounded='40px'
-            cursor='pointer'
-            gap='10px'
-          >
-            <LuBellDot />
-          </Flex>
-          <Flex
-            rounded='40px'
-            fontSize='24px'
-            p='12px'
-            alignItems='flex-start'
-            gap='18px'
-            bg='#E8E8EB'
-          >
-            <IoPersonCircle />
-            <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
-              Administrator
-            </Text>
-            <HiChevronDown />
-          </Flex>
-        </Flex>
-      </Flex>
+      <AdminHeader />
+
       {/*Profile Content*/}
 
       <Grid templateColumns='repeat(3, 1fr)' h='90vh'>
@@ -285,6 +243,8 @@ function UserProfileEmployer() {
                   itemsPerPage={itemsPerPage}
                   totalItems={posts.length}
                   changePage={changePage}
+                  tColor='#323541'
+                  bgColor='#D7D7D7'
                 />
               </Stack>
             </GridItem>
