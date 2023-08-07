@@ -15,7 +15,7 @@ export default function AdminPage(props) {
   let prevDayInMonth = new Date(year, month, 0).getDate();
   let firstDay = new Date(year, month, 1).getDay();
 
-  const Week = dayInWeek.map((item) => {
+  const WeekHTML = dayInWeek.map((item) => {
     return (
       <Text w={'26px'} textAlign={'center'}>
         {item}
@@ -23,15 +23,15 @@ export default function AdminPage(props) {
     );
   });
 
-  let b = [];
+  let day = [];
   for (let index = 1; index <= dayInMonth; index++) {
-    b.push(index);
+    day.push(index);
   }
 
-  let c = Array(5).fill(Array(7).fill(null));
+  let CalenderHTML = Array(5).fill(Array(7).fill(null));
   let store = 0;
 
-  c = c.map((arr, index) => {
+  CalenderHTML = CalenderHTML.map((arr, index) => {
     if (index == 0) {
       return (
         <Flex
@@ -70,14 +70,14 @@ export default function AdminPage(props) {
                   w={'26px'}
                   paddingTop={'4px'}
                   h={'26px'}
-                  borderRadius={datePublic == `${b[i - firstDay]}` ? '50%' : 0}
-                  background={datePublic == `${b[i - firstDay]}` ? '#323541' : '#fff'}
-                  color={datePublic == `${b[i - firstDay]}` ? '#fff' : '#000'}
+                  borderRadius={datePublic == `${day[i - firstDay]}` ? '50%' : 0}
+                  background={datePublic == `${day[i - firstDay]}` ? '#323541' : '#fff'}
+                  color={datePublic == `${day[i - firstDay]}` ? '#fff' : '#000'}
                   textAlign={'center'}
                   cursor={'pointer'}
-                  onClick={() => setDatePublic(`${b[i - firstDay]}`)}
+                  onClick={() => setDatePublic(`${day[i - firstDay]}`)}
                 >
-                  {b[i - firstDay]}
+                  {day[i - firstDay]}
                 </Text>
               );
             }
@@ -95,23 +95,23 @@ export default function AdminPage(props) {
         >
           {arr.map((item, i) => {
             store = store + 1;
-            if (b[store] != undefined) {
+            if (day[store] != undefined) {
               return (
                 <Text
                   w={'26px'}
                   paddingTop={'4px'}
                   h={'26px'}
-                  borderRadius={datePublic == `${b[store]}` ? '50%' : 0}
-                  background={datePublic == `${b[store]}` ? '#323541' : '#fff'}
-                  color={datePublic == `${b[store]}` ? '#fff' : '#000'}
+                  borderRadius={datePublic == `${day[store]}` ? '50%' : 0}
+                  background={datePublic == `${day[store]}` ? '#323541' : '#fff'}
+                  color={datePublic == `${day[store]}` ? '#fff' : '#000'}
                   textAlign={'center'}
                   cursor={'pointer'}
-                  id={`${b[store]}`}
+                  id={`${day[store]}`}
                   onClick={(e) => {
                     setDatePublic(e.target.id);
                   }}
                 >
-                  {b[store]}
+                  {day[store]}
                 </Text>
               );
             } else {
@@ -235,13 +235,13 @@ export default function AdminPage(props) {
         </Flex>
         <Flex
           justifyContent={'space-between'}
-          marginTop={'20px'}
+          marginTop={'15px'}
           fontSize={'14px'}
           fontWeight={'500'}
         >
-          {Week}
+          {WeekHTML}
         </Flex>
-        {c}
+        {CalenderHTML}
       </Stack>
       <Box w={'1px'} h={'272px'} background={'#323541'} margin={'0 20px'}></Box>
       <Stack w={'132px'} fontSize={'12px'} justifyContent={'space-evenly'}>
