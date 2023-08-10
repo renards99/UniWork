@@ -9,7 +9,7 @@ module.exports = {
     const findRole = await Role.findAll();
     try {
       if (findRole) {
-        return responsehandler.responseWithData(res, 'Get list role successfully!');
+        return responsehandler.responseWithData(res, 'Get list role successfully!', findRole);
       } else {
         return responsehandler.badRequest(res, 'Cannot get list role!');
       }
