@@ -397,7 +397,7 @@ module.exports = {
         onDelete: 'cascade',
       },
       is_active: {
-        type: Sequelize.DOUBLE,
+        type: Sequelize.BOOLEAN,
         allowNull: false,
       },
 
@@ -509,10 +509,7 @@ module.exports = {
         },
         onDelete: 'cascade',
       },
-      bill_date: {
-        type: Sequelize.DATE,
-        allowNull: false,
-      },
+
       total: {
         type: Sequelize.DOUBLE,
         allowNull: false,
