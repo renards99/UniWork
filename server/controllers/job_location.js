@@ -4,10 +4,17 @@ const Op = db.Sequelize.Op;
 const QueryTypes = db.Sequelize.QueryTypes;
 const responseHandler = require('../handlers/response.handler');
 
+// checkZipcode(){
+
+// }
+
 module.exports = {
   async addJobLocation(req, res) {
     try {
       const params = req.body;
+      if (params.zip_code.match(/^[0-9]+$/) == null) {
+        return responseHandler.badRequest(res, 'Zip code is invalid!');
+      }
       const create_Job_location = await Job_location.create(params);
       if (create_Job_location) {
         return responseHandler.responseWithData(res, 200, 'Create Job location successfully!');

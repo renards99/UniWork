@@ -5,6 +5,9 @@ const Op = db.Sequelize.Op;
 const QueryTypes = db.Sequelize.QueryTypes;
 const responseHandler = require('../handlers/response.handler');
 
+// async checkCompanyExist(req,res){
+//   await
+// }
 module.exports = {
   async addCompany(req, res) {
     try {
