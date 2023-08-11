@@ -19,23 +19,23 @@ module.exports = (sequelize, Sequelize) => {
         onDelete: 'cascade',
       },
       educational_detail: {
-        type: Sequelize.INTEGER(11),
+        type: Sequelize.STRING(20),
         allowNull: false,
       },
       major: {
-        type: Sequelize.INTEGER(11),
+        type: Sequelize.STRING(20),
         allowNull: false,
       },
       insitude_university_name: {
         type: Sequelize.STRING(20),
         allowNull: false,
       },
-      starting_date: {
-        type: Sequelize.DATE,
+      starting_year: {
+        type: Sequelize.INTEGER(5),
         allowNull: false,
       },
-      completion_date: {
-        type: Sequelize.DATE,
+      completion_year: {
+        type: Sequelize.INTEGER(5),
         allowNull: false,
       },
       cgpa: {
