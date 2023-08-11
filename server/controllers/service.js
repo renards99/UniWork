@@ -3,10 +3,13 @@ const Service = db.service;
 const Op = db.Sequelize.Op;
 const QueryTypes = db.Sequelize.QueryTypes;
 const responseHandler = require('../handlers/response.handler');
-
+const validateHandler = require('../handlers/validate.handler');
 module.exports = {
   async addService(req, res) {
     const params = req.body;
+    if (!validateHandler.validateInput(params)) {
+      return responseHandler.badRequest(res, 'Your input is invalid!');
+    }
     const createService = await Service.create(params);
     try {
       if (createService) {

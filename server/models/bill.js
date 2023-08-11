@@ -36,9 +36,7 @@ module.exports = (sequelize, Sequelize) => {
       createdAt: { type: Sequelize.DATE, field: 'created_at' },
       updatedAt: { type: Sequelize.DATE, field: 'updated_at' },
     },
-    {
-      freezeTableName: true,
-    },
+    { timestamps: true, freezeTableName: true },
   );
 
   return Bill;

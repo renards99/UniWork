@@ -5,6 +5,7 @@ const Op = db.Sequelize.Op;
 const QueryTypes = db.Sequelize.QueryTypes;
 const responsehandler = require('../handlers/response.handler');
 const validateHandler = require('../handlers/validate.handler');
+const regex = require('../handlers/regex.handler');
 function isValidCGPA(input) {
   const validGrades = ['A', 'B', 'C', 'D', 'E', 'F'];
 
@@ -20,27 +21,47 @@ function isValidCGPA(input) {
 module.exports = {
   async addEducationDetail(req, res) {
     const params = req.body;
+    if (!validateHandler.validateInput(params)) {
+      return responseHandler.badRequest(res, 'Your input is invalid!');
+    }
+    const {
+      user_account_id,
+      educational_detail,
+      major,
+      insitude_university_name,
+      starting_year,
+      completion_year,
+      cgpa,
+    } = params;
+
+    if (
+      !regex.regexNormalString.test(user_account_id) ||
+      !regex.regexNormalString.test(educational_detail) ||
+      !regex.regexNormalString.test(major) ||
+      !regex.regexNormalString.test(insitude_university_name) ||
+      !regex.regexNormalString.test(starting_year) ||
+      !regex.regexNormalString.test(completion_year) ||
+      !regex.regexNormalString.test(cgpa)
+    ) {
+      return responsehandler.badRequest(res, 'Cannot input special symbol!');
+    }
 
     try {
-      if (!isValidCGPA(params.cgpa)) {
+      if (!isValidCGPA(cgpa)) {
         return responsehandler.badRequest(res, 'invalid CGPA!');
       }
 
       if (
-        !validateHandler.validateYear(params.starting_year) ||
-        !validateHandler.validateYear(params.completion_year)
+        !validateHandler.validateYear(starting_year) ||
+        !validateHandler.validateYear(completion_year)
       ) {
         return responsehandler.badRequest(res, 'Year is not proper. Please check!');
       }
-      if (params.starting_year > params.completion_year) {
+      if (starting_year > completion_year) {
         return responsehandler.badRequest(
           res,
           'Starting year must be smaller than completion year!',
         );
-      }
-
-      if (!validateHandler.validateInput(params)) {
-        return responseHandler.badRequest(res, 'Your input is invalid!');
       }
 
       const createEducationDetail = await EducationDetail.create(params);

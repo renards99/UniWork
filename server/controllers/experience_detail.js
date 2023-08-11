@@ -4,11 +4,13 @@ const ExperienceDetail = db.experience_detail;
 const Op = db.Sequelize.Op;
 const QueryTypes = db.Sequelize.QueryTypes;
 const responsehandler = require('../handlers/response.handler');
-
+const validateHandler = require('../handlers/validate.handler');
 module.exports = {
   async addExperienceDetail(req, res) {
     const params = req.body;
-
+    if (!validateHandler.validateInput(params)) {
+      return responseHandler.badRequest(res, 'Your input is invalid!');
+    }
     try {
       const createExperienceDetail = await ExperienceDetail.create(params);
       if (createExperienceDetail) {

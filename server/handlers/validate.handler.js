@@ -88,14 +88,17 @@ const formatDate = (date) => {
 };
 
 //prevent input null
-const validateInput = (params) => {
+const validateInput = (params, exception) => {
   for (const key in params) {
     if (Object.hasOwnProperty.call(params, key)) {
       // Perform validation on each field here
+      if (params[key] === exception) {
+        continue;
+      }
       const fieldValue = params[key];
 
       // Example: Check if the field is not empty
-      if (!fieldValue) {
+      if (!fieldValue || fieldValue === '\n') {
         return false;
       }
 

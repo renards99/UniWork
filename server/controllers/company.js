@@ -4,15 +4,35 @@ const Company = db.company;
 const Op = db.Sequelize.Op;
 const QueryTypes = db.Sequelize.QueryTypes;
 const responseHandler = require('../handlers/response.handler');
+const validateHandler = require('../handlers/validate.handler');
+const regex = require('../handlers/regex.handler');
 
-// async checkCompanyExist(req,res){
-//   await
-// }
+const isValidUrl = (input) => {
+  if (input == '') return true;
+  try {
+    new URL(input);
+    return true;
+  } catch (error) {
+    return false;
+  }
+};
 module.exports = {
   async addCompany(req, res) {
+    const params = req.body;
+    const { company_name, company_description, company_website_url } = params;
+    if (!validateHandler.validateInput(params, company_website_url)) {
+      return responseHandler.badRequest(res, 'Your input is invalid!');
+    }
+    if (
+      !regex.regexNormalString.test(company_name) ||
+      !regex.regexNormalString.test(company_description)
+    ) {
+      return responseHandler.badRequest(res, 'cannot enter special symbol invalid!');
+    }
+    if (!isValidUrl(company_website_url)) {
+      return responseHandler.badRequest(res, 'Website invalid!');
+    }
     try {
-      const params = req.body;
-
       const create_company = await Company.create(params);
       if (create_company) {
         return responseHandler.responseWithData(res, 200, 'Create company successfully!');
