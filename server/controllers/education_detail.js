@@ -5,13 +5,27 @@ const Op = db.Sequelize.Op;
 const QueryTypes = db.Sequelize.QueryTypes;
 const responsehandler = require('../handlers/response.handler');
 const validateHandler = require('../handlers/validate.handler');
+function isValidCGPA(input) {
+  const validGrades = ['A', 'B', 'C', 'D', 'E', 'F'];
 
+  if (/^\d+(\.\d+)?$/.test(input)) {
+    const numValue = parseFloat(input);
+    return numValue >= 0 && numValue <= 10;
+  } else if (validGrades.includes(input.toUpperCase())) {
+    return true;
+  }
+
+  return false;
+}
 module.exports = {
   async addEducationDetail(req, res) {
     const params = req.body;
 
     try {
-      console.log(validateHandler.validateYear(params.starting_year));
+      if (!isValidCGPA(params.cgpa)) {
+        return responsehandler.badRequest(res, 'invalid CGPA!');
+      }
+
       if (
         !validateHandler.validateYear(params.starting_year) ||
         !validateHandler.validateYear(params.completion_year)
