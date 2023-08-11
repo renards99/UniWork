@@ -3,14 +3,14 @@ const Request = db.request;
 const Op = db.Sequelize.Op;
 const QueryTypes = db.Sequelize.QueryTypes;
 const responseHandler = require('../handlers/response.handler');
-
+const validateHandler = require('../handlers/validate.handler');
 module.exports = {
   async addRequest(req, res) {
     try {
       const params = req.body;
-      // const { user_account_id, request_name, request_description, state } =
-      //   params;
-
+      if (!validateHandler.validateInput(params)) {
+        return responseHandler.badRequest(res, 'Your input is invalid!');
+      }
       const createRequest = await Request.create(params);
       if (createRequest) {
         return responseHandler.responseWithData(res, 200, 'Create request successfully!');

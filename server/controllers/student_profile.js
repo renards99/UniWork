@@ -4,11 +4,13 @@ const StudentProfile = db.student_profile;
 const Op = db.Sequelize.Op;
 const QueryTypes = db.Sequelize.QueryTypes;
 const responsehandler = require('../handlers/response.handler');
-
+const validateHandler = require('../handlers/validate.handler');
 module.exports = {
   async addStudentProfile(req, res) {
     const params = req.body;
-
+    if (!validateHandler.validateInput(params)) {
+      return responseHandler.badRequest(res, 'Your input is invalid!');
+    }
     try {
       const createStudentProfile = await StudentProfile.create(params);
       if (createStudentProfile) {

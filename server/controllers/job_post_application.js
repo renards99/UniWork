@@ -3,11 +3,14 @@ const Job_post_application = db.job_post_application;
 const Op = db.Sequelize.Op;
 const QueryTypes = db.Sequelize.QueryTypes;
 const responseHandler = require('../handlers/response.handler');
-
+const validateHandler = require('../handlers/validate.handler');
 module.exports = {
   async addJobPostApplication(req, res) {
     try {
       const params = req.body;
+      if (!validateHandler.validateInput(params)) {
+        return responseHandler.badRequest(res, 'Your input is invalid!');
+      }
       const create_Job_post_application = await Job_post_application.create(params);
       if (create_Job_post_application) {
         return responseHandler.responseWithData(

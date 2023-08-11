@@ -3,7 +3,7 @@ const UserLog = db.user_log;
 const Op = db.Sequelize.Op;
 const QueryTypes = db.Sequelize.QueryTypes;
 const responsehandler = require('../handlers/response.handler');
-
+const validateHandler = require('../handlers/validate.handler');
 module.exports = {
   async getUserLogById(req, res) {
     const params = req.body;
@@ -21,6 +21,9 @@ module.exports = {
   },
   async createUserLog(req, res) {
     const params = req.body;
+    if (!validateHandler.validateInput(params)) {
+      return responseHandler.badRequest(res, 'Your input is invalid!');
+    }
     try {
       const userLog = await UserLog.create(params);
       if (userLog) {
