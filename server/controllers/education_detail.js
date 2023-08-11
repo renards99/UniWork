@@ -4,12 +4,31 @@ const EducationDetail = db.educational_detail;
 const Op = db.Sequelize.Op;
 const QueryTypes = db.Sequelize.QueryTypes;
 const responsehandler = require('../handlers/response.handler');
+const validateHandler = require('../handlers/validate.handler');
 
 module.exports = {
   async addEducationDetail(req, res) {
     const params = req.body;
 
     try {
+      console.log(validateHandler.validateYear(params.starting_year));
+      if (
+        !validateHandler.validateYear(params.starting_year) ||
+        !validateHandler.validateYear(params.completion_year)
+      ) {
+        return responsehandler.badRequest(res, 'Year is not proper. Please check!');
+      }
+      if (params.starting_year > params.completion_year) {
+        return responsehandler.badRequest(
+          res,
+          'Starting year must be smaller than completion year!',
+        );
+      }
+
+      if (!validateHandler.validateInput(params)) {
+        return responseHandler.badRequest(res, 'Your input is invalid!');
+      }
+
       const createEducationDetail = await EducationDetail.create(params);
       if (createEducationDetail) {
         return responsehandler.responseWithData(res, 200, 'Education detail created');
