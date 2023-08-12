@@ -27,7 +27,7 @@ module.exports = {
       !regex.regexNormalString.test(company_name) ||
       !regex.regexNormalString.test(company_description)
     ) {
-      return responseHandler.badRequest(res, 'cannot enter special symbol invalid!');
+      return responseHandler.badRequest(res, 'Can not enter special symbol!');
     }
     if (!isValidUrl(company_website_url)) {
       return responseHandler.badRequest(res, 'Website invalid!');
