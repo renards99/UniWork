@@ -39,6 +39,9 @@ module.exports = {
   async deleteJobLocation(req, res) {
     const params = req.body;
     const job_location_id = params.id;
+    if (!validateHandler.validateId(job_location_id)) {
+      return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+    }
     try {
       const delete_Job_location = await Job_location.destroy({
         where: {
@@ -57,9 +60,12 @@ module.exports = {
   },
   async updateJobLocation(req, res) {
     const params = req.body;
+    const { street_address, city, province, zip_code } = params;
+    const job_location_id = params.id;
+    if (!validateHandler.validateId(job_location_id)) {
+      return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+    }
     try {
-      const { street_address, city, province, zip_code } = params;
-      const job_location_id = params.id;
       const getJobLocation = await Job_location.findOne({
         where: {
           id: job_location_id,
@@ -86,8 +92,12 @@ module.exports = {
   },
   async getJobLocationById(req, res) {
     const params = req.body;
+
+    const job_location_id = params.id;
+    if (!validateHandler.validateId(job_location_id)) {
+      return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+    }
     try {
-      const job_location_id = params.id;
       const getJobLocation = await Job_location.findOne({
         where: {
           id: job_location_id,

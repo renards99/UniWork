@@ -407,7 +407,7 @@ module.exports = {
       },
       salary_to: {
         type: Sequelize.DOUBLE,
-        allowNull: false,
+        allowNull: true,
       },
       view: {
         type: Sequelize.INTEGER(50),
