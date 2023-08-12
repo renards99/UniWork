@@ -8,6 +8,7 @@ module.exports = {
   async addJobType(req, res) {
     try {
       const params = req.body;
+
       if (!validateHandler.validateInput(params)) {
         return responseHandler.badRequest(res, 'Your input is invalid!');
       }
@@ -25,6 +26,9 @@ module.exports = {
   async deleteJobType(req, res) {
     const params = req.body;
     const job_type_id = params.id;
+    if (!validateHandler.validateId(job_type_id)) {
+      return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+    }
     try {
       const delete_job_type = await Job_type.destroy({
         where: {
@@ -46,6 +50,10 @@ module.exports = {
     try {
       const job_type_name = params.job_type_name;
       const job_type_id = params.id;
+      if (!validateHandler.validateId(job_type_id)) {
+        return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+      }
+
       const getJobType = await Job_type.findOne({
         where: {
           id: job_type_id,
@@ -74,6 +82,9 @@ module.exports = {
     const params = req.body;
     try {
       const job_type_id = params.id;
+      if (!validateHandler.validateId(job_type_id)) {
+        return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+      }
       const getJobType = await Job_type.findOne({
         where: {
           id: job_type_id,

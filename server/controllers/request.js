@@ -8,6 +8,12 @@ module.exports = {
   async addRequest(req, res) {
     try {
       const params = req.body;
+      if (!validateHandler.validateId(params.user_account_id)) {
+        return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+      }
+      if (!validateHandler.validateState(params.state)) {
+        return responseHandler.badRequest(res, 'Invalid state input!');
+      }
       if (!validateHandler.validateInput(params)) {
         return responseHandler.badRequest(res, 'Your input is invalid!');
       }
@@ -25,6 +31,9 @@ module.exports = {
   async deleteRequest(req, res) {
     const params = req.body;
     const request_id = params.id;
+    if (!validateHandler.validateId(request_id)) {
+      return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+    }
     try {
       const delete_request = await Request.destroy({
         where: {
@@ -45,9 +54,15 @@ module.exports = {
   async updateRequest(req, res) {
     const params = req.body;
     try {
-      console.log('in update');
       const { request_name, request_description, state } = params;
       const request_id = params.id;
+      if (!validateHandler.validateId(request_id)) {
+        return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+      }
+      if (!validateHandler.validateState(state)) {
+        return responseHandler.badRequest(res, 'Invalid state input!');
+      }
+
       const getRequest = await Request.findOne({
         where: {
           id: request_id,
@@ -62,7 +77,6 @@ module.exports = {
           },
         },
       );
-      console.log('in update');
       if (updateRequest) {
         return responseHandler.responseWithData(res, 200, 'Update request successfully!');
       } else {
@@ -77,7 +91,9 @@ module.exports = {
     const params = req.body;
     try {
       const request_id = params.id;
-
+      if (!validateHandler.validateId(request_id)) {
+        return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+      }
       const getRequestById = await Request.findOne({
         where: {
           id: request_id,
@@ -96,6 +112,9 @@ module.exports = {
     const params = req.body;
     try {
       const user_account_id = params.user_account_id;
+      if (!validateHandler.validateId(user_account_id)) {
+        return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+      }
       const getRequestByUserId = await Request.findAll({
         where: {
           user_account_id: user_account_id,

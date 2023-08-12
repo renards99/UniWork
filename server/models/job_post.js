@@ -81,7 +81,7 @@ module.exports = (sequelize, Sequelize) => {
       },
       salary_to: {
         type: Sequelize.DOUBLE,
-        allowNull: false,
+        allowNull: true,
       },
       view: {
         type: Sequelize.INTEGER(50),

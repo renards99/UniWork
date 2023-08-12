@@ -88,15 +88,15 @@ const formatDate = (date) => {
 };
 
 //prevent input null
-const validateInput = (params, exception) => {
+const validateInput = (params, ...exceptions) => {
   for (const key in params) {
     if (Object.hasOwnProperty.call(params, key)) {
       // Perform validation on each field here
-      if (params[key] === exception) {
-        continue;
-      }
-      const fieldValue = params[key] + '';
 
+      const fieldValue = params[key] + '';
+      if (exceptions.includes(fieldValue)) {
+        continue; // Skip validation for exceptions
+      }
       // Example: Check if the field is not empty
       if (!fieldValue || fieldValue.trim().length === 0) {
         return false;
@@ -110,6 +110,20 @@ const validateInput = (params, exception) => {
 function validateYear(year) {
   return /^\d{4}$/.test(year) && parseInt(year) >= 1900 && parseInt(year) <= 2099;
 }
+function validateId(...inputs) {
+  for (const input of inputs) {
+    const parsedInput = Number(input);
+
+    if (!Number.isInteger(parsedInput) || parsedInput <= 0) {
+      return false; // Return false if any input is not a positive integer
+    }
+  }
+  return true; // Return true if all inputs are valid positive integers
+}
+function validateState(input) {
+  const validStates = ['accepted', 'waiting', 'denied'];
+  return validStates.includes(input);
+}
 module.exports = {
   validatePositiveIntegerNumber,
   validatePositiveNumber,
@@ -119,4 +133,6 @@ module.exports = {
   validateStringInRange,
   validateInput,
   validateYear,
+  validateId,
+  validateState,
 };

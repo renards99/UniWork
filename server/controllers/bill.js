@@ -35,7 +35,6 @@ module.exports = {
     if (!validId(params.service_id) || !validId(params.job_post_id)) {
       return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
     }
-    console.log(Number.parseFloat(params.service_id));
     try {
       const createBill = await Bill.create(params);
 
@@ -50,7 +49,10 @@ module.exports = {
   },
   async deleteBill(req, res) {
     const params = req.body;
-    const { id } = params;
+    const id = params.id;
+    if (!validateHandler.validateId(id)) {
+      return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+    }
     const destroyBill = await Bill.destroy({
       where: {
         id: id,
@@ -68,7 +70,10 @@ module.exports = {
   },
   async updateBill(req, res) {
     const params = req.body;
-    const { id } = params;
+    const id = params.id;
+    if (!validateHandler.validateId(id)) {
+      return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+    }
     const updateB = await Bill.update(params, {
       where: {
         id: id,
@@ -86,7 +91,10 @@ module.exports = {
   },
   async showBillById(req, res) {
     const params = req.body;
-    const { id } = params;
+    const id = params.id;
+    if (!validateHandler.validateId(id)) {
+      return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+    }
     const getBillById = await Bill.findOne({
       where: {
         id: id,

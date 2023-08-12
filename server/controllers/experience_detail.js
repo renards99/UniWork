@@ -11,6 +11,9 @@ module.exports = {
     if (!validateHandler.validateInput(params)) {
       return responseHandler.badRequest(res, 'Your input is invalid!');
     }
+    if (!validateHandler.validateId(params.user_account_id)) {
+      return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+    }
     try {
       const createExperienceDetail = await ExperienceDetail.create(params);
       if (createExperienceDetail) {
@@ -25,7 +28,10 @@ module.exports = {
 
   async deleteExperienceDetail(req, res) {
     const params = req.body;
-    const { id } = params;
+    const id = params.id;
+    if (!validateHandler.validateId(id)) {
+      return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+    }
 
     try {
       const experiencDetail = await ExperienceDetail.destroy({ where: { id } });
@@ -40,7 +46,10 @@ module.exports = {
   },
   async updateExperienceDetail(req, res) {
     const params = req.body;
-    const { id } = params;
+    const id = params.id;
+    if (!validateHandler.validateId(id)) {
+      return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+    }
 
     try {
       const experiencDetail = await ExperienceDetail.update(params, { where: { id } });
@@ -57,7 +66,9 @@ module.exports = {
   async showExperienceDetailById(req, res) {
     const params = req.body;
     const { user_account_id } = params;
-
+    if (!validateHandler.validateId(user_account_id)) {
+      return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+    }
     try {
       const experiencDetail = await ExperienceDetail.findOne({ where: { user_account_id } });
       if (experiencDetail) {
@@ -71,8 +82,10 @@ module.exports = {
   },
   async ShowAllExperienceDetail(req, res) {
     const params = req.body;
-    const { user_account_id } = params;
-
+    const user_account_id = params.user_account_id;
+    if (!validateHandler.validateId(user_account_id)) {
+      return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+    }
     try {
       const experiencDetail = await ExperienceDetail.findAll({ where: { user_account_id } });
       if (experiencDetail) {

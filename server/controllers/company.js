@@ -47,6 +47,9 @@ module.exports = {
   async deleteCompany(req, res) {
     const params = req.body;
     const company_id = params.id;
+    if (!validateHandler.validateId(company_id)) {
+      return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+    }
     try {
       const delete_company = await Company.destroy({
         where: {
@@ -67,10 +70,15 @@ module.exports = {
     const params = req.body;
     try {
       const { company_name, company_description, company_website_url } = params;
-      const company_id = params.id;
+      const id = params.id;
+      if (!validateHandler.validateId(id)) {
+        //check if id is float
+        return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+      }
+
       const get_company = await Company.findOne({
         where: {
-          id: company_id,
+          id: id,
         },
       });
       if (!get_company) return responseHandler.badRequest(res, 'Company does not exist');
@@ -78,7 +86,7 @@ module.exports = {
         { company_name, company_description, company_website_url },
         {
           where: {
-            id: company_id,
+            id: id,
           },
         },
       );
@@ -94,11 +102,15 @@ module.exports = {
   },
   async getCompanyById(req, res) {
     const params = req.body;
+    const id = params.id;
+    if (!validateHandler.validateId(id)) {
+      //check if id is float
+      return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+    }
     try {
-      const company_id = params.id;
       const get_company = await Company.findOne({
         where: {
-          id: company_id,
+          id: id,
         },
       });
       if (get_company) return responseHandler.responseWithData(res, 200, get_company);

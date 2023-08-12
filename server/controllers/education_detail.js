@@ -45,7 +45,9 @@ module.exports = {
     ) {
       return responseHandler.badRequest(res, 'Cannot input special symbol!');
     }
-
+    if (!validateHandler.validateId(user_account_id)) {
+      return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+    }
     try {
       if (!isValidCGPA(cgpa)) {
         return responseHandler.badRequest(res, 'invalid CGPA!');
@@ -77,8 +79,10 @@ module.exports = {
 
   async deleteEducationDetail(req, res) {
     const params = req.body;
-    const { id } = params;
-
+    const id = params.id;
+    if (!validateHandler.validateId(id)) {
+      return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+    }
     try {
       const getEducationDetail = await EducationDetail.destroy({ where: { id } });
       if (getEducationDetail) {
@@ -92,7 +96,10 @@ module.exports = {
   },
   async updateEducationDetail(req, res) {
     const params = req.body;
-    const { id } = params;
+    const id = params.id;
+    if (!validateHandler.validateId(id)) {
+      return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+    }
 
     try {
       const getEducationDetail = await EducationDetail.update(params, { where: { id } });
@@ -109,6 +116,9 @@ module.exports = {
   async showEducationDetailById(req, res) {
     const params = req.body;
     const id = params.id;
+    if (!validateHandler.validateId(id)) {
+      return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+    }
     try {
       const getEducationDetail = await EducationDetail.findOne({
         where: {
@@ -127,7 +137,9 @@ module.exports = {
   async ShowAllEducationDetail(req, res) {
     const params = req.body;
     const user_account_id = params.user_account_id;
-
+    if (!validateHandler.validateId(user_account_id)) {
+      return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+    }
     try {
       const getEducationDetail = await EducationDetail.findAll({ where: { user_account_id } });
       if (getEducationDetail) {
