@@ -95,10 +95,10 @@ const validateInput = (params, exception) => {
       if (params[key] === exception) {
         continue;
       }
-      const fieldValue = params[key];
+      const fieldValue = params[key] + '';
 
       // Example: Check if the field is not empty
-      if (!fieldValue || fieldValue === '\n') {
+      if (!fieldValue || fieldValue.trim().length === 0) {
         return false;
       }
 
