@@ -9,9 +9,10 @@ import { HiOutlineBuildingOffice2 } from 'react-icons/hi2';
 import Image from 'next/image';
 import TempAvatar from '../../public/static/images/temporary_avatar.png';
 import AdminHeader from '../../components/layout/admin/header';
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import PostImage from '../../public/static/images/applicationPost.png';
 import Paging from '../../components/paging';
+import axios from 'axios';
 function UserProfileEmployer() {
   const eProfile = {
     companyName: 'Data Management Officer',
@@ -104,6 +105,53 @@ function UserProfileEmployer() {
   const changePage = (pageNumber) => setCurrentPage(pageNumber);
 
   const handleToggle = () => setShow(!show);
+
+  const [param, setParam] = useState({ role_id: 2 });
+  const [userData, setUserData] = useState({});
+  const [postData, setPostData] = useState([]);
+  // const getAllPost = useCallback(async () => {
+  //   try {
+  //     const getAllPost = await axios.post(`http://localhost:5000/job-post/get-all-job-post`);
+  //     if (getAllPost.data.statusCode === 200) {
+  //       setPostData(getAllPost);
+  //     } else {
+  //     }
+  //   } catch (error) {}
+  // }, [param]);
+  // useEffect(() => {
+  //   getAllPost();
+  // }, []);
+  // const getUserAccount = useCallback(async () => {
+  //   try {
+  //     const getUserAccount = await axios.post(`http://localhost:5000/account-details`, {
+  //       ...param,
+  //     });
+  //     if (getUserAccount.data.statusCode === 200) {
+  //       setUserData(getUserAccount.data.data.user_details);
+  //     } else {
+  //     }
+  //   } catch (error) {}
+  // }, [param]);
+  // useEffect(() => {
+  //   getUserAccount();
+  // }, []);
+  console.log(userData[0]);
+  const getCompany = useCallback(async () => {
+    try {
+      const getCompany = await axios.post(`http://localhost:5000/company/get-company-by-id`, {
+        ...param,
+      });
+      if (getCompany.data.statusCode === 200) {
+        setUserData(getCompany.data.data.user_details);
+      } else {
+      }
+    } catch (error) {}
+  }, [param]);
+  useEffect(() => {
+    getCompany();
+  }, []);
+  console.log(userData);
+
   return (
     <div>
       {/*Header*/}

@@ -20,6 +20,8 @@ import ShieldCheck from '../../public/static/images/icon/shield_check.svg';
 import ShieldWarning from '../../public/static/images/icon/shield_warning.svg';
 import Pagination from '../../components/paging';
 import HeaderAdmins from '../../components/layout/header_admin';
+import { useCallback, useEffect, useState } from 'react';
+import axios from 'axios';
 
 export default function AccountManager() {
   const itemsPerPage = 12;
@@ -53,8 +55,37 @@ export default function AccountManager() {
       ban: 0,
     },
   ];
+  const [dataUser, setDataUser] = useState([]);
+  const [param, setParam] = useState({ offset: 0, limit: 3, search: '' });
+  const [search, setSearch] = useState();
+  const handleSearch = useCallback((value) => {
+    setSearch(value);
+    setParam({ ...param, search: value });
+    getListAccounts(value);
+  }, []);
 
-  const TableContent = data.map((item, index) => {
+  const getListAccounts = useCallback(
+    async (search) => {
+      try {
+        const getListAccounts = await axios.post(
+          `http://localhost:5000/company/get-company-by-id`,
+          {
+            ...param,
+            search: search ? search : param.search,
+          },
+        );
+        if (getListAccounts.data.statusCode === 200) {
+          setDataUser(getListAccounts.data.data.list_user);
+        } else {
+        }
+      } catch (error) {}
+    },
+    [param],
+  );
+  useEffect(() => {
+    getListAccounts();
+  }, []);
+  const TableContent = dataUser.map((item, index) => {
     return (
       <Tr>
         <Td textAlign={'center'}>{index}</Td>
@@ -164,6 +195,8 @@ export default function AccountManager() {
           fontSize={'16px'}
           _hover={{ outline: 'none' }}
           _focusVisible={{ outline: 'none' }}
+          value={search}
+          onChange={(e) => handleSearch(e.target.value)}
         />
       </Flex>
       <Box w={'24px'}></Box>
