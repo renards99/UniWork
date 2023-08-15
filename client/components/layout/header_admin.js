@@ -12,7 +12,7 @@ import {
 import { LuBellDot } from 'react-icons/lu';
 import { HiChevronDown } from 'react-icons/hi';
 import { FaCircleUser } from 'react-icons/fa6';
-
+import Notifications from './admin/notifications';
 export default function HeaderAdmins({ title }) {
   return (
     <Flex

@@ -3,6 +3,7 @@ import { LuBellDot } from 'react-icons/lu';
 import { IoPersonCircle } from 'react-icons/io5';
 import { HiChevronDown, HiOutlineMail } from 'react-icons/hi';
 import { useState } from 'react';
+import Notifications from './notifications';
 function AdminHeader() {
   const [show, setShow] = useState(false);
   const handleClick = () => {
@@ -15,7 +16,7 @@ function AdminHeader() {
       alignItems='center'
       border='1px'
       borderColor='#D7D7D7'
-      px='36px'
+      px='48px'
     >
       <Text fontSize='30px' fontWeight='700' lineHeight='38px'>
         Quản lý tài khoản
@@ -27,7 +28,7 @@ function AdminHeader() {
         </Text>
       </Text>
       <Flex gap='24px' justifyContent='flex-end' alignItems='flex-start'>
-        <Flex
+        {/* <Flex
           alignItems='flex-start'
           fontSize='24px'
           bg='#E8E8EB'
@@ -37,7 +38,8 @@ function AdminHeader() {
           gap='10px'
         >
           <LuBellDot />
-        </Flex>
+        </Flex> */}
+        <Notifications />
         <Flex
           rounded='40px'
           fontSize='24px'
