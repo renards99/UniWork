@@ -22,7 +22,7 @@ module.exports = {
   async addEducationDetail(req, res) {
     const params = req.body;
     if (!validateHandler.validateInput(params)) {
-      return responseHandler.badRequest(res, 'Your input is invalid!');
+      return responseHandler.badRequest(res, 'Invalid input!');
     }
     const {
       user_account_id,
@@ -44,6 +44,11 @@ module.exports = {
       !regex.regexNormalString.test(cgpa)
     ) {
       return responseHandler.badRequest(res, 'Cannot input special symbol!');
+    }
+    if (
+      !validateHandler.validateStringWithNumber(educational_detail, major, insitude_university_name)
+    ) {
+      return responseHandler.badRequest(res, 'Invalid input!');
     }
     if (!validateHandler.validateId(user_account_id)) {
       return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
@@ -97,12 +102,27 @@ module.exports = {
   async updateEducationDetail(req, res) {
     const params = req.body;
     const id = params.id;
+    const {
+      educational_detail,
+      major,
+      insitude_university_name,
+      starting_year,
+      completion_year,
+      cgpa,
+    } = params;
     if (!validateHandler.validateId(id)) {
       return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
     }
-
+    const updatedData = {
+      educational_detail,
+      major,
+      insitude_university_name,
+      starting_year,
+      completion_year,
+      cgpa,
+    };
     try {
-      const getEducationDetail = await EducationDetail.update(params, { where: { id } });
+      const getEducationDetail = await EducationDetail.update(updatedData, { where: { id } });
       if (getEducationDetail) {
         return responseHandler.responseWithData(res, 200, 'Education detail update successfully');
       } else {
