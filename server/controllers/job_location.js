@@ -3,11 +3,28 @@ const Job_location = db.job_location;
 const Op = db.Sequelize.Op;
 const QueryTypes = db.Sequelize.QueryTypes;
 const responseHandler = require('../handlers/response.handler');
+const validateHandler = require('../handlers/validate.handler');
 
 module.exports = {
   async addJobLocation(req, res) {
     try {
       const params = req.body;
+
+      console.log(params);
+      if (!validateHandler.validateInput(params)) {
+        return responseHandler.badRequest(res, 'Your input is invalid!');
+      }
+
+      //validate zip code
+      if (Number.parseInt(params.zip_code) < 0) {
+        return responseHandler.badRequest(res, 'Zip code is invalid!');
+      }
+      if (!Number.isInteger(params.zip_code)) {
+        if (params.zip_code.match(/^[0-9]+$/) == null) {
+          return responseHandler.badRequest(res, 'Zip code is invalid!');
+        }
+      }
+
       const create_Job_location = await Job_location.create(params);
       if (create_Job_location) {
         return responseHandler.responseWithData(res, 200, 'Create Job location successfully!');
@@ -22,6 +39,9 @@ module.exports = {
   async deleteJobLocation(req, res) {
     const params = req.body;
     const job_location_id = params.id;
+    if (!validateHandler.validateId(job_location_id)) {
+      return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+    }
     try {
       const delete_Job_location = await Job_location.destroy({
         where: {
@@ -40,9 +60,12 @@ module.exports = {
   },
   async updateJobLocation(req, res) {
     const params = req.body;
+    const { street_address, city, province, zip_code } = params;
+    const job_location_id = params.id;
+    if (!validateHandler.validateId(job_location_id)) {
+      return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+    }
     try {
-      const { street_address, city, province, zip_code } = params;
-      const job_location_id = params.id;
       const getJobLocation = await Job_location.findOne({
         where: {
           id: job_location_id,
@@ -69,8 +92,12 @@ module.exports = {
   },
   async getJobLocationById(req, res) {
     const params = req.body;
+
+    const job_location_id = params.id;
+    if (!validateHandler.validateId(job_location_id)) {
+      return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+    }
     try {
-      const job_location_id = params.id;
       const getJobLocation = await Job_location.findOne({
         where: {
           id: job_location_id,

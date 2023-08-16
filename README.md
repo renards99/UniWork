@@ -1,4 +1,4 @@
-Setup môi trường chung cho dự án bus official (BE) 
+Setup môi trường chung cho dự án uniwork (BE) 
 1 .env ( chứa các thông tin như port, db information )
 2. các thư viện hiện tại đã cài : npm install express sequelize mysql2 cors --save cookie-parser  bcrypt
 3. extension để format code : prettier

@@ -29,26 +29,14 @@ module.exports = (sequelize, Sequelize) => {
         },
         onDelete: 'cascade',
       },
-      bill_date: {
-        type: Sequelize.DATE,
-        allowNull: false,
-      },
       total: {
         type: Sequelize.DOUBLE,
         allowNull: false,
       },
-      created_at: {
-        type: Sequelize.DATE,
-        allowNull: true,
-      },
-      updated_at: {
-        type: Sequelize.DATE,
-        allowNull: true,
-      },
+      createdAt: { type: Sequelize.DATE, field: 'created_at' },
+      updatedAt: { type: Sequelize.DATE, field: 'updated_at' },
     },
-    {
-      freezeTableName: true,
-    },
+    { timestamps: true, freezeTableName: true },
   );
 
   return Bill;

@@ -3,13 +3,13 @@ const Role = db.role;
 const Op = db.Sequelize.Op;
 const QueryTypes = db.Sequelize.QueryTypes;
 const responsehandler = require('../handlers/response.handler');
-
+const validateHandler = require('../handlers/validate.handler');
 module.exports = {
   async listRole(req, res) {
     const findRole = await Role.findAll();
     try {
       if (findRole) {
-        return responsehandler.responseWithData(res, 'Get list role successfully!');
+        return responsehandler.responseWithData(res, 'Get list role successfully!', findRole);
       } else {
         return responsehandler.badRequest(res, 'Cannot get list role!');
       }

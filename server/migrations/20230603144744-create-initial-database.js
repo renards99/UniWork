@@ -211,23 +211,23 @@ module.exports = {
         onDelete: 'cascade',
       },
       educational_detail: {
-        type: Sequelize.INTEGER(11),
+        type: Sequelize.STRING(20),
         allowNull: false,
       },
       major: {
-        type: Sequelize.INTEGER(11),
+        type: Sequelize.STRING(20),
         allowNull: false,
       },
       insitude_university_name: {
         type: Sequelize.STRING(20),
         allowNull: false,
       },
-      starting_date: {
-        type: Sequelize.DATE,
+      starting_year: {
+        type: Sequelize.INTEGER(5),
         allowNull: false,
       },
-      completion_date: {
-        type: Sequelize.DATE,
+      completion_year: {
+        type: Sequelize.INTEGER(5),
         allowNull: false,
       },
       cgpa: {
@@ -378,7 +378,7 @@ module.exports = {
         onDelete: 'cascade',
       },
       hire_number: {
-        type: Sequelize.STRING(20),
+        type: Sequelize.INTEGER(10),
         allowNull: true,
       },
       job_description: {
@@ -397,7 +397,7 @@ module.exports = {
         onDelete: 'cascade',
       },
       is_active: {
-        type: Sequelize.STRING(10),
+        type: Sequelize.BOOLEAN,
         allowNull: false,
       },
 
@@ -407,7 +407,7 @@ module.exports = {
       },
       salary_to: {
         type: Sequelize.DOUBLE,
-        allowNull: false,
+        allowNull: true,
       },
       view: {
         type: Sequelize.INTEGER(50),
@@ -420,6 +420,18 @@ module.exports = {
       tag: {
         type: Sequelize.STRING(100),
         allowNull: true,
+      },
+      created_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      updated_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      expired_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
       },
     });
 
@@ -497,10 +509,7 @@ module.exports = {
         },
         onDelete: 'cascade',
       },
-      bill_date: {
-        type: Sequelize.DATE,
-        allowNull: false,
-      },
+
       total: {
         type: Sequelize.DOUBLE,
         allowNull: false,

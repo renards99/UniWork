@@ -4,11 +4,16 @@ const StudentProfile = db.student_profile;
 const Op = db.Sequelize.Op;
 const QueryTypes = db.Sequelize.QueryTypes;
 const responsehandler = require('../handlers/response.handler');
-
+const validateHandler = require('../handlers/validate.handler');
 module.exports = {
   async addStudentProfile(req, res) {
     const params = req.body;
-
+    if (!validateHandler.validateInput(params)) {
+      return responseHandler.badRequest(res, 'Your input is invalid!');
+    }
+    if (!validateHandler.validateId(params.user_account_id)) {
+      return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+    }
     try {
       const createStudentProfile = await StudentProfile.create(params);
       if (createStudentProfile) {
@@ -23,8 +28,10 @@ module.exports = {
 
   async deleteStudentProfile(req, res) {
     const params = req.body;
-    const { id } = params;
-
+    const id = params.id;
+    if (!validateHandler.validateId(params.id)) {
+      return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+    }
     try {
       const studentProfile = await StudentProfile.destroy({ where: { id } });
       if (studentProfile) {
@@ -39,8 +46,10 @@ module.exports = {
   },
   async updateStudentProfile(req, res) {
     const params = req.body;
-    const { id } = params;
-
+    const id = params.id;
+    if (!validateHandler.validateId(params.id)) {
+      return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+    }
     try {
       const studentProfile = await StudentProfile.update(params, { where: { id } });
       if (studentProfile) {
@@ -54,10 +63,13 @@ module.exports = {
   },
   async showStudentProfileById(req, res) {
     const params = req.body;
-    const { user_account_id } = params;
+    const id = params.id;
+    if (!validateHandler.validateId(id)) {
+      return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+    }
 
     try {
-      const studentProfile = await StudentProfile.findOne({ where: { user_account_id } });
+      const studentProfile = await StudentProfile.findOne({ where: { id } });
       if (studentProfile) {
         return responsehandler.responseWithData(res, 200, studentProfile);
       } else {
@@ -69,7 +81,11 @@ module.exports = {
   },
   async showAllStudentProfile(req, res) {
     const params = req.body;
-    const { user_account_id } = params;
+    const user_account_id = params.user_account_id;
+
+    if (!validateHandler.validateId(user_account_id)) {
+      return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+    }
 
     try {
       const studentProfile = await StudentProfile.findAll({ where: { user_account_id } });

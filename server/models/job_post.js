@@ -52,7 +52,7 @@ module.exports = (sequelize, Sequelize) => {
         onDelete: 'cascade',
       },
       hire_number: {
-        type: Sequelize.STRING(20),
+        type: Sequelize.INTEGER(10),
         allowNull: true,
       },
       job_description: {
@@ -71,20 +71,17 @@ module.exports = (sequelize, Sequelize) => {
         onDelete: 'cascade',
       },
       is_active: {
-        type: Sequelize.STRING(10),
+        type: Sequelize.BOOLEAN,
         allowNull: false,
       },
-      expired_at: {
-        type: Sequelize.DATE,
-        allowNull: false,
-      },
+
       salary_from: {
         type: Sequelize.DOUBLE,
         allowNull: false,
       },
       salary_to: {
         type: Sequelize.DOUBLE,
-        allowNull: false,
+        allowNull: true,
       },
       view: {
         type: Sequelize.INTEGER(50),
@@ -98,8 +95,13 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING(100),
         allowNull: true,
       },
+
       createdAt: { type: Sequelize.DATE, field: 'created_at' },
       updatedAt: { type: Sequelize.DATE, field: 'updated_at' },
+      expired_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
     },
     {
       timestamps: true,

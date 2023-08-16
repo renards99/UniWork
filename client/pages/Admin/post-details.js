@@ -27,7 +27,7 @@ import {
   HiOutlineCurrencyDollar,
   HiBriefcase,
 } from 'react-icons/hi';
-
+import DropDown from '../../components/layout/admin/dropDown';
 import { HiOutlineMapPin, HiOutlineBuildingOffice2 } from 'react-icons/hi2';
 import { GiPlayerTime } from 'react-icons/gi';
 import { LiaNewspaperSolid } from 'react-icons/lia';
@@ -39,15 +39,14 @@ import {
   BsGenderAmbiguous,
 } from 'react-icons/bs';
 import { FiPhone } from 'react-icons/fi';
-
+import AdminPage from '.';
+import DatePicker from '../../components/layout/admin/datePicker';
 import Image from 'next/image';
 import TempAvatar from '../../public/static/images/temporary_avatar.png';
 import AdminHeader from '../../components/layout/admin/header';
-import { use, useState } from 'react';
-import PostImage from '../../public/static/images/applicationPost.png';
-import Paging from '../../components/paging';
-import StatusFrameGreen from '../../components/layout/admin/statusFrameGreen';
-import StatusFrameGrey from '../../components/layout/admin/statusFrameGrey';
+import { useState } from 'react';
+import StatusFrame from '../../components/layout/admin/statusFrame';
+import DropDownStatus from '../../components/layout/admin/dropDownStatus';
 function PostDetails() {
   const [menuIcon, setMenuIcon] = useState(false);
   const [activeIcon, setActiveIcon] = useState(0);
@@ -94,19 +93,12 @@ function PostDetails() {
       'Làm việc văn phòng và làm việc từ xa - Hybird',
     ],
     gender: ['nam', 'nữ', 'không yêu cầu'],
-  };
-  const [selectedMenuRole, setSelectedMenuRole] = useState(menuData.roles[0]);
-  const [selectedMenuWorkForm, setSelectedMenuWorkForm] = useState(menuData.workForm[0]);
-  const [selectedMenuGender, setSelectedMenuGender] = useState(menuData.gender[0]);
-
-  const handleMenuItemRole = (text) => {
-    setSelectedMenuRole(text);
-  };
-  const handleMenuItemWorkForm = (text) => {
-    setSelectedMenuWorkForm(text);
-  };
-  const handleMenuItemGender = (text) => {
-    setSelectedMenuGender(text);
+    status: [
+      <StatusFrame text='Chưa duyệt' />,
+      <StatusFrame text='Đã duyệt' />,
+      <StatusFrame text='Không duyệt' />,
+      <StatusFrame text='Hết hạn' />,
+    ],
   };
 
   const status = (
@@ -140,6 +132,8 @@ function PostDetails() {
           </Flex>
         </Stack>
         <Stack gap='12px' alignItems='flex-start'>
+          {/*Status*/}
+          {/*
           <Menu matchWidth>
             <MenuButton
               _hover='none'
@@ -186,6 +180,8 @@ function PostDetails() {
               </MenuItem>
             </MenuList>
           </Menu>
+            */}
+          <DropDownStatus data={menuData.status} />
           <Flex
             gap='20px'
             p='10px 12px 10px 24px'
@@ -595,61 +591,8 @@ function PostDetails() {
                 <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
                   Cấp bậc
                 </Text>
-                <Menu matchWidth>
-                  <MenuButton
-                    _hover='none'
-                    _focus={{ bg: 'none' }}
-                    _expanded={{ bg: 'none' }}
-                    bg='none'
-                    as={Button}
-                    gap='20px'
-                    py='22px'
-                    pl='24px'
-                    pr='12px'
-                    justifyContent='space-between'
-                    alignSelf='stretch'
-                    alignItems='center'
-                    border='1px solid #666666'
-                    rounded='12px'
-                    rightIcon={
-                      <Box transition='transform 0.3s ease-in-out' fontSize='24px'>
-                        <HiChevronDown />
-                      </Box>
-                    }
-                  >
-                    <Flex gap='20px'>
-                      <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
-                        {selectedMenuRole}
-                      </Text>
-                    </Flex>
-                  </MenuButton>
-                  <MenuList rounded='10px' border='1px solid #323541'>
-                    {menuData.roles.map((role) => (
-                      <Flex>
-                        {selectedMenuRole === role ? (
-                          <Box
-                            border='2px solid #323541'
-                            roundedRight='12px'
-                            pos='fixed'
-                            h='48px'
-                          ></Box>
-                        ) : (
-                          ''
-                        )}
-
-                        <MenuItem
-                          h='48px'
-                          onClick={() => handleMenuItemRole(role)}
-                          borderBottom='1px #D7D7D7 solid'
-                        >
-                          <Text p='12px 20px' fontSize='16px' fontWeight='600' lineHeight='24px'>
-                            {role}
-                          </Text>
-                        </MenuItem>
-                      </Flex>
-                    ))}
-                  </MenuList>
-                </Menu>
+                {/*Role*/}
+                <DropDown data={menuData.roles} />
               </Stack>
             </Flex>
           </Stack>
@@ -684,141 +627,34 @@ function PostDetails() {
                 <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
                   Hình thức làm việc
                 </Text>
-                <Menu matchWidth>
-                  <MenuButton
-                    _hover='none'
-                    _focus={{ bg: 'none' }}
-                    _expanded={{ bg: 'none' }}
-                    bg='none'
-                    as={Button}
-                    gap='20px'
-                    py='22px'
-                    pl='24px'
-                    pr='12px'
-                    justifyContent='space-between'
-                    alignSelf='stretch'
-                    alignItems='center'
-                    border='1px solid #666666'
-                    rounded='12px'
-                    overflow='hidden'
-                    rightIcon={
-                      <Box transition='transform 0.3s ease-in-out' fontSize='24px'>
-                        <HiChevronDown />
-                      </Box>
-                    }
-                  >
-                    <Flex gap='20px'>
-                      <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
-                        {selectedMenuWorkForm}
-                      </Text>
-                    </Flex>
-                  </MenuButton>
-                  <MenuList rounded='10px' border='1px solid #323541'>
-                    {menuData.workForm.map((work) => (
-                      <Flex>
-                        {selectedMenuWorkForm === work ? (
-                          <Box
-                            border='2px solid #323541'
-                            roundedRight='12px'
-                            pos='fixed'
-                            h='48px'
-                          ></Box>
-                        ) : (
-                          ''
-                        )}
-
-                        <MenuItem
-                          h='48px'
-                          onClick={() => handleMenuItemWorkForm(work)}
-                          borderBottom='1px #D7D7D7 solid'
-                        >
-                          <Text p='12px 20px' fontSize='16px' fontWeight='600' lineHeight='24px'>
-                            {work}
-                          </Text>
-                        </MenuItem>
-                      </Flex>
-                    ))}
-                  </MenuList>
-                </Menu>
+                <DropDown data={menuData.workForm} />
               </Stack>
               <Stack gap='8px' alignItems='flex-start' alignSelf='stretch' w='276px'>
                 <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
                   Thời hạn đăng
                 </Text>
-                <Input
-                  type='date'
-                  p='24px 20px'
-                  placeholder='Kinh nghiệm'
-                  rounded='12px'
-                  border='1px solid #323541'
-                  focusBorderColor='none'
-                  _placeholder={{ fontSize: '14px', fontWeight: '500', lineHeight: '24px' }}
-                  fontSize='16px'
-                  fontWeight='600px'
-                  lineHeight='24px'
-                ></Input>
+                <Flex alignItems='center' alignSelf='stretch'>
+                  <DatePicker />
+                  <Input
+                    rounded='0px 12px 12px 0px'
+                    p='24px 20px'
+                    placeholder='Thời hạn đăng'
+                    border='1px solid #323541'
+                    focusBorderColor='none'
+                    _placeholder={{ fontSize: '14px', fontWeight: '500', lineHeight: '24px' }}
+                    fontSize='16px'
+                    fontWeight='600px'
+                    lineHeight='24px'
+                  ></Input>
+                </Flex>
               </Stack>
             </Flex>
+
             <Stack gap='8px' alignItems='flex-start' w='276px' alignSelf='flex-start'>
               <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
                 Giới tính
               </Text>
-              <Menu matchWidth>
-                <MenuButton
-                  _hover='none'
-                  _focus={{ bg: 'none' }}
-                  _expanded={{ bg: 'none' }}
-                  bg='none'
-                  as={Button}
-                  gap='20px'
-                  py='22px'
-                  pl='24px'
-                  pr='12px'
-                  justifyContent='space-between'
-                  alignSelf='stretch'
-                  alignItems='center'
-                  border='1px solid #666666'
-                  rounded='12px'
-                  overflow='hidden'
-                  rightIcon={
-                    <Box transition='transform 0.3s ease-in-out' fontSize='24px'>
-                      <HiChevronDown />
-                    </Box>
-                  }
-                >
-                  <Flex gap='20px'>
-                    <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
-                      {selectedMenuGender}
-                    </Text>
-                  </Flex>
-                </MenuButton>
-                <MenuList rounded='10px' border='1px solid #323541'>
-                  {menuData.gender.map((gender) => (
-                    <Flex>
-                      {selectedMenuGender === gender ? (
-                        <Box
-                          border='2px solid #323541'
-                          roundedRight='12px'
-                          pos='fixed'
-                          h='48px'
-                        ></Box>
-                      ) : (
-                        ''
-                      )}
-
-                      <MenuItem
-                        h='48px'
-                        onClick={() => handleMenuItemGender(gender)}
-                        borderBottom='1px #D7D7D7 solid'
-                      >
-                        <Text p='12px 20px' fontSize='16px' fontWeight='600' lineHeight='24px'>
-                          {gender}
-                        </Text>
-                      </MenuItem>
-                    </Flex>
-                  ))}
-                </MenuList>
-              </Menu>
+              <DropDown data={menuData.gender} />
             </Stack>
           </Stack>
         </Stack>

@@ -3,6 +3,7 @@ const UserAccount = db.user_account;
 const Op = db.Sequelize.Op;
 const bcrypt = require('bcrypt');
 const QueryTypes = db.Sequelize.QueryTypes;
+const sequelize = db.sequelize;
 const jwt = require('jsonwebtoken');
 const responsehandler = require('../handlers/response.handler');
 
@@ -102,6 +103,45 @@ module.exports = {
       } catch (error) {
         responsehandler.badRequest(res, 'Something wrong when trying to refresh. Try again later');
       }
+    }
+  },
+  async listAccounts(req, res) {
+    try {
+      const params = req.body;
+      const { role_id, offset, limit, search } = params;
+      const getAllUsers = await sequelize.query(
+        `SELECT * from user_account where email like "%${search}%" limit ${limit} offset 0`,
+        {
+          type: QueryTypes.SELECT,
+        },
+      );
+
+      if (getAllUsers) {
+        return responsehandler.responseWithData(res, 200, { list_user: getAllUsers });
+      } else {
+        return responsehandler.badRequest(res, "can't get list user");
+      }
+    } catch (error) {
+      return responsehandler.error(res);
+    }
+  },
+  async getUserDetails(req, res) {
+    try {
+      const params = req.body;
+      const { role_id } = params;
+      const getUser = await sequelize.query(
+        `SELECT * FROM user_account where role_id = "${role_id}" limit 1`,
+        {
+          type: QueryTypes.SELECT,
+        },
+      );
+      if (getUser) {
+        return responsehandler.responseWithData(res, 200, { user_details: getUser });
+      } else {
+        return responsehandler.badRequest(res, "can't get user");
+      }
+    } catch (error) {
+      return responsehandler.error(res);
     }
   },
   async loginAccount(req, res) {

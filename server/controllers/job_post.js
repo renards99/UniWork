@@ -3,11 +3,44 @@ const Job_post = db.job_post;
 const Op = db.Sequelize.Op;
 const QueryTypes = db.Sequelize.QueryTypes;
 const responseHandler = require('../handlers/response.handler');
-
+const validateHandler = require('../handlers/validate.handler');
 module.exports = {
   async addJobPost(req, res) {
     try {
       const params = req.body;
+      const {
+        service_id,
+        job_type_id,
+        post_by_id,
+        company_id,
+        hire_number,
+        job_location_id,
+        salary_from,
+        salary_to,
+      } = params;
+      if (
+        !validateHandler.validateId(
+          service_id,
+          job_type_id,
+          post_by_id,
+          company_id,
+          hire_number,
+          job_location_id,
+        )
+      ) {
+        return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+      }
+      if (Number.parseFloat(salary_to)) {
+        if (Number.parseFloat(salary_from) >= Number.parseFloat(salary_to)) {
+          return responseHandler.badRequest(res, 'salary_from must >= salary_to !');
+        }
+      } else {
+        params.salary_to = null;
+      }
+
+      if (!validateHandler.validateInput(params, salary_to)) {
+        return responseHandler.badRequest(res, 'Your input is invalid!');
+      }
       const create_Job_post = await Job_post.create(params);
       if (create_Job_post) {
         return responseHandler.responseWithData(res, 200, 'Create job post successfully!');
@@ -42,17 +75,27 @@ module.exports = {
     const params = req.body;
     try {
       const job_post_id = params.id;
+      if (!validateHandler.validateId(job_post_id)) {
+        return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+      }
+
+      if (!validateHandler.validateInput(params, salary_to)) {
+        return responseHandler.badRequest(res, 'Your input is invalid!');
+      }
       const getJobPost = await Job_post.findOne({
         where: {
           id: job_post_id,
         },
       });
       if (!getJobPost) return responseHandler.badRequest(res, 'job post does not exist!');
-      const updateJobPost = await Job_post.update(params, {
-        where: {
-          id: job_post_id,
+      const updateJobPost = await Job_post.update(
+        { params },
+        {
+          where: {
+            id: job_post_id,
+          },
         },
-      });
+      );
       if (updateJobPost) {
         return responseHandler.responseWithData(res, 200, 'Update job post successfully!');
       } else {
@@ -66,10 +109,13 @@ module.exports = {
   async getJobPostById(req, res) {
     const params = req.body;
     try {
-      const Job_post_id = params.id;
+      const job_post_id = params.id;
+      if (!validateHandler.validateId(job_post_id)) {
+        return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+      }
       const get_job_post = await Job_post.findOne({
         where: {
-          id: Job_post_id,
+          id: job_post_id,
         },
       });
       if (get_job_post) return responseHandler.responseWithData(res, 200, get_job_post);
