@@ -38,6 +38,7 @@ module.exports = (sequelize, Sequelize) => {
           is: /^[0-9]{10,12}$/, // Validate phone number
         },
       },
+
       registration_date: {
         type: Sequelize.DATE,
         allowNull: false,
@@ -57,6 +58,17 @@ module.exports = (sequelize, Sequelize) => {
       short_des: {
         type: Sequelize.STRING(1000),
         allowNull: false,
+      },
+      company_id: {
+        type: Sequelize.INTEGER(11),
+        allowNull: true,
+        references: {
+          model: {
+            tableName: 'company',
+          },
+          key: 'id',
+        },
+        onDelete: 'cascade',
       },
       refresh_access_token: {
         type: Sequelize.STRING(1000),
