@@ -19,11 +19,11 @@ module.exports = (sequelize, Sequelize) => {
         onDelete: 'cascade',
       },
       start_date: {
-        type: Sequelize.DATE,
+        type: Sequelize.STRING(100),
         allowNull: false,
       },
       end_date: {
-        type: Sequelize.DATE,
+        type: Sequelize.STRING(100),
         allowNull: true,
       },
       job_title: {
