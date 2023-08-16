@@ -124,6 +124,23 @@ function validateState(input) {
   const validStates = ['accepted', 'waiting', 'denied'];
   return validStates.includes(input);
 }
+function validateStringWithNumber(...inputArray) {
+  return inputArray.every((inputStr) => {
+    // Check if the input is empty or only contains digits and spaces
+    if (!inputStr || /^[\d\s]+$/.test(inputStr)) {
+      return false;
+    }
+
+    // Check if the input contains only letters, numbers, and optional spaces
+    if (/^[a-zA-Z0-9\s]*$/.test(inputStr)) {
+      // Check if the input is not only composed of a single digit
+      if (!/^\d$/.test(inputStr.trim())) {
+        return true;
+      }
+    }
+    return false;
+  });
+}
 module.exports = {
   validatePositiveIntegerNumber,
   validatePositiveNumber,
@@ -135,4 +152,5 @@ module.exports = {
   validateYear,
   validateId,
   validateState,
+  validateStringWithNumber,
 };

@@ -81,15 +81,18 @@ module.exports = {
           id: id,
         },
       });
+
       if (!get_company) return responseHandler.badRequest(res, 'Company does not exist');
-      const updateCompany = await Company.update(
-        { company_name, company_description, company_website_url },
-        {
-          where: {
-            id: id,
-          },
+      const updatedData = {
+        company_name,
+        company_description,
+        company_website_url,
+      };
+      const updateCompany = await Company.update(updatedData, {
+        where: {
+          id: id,
         },
-      );
+      });
       if (updateCompany) {
         return responseHandler.responseWithData(res, 200, 'Update Company successfully!');
       } else {
