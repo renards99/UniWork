@@ -211,23 +211,23 @@ module.exports = {
         onDelete: 'cascade',
       },
       educational_detail: {
-        type: Sequelize.INTEGER(11),
+        type: Sequelize.STRING(20),
         allowNull: false,
       },
       major: {
-        type: Sequelize.INTEGER(11),
+        type: Sequelize.STRING(20),
         allowNull: false,
       },
       insitude_university_name: {
         type: Sequelize.STRING(20),
         allowNull: false,
       },
-      starting_date: {
-        type: Sequelize.DATE,
+      starting_year: {
+        type: Sequelize.INTEGER(5),
         allowNull: false,
       },
-      completion_date: {
-        type: Sequelize.DATE,
+      completion_year: {
+        type: Sequelize.INTEGER(5),
         allowNull: false,
       },
       cgpa: {
@@ -254,11 +254,11 @@ module.exports = {
         onDelete: 'cascade',
       },
       start_date: {
-        type: Sequelize.DATE,
+        type: Sequelize.STRING(100),
         allowNull: false,
       },
       end_date: {
-        type: Sequelize.DATE,
+        type: Sequelize.STRING(100),
         allowNull: true,
       },
       job_title: {
@@ -378,7 +378,7 @@ module.exports = {
         onDelete: 'cascade',
       },
       hire_number: {
-        type: Sequelize.STRING(20),
+        type: Sequelize.STRING(100),
         allowNull: true,
       },
       job_description: {
@@ -397,16 +397,12 @@ module.exports = {
         onDelete: 'cascade',
       },
       is_active: {
-        type: Sequelize.STRING(10),
+        type: Sequelize.BOOLEAN,
         allowNull: false,
       },
 
-      salary_from: {
-        type: Sequelize.DOUBLE,
-        allowNull: false,
-      },
-      salary_to: {
-        type: Sequelize.DOUBLE,
+      salary: {
+        type: Sequelize.STRING(100),
         allowNull: false,
       },
       view: {
@@ -414,12 +410,24 @@ module.exports = {
         allowNull: false,
       },
       gender: {
-        type: Sequelize.BOOLEAN,
+        type: Sequelize.INTEGER(2),
         allowNull: true,
       },
       tag: {
         type: Sequelize.STRING(100),
         allowNull: true,
+      },
+      created_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      updated_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      expired_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
       },
     });
 
@@ -497,10 +505,7 @@ module.exports = {
         },
         onDelete: 'cascade',
       },
-      bill_date: {
-        type: Sequelize.DATE,
-        allowNull: false,
-      },
+
       total: {
         type: Sequelize.DOUBLE,
         allowNull: false,

@@ -3,11 +3,15 @@ const UserLog = db.user_log;
 const Op = db.Sequelize.Op;
 const QueryTypes = db.Sequelize.QueryTypes;
 const responsehandler = require('../handlers/response.handler');
-
+const validateHandler = require('../handlers/validate.handler');
 module.exports = {
   async getUserLogById(req, res) {
     const params = req.body;
-    const { user_account_id } = params;
+    const user_account_id = params.user_account_id;
+
+    if (!validateHandler.validateId(user_account_id)) {
+      return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+    }
     try {
       const userLog = await UserLog.findOne({ where: { user_account_id } });
       if (userLog) {
@@ -21,6 +25,12 @@ module.exports = {
   },
   async createUserLog(req, res) {
     const params = req.body;
+    if (!validateHandler.validateInput(params)) {
+      return responseHandler.badRequest(res, 'Your input is invalid!');
+    }
+    if (!validateHandler.validateId(params.user_account_id)) {
+      return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+    }
     try {
       const userLog = await UserLog.create(params);
       if (userLog) {

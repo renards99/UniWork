@@ -3,11 +3,21 @@ const Job_post_application = db.job_post_application;
 const Op = db.Sequelize.Op;
 const QueryTypes = db.Sequelize.QueryTypes;
 const responseHandler = require('../handlers/response.handler');
-
+const validateHandler = require('../handlers/validate.handler');
 module.exports = {
   async addJobPostApplication(req, res) {
     try {
       const params = req.body;
+      if (
+        !validateHandler.validateId(params.user_account_id) ||
+        !validateHandler.validateId(params.job_post_id)
+      ) {
+        return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+      }
+
+      if (!validateHandler.validateInput(params)) {
+        return responseHandler.badRequest(res, 'Your input is invalid!');
+      }
       const create_Job_post_application = await Job_post_application.create(params);
       if (create_Job_post_application) {
         return responseHandler.responseWithData(
@@ -26,6 +36,10 @@ module.exports = {
   async deleteJobPostApplication(req, res) {
     const params = req.body;
     const job_post_application_id = params.id;
+    if (!validateHandler.validateId(job_post_application_id)) {
+      return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+    }
+
     try {
       const delete_job_post_application = await Job_post_application.destroy({
         where: {
@@ -50,6 +64,9 @@ module.exports = {
     const params = req.body;
     try {
       const job_post_application_id = params.id;
+      if (!validateHandler.validateId(job_post_application_id)) {
+        return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+      }
       const getJobPostApplication = await Job_post_application.findOne({
         where: {
           id: job_post_application_id,
@@ -80,6 +97,9 @@ module.exports = {
     const params = req.body;
     try {
       const job_post_application_id = params.id;
+      if (!validateHandler.validateId(job_post_application_id)) {
+        return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+      }
       const get_job_post_application_by_id = await Job_post_application.findOne({
         where: {
           id: job_post_application_id,
