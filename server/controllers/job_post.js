@@ -3,7 +3,7 @@ const Job_post = db.job_post;
 const Op = db.Sequelize.Op;
 const QueryTypes = db.Sequelize.QueryTypes;
 const responseHandler = require('../handlers/response.handler');
-const { param } = require('../routes/user_account');
+
 const sequelize = db.sequelize;
 
 module.exports = {
