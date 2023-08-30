@@ -5,13 +5,13 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     return queryInterface.bulkInsert('role', [
       {
-        role_name: 'Admin',
+        role_name: 'Quản trị viên',
       },
       {
-        role_name: 'Employee',
+        role_name: 'Nhà tuyển dụng',
       },
       {
-        role_name: 'Student',
+        role_name: 'Ứng viên',
       },
     ]);
   },

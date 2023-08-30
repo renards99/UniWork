@@ -1,8 +1,8 @@
 module.exports = (sequelize, Sequelize) => {
-  const Student_profile = sequelize.define(
-    'student_profile',
+  const Student = sequelize.define(
+    'student',
     {
-      id: {
+       id: {
         type: Sequelize.INTEGER(11),
         primaryKey: true,
         autoIncrement: true,
@@ -18,14 +18,6 @@ module.exports = (sequelize, Sequelize) => {
         },
         onDelete: 'cascade',
       },
-      first_name: {
-        type: Sequelize.STRING(20),
-        allowNull: false,
-      },
-      last_name: {
-        type: Sequelize.STRING(20),
-        allowNull: true,
-      },
       cv: {
         type: Sequelize.STRING(100),
         allowNull: true,
@@ -37,5 +29,5 @@ module.exports = (sequelize, Sequelize) => {
     },
   );
 
-  return Student_profile;
+  return Student;
 };

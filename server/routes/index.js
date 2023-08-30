@@ -3,7 +3,7 @@ module.exports = [
   require('./role'),
   require('./user_account'),
   require('./user_log'),
-  require('./student_profile'),
+  require('./student'),
   require('./education_detail'),
   require('./experience_detail'),
   require('./request'),

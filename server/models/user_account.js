@@ -7,6 +7,10 @@ module.exports = (sequelize, Sequelize) => {
         primaryKey: true,
         autoIncrement: true,
       },
+      fullname: {
+        type: Sequelize.STRING(100),
+        allowNull: false,
+      },
       role_id: {
         type: Sequelize.INTEGER(11),
         allowNull: false,
@@ -19,7 +23,7 @@ module.exports = (sequelize, Sequelize) => {
         onDelete: 'cascade',
       },
       email: {
-        type: Sequelize.STRING(20),
+        type: Sequelize.STRING(100),
         allowNull: false,
       },
       password: {
