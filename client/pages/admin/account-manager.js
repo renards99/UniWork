@@ -67,13 +67,10 @@ export default function AccountManager() {
   const getListAccounts = useCallback(
     async (search) => {
       try {
-        const getListAccounts = await axios.post(
-          `http://localhost:5000/company/get-company-by-id`,
-          {
-            ...param,
-            search: search ? search : param.search,
-          },
-        );
+        const getListAccounts = await axios.post(`http://localhost:5000/list-accounts`, {
+          ...param,
+          search: search ? search : param.search,
+        });
         if (getListAccounts.data.statusCode === 200) {
           setDataUser(getListAccounts.data.data.list_user);
         } else {

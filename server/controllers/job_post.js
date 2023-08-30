@@ -3,6 +3,9 @@ const Job_post = db.job_post;
 const Op = db.Sequelize.Op;
 const QueryTypes = db.Sequelize.QueryTypes;
 const responseHandler = require('../handlers/response.handler');
+
+const sequelize = db.sequelize;
+
 const validateHandler = require('../handlers/validate.handler');
 module.exports = {
   async addJobPost(req, res) {
@@ -130,6 +133,22 @@ module.exports = {
     } catch (e) {
       console.log(e);
       return responseHandler.badRequest(res, 'There is something wrong with your request!');
+    }
+  },
+  async getAllPosts(req, res) {
+    try {
+      const params = req.body;
+      const {} = params;
+      const getAllPost = await sequelize.query(`SELECT * FROM job_post`, {
+        type: QueryTypes.SELECT,
+      });
+      if (getAllPost) {
+        return responseHandler.responseWithData(res, 200, { list_user: getAllPost });
+      } else {
+        return responseHandler.badRequest(res, "can't get list user");
+      }
+    } catch (error) {
+      return responseHandler.error(res);
     }
   },
 };

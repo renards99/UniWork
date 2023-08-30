@@ -16,7 +16,6 @@ module.exports = {
         user_image:
           'https://www.google.com/url?sa=i&url=https%3A%2F%2Fpixabay.com%2Fimages%2Fsearch%2Fnature%2F&psig=AOvVaw1wkv00c9PQhVr-wCoFnaX7&ust=1690907381255000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNifk4KvuYADFQAAAAAdAAAAABAE',
         short_des: 'Nhà sáng lập công ty BSS',
-        company_id: null,
       },
       {
         role_id: 2,
@@ -29,7 +28,6 @@ module.exports = {
         is_banned: false,
         user_image: 'https://cdn.love-shayari.co/wp-content/uploads/2021/10/sun-rise.jpg',
         short_des: 'Nhà sáng lập công ty Google',
-        company_id: null,
       },
       {
         role_id: 3,
@@ -43,7 +41,6 @@ module.exports = {
         user_image:
           'https://img.freepik.com/premium-photo/image-colorful-galaxy-sky-generative-ai_791316-9864.jpg?w=2000',
         short_des: 'Sinh viên trường đại học FPT',
-        company_id: null,
       },
     ]);
   },
