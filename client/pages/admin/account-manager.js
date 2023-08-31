@@ -43,6 +43,7 @@ export default function AccountManager() {
 
   const [dataUser, setDataUser] = useState([]);
   const [param, setParam] = useState({ search: '', role: '' });
+
   const [search, setSearch] = useState();
   const [role, setRole] = useState();
   const handleSearch = useCallback((value, role) => {
