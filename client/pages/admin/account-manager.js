@@ -22,54 +22,42 @@ import Pagination from '../../components/paging';
 import HeaderAdmins from '../../components/layout/header_admin';
 import { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
+//format date
+const options = {
+  day: '2-digit',
+  month: '2-digit',
+  year: 'numeric',
+  hour: '2-digit',
+  minute: '2-digit',
+  second: '2-digit',
+  hour12: false,
+  timeZone: 'UTC',
+};
 
 export default function AccountManager() {
   const itemsPerPage = 12;
   const changePage = (pageNumber) => setCurrentPage(pageNumber);
-  const data = [
-    {
-      id: 1,
-      job_name: 'Java Dev',
-      email: 'alma.lawson@gmail.com',
-      role: 1,
-      date: '12/12/2022',
-      status: 1,
-      ban: 1,
-    },
-    {
-      id: 2,
-      job_name: 'Android Dev',
-      email: 'dols.chambers@gmail.com',
-      role: 1,
-      date: '30/05/2022',
-      status: 0,
-      ban: 1,
-    },
-    {
-      id: 3,
-      job_name: 'Java Dev',
-      email: 'tanya.hill@gmail.com',
-      role: 1,
-      date: '24/01/2022',
-      status: 0,
-      ban: 0,
-    },
-  ];
+
   const [dataUser, setDataUser] = useState([]);
-  const [param, setParam] = useState({ offset: 0, limit: 3, search: '', role: '' });
+
+  const [param, setParam] = useState({ offset: 0, limit: 10, search: '', role: '' });
+
   const [search, setSearch] = useState();
-  const handleSearch = useCallback((value) => {
+  const [role, setRole] = useState();
+  const handleSearch = useCallback((value, role) => {
+    setRole(role);
     setSearch(value);
     setParam({ ...param, search: value });
-    getListAccounts(value);
+    getListAccounts(value, role);
   }, []);
 
   const getListAccounts = useCallback(
-    async (search) => {
+    async (search, role) => {
       try {
         const getListAccounts = await axios.post(`http://localhost:5000/list-accounts`, {
           ...param,
           search: search ? search : param.search,
+          role: role ? role : param.role,
         });
         if (getListAccounts.data.statusCode === 200) {
           setDataUser(getListAccounts.data.data.list_user);
@@ -79,21 +67,22 @@ export default function AccountManager() {
     },
     [param],
   );
+  console.log(dataUser);
   useEffect(() => {
     getListAccounts();
   }, []);
-  const TableContent = dataUser.map((item, index) => {
+  const TableContent = dataUser.map((item) => {
     return (
       <Tr>
-        <Td textAlign={'center'}>{index}</Td>
-        <Td>{item.job_name}</Td>
+        <Td textAlign={'center'}>{item.id}</Td>
+        <Td>{item.fullname}</Td>
         <Td>{item.email}</Td>
-        <Td>
-          {item.role == 0 ? 'Quản trị viên' : item.role == 1 ? 'Nhà tuyển dụng' : 'Sinh viên'}
-        </Td>
-        <Td textAlign={'center'}>{item.date}</Td>
+        <Td>{item.role_name}</Td>
         <Td textAlign={'center'}>
-          {item.status ? (
+          {new Intl.DateTimeFormat('en-GB', options).format(new Date(item.registration_date))}
+        </Td>
+        <Td textAlign={'center'}>
+          {item.is_verified ? (
             <Box
               backgroundColor={'#C7F5D9'}
               w='134px'
@@ -124,7 +113,7 @@ export default function AccountManager() {
           )}
         </Td>
         <Td textAlign={'center'}>
-          {item.ban ? (
+          {item.is_banned ? (
             <Image src={ShieldCheck} style={{ margin: '0 auto' }} />
           ) : (
             <Image src={ShieldWarning} style={{ margin: '0 auto' }} />
@@ -140,10 +129,10 @@ export default function AccountManager() {
         <Table variant='simple' className='unw-table-custom'>
           <Thead>
             <Tr>
-              <th style={{ width: '5%' }}>STT</th>
+              <th style={{ width: '5%' }}>ID</th>
               <th style={{ width: '20%' }}>Tên</th>
               <th style={{ width: '25%' }}>Email</th>
-              <th>Chức năng</th>
+              <th>Vai trò</th>
               <th>Ngày đăng kí</th>
               <th style={{ width: '15%' }}>Trạng thái</th>
               <th style={{ width: '5%' }}>Cấm</th>
@@ -152,29 +141,50 @@ export default function AccountManager() {
           <Tbody>{TableContent}</Tbody>
         </Table>
       </TableContainer>
-      <Pagination itemsPerPage={itemsPerPage} totalItems={data.length} changePage={changePage} />;
+      <Pagination itemsPerPage={itemsPerPage} totalItems={param.length} changePage={changePage} />;
     </>
   );
-
+  //
+  //
   const TabUNW = (
     <Tabs marginTop={'28px'}>
       <TabList paddingLeft={'24px'} borderBottom={'none'}>
-        <Tab fontSize={'16px'} fontWeight={'600'} color={'#323541'}>
+        <Tab
+          fontSize={'16px'}
+          fontWeight={'600'}
+          color={'#323541'}
+          onClick={() => handleSearch(search, '')}
+        >
           Tất cả tài khoản
         </Tab>
-        <Tab fontSize={'16px'} fontWeight={'600'} color={'#323541'}>
+        <Tab
+          fontSize={'16px'}
+          fontWeight={'600'}
+          color={'#323541'}
+          onClick={() => handleSearch(search, 'Nhà tuyển dụng')}
+        >
           Nhà tuyển dụng
         </Tab>
-        <Tab fontSize={'16px'} fontWeight={'600'} color={'#323541'}>
+        <Tab
+          fontSize={'16px'}
+          fontWeight={'600'}
+          color={'#323541'}
+          onClick={() => handleSearch(search, 'Ứng viên')}
+        >
           Ứng viên
         </Tab>
-        <Tab fontSize={'16px'} fontWeight={'600'} color={'#323541'}>
+        <Tab
+          fontSize={'16px'}
+          fontWeight={'600'}
+          color={'#323541'}
+          onClick={() => handleSearch(search, 'Quản trị viên')}
+        >
           Quản trị viên
         </Tab>
       </TabList>
     </Tabs>
   );
-
+  console.log(role);
   const ActionUNW = (
     <Flex p={'24px 0 0 24px'}>
       <Flex
@@ -187,13 +197,13 @@ export default function AccountManager() {
       >
         <CiSearch color={'#323541'} style={{ width: '28px', height: '24px' }} />
         <Input
-          placeHolder={'Tìm kiếm'}
+          placeholder={'Tìm kiếm'}
           backgroundColor={'#e7e7ea'}
           fontSize={'16px'}
           _hover={{ outline: 'none' }}
           _focusVisible={{ outline: 'none' }}
           value={search}
-          onChange={(e) => handleSearch(e.target.value)}
+          onChange={(e) => handleSearch(e.target.value, role)}
         />
       </Flex>
       <Box w={'24px'}></Box>

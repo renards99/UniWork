@@ -3,7 +3,7 @@ const role = require('./role');
 const request = require('./request');
 const user_accounts = require('./user_account');
 const user_log = require('./user_log');
-const student_profile = require('./student_profile');
+const student = require('./student');
 const education_detail = require('./education_detail');
 const experience_detail = require('./experience_detail');
 const job_type = require('./job_type');
@@ -18,7 +18,6 @@ module.exports = {
   role,
   user_accounts,
   user_log,
-  student_profile,
   education_detail,
   experience_detail,
   request,
@@ -28,4 +27,5 @@ module.exports = {
   service,
   job_post,
   job_post_application,
+  student,
 };

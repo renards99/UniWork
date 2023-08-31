@@ -1,12 +1,11 @@
-//todo student profile
 const db = require('../models');
-const StudentProfile = db.student_profile;
+const Student = db.student;
 const Op = db.Sequelize.Op;
 const QueryTypes = db.Sequelize.QueryTypes;
 const responsehandler = require('../handlers/response.handler');
 const validateHandler = require('../handlers/validate.handler');
 module.exports = {
-  async addStudentProfile(req, res) {
+  async addStudent(req, res) {
     const params = req.body;
     if (!validateHandler.validateInput(params)) {
       return responseHandler.badRequest(res, 'Your input is invalid!');
@@ -15,8 +14,8 @@ module.exports = {
       return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
     }
     try {
-      const createStudentProfile = await StudentProfile.create(params);
-      if (createStudentProfile) {
+      const createStudent = await Student.create(params);
+      if (createStudent) {
         return responsehandler.responseWithData(res, 200, 'Student profile created');
       } else {
         return responsehandler.badRequest(res, 'Can not create student profile');
@@ -26,15 +25,15 @@ module.exports = {
     }
   },
 
-  async deleteStudentProfile(req, res) {
+  async deleteStudent(req, res) {
     const params = req.body;
     const id = params.id;
     if (!validateHandler.validateId(params.id)) {
       return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
     }
     try {
-      const studentProfile = await StudentProfile.destroy({ where: { id } });
-      if (studentProfile) {
+      const student = await Student.destroy({ where: { id } });
+      if (student) {
         return responsehandler.responseWithData(res, 200, 'Student profile deleted successfully');
       } else {
         return responsehandler.badRequest(res, 'Can not delete student profile');
@@ -44,15 +43,15 @@ module.exports = {
       return responsehandler.error(res);
     }
   },
-  async updateStudentProfile(req, res) {
+  async updateStudent(req, res) {
     const params = req.body;
     const id = params.id;
     if (!validateHandler.validateId(params.id)) {
       return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
     }
     try {
-      const studentProfile = await StudentProfile.update(params, { where: { id } });
-      if (studentProfile) {
+      const student = await Student.update(params, { where: { id } });
+      if (student) {
         return responsehandler.responseWithData(res, 200, 'Student profile update successfully');
       } else {
         return responsehandler.badRequest(res, 'Can not update student profile');
@@ -61,7 +60,7 @@ module.exports = {
       return responsehandler.error(res);
     }
   },
-  async showStudentProfileById(req, res) {
+  async showStudentById(req, res) {
     const params = req.body;
     const id = params.id;
     if (!validateHandler.validateId(id)) {
@@ -69,9 +68,9 @@ module.exports = {
     }
 
     try {
-      const studentProfile = await StudentProfile.findOne({ where: { id } });
-      if (studentProfile) {
-        return responsehandler.responseWithData(res, 200, studentProfile);
+      const student = await Student.findOne({ where: { id } });
+      if (student) {
+        return responsehandler.responseWithData(res, 200, Student);
       } else {
         return responsehandler.badRequest(res, 'Can not get student profile');
       }
@@ -79,7 +78,7 @@ module.exports = {
       return responsehandler.error(res);
     }
   },
-  async showAllStudentProfile(req, res) {
+  async showAllStudent(req, res) {
     const params = req.body;
     const user_account_id = params.user_account_id;
 
@@ -88,9 +87,9 @@ module.exports = {
     }
 
     try {
-      const studentProfile = await StudentProfile.findAll({ where: { user_account_id } });
-      if (studentProfile) {
-        return responsehandler.responseWithData(res, 200, studentProfile);
+      const student = await Student.findAll({ where: { user_account_id } });
+      if (student) {
+        return responsehandler.responseWithData(res, 200, Student);
       } else {
         return responsehandler.badRequest(res, 'Can not get list student profile');
       }

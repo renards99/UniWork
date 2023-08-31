@@ -40,6 +40,10 @@ module.exports = {
         primaryKey: true,
         autoIncrement: true,
       },
+      fullname: {
+        type: Sequelize.STRING(100),
+        allowNull: false,
+      },
       role_id: {
         type: Sequelize.INTEGER(11),
         allowNull: false,
@@ -52,7 +56,7 @@ module.exports = {
         onDelete: 'cascade',
       },
       email: {
-        type: Sequelize.STRING(20),
+        type: Sequelize.STRING(100),
         allowNull: false,
       },
       password: {
@@ -64,7 +68,7 @@ module.exports = {
         allowNull: false,
       },
       mobile_number: {
-        type: Sequelize.STRING(20),
+        type: Sequelize.STRING(100),
         allowNull: false,
         unique: true,
         validate: {
@@ -85,7 +89,7 @@ module.exports = {
       },
       user_image: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       short_des: {
         type: Sequelize.STRING(1000),
@@ -162,7 +166,7 @@ module.exports = {
       },
     });
 
-    await queryInterface.createTable('student_profile', {
+    await queryInterface.createTable('student', {
       id: {
         type: Sequelize.INTEGER(11),
         primaryKey: true,
@@ -178,14 +182,6 @@ module.exports = {
           key: 'id',
         },
         onDelete: 'cascade',
-      },
-      first_name: {
-        type: Sequelize.STRING(20),
-        allowNull: false,
-      },
-      last_name: {
-        type: Sequelize.STRING(20),
-        allowNull: true,
       },
       cv: {
         type: Sequelize.STRING(100),
@@ -431,52 +427,6 @@ module.exports = {
       },
     });
 
-    await queryInterface.createTable('job_post_application', {
-      id: {
-        type: Sequelize.INTEGER(11),
-        primaryKey: true,
-        autoIncrement: true,
-      },
-      user_account_id: {
-        type: Sequelize.INTEGER(11),
-        allowNull: false,
-        references: {
-          model: {
-            tableName: 'user_account',
-          },
-          key: 'id',
-        },
-        onDelete: 'cascade',
-      },
-      job_post_id: {
-        type: Sequelize.INTEGER(11),
-        allowNull: false,
-        references: {
-          model: {
-            tableName: 'job_post',
-          },
-          key: 'id',
-        },
-        onDelete: 'cascade',
-      },
-      apply_at: {
-        type: Sequelize.STRING(20),
-        allowNull: false,
-      },
-      state: {
-        type: Sequelize.STRING(20),
-        allowNull: true,
-      },
-      created_at: {
-        type: Sequelize.DATE,
-        allowNull: false,
-      },
-      updated_at: {
-        type: Sequelize.DATE,
-        allowNull: false,
-      },
-    });
-
     await queryInterface.createTable('bill', {
       id: {
         type: Sequelize.INTEGER(11),
@@ -509,6 +459,77 @@ module.exports = {
       total: {
         type: Sequelize.DOUBLE,
         allowNull: false,
+      },
+      created_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      updated_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+    });
+    await queryInterface.createTable('employer', {
+      id: {
+        type: Sequelize.INTEGER(11),
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      user_account_id: {
+        type: Sequelize.INTEGER(11),
+        allowNull: false,
+        references: {
+          model: {
+            tableName: 'user_account',
+          },
+          key: 'id',
+        },
+        license: {
+          type: Sequelize.STRING,
+          allowNull: true,
+        },
+        other_document: {
+          type: Sequelize.STRING,
+          allowNull: true,
+        },
+        onDelete: 'cascade',
+      },
+    });
+    await queryInterface.createTable('job_post_application', {
+      id: {
+        type: Sequelize.INTEGER(11),
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      employer_id: {
+        type: Sequelize.INTEGER(11),
+        allowNull: false,
+        references: {
+          model: {
+            tableName: 'employer',
+          },
+          key: 'id',
+        },
+        onDelete: 'cascade',
+      },
+      job_post_id: {
+        type: Sequelize.INTEGER(11),
+        allowNull: false,
+        references: {
+          model: {
+            tableName: 'job_post',
+          },
+          key: 'id',
+        },
+        onDelete: 'cascade',
+      },
+      apply_at: {
+        type: Sequelize.STRING(20),
+        allowNull: false,
+      },
+      state: {
+        type: Sequelize.STRING(20),
+        allowNull: true,
       },
       created_at: {
         type: Sequelize.DATE,

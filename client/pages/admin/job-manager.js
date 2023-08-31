@@ -22,7 +22,7 @@ import Pagination from '../../components/paging';
 import HeaderAdmins from '../../components/layout/header_admin';
 
 export default function JobManager() {
-  const itemsPerPage = 12;
+  const itemsPerPage = 10;
   const changePage = (pageNumber) => setCurrentPage(pageNumber);
   const data = [
     {
