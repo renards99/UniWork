@@ -1,12 +1,13 @@
 import { HStack, Button, Hide, Flex, Stack, Text } from '@chakra-ui/react';
 import { number } from 'prop-types';
 import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 function Paging(props) {
   const router = useRouter();
   const pageNumbers = [];
+  var currentPage_help = props.currentPage;
   const totalItems = props.totalItems;
   const itemsPerPage = props.itemsPerPage;
   const changePage = props.changePage;
@@ -19,21 +20,29 @@ function Paging(props) {
   const [currentPage, setCurrentPage] = useState(1);
 
   const handlePageClick = (number) => {
+    currentPage_help = number;
     setCurrentPage(number);
     changePage(number);
   };
   const prevPage = () => {
+    currentPage_help = currentPage_help - 1;
     setCurrentPage(currentPage - 1);
     changePage(currentPage - 1);
   };
   const nextPage = () => {
+    currentPage_help = currentPage_help + 1;
     setCurrentPage(currentPage + 1);
     changePage(currentPage + 1);
   };
+
+  useEffect(() => {
+    setCurrentPage(currentPage_help); // Update the current page value
+  }, [currentPage_help]);
+  console.log('current page trong component', currentPage);
   return (
     <Flex justifyContent='center' gap={12}>
       <Button
-        sx={currentPage === 1 ? { visibility: 'hidden ' } : ''}
+        sx={currentPage_help === 1 ? { visibility: 'hidden ' } : ''}
         rounded='full'
         boxSize={16}
         fontSize='2xl'
@@ -77,7 +86,7 @@ function Paging(props) {
         ))}
       </Flex>
       <Button
-        sx={currentPage === totalPages ? { visibility: 'hidden ' } : ''}
+        sx={currentPage_help === totalPages ? { visibility: 'hidden ' } : ''}
         rounded='full'
         boxSize={16}
         fontSize='2xl'
