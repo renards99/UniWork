@@ -35,16 +35,20 @@ const options = {
 };
 
 export default function AccountManager() {
-  const itemsPerPage = 12;
+  const itemsPerPage = 10;
+  const [currentPage, setCurrentPage] = useState(1);
   const changePage = (pageNumber) => setCurrentPage(pageNumber);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
 
   const [dataUser, setDataUser] = useState([]);
-  const [param, setParam] = useState({ offset: 0, limit: 10, search: '', role: '' });
+  const [param, setParam] = useState({ search: '', role: '' });
   const [search, setSearch] = useState();
   const [role, setRole] = useState();
   const handleSearch = useCallback((value, role) => {
     setRole(role);
     setSearch(value);
+    changePage(1);
     setParam({ ...param, search: value });
     getListAccounts(value, role);
   }, []);
@@ -69,7 +73,9 @@ export default function AccountManager() {
   useEffect(() => {
     getListAccounts();
   }, []);
-  const TableContent = dataUser.map((item) => {
+
+  const slicedDataUser = dataUser.slice(startIndex, endIndex);
+  const TableContent = slicedDataUser.map((item) => {
     return (
       <Tr>
         <Td textAlign={'center'}>{item.id}</Td>
@@ -120,7 +126,7 @@ export default function AccountManager() {
       </Tr>
     );
   });
-
+  console.log(dataUser, 'haha', currentPage);
   const TableUNW = (
     <>
       <TableContainer marginTop={'28px'} p={'0 40px'}>
@@ -139,7 +145,13 @@ export default function AccountManager() {
           <Tbody>{TableContent}</Tbody>
         </Table>
       </TableContainer>
-      <Pagination itemsPerPage={itemsPerPage} totalItems={param.length} changePage={changePage} />;
+      <Pagination
+        currentPage={currentPage}
+        itemsPerPage={itemsPerPage}
+        totalItems={dataUser.length}
+        changePage={changePage}
+      />
+      ;
     </>
   );
   //
@@ -151,7 +163,10 @@ export default function AccountManager() {
           fontSize={'16px'}
           fontWeight={'600'}
           color={'#323541'}
-          onClick={() => handleSearch(search, '')}
+          onClick={() => {
+            changePage(1);
+            handleSearch(search, '');
+          }}
         >
           Tất cả tài khoản
         </Tab>
@@ -159,7 +174,10 @@ export default function AccountManager() {
           fontSize={'16px'}
           fontWeight={'600'}
           color={'#323541'}
-          onClick={() => handleSearch(search, 'Nhà tuyển dụng')}
+          onClick={() => {
+            changePage(1);
+            handleSearch(search, 'Nhà tuyển dụng');
+          }}
         >
           Nhà tuyển dụng
         </Tab>
@@ -167,7 +185,10 @@ export default function AccountManager() {
           fontSize={'16px'}
           fontWeight={'600'}
           color={'#323541'}
-          onClick={() => handleSearch(search, 'Ứng viên')}
+          onClick={() => {
+            changePage(1);
+            handleSearch(search, 'Ứng viên');
+          }}
         >
           Ứng viên
         </Tab>
@@ -175,14 +196,16 @@ export default function AccountManager() {
           fontSize={'16px'}
           fontWeight={'600'}
           color={'#323541'}
-          onClick={() => handleSearch(search, 'Quản trị viên')}
+          onClick={() => {
+            handleSearch(search, 'Quản trị viên');
+            changePage(1);
+          }}
         >
           Quản trị viên
         </Tab>
       </TabList>
     </Tabs>
   );
-  console.log(role);
   const ActionUNW = (
     <Flex p={'24px 0 0 24px'}>
       <Flex
