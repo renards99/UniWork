@@ -39,7 +39,9 @@ export default function AccountManager() {
   const changePage = (pageNumber) => setCurrentPage(pageNumber);
 
   const [dataUser, setDataUser] = useState([]);
+
   const [param, setParam] = useState({ offset: 0, limit: 10, search: '', role: '' });
+
   const [search, setSearch] = useState();
   const [role, setRole] = useState();
   const handleSearch = useCallback((value, role) => {
