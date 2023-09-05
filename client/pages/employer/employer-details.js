@@ -28,9 +28,10 @@ import Paging from '../../components/paging';
 import axios from 'axios';
 import DropDown from '../../components/layout/employer/dropDown';
 import StatusFrame from '../../components/layout/admin/statusFrame';
+import { IoEllipse } from 'react-icons/io5';
 
 function employerDetails() {
-  const [tab, setTab] = useState(2);
+  const [tab, setTab] = useState(1);
   const [show, setShow] = useState(false);
   const [edit, setEdit] = useState(false);
   const [value, setValue] = useState('1');
@@ -69,6 +70,7 @@ function employerDetails() {
   const menuData = {
     jobType: ['Shipper', 'Worker', 'Khác', '...'],
     scale: ['10-20', '25-90', '100-200', '...'],
+    gender: ['Nam', 'Nữ'],
   };
   const handleEdit = () => setEdit(!edit);
   const handleToggle = () => setShow(!show);
@@ -792,7 +794,7 @@ function employerDetails() {
     </Stack>
   );
   const licensePage = (
-    <Box w='100%'>
+    <Stack w='100%'>
       <Flex
         px='24px'
         pb='8px'
@@ -809,12 +811,290 @@ function employerDetails() {
         </Text>
       </Flex>
       <Stack p='24px' justifyContent='center' gap='24px' border='1px solid #818181'>
-        <Flex>
-          <Text>Trạng thái:</Text>
-          <StatusFrame></StatusFrame>
+        <Flex alignItems='flex-start' gap='20px'>
+          <Text fontSize='14px' fontWeight='600' lineHeight='24px'>
+            Trạng thái:
+          </Text>
+          <StatusFrame text='Chưa duyệt'></StatusFrame>
+        </Flex>
+        <Flex gap='24px' alignItems='center'>
+          <Stack justifyContent='space-between' flex='1 0 0'>
+            <Text fontSize='14px' fontWeight='600' lineHeight='24px'>
+              Giấy phép kinh doanh/Giấy ủy quyền/Thẻ nhân viên
+            </Text>
+            <Text fontSize='14px' fontWeight='600' lineHeight='24px'>
+              Dung lượng file không quá 5MB
+            </Text>
+            <Stack
+              py='20px'
+              justifyContent='center'
+              alignItems='center'
+              rounded='12px'
+              gap='12px'
+              bg='#1311311A'
+            >
+              <Text color='#818181' fontSize='14px' fontWeight='600' lineHeight='24px'>
+                Chọn hoặc kéo file vào đây
+              </Text>
+              <Flex
+                w='101px'
+                h='26px'
+                p='8px 12px'
+                justifyContent='center'
+                alignItems='center'
+                gap='20px'
+                rounded='20px'
+                bg='transparent'
+                border='1px solid #323541'
+              >
+                <Text fontSize='14px' fontWeight='400px' lineHeight='24px' color='#323541'>
+                  Chọn
+                </Text>
+              </Flex>
+            </Stack>
+          </Stack>
+          <Stack justifyContent='space-between' flex='1 0 0'>
+            <Text fontSize='14px' fontWeight='600' lineHeight='24px'>
+              Giấy tờ bổ sung
+            </Text>
+            <Text fontSize='14px' fontWeight='600' lineHeight='24px'>
+              Dung lượng file không quá 5MB
+            </Text>
+            <Stack
+              py='20px'
+              justifyContent='center'
+              alignItems='center'
+              rounded='12px'
+              gap='12px'
+              bg='#1311311A'
+            >
+              <Text color='#818181' fontSize='14px' fontWeight='600' lineHeight='24px'>
+                Chọn hoặc kéo file vào đây
+              </Text>
+              <Flex
+                w='101px'
+                h='26px'
+                p='8px 12px'
+                justifyContent='center'
+                alignItems='center'
+                gap='20px'
+                rounded='20px'
+                bg='transparent'
+                border='1px solid #323541'
+              >
+                <Text fontSize='14px' fontWeight='400px' lineHeight='24px' color='#323541'>
+                  Chọn
+                </Text>
+              </Flex>
+            </Stack>
+          </Stack>
         </Flex>
       </Stack>
-    </Box>
+      <Stack w='215px' justifyContent='center' alignItems='flex-start' gap='20px'>
+        <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
+          Tài liệu hướng dẫn
+        </Text>
+        <Flex gap='20px' alignItems='center'>
+          <Box fontSize='16px'>
+            <IoEllipse />
+          </Box>
+          <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
+            Mẫu giấy uỷ quyền
+          </Text>
+        </Flex>
+        <Flex gap='20px' alignItems='center'>
+          <Box fontSize='16px'>
+            <IoEllipse />
+          </Box>
+          <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
+            Hướng dẫn đăng tải
+          </Text>
+        </Flex>
+      </Stack>
+      <Flex p='12px' justifyContent='flex-start' alignItems='center' gap='20px'>
+        <Flex
+          w='132px'
+          p='8px 12px'
+          justifyContent='center'
+          alignItems='center'
+          gap='20px'
+          rounded='12px'
+          bg='#323541'
+          onClick={handleEdit}
+          cursor='pointer'
+        >
+          <Text fontSize='14px' fontWeight='400px' lineHeight='24px' color='white'>
+            Lưu
+          </Text>
+        </Flex>
+        <Flex
+          w='132px'
+          p='8px 12px'
+          justifyContent='center'
+          alignItems='center'
+          gap='20px'
+          rounded='12px'
+          bg='white'
+          border='1px solid #323541'
+          onClick={handleEdit}
+          cursor='pointer'
+        >
+          <Text fontSize='14px' fontWeight='400px' lineHeight='24px' color='#323541'>
+            Hủy
+          </Text>
+        </Flex>
+      </Flex>
+    </Stack>
+  );
+  const personalInfo = (
+    <Stack gap='0' w='620px'>
+      <Flex
+        px='24px'
+        pb='8px'
+        pt='16px'
+        bg='#323541'
+        p='12px'
+        fontSize='18px'
+        roundedTop='12px'
+        gap='12px'
+        alignItems='flex-start'
+      >
+        <Text color='white' fontSize='16px' fontWeight='500' lineHeight='24px'>
+          Giấy phép kinh doanh
+        </Text>
+      </Flex>
+      <Stack p='24px' justifyContent='center' gap='20px' border='1px solid #818181'>
+        <Flex gap='20px' alignItems='center' alignSelf='stretch'>
+          <Box bg='#323541' w='100px' h='100px' rounded='full'></Box>
+          <Flex
+            w='132px'
+            p='8px 12px'
+            justifyContent='center'
+            alignItems='center'
+            gap='20px'
+            rounded='12px'
+            bg='#323541'
+            border='1px solid #323541'
+            cursor='pointer'
+          >
+            <Text fontSize='14px' fontWeight='400px' lineHeight='24px' color='white'>
+              Đổi ảnh đại diện
+            </Text>
+          </Flex>
+        </Flex>
+        <Flex gap='20px' alignItems='center' alignSelf='stretch'>
+          <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
+            Email:
+          </Text>
+          <Text fontSize='14px' fontWeight='400' lineHeight='24px'>
+            hanhfchinh@lechongvien.vn
+          </Text>
+        </Flex>
+
+        <Stack gap='8px' p='0px'>
+          <Text fontSize='14px' fontWeight='500' lineHeight='24px'>
+            Mã số thuế:
+          </Text>
+          <Input
+            p='24px 20px'
+            placeholder='Mã số thuế'
+            rounded='12px'
+            border='1px solid #323541'
+            focusBorderColor='none'
+            _placeholder={{ fontSize: '14px', fontWeight: '500', lineHeight: '24px' }}
+            fontSize='16px'
+            fontWeight='600px'
+            lineHeight='24px'
+          ></Input>
+        </Stack>
+
+        <Stack gap='8px' p='0px'>
+          <Text fontSize='14px' fontWeight='500' lineHeight='24px'>
+            Tên doanh nghiệp:
+          </Text>
+          <DropDown data={menuData.jobType} />
+        </Stack>
+        <Flex gap='20px'>
+          <Stack gap='8px' p='0px' flex='1 0 0'>
+            <Text fontSize='14px' fontWeight='500' lineHeight='24px'>
+              Giới tính:
+            </Text>
+            <DropDown data={menuData.gender} />
+          </Stack>
+          <Stack gap='8px' p='0px' flex='1 0 0'>
+            <Text fontSize='14px' fontWeight='500' lineHeight='24px'>
+              Điện thoại:
+            </Text>
+            <Input
+              p='24px 20px'
+              placeholder='Số điện thoại'
+              rounded='12px'
+              border='1px solid #323541'
+              focusBorderColor='none'
+              _placeholder={{ fontSize: '14px', fontWeight: '500', lineHeight: '24px' }}
+              fontSize='16px'
+              fontWeight='600px'
+              lineHeight='24px'
+            ></Input>
+          </Stack>
+        </Flex>
+        <Stack gap='8px' p='0px'>
+          <Text fontSize='14px' fontWeight='500' lineHeight='24px'>
+            Tên doanh nghiệp:
+          </Text>
+          <DropDown data={menuData.jobType} />
+        </Stack>
+        <Stack gap='8px' p='0px' flex='1 0 0'>
+          <Text fontSize='14px' fontWeight='500' lineHeight='24px'>
+            Facebook:
+          </Text>
+          <Input
+            p='24px 20px'
+            placeholder='Nhập tài khoản facebook'
+            rounded='12px'
+            border='1px solid #323541'
+            focusBorderColor='none'
+            _placeholder={{ fontSize: '14px', fontWeight: '500', lineHeight: '24px' }}
+            fontSize='16px'
+            fontWeight='600px'
+            lineHeight='24px'
+          ></Input>
+        </Stack>
+      </Stack>
+      <Flex p='12px' justifyContent='flex-start' alignItems='center' gap='20px'>
+        <Flex
+          w='132px'
+          p='8px 12px'
+          justifyContent='center'
+          alignItems='center'
+          gap='20px'
+          rounded='12px'
+          bg='#323541'
+          onClick={handleEdit}
+          cursor='pointer'
+        >
+          <Text fontSize='14px' fontWeight='400px' lineHeight='24px' color='white'>
+            Lưu
+          </Text>
+        </Flex>
+        <Flex
+          w='132px'
+          p='8px 12px'
+          justifyContent='center'
+          alignItems='center'
+          gap='20px'
+          rounded='12px'
+          bg='white'
+          border='1px solid #323541'
+          onClick={handleEdit}
+          cursor='pointer'
+        >
+          <Text fontSize='14px' fontWeight='400px' lineHeight='24px' color='#323541'>
+            Hủy
+          </Text>
+        </Flex>
+      </Flex>
+    </Stack>
   );
   return (
     <Box>
@@ -845,7 +1125,7 @@ function employerDetails() {
             opacity={tab === 2 ? '1' : '0.5'}
           >
             <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
-              giấy phép kinh doanh
+              Giấy phép kinh doanh
             </Text>
           </Flex>
           <Flex
@@ -862,15 +1142,7 @@ function employerDetails() {
             </Text>
           </Flex>
         </Flex>
-        {tab === 3 ? (
-          employerInfo
-        ) : tab === 2 ? (
-          licensePage
-        ) : tab === 1 ? (
-          <Text>this is something</Text>
-        ) : (
-          ''
-        )}
+        {tab === 3 ? employerInfo : tab === 2 ? licensePage : tab === 1 ? personalInfo : ''}
       </Stack>
     </Box>
   );
