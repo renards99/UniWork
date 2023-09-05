@@ -27,11 +27,11 @@ export default function DropDown(props) {
   return (
     <Menu matchWidth>
       <MenuButton
-        leftIcon={
-          <Box fontSize='24px'>
-            <HiMiniMapPin />
-          </Box>
-        }
+        // leftIcon={
+        //   <Box fontSize='24px'>
+        //     <HiMiniMapPin />
+        //   </Box>
+        // }
         _hover='none'
         _focus={{ bg: 'none' }}
         _expanded={{ bg: 'none' }}
