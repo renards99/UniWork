@@ -32,7 +32,7 @@ import StatusFrame from '../../components/layout/admin/statusFrame';
 function employerDetails() {
   const [tab, setTab] = useState(2);
   const [show, setShow] = useState(false);
-  const [edit, setEdit] = useState(true);
+  const [edit, setEdit] = useState(false);
   const [value, setValue] = useState('1');
   const itemFilter = { location: ['Hà Nội', 'Hà Giang', 'Kon tum'] };
   const fakeData = [
