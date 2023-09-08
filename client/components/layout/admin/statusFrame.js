@@ -30,7 +30,6 @@ export default function StatusFrame(props) {
       padding='6px 10px'
       h='28px'
       borderRadius={'12px'}
-      margin={'0 auto'}
       textAlign={'center'}
     >
       <Text fontSize={'14px'} fontWeight={'500'} color={tColor}>
