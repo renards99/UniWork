@@ -131,7 +131,7 @@ function employerDetails() {
                     </Radio>
                     <Radio value='2'>
                       <Text fontSize='14px' fontWeight='600' lineHeight='24px'>
-                        Cửa hàng
+                        Công ty
                       </Text>
                     </Radio>
                   </Stack>
