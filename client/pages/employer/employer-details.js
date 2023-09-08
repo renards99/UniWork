@@ -993,11 +993,11 @@ function employerDetails() {
 
         <Stack gap='8px' p='0px'>
           <Text fontSize='14px' fontWeight='500' lineHeight='24px'>
-            Mã số thuế:
+            Họ và tên:
           </Text>
           <Input
             p='24px 20px'
-            placeholder='Mã số thuế'
+            placeholder='Họ và tên'
             rounded='12px'
             border='1px solid #323541'
             focusBorderColor='none'
@@ -1006,13 +1006,6 @@ function employerDetails() {
             fontWeight='600px'
             lineHeight='24px'
           ></Input>
-        </Stack>
-
-        <Stack gap='8px' p='0px'>
-          <Text fontSize='14px' fontWeight='500' lineHeight='24px'>
-            Tên doanh nghiệp:
-          </Text>
-          <DropDown data={menuData.jobType} />
         </Stack>
         <Flex gap='20px'>
           <Stack gap='8px' p='0px' flex='1 0 0'>
@@ -1040,7 +1033,7 @@ function employerDetails() {
         </Flex>
         <Stack gap='8px' p='0px'>
           <Text fontSize='14px' fontWeight='500' lineHeight='24px'>
-            Tên doanh nghiệp:
+            Lĩnh vực hoạt động:
           </Text>
           <DropDown data={menuData.jobType} />
         </Stack>
