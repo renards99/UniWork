@@ -108,7 +108,7 @@ module.exports = {
   async listAccounts(req, res) {
     try {
       const params = req.body;
-      const { role_id, offset, limit, search } = params;
+      const { role_id, offset, limit, search, role } = params;
       const getAllUsers = await sequelize.query(
         `SELECT * from user_account where email like "%${search}%" limit ${limit} offset 0`,
         {

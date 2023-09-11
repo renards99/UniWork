@@ -56,7 +56,7 @@ export default function AccountManager() {
     },
   ];
   const [dataUser, setDataUser] = useState([]);
-  const [param, setParam] = useState({ offset: 0, limit: 3, search: '' });
+  const [param, setParam] = useState({ offset: 0, limit: 3, search: '', role: '' });
   const [search, setSearch] = useState();
   const handleSearch = useCallback((value) => {
     setSearch(value);
@@ -67,13 +67,10 @@ export default function AccountManager() {
   const getListAccounts = useCallback(
     async (search) => {
       try {
-        const getListAccounts = await axios.post(
-          `http://localhost:5000/company/get-company-by-id`,
-          {
-            ...param,
-            search: search ? search : param.search,
-          },
-        );
+        const getListAccounts = await axios.post(`http://localhost:5000/list-accounts`, {
+          ...param,
+          search: search ? search : param.search,
+        });
         if (getListAccounts.data.statusCode === 200) {
           setDataUser(getListAccounts.data.data.list_user);
         } else {

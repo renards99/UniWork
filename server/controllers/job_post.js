@@ -3,6 +3,9 @@ const Job_post = db.job_post;
 const Op = db.Sequelize.Op;
 const QueryTypes = db.Sequelize.QueryTypes;
 const responseHandler = require('../handlers/response.handler');
+
+const sequelize = db.sequelize;
+
 const validateHandler = require('../handlers/validate.handler');
 module.exports = {
   async addJobPost(req, res) {
@@ -15,8 +18,8 @@ module.exports = {
         company_id,
         hire_number,
         job_location_id,
-        salary_from,
-        salary_to,
+        salary,
+        gender,
       } = params;
       if (
         !validateHandler.validateId(
@@ -30,15 +33,11 @@ module.exports = {
       ) {
         return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
       }
-      if (Number.parseFloat(salary_to)) {
-        if (Number.parseFloat(salary_from) >= Number.parseFloat(salary_to)) {
-          return responseHandler.badRequest(res, 'salary_from must >= salary_to !');
-        }
-      } else {
-        params.salary_to = null;
+      if (!validateHandler.validateGender(gender)) {
+        return responseHandler.badRequest(res, 'Invalid gender input!');
       }
 
-      if (!validateHandler.validateInput(params, salary_to)) {
+      if (!validateHandler.validateInput(params)) {
         return responseHandler.badRequest(res, 'Your input is invalid!');
       }
       const create_Job_post = await Job_post.create(params);
@@ -73,29 +72,30 @@ module.exports = {
   },
   async updateJobPost(req, res) {
     const params = req.body;
+    const is_active = params.is_active;
     try {
       const job_post_id = params.id;
       if (!validateHandler.validateId(job_post_id)) {
         return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
       }
 
-      if (!validateHandler.validateInput(params, salary_to)) {
+      if (!validateHandler.validateInput(params)) {
         return responseHandler.badRequest(res, 'Your input is invalid!');
       }
+      const updatedData = {
+        is_active,
+      };
       const getJobPost = await Job_post.findOne({
         where: {
           id: job_post_id,
         },
       });
       if (!getJobPost) return responseHandler.badRequest(res, 'job post does not exist!');
-      const updateJobPost = await Job_post.update(
-        { params },
-        {
-          where: {
-            id: job_post_id,
-          },
+      const updateJobPost = await Job_post.update(updatedData, {
+        where: {
+          id: job_post_id,
         },
-      );
+      });
       if (updateJobPost) {
         return responseHandler.responseWithData(res, 200, 'Update job post successfully!');
       } else {
@@ -133,6 +133,22 @@ module.exports = {
     } catch (e) {
       console.log(e);
       return responseHandler.badRequest(res, 'There is something wrong with your request!');
+    }
+  },
+  async getAllPosts(req, res) {
+    try {
+      const params = req.body;
+      const {} = params;
+      const getAllPost = await sequelize.query(`SELECT * FROM job_post`, {
+        type: QueryTypes.SELECT,
+      });
+      if (getAllPost) {
+        return responseHandler.responseWithData(res, 200, { list_user: getAllPost });
+      } else {
+        return responseHandler.badRequest(res, "can't get list user");
+      }
+    } catch (error) {
+      return responseHandler.error(res);
     }
   },
 };

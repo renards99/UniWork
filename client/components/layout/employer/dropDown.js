@@ -14,6 +14,7 @@ import {
   Flex,
 } from '@chakra-ui/react';
 import { HiChevronDown } from 'react-icons/hi';
+import { HiMiniMapPin } from 'react-icons/hi2';
 export default function DropDown(props) {
   const data = props.data;
 
@@ -26,6 +27,11 @@ export default function DropDown(props) {
   return (
     <Menu matchWidth>
       <MenuButton
+        // leftIcon={
+        //   <Box fontSize='24px'>
+        //     <HiMiniMapPin />
+        //   </Box>
+        // }
         _hover='none'
         _focus={{ bg: 'none' }}
         _expanded={{ bg: 'none' }}
@@ -38,7 +44,7 @@ export default function DropDown(props) {
         justifyContent='space-between'
         alignSelf='stretch'
         alignItems='center'
-        border='1px solid #666666'
+        border='1px solid #818181'
         rounded='12px'
         onClick={handleMenuClick}
         rightIcon={

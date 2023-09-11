@@ -121,36 +121,38 @@ function UserProfileEmployer() {
   // useEffect(() => {
   //   getAllPost();
   // }, []);
-  // const getUserAccount = useCallback(async () => {
-  //   try {
-  //     const getUserAccount = await axios.post(`http://localhost:5000/account-details`, {
-  //       ...param,
-  //     });
-  //     if (getUserAccount.data.statusCode === 200) {
-  //       setUserData(getUserAccount.data.data.user_details);
-  //     } else {
-  //     }
-  //   } catch (error) {}
-  // }, [param]);
-  // useEffect(() => {
-  //   getUserAccount();
-  // }, []);
-  console.log(userData[0]);
-  const getCompany = useCallback(async () => {
+  const getUserAccount = useCallback(async () => {
     try {
-      const getCompany = await axios.post(`http://localhost:5000/company/get-company-by-id`, {
+      const getUserAccount = await axios.post(`http://localhost:5000/account-details`, {
         ...param,
       });
-      if (getCompany.data.statusCode === 200) {
-        setUserData(getCompany.data.data.user_details);
+      if (getUserAccount.data.statusCode === 200) {
+        setUserData(getUserAccount.data.data.user_details);
       } else {
       }
     } catch (error) {}
   }, [param]);
   useEffect(() => {
-    getCompany();
+    getUserAccount();
   }, []);
-  console.log(userData);
+  console.log(userData[0]);
+  const data = userData[0];
+
+  // const getCompany = useCallback(async () => {
+  //   try {
+  //     const getCompany = await axios.post(`http://localhost:5000/company/get-company-by-id`, {
+  //       ...param,
+  //     });
+  //     if (getCompany.data.statusCode === 200) {
+  //       setUserData(getCompany.data.data.user_details);
+  //     } else {
+  //     }
+  //   } catch (error) {}
+  // }, [param]);
+  // useEffect(() => {
+  //   getCompany();
+  // }, []);
+  // console.log(userData);
 
   return (
     <div>
@@ -318,7 +320,7 @@ function UserProfileEmployer() {
                 <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
                   Ngày đăng ký:{' '}
                   <Text as='span' fontSize='14px' fontWeight='500' lineHeight='24px'>
-                    {eProfile.subScriptionDate}
+                    {data.registration_date}
                   </Text>
                 </Text>
               </Stack>
@@ -353,7 +355,7 @@ function UserProfileEmployer() {
                     <HiOutlineMail />
                   </Box>
                   <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
-                    Email: {eProfile.email}
+                    Email: {data.email}
                   </Text>
                 </Flex>
 
@@ -362,7 +364,7 @@ function UserProfileEmployer() {
                     <FiPhone />
                   </Box>
                   <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
-                    Điện thoại: {eProfile.phone}
+                    Điện thoại: {data.mobile_number}
                   </Text>
                 </Flex>
                 <Flex gap='4'>

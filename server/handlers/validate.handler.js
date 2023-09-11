@@ -141,6 +141,11 @@ function validateStringWithNumber(...inputArray) {
     return false;
   });
 }
+function validateGender(input) {
+  return (
+    input === 1 || input === '1' || input === 2 || input === '2' || input === 3 || input === '3'
+  );
+}
 module.exports = {
   validatePositiveIntegerNumber,
   validatePositiveNumber,
@@ -153,4 +158,5 @@ module.exports = {
   validateId,
   validateState,
   validateStringWithNumber,
+  validateGender,
 };
