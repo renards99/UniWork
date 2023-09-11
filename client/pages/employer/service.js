@@ -62,18 +62,21 @@ function Service() {
   const services = {
     trial: [
       {
+        id: 1,
         title: 'UNI MAX TRIAL',
         price: '2.887.500 VND',
         description:
           'Trải nghiệm quảng cáo tin đăng tuyển dụng hiệu quả với vị trí nổi bật trong việc làm tốt nhất kết hợp cùng các dịch vụ cao cấp và được Uni bảo hành vị trí ưu tiên với chi phí tối ưu nhất dành cho khách hàng.',
       },
       {
+        id: 2,
         title: 'UNI PRO TRIAL',
         price: '2.448.000 VND',
         description:
           'Trải nghiệm quảng cáo tin đăng tuyển dụng tối ưu với vị trí ưu tiên trong Việc làm hấp dẫn kết hợp cùng các dịch vụ cao cấp với chi phí tối ưu.',
       },
       {
+        id: 3,
         title: 'UNI ECO PLUS TRIAL',
         price: '2.112.000 VND',
         description:
@@ -82,6 +85,7 @@ function Service() {
     ],
     promote: [
       {
+        id: 4,
         title: 'UNI MAX',
         price: '7.500.000 VND',
         description:
@@ -89,6 +93,7 @@ function Service() {
         color: '#048500',
       },
       {
+        id: 5,
         title: 'UNI PRO',
         price: '5.440.000 VND',
         description:
@@ -96,6 +101,7 @@ function Service() {
         color: '#4881FC',
       },
       {
+        id: 6,
         title: 'UNI ECO PLUS',
         price: '4.400.000 VND',
         description:
@@ -105,18 +111,49 @@ function Service() {
     ],
     credit: [
       {
+        id: 7,
         title: 'UNI JOBS TRIAL ',
         price: '3.000.000 VND',
         description:
           'Sử dụng credit để mở khóa thông tin liên hệ của các ứng viên phù hợp từ kho dữ liệu với hàng triệu CV chất lượng',
       },
       {
+        id: 8,
         title: 'UNI PRO TRIAL',
         price: '6.000.000 VND',
         description:
           'Sử dụng credit để mở khóa thông tin liên hệ của các ứng viên phù hợp từ kho dữ liệu với hàng triệu CV chất lượng',
       },
     ],
+  };
+  const hanldeAddToCartButton = (service) => {
+    let items = [];
+    if (localStorage.getItem('cart_items') === null) {
+      localStorage.setItem('cart_items', JSON.stringify(items));
+      let cart_items = localStorage.getItem('cart_items');
+      cart_items = JSON.parse(cart_items);
+      let check_exists = true;
+      cart_items.forEach((e, i) => {
+        if (e.id === service.id) {
+          e.quantity += 1;
+          check_exists = false;
+        }
+      });
+      check_exists ? cart_items.push({ ...service, quantity: 1 }) : null;
+      localStorage.setItem('cart_items', JSON.stringify(cart_items));
+    } else {
+      let cart_items = localStorage.getItem('cart_items');
+      cart_items = JSON.parse(cart_items);
+      let check_exists = true;
+      cart_items.forEach((e, i) => {
+        if (e.id === service.id) {
+          e.quantity += 1;
+          check_exists = false;
+        }
+      });
+      check_exists ? cart_items.push({ ...service, quantity: 1 }) : null;
+      localStorage.setItem('cart_items', JSON.stringify(cart_items));
+    }
   };
   return (
     <Box>
@@ -185,6 +222,7 @@ function Service() {
                     cursor='pointer'
                     border='1px'
                     borderColor='#323541'
+                    onClick={() => hanldeAddToCartButton(service)}
                   >
                     Thêm vào giỏ
                   </Flex>
@@ -272,6 +310,7 @@ function Service() {
                     cursor='pointer'
                     border='1px'
                     borderColor='#323541'
+                    onClick={() => hanldeAddToCartButton(service)}
                   >
                     Thêm vào giỏ
                   </Flex>
@@ -357,6 +396,7 @@ function Service() {
                     cursor='pointer'
                     border='1px'
                     borderColor='#323541'
+                    onClick={() => hanldeAddToCartButton(service)}
                   >
                     Thêm vào giỏ
                   </Flex>
