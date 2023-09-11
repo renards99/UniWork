@@ -103,8 +103,56 @@ function postsList() {
                   <Box w='100px' h='100px' bg='#323541'></Box>
                   <Stack justifyContent='space-between' flex='1 0 0' alignSelf='stretch'>
                     <Stack gap='4px'>
-                      <Text>Nhân viên thiết kế UI/UX(UI/UX Designer)</Text>
+                      <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
+                        Nhân viên thiết kế UI/UX (UI/UX Designer)
+                      </Text>
+                      <Text fontSize='14px' fontWeight='400'>
+                        Công ty Cổ phần Công nghệ eUp
+                      </Text>
                     </Stack>
+                    <StatusFrame text='Chưa duyệt' />
+                  </Stack>
+                </Flex>
+                <Flex p='16px' gap='20px'>
+                  <Box w='100px' h='100px' bg='#323541'></Box>
+                  <Stack justifyContent='space-between' flex='1 0 0' alignSelf='stretch'>
+                    <Stack gap='4px'>
+                      <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
+                        Nhân viên thiết kế UI/UX (UI/UX Designer)
+                      </Text>
+                      <Text fontSize='14px' fontWeight='400'>
+                        Công ty Cổ phần Công nghệ eUp
+                      </Text>
+                    </Stack>
+                    <StatusFrame text='Chưa duyệt' />
+                  </Stack>
+                </Flex>
+                <Flex p='16px' gap='20px'>
+                  <Box w='100px' h='100px' bg='#323541'></Box>
+                  <Stack justifyContent='space-between' flex='1 0 0' alignSelf='stretch'>
+                    <Stack gap='4px'>
+                      <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
+                        Nhân viên thiết kế UI/UX (UI/UX Designer)
+                      </Text>
+                      <Text fontSize='14px' fontWeight='400'>
+                        Công ty Cổ phần Công nghệ eUp
+                      </Text>
+                    </Stack>
+                    <StatusFrame text='Chưa duyệt' />
+                  </Stack>
+                </Flex>
+                <Flex p='16px' gap='20px'>
+                  <Box w='100px' h='100px' bg='#323541'></Box>
+                  <Stack justifyContent='space-between' flex='1 0 0' alignSelf='stretch'>
+                    <Stack gap='4px'>
+                      <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
+                        Nhân viên thiết kế UI/UX (UI/UX Designer)
+                      </Text>
+                      <Text fontSize='14px' fontWeight='400'>
+                        Công ty Cổ phần Công nghệ eUp
+                      </Text>
+                    </Stack>
+                    <StatusFrame text='Chưa duyệt' />
                   </Stack>
                 </Flex>
               </Stack>
@@ -127,7 +175,7 @@ function postsList() {
                 alignItems='flex-start'
               >
                 <Text color='white' fontSize='16px' fontWeight='500' lineHeight='24px'>
-                  Dịch vụ
+                  Ứng viên tuyển gần đây
                 </Text>
               </Flex>
 
@@ -137,24 +185,83 @@ function postsList() {
                 gap='16px'
                 border='1px'
                 borderColor='#D7D7D7'
-              ></Stack>
-              <Stack
-                p='24px'
-                justifyContent='center'
-                gap='16px'
-                border='1px'
-                borderColor='#D7D7D7'
                 roundedBottom='20px'
               >
-                <Flex>
-                  <Flex justifyContent='space-between' alignItems='center'>
-                    <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
-                      Total:
-                    </Text>
-                    <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
-                      1.000.000đ
-                    </Text>
-                  </Flex>
+                <Flex p='16px' gap='20px'>
+                  <Box w='60px' h='60px' rounded='full' bg='#323541'></Box>
+                  <Stack justifyContent='space-between' flex='1 0 0' alignSelf='stretch' gap='0px'>
+                    <Flex justifyContent='space-between'>
+                      <Stack gap='4px'>
+                        <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
+                          Nguyễn văn A
+                        </Text>
+                        <Text fontSize='14px' fontWeight='400'>
+                          Java-Dev
+                        </Text>
+                      </Stack>
+                      <Text fontSize='14px' fontWeight='600'>
+                        17/08/2021
+                      </Text>
+                    </Flex>
+                    <StatusFrame text='Chưa duyệt' />
+                  </Stack>
+                </Flex>
+                <Flex p='16px' gap='20px'>
+                  <Box w='60px' h='60px' rounded='full' bg='#323541'></Box>
+                  <Stack justifyContent='space-between' flex='1 0 0' alignSelf='stretch' gap='0px'>
+                    <Flex justifyContent='space-between'>
+                      <Stack gap='4px'>
+                        <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
+                          Nguyễn văn A
+                        </Text>
+                        <Text fontSize='14px' fontWeight='400'>
+                          Java-Dev
+                        </Text>
+                      </Stack>
+                      <Text fontSize='14px' fontWeight='600'>
+                        17/08/2021
+                      </Text>
+                    </Flex>
+                    <StatusFrame text='Chưa duyệt' />
+                  </Stack>
+                </Flex>
+                <Flex p='16px' gap='20px'>
+                  <Box w='60px' h='60px' rounded='full' bg='#323541'></Box>
+                  <Stack justifyContent='space-between' flex='1 0 0' alignSelf='stretch' gap='0px'>
+                    <Flex justifyContent='space-between'>
+                      <Stack gap='4px'>
+                        <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
+                          Nguyễn văn A
+                        </Text>
+                        <Text fontSize='14px' fontWeight='400'>
+                          Java-Dev
+                        </Text>
+                      </Stack>
+                      <Text fontSize='14px' fontWeight='600'>
+                        17/08/2021
+                      </Text>
+                    </Flex>
+                    <StatusFrame text='Chưa duyệt' />
+                  </Stack>
+                </Flex>
+                <Flex p='16px' gap='20px'>
+                  <Box w='60px' h='60px' rounded='full' bg='#323541'></Box>
+                  <Stack justifyContent='space-between' flex='1 0 0' alignSelf='stretch' gap='0px'>
+                    <Flex justifyContent='space-between'>
+                      <Stack gap='4px'>
+                        <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
+                          Nguyễn văn A
+                        </Text>
+                        <Text fontSize='14px' fontWeight='400'>
+                          Java-Dev
+                        </Text>
+                      </Stack>
+                      <Text fontSize='14px' fontWeight='600'>
+                        17/08/2021
+                      </Text>
+                    </Flex>
+                    <StatusFrame text='Chưa duyệt' />
+                  </Stack>
                 </Flex>
               </Stack>
             </Box>
