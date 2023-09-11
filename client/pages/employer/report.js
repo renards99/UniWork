@@ -173,7 +173,7 @@ function report() {
               cursor='pointer'
             >
               <Text fontSize='14px' fontWeight='600' lineHeight='24px'>
-                Lưu
+                Gửi báo cáo
               </Text>
             </Flex>
           </Stack>
