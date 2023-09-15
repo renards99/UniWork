@@ -1008,6 +1008,7 @@ function employerDetails() {
           ></Input>
         </Stack>
 
+
         <Flex gap='20px'>
           <Stack gap='8px' p='0px' flex='1 0 0'>
             <Text fontSize='14px' fontWeight='500' lineHeight='24px'>
@@ -1035,7 +1036,9 @@ function employerDetails() {
 
         <Stack gap='8px' p='0px'>
           <Text fontSize='14px' fontWeight='500' lineHeight='24px'>
+
             Lĩnh vực hoạt động (ngành nghề):
+
           </Text>
           <DropDown data={menuData.jobType} />
         </Stack>

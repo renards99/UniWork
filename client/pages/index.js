@@ -229,6 +229,7 @@ export default function HomePage() {
   const HomeContent = (
     <div>
       <Header back_end_port={back_end_port} />
+
       <Box h='465px' px='150px' display='flex' justifyContent='space-evenly'>
         <Box h='465px' bg='transparent' minW='30%' pt='50px'>
           <h1 className='unw-homepage-text'>Tìm Việc Làm</h1>
