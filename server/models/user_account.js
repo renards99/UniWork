@@ -7,7 +7,7 @@ module.exports = (sequelize, Sequelize) => {
         primaryKey: true,
         autoIncrement: true,
       },
-      fullname: {
+      full_name: {
         type: Sequelize.STRING(100),
         allowNull: false,
       },
@@ -62,17 +62,6 @@ module.exports = (sequelize, Sequelize) => {
       short_des: {
         type: Sequelize.STRING(1000),
         allowNull: false,
-      },
-      company_id: {
-        type: Sequelize.INTEGER(11),
-        allowNull: true,
-        references: {
-          model: {
-            tableName: 'company',
-          },
-          key: 'id',
-        },
-        onDelete: 'cascade',
       },
       refresh_access_token: {
         type: Sequelize.STRING(1000),

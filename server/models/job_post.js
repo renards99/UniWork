@@ -7,6 +7,14 @@ module.exports = (sequelize, Sequelize) => {
         primaryKey: true,
         autoIncrement: true,
       },
+      title: {
+        type: Sequelize.STRING(1000),
+        allowNull: false,
+      },
+      work_hours: {
+        type: Sequelize.STRING(100),
+        allowNull: false,
+      },
       service_id: {
         type: Sequelize.INTEGER(11),
         allowNull: false,
@@ -34,9 +42,9 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
         references: {
           model: {
-            tableName: 'user_account',
+            tableName: 'employer',
           },
-          key: 'id',
+          key: 'user_account_id',
         },
         onDelete: 'cascade',
       },
@@ -56,19 +64,12 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: true,
       },
       job_description: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING(10000),
         allowNull: false,
       },
-      job_location_id: {
-        type: Sequelize.INTEGER(11),
+      job_location: {
+        type: Sequelize.STRING(200),
         allowNull: false,
-        references: {
-          model: {
-            tableName: 'job_location',
-          },
-          key: 'id',
-        },
-        onDelete: 'cascade',
       },
       is_active: {
         type: Sequelize.BOOLEAN,
@@ -87,8 +88,8 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.INTEGER(2),
         allowNull: true,
       },
-      tag: {
-        type: Sequelize.STRING(100),
+      state: {
+        type: Sequelize.STRING(20),
         allowNull: true,
       },
       created_at: {
@@ -97,6 +98,10 @@ module.exports = (sequelize, Sequelize) => {
       },
       updated_at: {
         type: Sequelize.DATE,
+        allowNull: false,
+      },
+      apply_at: {
+        type: Sequelize.STRING(20),
         allowNull: false,
       },
       expired_at: {

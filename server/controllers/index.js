@@ -4,6 +4,7 @@ const request = require('./request');
 const user_accounts = require('./user_account');
 const user_log = require('./user_log');
 const student = require('./student');
+const employer = require('./employer');
 const education_detail = require('./education_detail');
 const experience_detail = require('./experience_detail');
 const job_type = require('./job_type');
@@ -11,7 +12,6 @@ const company = require('./company');
 const job_location = require('./job_location');
 const service = require('./service');
 const job_post = require('./job_post');
-const job_post_application = require('./job_post_application');
 
 module.exports = {
   bill,
@@ -26,6 +26,5 @@ module.exports = {
   company,
   service,
   job_post,
-  job_post_application,
   student,
 };

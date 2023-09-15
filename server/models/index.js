@@ -43,7 +43,6 @@ db.job_type = require('./job_type')(sequelize, Sequelize);
 db.bill = require('./bill')(sequelize, Sequelize);
 db.experience_detail = require('./experience_detail')(sequelize, Sequelize);
 db.job_location = require('./job_location')(sequelize, Sequelize);
-db.job_post_application = require('./job_post_application')(sequelize, Sequelize);
 db.job_post = require('./job_post')(sequelize, Sequelize);
 db.service = require('./service')(sequelize, Sequelize);
 db.company = require('./company')(sequelize, Sequelize);
@@ -53,5 +52,7 @@ db.student = require('./student')(sequelize, Sequelize);
 db.user_account = require('./user_account')(sequelize, Sequelize);
 db.user_log = require('./user_log')(sequelize, Sequelize);
 db.role = require('./role')(sequelize, Sequelize);
+
+db.employer = require('./employer')(sequelize, Sequelize);
 
 module.exports = db;

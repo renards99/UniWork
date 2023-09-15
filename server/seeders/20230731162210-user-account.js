@@ -5,7 +5,7 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     return queryInterface.bulkInsert('user_account', [
       {
-        fullname: 'Lương Quốc Hùng',
+        full_name: 'Lương Quốc Hùng',
         role_id: 1,
         email: 'hunglq@gmail.com',
         password: '$2b$10$kX81peifItpACbY.bKCGrOZqCESNmevMwFGi8MPeIH4E3nb9c3WrC',
@@ -19,7 +19,7 @@ module.exports = {
         short_des: 'Nhà sáng lập công ty BSS',
       },
       {
-        fullname: 'Ngô Trung Nghĩa',
+        full_name: 'Ngô Trung Nghĩa',
         role_id: 2,
         email: 'nghiant@gmail.com',
         password: '$2b$10$kX81peifItpACbY.bKCGrOZqCESNmevMwFGi8MPeIH4E3nb9c3WrC',
@@ -32,7 +32,7 @@ module.exports = {
         short_des: 'Nhà sáng lập công ty Google',
       },
       {
-        fullname: 'A B C',
+        full_name: 'A B C',
         role_id: 3,
         email: 'abc@gmail.com',
         password: '$2b$10$kX81peifItpACbY.bKCGrOZqCESNmevMwFGi8MPeIH4E3nb9c3WrC',
@@ -46,7 +46,7 @@ module.exports = {
         short_des: 'Sinh viên trường đại học FPT',
       },
       {
-        fullname: 'Chu Quốc Huy',
+        full_name: 'Chu Quốc Huy',
         role_id: 2,
         email: 'huycq@gmail.com',
         password: '$2b$10$kX81peifItpACbY.bKCGrOZqCESNmevMwFGi8MPeIH4E3nb9c3WrC',
@@ -60,7 +60,7 @@ module.exports = {
         short_des: 'Sinh viên trường đại học FPT',
       },
       {
-        fullname: 'Nguyen Thi An',
+        full_name: 'Nguyen Thi An',
         role_id: 3,
         email: 'an.nguyen@example.com',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -73,7 +73,7 @@ module.exports = {
         short_des: 'Software Engineer',
       },
       {
-        fullname: 'Tran Van A',
+        full_name: 'Tran Van A',
         role_id: 1,
         email: 'tran.va@example.com',
         password: '$2b$10$X7GxCsBYDBmI0aASZt0X9.dWABiEDEJ96M2Tpy1x/6u/l33yuhF6m',
@@ -86,7 +86,7 @@ module.exports = {
         short_des: 'Marketing Specialist',
       },
       {
-        fullname: 'Le Thi B',
+        full_name: 'Le Thi B',
         role_id: 3,
         email: 'le.tb@example.com',
         password: '$2b$10$X7GxCsBYDBmI0aASZt0X9.dWABiEDEJ96M2Tpy1x/6u/l33yuhF6m',
@@ -99,7 +99,7 @@ module.exports = {
         short_des: 'Graphic Designer',
       },
       {
-        fullname: 'Nguyen Van B',
+        full_name: 'Nguyen Van B',
         role_id: 2,
         email: 'nguyen.vb@example.com',
         password: '$2b$10$X7GxCsBYDBmI0aASZt0X9.dWABiEDEJ96M2Tpy1x/6u/l33yuhF6m',
@@ -112,7 +112,7 @@ module.exports = {
         short_des: 'Sales Manager',
       },
       {
-        fullname: 'Pham Thi C',
+        full_name: 'Pham Thi C',
         role_id: 3,
         email: 'pham.tc@example.com',
         password: '$2b$10$X7GxCsBYDBmI0aASZt0X9.dWABiEDEJ96M2Tpy1x/6u/l33yuhF6m',
@@ -125,7 +125,7 @@ module.exports = {
         short_des: 'Content Writer',
       },
       {
-        fullname: 'Lâm Văn Thành',
+        full_name: 'Lâm Văn Thành',
         role_id: 3,
         email: 'robertsjustin@example.net',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -138,7 +138,7 @@ module.exports = {
         short_des: 'Young heavy nature writer goal music.',
       },
       {
-        fullname: 'Trần Minh Thông',
+        full_name: 'Trần Minh Thông',
         role_id: 3,
         email: 'william42@example.com',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -151,7 +151,7 @@ module.exports = {
         short_des: 'They scene at purpose discover hand must.',
       },
       {
-        fullname: 'Đoàn Thanh Tân',
+        full_name: 'Đoàn Thanh Tân',
         role_id: 3,
         email: 'ywaller@example.org',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -164,7 +164,7 @@ module.exports = {
         short_des: 'Item individual model chair.',
       },
       {
-        fullname: 'Trần Tất Thắng',
+        full_name: 'Trần Tất Thắng',
         role_id: 3,
         email: 'jimenezeric@example.com',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -177,7 +177,7 @@ module.exports = {
         short_des: 'Region avoid western yes.',
       },
       {
-        fullname: 'Lê Hoàng Quân',
+        full_name: 'Lê Hoàng Quân',
         role_id: 3,
         email: 'qmoore@example.net',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -190,7 +190,7 @@ module.exports = {
         short_des: 'Gas question like somebody those piece region.',
       },
       {
-        fullname: 'Nguyễn Vũ Trường Sơn',
+        full_name: 'Nguyễn Vũ Trường Sơn',
         role_id: 3,
         email: 'barnesmichael@example.org',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -203,7 +203,7 @@ module.exports = {
         short_des: 'Republican generation open certain.',
       },
       {
-        fullname: 'Diệp Vương Thắng',
+        full_name: 'Diệp Vương Thắng',
         role_id: 3,
         email: 'laurachristian@example.net',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -216,7 +216,7 @@ module.exports = {
         short_des: 'Message itself language establish material spend.',
       },
       {
-        fullname: 'Nguyễn Echam Samuel',
+        full_name: 'Nguyễn Echam Samuel',
         role_id: 3,
         email: 'bryanflowers@example.com',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -229,7 +229,7 @@ module.exports = {
         short_des: 'Reveal drug final last name people include.',
       },
       {
-        fullname: 'Nguyễn Anh Tấn',
+        full_name: 'Nguyễn Anh Tấn',
         role_id: 3,
         email: 'bcarrillo@example.org',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -242,7 +242,7 @@ module.exports = {
         short_des: 'Reason little message claim machine laugh.',
       },
       {
-        fullname: 'Nguyễn Cao Trường',
+        full_name: 'Nguyễn Cao Trường',
         role_id: 3,
         email: 'linda67@example.net',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -255,7 +255,7 @@ module.exports = {
         short_des: 'Front full good political region where board beyond.',
       },
       {
-        fullname: 'Nguyễn Xuân Sang',
+        full_name: 'Nguyễn Xuân Sang',
         role_id: 3,
         email: 'amberochoa@example.net',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -268,7 +268,7 @@ module.exports = {
         short_des: 'Where cup five space.',
       },
       {
-        fullname: 'Trịnh Đức Thiện',
+        full_name: 'Trịnh Đức Thiện',
         role_id: 3,
         email: 'blacklisa@example.net',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -281,7 +281,7 @@ module.exports = {
         short_des: 'Entire case win increase west weight local.',
       },
       {
-        fullname: 'Vũ Hoàng Hải Sơn',
+        full_name: 'Vũ Hoàng Hải Sơn',
         role_id: 3,
         email: 'hopkinsrebecca@example.com',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -294,7 +294,7 @@ module.exports = {
         short_des: 'Stock present fill TV beat thank grow.',
       },
       {
-        fullname: 'Phan Xuân Thắng',
+        full_name: 'Phan Xuân Thắng',
         role_id: 3,
         email: 'smithmegan@example.org',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -307,7 +307,7 @@ module.exports = {
         short_des: 'Whether difference within attention it.',
       },
       {
-        fullname: 'Nguyễn Chí Thanh',
+        full_name: 'Nguyễn Chí Thanh',
         role_id: 3,
         email: 'tylerfuller@example.org',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -320,7 +320,7 @@ module.exports = {
         short_des: 'Traditional international over a thus drop each.',
       },
       {
-        fullname: 'Phan Duy Quốc',
+        full_name: 'Phan Duy Quốc',
         role_id: 3,
         email: 'xknight@example.net',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -333,7 +333,7 @@ module.exports = {
         short_des: 'Writer ball guess.',
       },
       {
-        fullname: 'Nguyễn Viết Sơn',
+        full_name: 'Nguyễn Viết Sơn',
         role_id: 3,
         email: 'ericnash@example.com',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -346,7 +346,7 @@ module.exports = {
         short_des: 'Account baby guess meeting maintain.',
       },
       {
-        fullname: 'Phan Đức Sơn',
+        full_name: 'Phan Đức Sơn',
         role_id: 3,
         email: 'tracytyler@example.org',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -359,7 +359,7 @@ module.exports = {
         short_des: 'President democratic official foreign.',
       },
       {
-        fullname: 'Nguyễn Echam Samuel',
+        full_name: 'Nguyễn Echam Samuel',
         role_id: 3,
         email: 'susansimpson@example.org',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -372,7 +372,7 @@ module.exports = {
         short_des: 'Left fill better society town.',
       },
       {
-        fullname: 'Ngô Vũ Sang',
+        full_name: 'Ngô Vũ Sang',
         role_id: 3,
         email: 'thomas00@example.net',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -385,7 +385,7 @@ module.exports = {
         short_des: 'Station local reason.',
       },
       {
-        fullname: 'Vũ Minh Thái',
+        full_name: 'Vũ Minh Thái',
         role_id: 3,
         email: 'archermary@example.com',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -398,7 +398,7 @@ module.exports = {
         short_des: 'Ask likely nation family.',
       },
       {
-        fullname: 'Diệp Vương Thắng',
+        full_name: 'Diệp Vương Thắng',
         role_id: 3,
         email: 'allen65@example.com',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -411,7 +411,7 @@ module.exports = {
         short_des: 'Movie recent free.',
       },
       {
-        fullname: 'Bùi Minh Quân',
+        full_name: 'Bùi Minh Quân',
         role_id: 3,
         email: 'joshua89@example.com',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -424,7 +424,7 @@ module.exports = {
         short_des: 'Stuff full even try.',
       },
       {
-        fullname: 'Nguyễn Trung Sơn',
+        full_name: 'Nguyễn Trung Sơn',
         role_id: 3,
         email: 'whitejoshua@example.net',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -437,7 +437,7 @@ module.exports = {
         short_des: 'At visit may keep hold.',
       },
       {
-        fullname: 'Trần Quang Văn Thư',
+        full_name: 'Trần Quang Văn Thư',
         role_id: 3,
         email: 'jennifer89@example.com',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -450,7 +450,7 @@ module.exports = {
         short_des: 'Appear instead traditional word difficult share seat.',
       },
       {
-        fullname: 'Vũ Thị Hoài Sơn',
+        full_name: 'Vũ Thị Hoài Sơn',
         role_id: 3,
         email: 'allensandra@example.org',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -463,7 +463,7 @@ module.exports = {
         short_des: 'Political simple against usually than key great including.',
       },
       {
-        fullname: 'Nguyễn Văn Thịnh',
+        full_name: 'Nguyễn Văn Thịnh',
         role_id: 3,
         email: 'anitali@example.com',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -476,7 +476,7 @@ module.exports = {
         short_des: 'Its half amount tonight contain establish.',
       },
       {
-        fullname: 'Nguyễn Tiến Thành',
+        full_name: 'Nguyễn Tiến Thành',
         role_id: 3,
         email: 'reginaarias@example.com',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -489,7 +489,7 @@ module.exports = {
         short_des: 'Once civil artist society since.',
       },
       {
-        fullname: 'Trần Minh Sang',
+        full_name: 'Trần Minh Sang',
         role_id: 3,
         email: 'tyler03@example.com',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -502,7 +502,7 @@ module.exports = {
         short_des: 'Customer member federal safe trouble authority quality reduce.',
       },
       {
-        fullname: 'Lê Tấn Thạnh',
+        full_name: 'Lê Tấn Thạnh',
         role_id: 3,
         email: 'rjackson@example.net',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -515,7 +515,7 @@ module.exports = {
         short_des: 'Although my agency fight take once blood.',
       },
       {
-        fullname: 'Trần Minh Thông',
+        full_name: 'Trần Minh Thông',
         role_id: 3,
         email: 'angelamoore@example.org',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -528,7 +528,7 @@ module.exports = {
         short_des: 'More TV though blue between piece enjoy president.',
       },
       {
-        fullname: 'Nguyễn Bỉnh Khiêm',
+        full_name: 'Nguyễn Bỉnh Khiêm',
         role_id: 3,
         email: 'spencerfischer@example.net',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -541,7 +541,7 @@ module.exports = {
         short_des: 'Understand network name.',
       },
       {
-        fullname: 'Lê Hà Xuân Thái',
+        full_name: 'Lê Hà Xuân Thái',
         role_id: 3,
         email: 'williamsonryan@example.com',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -554,7 +554,7 @@ module.exports = {
         short_des: 'Just range fact theory college.',
       },
       {
-        fullname: 'Trần Thị Minh Sương',
+        full_name: 'Trần Thị Minh Sương',
         role_id: 3,
         email: 'zhoover@example.com',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -567,7 +567,7 @@ module.exports = {
         short_des: 'Less compare close role whatever person federal.',
       },
       {
-        fullname: 'Lê Công Tài',
+        full_name: 'Lê Công Tài',
         role_id: 3,
         email: 'smiththomas@example.com',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -580,7 +580,7 @@ module.exports = {
         short_des: 'Goal plant black imagine.',
       },
       {
-        fullname: 'Lê Quang',
+        full_name: 'Lê Quang',
         role_id: 3,
         email: 'sarah38@example.com',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -593,7 +593,7 @@ module.exports = {
         short_des: 'Mission produce understand event Congress around.',
       },
       {
-        fullname: 'Phan Khánh Thuận',
+        full_name: 'Phan Khánh Thuận',
         role_id: 3,
         email: 'slloyd@example.com',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -606,7 +606,7 @@ module.exports = {
         short_des: 'Bar student he ahead common available.',
       },
       {
-        fullname: 'Trương Trọng Quân',
+        full_name: 'Trương Trọng Quân',
         role_id: 3,
         email: 'tammywalter@example.org',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -619,7 +619,7 @@ module.exports = {
         short_des: 'Whom opportunity score probably page doctor.',
       },
       {
-        fullname: 'Võ Hoàng Phương',
+        full_name: 'Võ Hoàng Phương',
         role_id: 3,
         email: 'stephanie07@example.com',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -632,7 +632,7 @@ module.exports = {
         short_des: 'Smile American evidence behind.',
       },
       {
-        fullname: 'Vũ Hoàng Hải Sơn',
+        full_name: 'Vũ Hoàng Hải Sơn',
         role_id: 3,
         email: 'holly23@example.com',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -645,7 +645,7 @@ module.exports = {
         short_des: 'Form today same majority another.',
       },
       {
-        fullname: 'Vũ Thị Phương',
+        full_name: 'Vũ Thị Phương',
         role_id: 3,
         email: 'timothymitchell@example.net',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -658,7 +658,7 @@ module.exports = {
         short_des: 'Court compare operation defense toward.',
       },
       {
-        fullname: 'Bùi Minh Quân',
+        full_name: 'Bùi Minh Quân',
         role_id: 3,
         email: 'aaron16@example.org',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -671,7 +671,7 @@ module.exports = {
         short_des: 'Sound performance cut yourself.',
       },
       {
-        fullname: 'Lê Hà Xuân Thái',
+        full_name: 'Lê Hà Xuân Thái',
         role_id: 3,
         email: 'courtneystark@example.org',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -684,7 +684,7 @@ module.exports = {
         short_des: 'Machine population eat voice her admit including town.',
       },
       {
-        fullname: 'Phạm Thanh Quốc',
+        full_name: 'Phạm Thanh Quốc',
         role_id: 3,
         email: 'hlee@example.com',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -697,7 +697,7 @@ module.exports = {
         short_des: 'Even door student any prevent here offer plan.',
       },
       {
-        fullname: 'Lê Tấn Thạnh',
+        full_name: 'Lê Tấn Thạnh',
         role_id: 3,
         email: 'mwest@example.org',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -710,7 +710,7 @@ module.exports = {
         short_des: 'Anything again note practice lose prove identify.',
       },
       {
-        fullname: 'Đàm Văn Thiện',
+        full_name: 'Đàm Văn Thiện',
         role_id: 3,
         email: 'cory17@example.net',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -723,7 +723,7 @@ module.exports = {
         short_des: 'Program everybody easy site former bag.',
       },
       {
-        fullname: 'Trần Văn Dö',
+        full_name: 'Trần Văn Dö',
         role_id: 3,
         email: 'brian12@example.net',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -736,7 +736,7 @@ module.exports = {
         short_des: 'Young coach safe never.',
       },
       {
-        fullname: 'Nguyễn Đức Thông',
+        full_name: 'Nguyễn Đức Thông',
         role_id: 3,
         email: 'murphyvanessa@example.com',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -749,7 +749,7 @@ module.exports = {
         short_des: 'Technology hair thing past case study stock.',
       },
       {
-        fullname: 'Đinh Văn Phượng',
+        full_name: 'Đinh Văn Phượng',
         role_id: 3,
         email: 'bonnieadams@example.org',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -762,7 +762,7 @@ module.exports = {
         short_des: 'Full fight car bad with once effort.',
       },
       {
-        fullname: 'Vũ Hồng Tâm',
+        full_name: 'Vũ Hồng Tâm',
         role_id: 3,
         email: 'christopher88@example.com',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -775,7 +775,7 @@ module.exports = {
         short_des: 'Quality research spend policy wife.',
       },
       {
-        fullname: 'Lê Công Tài',
+        full_name: 'Lê Công Tài',
         role_id: 3,
         email: 'hbernard@example.net',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -788,7 +788,7 @@ module.exports = {
         short_des: 'Evidence region officer watch expert.',
       },
       {
-        fullname: 'Võ Tiến Sĩ',
+        full_name: 'Võ Tiến Sĩ',
         role_id: 3,
         email: 'anthony14@example.com',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -801,7 +801,7 @@ module.exports = {
         short_des: 'Yes turn after president analysis necessary serve.',
       },
       {
-        fullname: 'Nguyễn Đức Thông',
+        full_name: 'Nguyễn Đức Thông',
         role_id: 3,
         email: 'daniel98@example.net',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -814,7 +814,7 @@ module.exports = {
         short_des: 'Spend agency drop too.',
       },
       {
-        fullname: 'Nguyễn Ngọc Phương',
+        full_name: 'Nguyễn Ngọc Phương',
         role_id: 3,
         email: 'adam56@example.net',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -827,7 +827,7 @@ module.exports = {
         short_des: 'Positive those brother be number decade artist.',
       },
       {
-        fullname: 'Lê Phú Quý',
+        full_name: 'Lê Phú Quý',
         role_id: 3,
         email: 'porterbelinda@example.org',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -840,7 +840,7 @@ module.exports = {
         short_des: 'Carry message stock drive drop.',
       },
       {
-        fullname: 'Phạm Thanh Quốc',
+        full_name: 'Phạm Thanh Quốc',
         role_id: 3,
         email: 'keithmontes@example.net',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -853,7 +853,7 @@ module.exports = {
         short_des: 'Describe big cover gas condition from.',
       },
       {
-        fullname: 'Nguyễn Minh Phương',
+        full_name: 'Nguyễn Minh Phương',
         role_id: 3,
         email: 'simondanny@example.com',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -866,7 +866,7 @@ module.exports = {
         short_des: 'Use here standard local simple.',
       },
       {
-        fullname: 'Trịnh Đức Thiện',
+        full_name: 'Trịnh Đức Thiện',
         role_id: 3,
         email: 'carolinestrickland@example.org',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -879,7 +879,7 @@ module.exports = {
         short_des: 'Measure analysis marriage center.',
       },
       {
-        fullname: 'Phan Khánh Thuận',
+        full_name: 'Phan Khánh Thuận',
         role_id: 3,
         email: 'zcrosby@example.org',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -892,7 +892,7 @@ module.exports = {
         short_des: 'Politics up federal return.',
       },
       {
-        fullname: 'Trần Thị Minh Sương',
+        full_name: 'Trần Thị Minh Sương',
         role_id: 3,
         email: 'barbarajennings@example.org',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -905,7 +905,7 @@ module.exports = {
         short_des: 'Campaign speech left himself process computer within crime.',
       },
       {
-        fullname: 'Trần Quang Văn Thư',
+        full_name: 'Trần Quang Văn Thư',
         role_id: 3,
         email: 'ujordan@example.net',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -918,7 +918,7 @@ module.exports = {
         short_des: 'Best always opportunity oil economic.',
       },
       {
-        fullname: 'Lê Ngọc Thuận',
+        full_name: 'Lê Ngọc Thuận',
         role_id: 3,
         email: 'srichardson@example.com',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -931,7 +931,7 @@ module.exports = {
         short_des: 'Beyond fall audience administration industry compare sea.',
       },
       {
-        fullname: 'Nguyễn Công Thành',
+        full_name: 'Nguyễn Công Thành',
         role_id: 3,
         email: 'rachel45@example.com',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -944,7 +944,7 @@ module.exports = {
         short_des: 'Quality discussion go data risk far change.',
       },
       {
-        fullname: 'Vũ Văn Thành',
+        full_name: 'Vũ Văn Thành',
         role_id: 3,
         email: 'duncanjulia@example.com',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -957,7 +957,7 @@ module.exports = {
         short_des: 'To why may doctor seven idea test.',
       },
       {
-        fullname: 'Nguyễn Ngọc Thân',
+        full_name: 'Nguyễn Ngọc Thân',
         role_id: 3,
         email: 'ronald37@example.org',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -970,7 +970,7 @@ module.exports = {
         short_des: 'Will exist million race hour provide.',
       },
       {
-        fullname: 'Hồ Nguyễn Xuân Thanh',
+        full_name: 'Hồ Nguyễn Xuân Thanh',
         role_id: 3,
         email: 'dhernandez@example.org',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -983,7 +983,7 @@ module.exports = {
         short_des: 'Hear will step protect throw ahead report example.',
       },
       {
-        fullname: 'Nguyễn Tiến Thành',
+        full_name: 'Nguyễn Tiến Thành',
         role_id: 3,
         email: 'joannanicholson@example.com',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -996,7 +996,7 @@ module.exports = {
         short_des: 'Response third give make art tree not.',
       },
       {
-        fullname: 'Nguyễn Hữu Thế',
+        full_name: 'Nguyễn Hữu Thế',
         role_id: 3,
         email: 'amy31@example.org',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -1009,7 +1009,7 @@ module.exports = {
         short_des: 'Interesting plant stock shoulder hope development child will.',
       },
       {
-        fullname: 'Lý Quốc Quyền',
+        full_name: 'Lý Quốc Quyền',
         role_id: 3,
         email: 'silvarebecca@example.com',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -1022,7 +1022,7 @@ module.exports = {
         short_des: 'Open another risk company last consumer shoulder.',
       },
       {
-        fullname: 'Võ Đức Thảo',
+        full_name: 'Võ Đức Thảo',
         role_id: 3,
         email: 'harringtonadam@example.com',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -1035,7 +1035,7 @@ module.exports = {
         short_des: 'Away lose every strategy raise north movie.',
       },
       {
-        fullname: 'Võ Tiến Sĩ',
+        full_name: 'Võ Tiến Sĩ',
         role_id: 3,
         email: 'fbaxter@example.net',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -1048,7 +1048,7 @@ module.exports = {
         short_des: 'This feel member laugh himself fall.',
       },
       {
-        fullname: 'Lê Tiến Thành',
+        full_name: 'Lê Tiến Thành',
         role_id: 3,
         email: 'stokessarah@example.org',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -1061,7 +1061,7 @@ module.exports = {
         short_des: 'Control of friend air.',
       },
       {
-        fullname: 'Trần Tất Thắng',
+        full_name: 'Trần Tất Thắng',
         role_id: 3,
         email: 'melissajohnson@example.org',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -1074,7 +1074,7 @@ module.exports = {
         short_des: 'Economy lose power speak movement alone talk difficult.',
       },
       {
-        fullname: 'Lê Anh Sơn',
+        full_name: 'Lê Anh Sơn',
         role_id: 3,
         email: 'thompsonwendy@example.com',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -1087,7 +1087,7 @@ module.exports = {
         short_des: 'Free policy sure deep gun nothing drive.',
       },
       {
-        fullname: 'Nguyễn Anh Tấn',
+        full_name: 'Nguyễn Anh Tấn',
         role_id: 3,
         email: 'christina47@example.com',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -1100,7 +1100,7 @@ module.exports = {
         short_des: 'Question finally outside.',
       },
       {
-        fullname: 'Nguyễn Đình Thi',
+        full_name: 'Nguyễn Đình Thi',
         role_id: 3,
         email: 'jason91@example.com',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -1113,7 +1113,7 @@ module.exports = {
         short_des: 'Voice fact article century way their woman.',
       },
       {
-        fullname: 'Nguyễn Hồng Thông',
+        full_name: 'Nguyễn Hồng Thông',
         role_id: 3,
         email: 'dreynolds@example.com',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -1126,7 +1126,7 @@ module.exports = {
         short_des: 'These series radio people message.',
       },
       {
-        fullname: 'Nguyễn Viết Sơn',
+        full_name: 'Nguyễn Viết Sơn',
         role_id: 3,
         email: 'cindy47@example.com',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -1139,7 +1139,7 @@ module.exports = {
         short_des: 'Coach air past investment entire summer.',
       },
       {
-        fullname: 'Võ Thanh Sanh',
+        full_name: 'Võ Thanh Sanh',
         role_id: 3,
         email: 'wrich@example.org',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -1152,7 +1152,7 @@ module.exports = {
         short_des: 'Kind piece piece.',
       },
       {
-        fullname: 'Nguyễn Bỉnh Khiêm',
+        full_name: 'Nguyễn Bỉnh Khiêm',
         role_id: 3,
         email: 'lnguyen@example.com',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -1165,7 +1165,7 @@ module.exports = {
         short_des: 'Another whom body opportunity lot miss.',
       },
       {
-        fullname: 'Phạm Minh Quân',
+        full_name: 'Phạm Minh Quân',
         role_id: 3,
         email: 'mendozaashley@example.org',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -1178,7 +1178,7 @@ module.exports = {
         short_des: 'Education plan box writer through.',
       },
       {
-        fullname: 'Vũ Thị Hoài Sơn',
+        full_name: 'Vũ Thị Hoài Sơn',
         role_id: 3,
         email: 'theresamoore@example.com',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -1191,7 +1191,7 @@ module.exports = {
         short_des: 'Leave break strong improve staff.',
       },
       {
-        fullname: 'Lý Quốc Quyền',
+        full_name: 'Lý Quốc Quyền',
         role_id: 3,
         email: 'rodneygarcia@example.net',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -1204,7 +1204,7 @@ module.exports = {
         short_des: 'Defense key enough day sign theory throughout.',
       },
       {
-        fullname: 'Lê Anh Sơn',
+        full_name: 'Lê Anh Sơn',
         role_id: 3,
         email: 'cody04@example.org',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -1217,7 +1217,7 @@ module.exports = {
         short_des: 'Over movement each stay figure.',
       },
       {
-        fullname: 'Phạm Minh Quân',
+        full_name: 'Phạm Minh Quân',
         role_id: 3,
         email: 'davidcastillo@example.com',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -1230,7 +1230,7 @@ module.exports = {
         short_des: 'Safe catch all everybody meeting mother.',
       },
       {
-        fullname: 'Nguyễn Công Thành',
+        full_name: 'Nguyễn Công Thành',
         role_id: 3,
         email: 'morriskayla@example.org',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -1243,7 +1243,7 @@ module.exports = {
         short_des: 'Laugh trade win tell attorney service these.',
       },
       {
-        fullname: 'Trần Văn Dö',
+        full_name: 'Trần Văn Dö',
         role_id: 3,
         email: 'zmaldonado@example.net',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -1256,7 +1256,7 @@ module.exports = {
         short_des: 'Strategy word put.',
       },
       {
-        fullname: 'Vũ Hồng Tâm',
+        full_name: 'Vũ Hồng Tâm',
         role_id: 3,
         email: 'lbush@example.org',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -1269,7 +1269,7 @@ module.exports = {
         short_des: 'Describe fly station hot.',
       },
       {
-        fullname: 'Nguyễn Vũ Trường Sơn',
+        full_name: 'Nguyễn Vũ Trường Sơn',
         role_id: 3,
         email: 'madisongraham@example.org',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -1282,7 +1282,7 @@ module.exports = {
         short_des: 'Impact rather security phone difference always teacher.',
       },
       {
-        fullname: 'Võ Tiến Sĩ',
+        full_name: 'Võ Tiến Sĩ',
         role_id: 3,
         email: 'bhanna@example.org',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -1295,7 +1295,7 @@ module.exports = {
         short_des: 'Loss brother dark moment late expect.',
       },
       {
-        fullname: 'Nguyễn Ngọc Phương',
+        full_name: 'Nguyễn Ngọc Phương',
         role_id: 3,
         email: 'briangregory@example.net',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -1308,7 +1308,7 @@ module.exports = {
         short_des: 'Camera successful always security admit prevent.',
       },
       {
-        fullname: 'Nguyễn Tiến Thành',
+        full_name: 'Nguyễn Tiến Thành',
         role_id: 3,
         email: 'tchavez@example.com',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -1321,7 +1321,7 @@ module.exports = {
         short_des: 'Room lawyer people lay executive worry alone.',
       },
       {
-        fullname: 'Trần Thế Sơn',
+        full_name: 'Trần Thế Sơn',
         role_id: 3,
         email: 'pware@example.com',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -1334,7 +1334,7 @@ module.exports = {
         short_des: 'Century book treat note same.',
       },
       {
-        fullname: 'Nguyễn Văn Thịnh',
+        full_name: 'Nguyễn Văn Thịnh',
         role_id: 3,
         email: 'anthony35@example.com',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -1347,7 +1347,7 @@ module.exports = {
         short_des: 'Benefit make first would garden.',
       },
       {
-        fullname: 'Dương Chí Tâm',
+        full_name: 'Dương Chí Tâm',
         role_id: 3,
         email: 'hansenbrian@example.com',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -1360,7 +1360,7 @@ module.exports = {
         short_des: 'Lose fine where difficult north capital.',
       },
       {
-        fullname: 'Nguyễn Ngọc Sơn',
+        full_name: 'Nguyễn Ngọc Sơn',
         role_id: 3,
         email: 'weaveranthony@example.com',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -1373,7 +1373,7 @@ module.exports = {
         short_des: 'Market particular first above not center.',
       },
       {
-        fullname: 'Bùi Minh Quân',
+        full_name: 'Bùi Minh Quân',
         role_id: 3,
         email: 'ebarrett@example.org',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -1386,7 +1386,7 @@ module.exports = {
         short_des: 'Mission the church half.',
       },
       {
-        fullname: 'Lưu Nguyễn Quốc Sơn',
+        full_name: 'Lưu Nguyễn Quốc Sơn',
         role_id: 3,
         email: 'john92@example.net',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -1399,7 +1399,7 @@ module.exports = {
         short_des: 'Step city arm matter.',
       },
       {
-        fullname: 'Nguyễn Vũ Ngọc Quyên',
+        full_name: 'Nguyễn Vũ Ngọc Quyên',
         role_id: 3,
         email: 'jacksontheresa@example.com',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
@@ -1412,7 +1412,7 @@ module.exports = {
         short_des: 'Economic artist computer politics wish professional.',
       },
       {
-        fullname: 'Đỗ Minh Tâm',
+        full_name: 'Đỗ Minh Tâm',
         role_id: 3,
         email: 'benjamin03@example.com',
         password: '$2b$10$wvYZa/.oM7HXX2k0cNJ/j.Jp4gG4UDz/VZSyVcTtGHfBb2CHvDWEm',
