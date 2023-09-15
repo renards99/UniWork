@@ -25,24 +25,6 @@ function Notifications() {
       time: '2h trước',
       role: 'Nhà tuyển dụng',
     },
-    {
-      image: tempAvatar,
-      text: 'Nhà tuyển dụng Afact Company vừa có một bài tuyển dụng cần duyệt',
-      time: '2h trước',
-      role: 'Ứng viên',
-    },
-    {
-      image: tempAvatar,
-      text: 'Quản trị viên QuynhTD vừa không duyệt bài đăng của nhà tuyển dụng ABC Group',
-      time: '2h trước',
-      role: 'Quản trị viên',
-    },
-    {
-      image: tempAvatar,
-      text: 'Quản trị viên LocNT vừa cấm nhà tuyển dụng BC Entertainment vượt do quá số lần vi phạm',
-      time: '2h trước',
-      role: 'Quản trị viên',
-    },
   ];
   return (
     <Menu>

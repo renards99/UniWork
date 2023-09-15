@@ -70,7 +70,6 @@ export default function AccountManager() {
     },
     [param],
   );
-  console.log(dataUser);
   useEffect(() => {
     getListAccounts();
   }, []);
@@ -127,7 +126,6 @@ export default function AccountManager() {
       </Tr>
     );
   });
-  console.log(dataUser, 'haha', currentPage);
   const TableUNW = (
     <>
       <TableContainer marginTop={'28px'} p={'0 40px'}>

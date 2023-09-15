@@ -108,7 +108,7 @@ module.exports = {
   async listAccounts(req, res) {
     try {
       const params = req.body;
-      const { role_id, offset, limit, search, role } = params;
+      const { search, role } = params;
       const getAllUsers = await sequelize.query(
         `SELECT user_account.*, role.role_name from user_account join role where user_account.role_id= role.id and (email like "%${search}%" or fullname like"%${search}%" ) and role_name like "%${role}%" order by user_account.id   `,
         {

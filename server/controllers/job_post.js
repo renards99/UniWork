@@ -12,25 +12,21 @@ module.exports = {
     try {
       const params = req.body;
       const {
+        title,
+        work_hours,
         service_id,
         job_type_id,
         post_by_id,
         company_id,
         hire_number,
-        job_location_id,
+        job_location,
+        is_active,
         salary,
+        view,
         gender,
+        state,
       } = params;
-      if (
-        !validateHandler.validateId(
-          service_id,
-          job_type_id,
-          post_by_id,
-          company_id,
-          hire_number,
-          job_location_id,
-        )
-      ) {
+      if (!validateHandler.validateId(service_id, job_type_id, post_by_id, company_id)) {
         return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
       }
       if (!validateHandler.validateGender(gender)) {
@@ -135,13 +131,28 @@ module.exports = {
       return responseHandler.badRequest(res, 'There is something wrong with your request!');
     }
   },
+  //
+  // SELECT user_account.*, role.role_name from user_account join role where user_account.role_id= role.id and (email like "%${search}%" or fullname like"%${search}%" ) and role_name like "%${role}%" order by user_account.id
+  //
   async getAllPosts(req, res) {
     try {
       const params = req.body;
-      const {} = params;
-      const getAllPost = await sequelize.query(`SELECT * FROM job_post`, {
-        type: QueryTypes.SELECT,
-      });
+
+      const { search, role } = params;
+      const getAllPost = await sequelize.query(
+        `SELECT job_post.id as "main_id", 
+       job_post.*, 
+       company.*, 
+       job_type.*
+      FROM job_post 
+      JOIN company ON job_post.company_id = company.id
+      JOIN job_type ON job_post.job_type_id = job_type.id where (title like "%${search}%"or company_name like "%${search}%" or job_type_name like "%${search}%")
+      and state like "%${role}%"
+      ORDER BY job_post.id ASC;`,
+        {
+          type: QueryTypes.SELECT,
+        },
+      );
       if (getAllPost) {
         return responseHandler.responseWithData(res, 200, { list_user: getAllPost });
       } else {

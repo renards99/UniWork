@@ -960,7 +960,7 @@ function employerDetails() {
         alignItems='flex-start'
       >
         <Text color='white' fontSize='16px' fontWeight='500' lineHeight='24px'>
-          Giấy phép kinh doanh
+          Thông tin cá nhân
         </Text>
       </Flex>
       <Stack p='24px' justifyContent='center' gap='20px' border='1px solid #818181'>
@@ -1007,6 +1007,8 @@ function employerDetails() {
             lineHeight='24px'
           ></Input>
         </Stack>
+
+
         <Flex gap='20px'>
           <Stack gap='8px' p='0px' flex='1 0 0'>
             <Text fontSize='14px' fontWeight='500' lineHeight='24px'>
@@ -1031,12 +1033,16 @@ function employerDetails() {
             ></Input>
           </Stack>
         </Flex>
+
         <Stack gap='8px' p='0px'>
           <Text fontSize='14px' fontWeight='500' lineHeight='24px'>
-            Lĩnh vực hoạt động:
+
+            Lĩnh vực hoạt động (ngành nghề):
+
           </Text>
           <DropDown data={menuData.jobType} />
         </Stack>
+
         <Stack gap='8px' p='0px' flex='1 0 0'>
           <Text fontSize='14px' fontWeight='500' lineHeight='24px'>
             Facebook:

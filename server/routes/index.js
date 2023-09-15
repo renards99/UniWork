@@ -4,6 +4,7 @@ module.exports = [
   require('./user_account'),
   require('./user_log'),
   require('./student'),
+  require('./employer'),
   require('./education_detail'),
   require('./experience_detail'),
   require('./request'),
@@ -12,5 +13,4 @@ module.exports = [
   require('./job_location'),
   require('./service'),
   require('./job_post'),
-  require('./job_post_application'),
 ];

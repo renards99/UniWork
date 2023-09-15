@@ -40,7 +40,7 @@ module.exports = {
         primaryKey: true,
         autoIncrement: true,
       },
-      fullname: {
+      full_name: {
         type: Sequelize.STRING(100),
         allowNull: false,
       },
@@ -329,6 +329,14 @@ module.exports = {
         primaryKey: true,
         autoIncrement: true,
       },
+      title: {
+        type: Sequelize.STRING(1000),
+        allowNull: false,
+      },
+      work_hours: {
+        type: Sequelize.STRING(100),
+        allowNull: false,
+      },
       service_id: {
         type: Sequelize.INTEGER(11),
         allowNull: false,
@@ -378,19 +386,12 @@ module.exports = {
         allowNull: true,
       },
       job_description: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING(10000),
         allowNull: false,
       },
-      job_location_id: {
-        type: Sequelize.INTEGER(11),
+      job_location: {
+        type: Sequelize.STRING(200),
         allowNull: false,
-        references: {
-          model: {
-            tableName: 'job_location',
-          },
-          key: 'id',
-        },
-        onDelete: 'cascade',
       },
       is_active: {
         type: Sequelize.BOOLEAN,
@@ -409,8 +410,8 @@ module.exports = {
         type: Sequelize.INTEGER(2),
         allowNull: true,
       },
-      tag: {
-        type: Sequelize.STRING(100),
+      state: {
+        type: Sequelize.STRING(20),
         allowNull: true,
       },
       created_at: {
@@ -419,6 +420,10 @@ module.exports = {
       },
       updated_at: {
         type: Sequelize.DATE,
+        allowNull: false,
+      },
+      apply_at: {
+        type: Sequelize.STRING(20),
         allowNull: false,
       },
       expired_at: {
@@ -470,74 +475,47 @@ module.exports = {
       },
     });
     await queryInterface.createTable('employer', {
-      id: {
-        type: Sequelize.INTEGER(11),
-        primaryKey: true,
-        autoIncrement: true,
-      },
       user_account_id: {
         type: Sequelize.INTEGER(11),
-        allowNull: false,
+        primaryKey: true,
         references: {
           model: {
             tableName: 'user_account',
           },
           key: 'id',
         },
-        license: {
-          type: Sequelize.STRING,
-          allowNull: true,
-        },
-        other_document: {
-          type: Sequelize.STRING,
-          allowNull: true,
-        },
-        onDelete: 'cascade',
       },
-    });
-    await queryInterface.createTable('job_post_application', {
-      id: {
+      company_id: {
         type: Sequelize.INTEGER(11),
-        primaryKey: true,
-        autoIncrement: true,
+        allowNull: true,
+        references: {
+          model: {
+            tableName: 'company',
+          },
+          key: 'id',
+        },
       },
-      employer_id: {
+      job_type_id: {
         type: Sequelize.INTEGER(11),
         allowNull: false,
         references: {
           model: {
-            tableName: 'employer',
+            tableName: 'job_type',
           },
           key: 'id',
         },
-        onDelete: 'cascade',
       },
-      job_post_id: {
-        type: Sequelize.INTEGER(11),
-        allowNull: false,
-        references: {
-          model: {
-            tableName: 'job_post',
-          },
-          key: 'id',
-        },
-        onDelete: 'cascade',
-      },
-      apply_at: {
-        type: Sequelize.STRING(20),
-        allowNull: false,
-      },
-      state: {
-        type: Sequelize.STRING(20),
+      facebook_link: {
+        type: Sequelize.STRING,
         allowNull: true,
       },
-      created_at: {
-        type: Sequelize.DATE,
-        allowNull: false,
+      license: {
+        type: Sequelize.STRING,
+        allowNull: true,
       },
-      updated_at: {
-        type: Sequelize.DATE,
-        allowNull: false,
+      other_document: {
+        type: Sequelize.STRING,
+        allowNull: true,
       },
     });
   },

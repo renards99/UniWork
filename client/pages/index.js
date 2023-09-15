@@ -222,13 +222,14 @@ export default function HomePage() {
   const lastItemIndex = currentPage * itemsPerPage;
   const firstItemIndex = lastItemIndex - itemsPerPage;
   const currentEmployers = employers.slice(firstItemIndex, lastItemIndex);
-
+  const back_end_port = 'http://localhost:5000';
   //change page
   const changePage = (pageNumber) => setCurrentPage(pageNumber);
 
   const HomeContent = (
     <div>
-      <Header />
+      <Header back_end_port={back_end_port} />
+
       <Box h='465px' px='150px' display='flex' justifyContent='space-evenly'>
         <Box h='465px' bg='transparent' minW='30%' pt='50px'>
           <h1 className='unw-homepage-text'>Tìm Việc Làm</h1>
