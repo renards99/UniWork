@@ -22,6 +22,16 @@ import {
   TabList,
   Radio,
   RadioGroup,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
+  Link,
+  Textarea,
 } from '@chakra-ui/react';
 import { MdOpenInNew } from 'react-icons/md';
 import { HiOutlineMapPin } from 'react-icons/hi2';
@@ -34,6 +44,11 @@ import DropDown from '../../components/layout/candidate/dropDown';
 import speakerIcon from '../../public/static/images/icon/speaker.svg';
 
 function JobDetails() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [radioValue, setRadioValue] = useState('1');
+  const handleRadioClick = (index) => {
+    setRadioValue(index);
+  };
   const fakeData = [
     {
       id: 1,
@@ -244,11 +259,123 @@ function JobDetails() {
                 bg='#F8A353'
                 w='220px'
                 rounded='12px'
+                cursor='pointer'
+                onClick={onOpen}
               >
                 <Text fontSize='16px' color='white' fontWeight='700' lineHeight='40px'>
                   Ứng tuyển
                 </Text>
               </Flex>
+              <Modal isOpen={isOpen} onClose={onClose} isCentered size='5xl'>
+                <ModalOverlay bg='none' backdropFilter='auto' backdropBlur='2px' />
+                <ModalContent>
+                  <ModalHeader borderBottom='1px solid #818181' fontSize='24px'>
+                    Ứng tuyển{' '}
+                    <Text as='span' color='#F98820'>
+                      Nhân viên tư vấn
+                    </Text>
+                  </ModalHeader>
+                  <ModalCloseButton />
+                  <ModalBody>
+                    <Stack p='24px 24px 32px 24px' justifyContent='center' alignItems='center'>
+                      <RadioGroup onChange={setRadioValue} value={radioValue}>
+                        <Stack gap='20px' alignSelf='stretch'>
+                          <Flex gap='220px'>
+                            <Radio
+                              size='lg'
+                              colorScheme='orange'
+                              value='1'
+                              border='1px solid black'
+                            >
+                              Nộp hồ sơ Online{' '}
+                              <Text color='#F8A353' as='span'>
+                                (<Link>Xem</Link>)
+                              </Text>
+                            </Radio>
+                            <Radio
+                              size='lg'
+                              colorScheme='orange'
+                              value='2'
+                              border='1px solid black'
+                            >
+                              CV đã tải lên{' '}
+                              <Text color='#F8A353' as='span'>
+                                (<Link>Xem</Link>)
+                              </Text>
+                            </Radio>
+                          </Flex>
+                          <Radio size='lg' colorScheme='orange' value='3' border='1px solid black'>
+                            CV Tải từ máy tính
+                          </Radio>
+                        </Stack>
+                      </RadioGroup>
+                      {radioValue === '1' ? (
+                        <Stack gap='8px' alignSelf='stretch'>
+                          <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
+                            Mô tả về bản thân
+                          </Text>
+                          <Textarea
+                            placeholder='Mô tả về bản thân...'
+                            p='12px 12px 12px 16px'
+                            h='160px'
+                          />
+                        </Stack>
+                      ) : radioValue === '2' ? (
+                        <Stack gap='8px' alignSelf='stretch'>
+                          <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
+                            CV của bạn
+                          </Text>
+                          <Stack
+                            p='12px'
+                            justifyContent='center'
+                            alignItems='center'
+                            gap='10px'
+                            alignSelf='stretch'
+                            height='160px'
+                            bg='#1311311A'
+                            rounded='12px'
+                          >
+                            <Image
+                              src='/static/images/upload_cloud.png'
+                              width='40'
+                              height='40'
+                            ></Image>
+                            <Stack
+                              justifyContent='center'
+                              alignItems='center'
+                              fontSize='12px'
+                              fontWeight='700'
+                              lineHeight='20px'
+                              color='#818181'
+                            >
+                              <Text>Kéo CV của bạn vào đây hoặc bấm để chọn file CV của bạn</Text>
+                              <Text>Dung lượng file không vượt quá 5MB.</Text>
+                              <Text>(Hỗ trợ tải lên file: PDF)</Text>
+                            </Stack>
+                          </Stack>
+                        </Stack>
+                      ) : (
+                        ''
+                      )}
+                      <Flex
+                        p='12px'
+                        w='140px'
+                        mt='32px'
+                        rounded='12px'
+                        bg='#F8A353'
+                        justifyContent='center'
+                        alignItems='center'
+                        onClick={onClose}
+                        cursor='pointer'
+                      >
+                        <Text fontSize='16px' fontWeight='600' lineHeight='24px' color='white'>
+                          Xác nhận{' '}
+                        </Text>
+                      </Flex>
+                    </Stack>
+                  </ModalBody>
+                </ModalContent>
+              </Modal>
               <Text fontSize='14px' fontWeight='500'>
                 Hạn nộp hồ sơ: 09/08/2023.
               </Text>
