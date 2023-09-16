@@ -13,7 +13,7 @@ import Image from 'next/image';
 import { Select } from '@chakra-ui/react';
 import CandidateHeader from '../../components/layout/candidate/header';
 import backgroundImg from '../../public/static/images/rectangle_33.png';
-import DropDown from '../../components/layout/candidate/dropDown';
+import DropDown from '../../components/layout/candidate/dropDownLocation';
 import speakerIcon from '../../public/static/images/icon/speaker.svg';
 
 function JobSearching() {

@@ -37,9 +37,13 @@ export default function DropDown(props) {
         justifyContent='space-between'
         alignSelf='stretch'
         alignItems='center'
-        rounded='12px'
-        border='1px solid #F6871F'
+        rounded='40px'
         onClick={handleMenuClick}
+        leftIcon={
+          <Box fontSize='24px'>
+            <HiMapPin />
+          </Box>
+        }
         rightIcon={
           menuIcon ? (
             <Box transition='transform 0.3s ease-in-out' fontSize='24px'>

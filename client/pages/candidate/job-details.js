@@ -40,7 +40,7 @@ import Image from 'next/image';
 import { Select } from '@chakra-ui/react';
 import CandidateHeader from '../../components/layout/candidate/header';
 import backgroundImg from '../../public/static/images/rectangle_33.png';
-import DropDown from '../../components/layout/candidate/dropDown';
+import DropDown from '../../components/layout/candidate/dropDownLocation';
 import speakerIcon from '../../public/static/images/icon/speaker.svg';
 
 function JobDetails() {
@@ -108,18 +108,8 @@ function JobDetails() {
   const HomeContent = (
     <div>
       <CandidateHeader />
-      <Flex
-        h='465px'
-        px='150px'
-        display='flex'
-        justifyContent='space-evenly'
-        alignItems='flex-end'
-        bg='#333333'
-      >
-        <Box h='465px' bg='transparent' minW='30%' pt='50px'>
-          <Text className='unw-homepage-text' color='white'>
-            Tìm Việc Làm
-          </Text>
+      <Stack bg='#333333' justifyContent='center' alignItems='center'>
+        <Flex bg='transparent' pt='50px' gap='0px'>
           <Input
             focusBorderColor='#F98820'
             borderColor='transparent'
@@ -130,19 +120,24 @@ function JobDetails() {
             fontSize='2xl'
             fontWeight='medium'
             boxShadow='md'
-            mb='20px'
-            rounded='xl'
+            rounded='none'
+            roundedLeft='xl'
+            w='800px'
+            h='60px'
           />
 
-          <Box display='flex' justifyContent='space-between'>
+          <Flex gap='40px'>
             <Select
               focusBorderColor='#F98820'
               borderColor='transparent'
+              borderLeft='2px solid #CBCBCB'
               icon={<Icon as={BsChevronDown} />}
               className='unw-homepage-select'
               bg='gray.100'
-              size='lg'
-              rounded='xl'
+              w='160px'
+              h='60px'
+              rounded='none'
+              roundedRight='xl'
             >
               <option selected hidden disabled>
                 Địa Điểm
@@ -157,9 +152,9 @@ function JobDetails() {
               icon={<Icon as={BsChevronDown} />}
               className='unw-homepage-select'
               bg='gray.100'
-              size='lg'
-              mx='90px'
               rounded='xl'
+              w='160px'
+              h='60px'
             >
               <option selected hidden disabled>
                 Kinh Nghiệm
@@ -174,8 +169,9 @@ function JobDetails() {
               icon={<Icon as={BsChevronDown} />}
               className='unw-homepage-select'
               bg='gray.100'
-              size='lg'
               rounded='xl'
+              w='160px'
+              h='60px'
             >
               <option selected hidden disabled>
                 Mức Lương
@@ -184,15 +180,83 @@ function JobDetails() {
                 return <option>{salary}</option>;
               })}
             </Select>
-          </Box>
-          <Button bg='#F98820' textColor='white' py='16px' px='30px' mt='16px' fontSize='2xl'>
+          </Flex>
+          <Button
+            bg='#F98820'
+            textColor='white'
+            py='16px'
+            px='30px'
+            w='160px'
+            h='60px'
+            ml='24px'
+            fontSize='2xl'
+          >
             Tìm Kiếm
           </Button>
-        </Box>
-        <Box>
-          <Image width='600' height='600' src='/static/images/home_page1.png' />
-        </Box>
-      </Flex>
+        </Flex>
+        <Stack
+          rounded='12px'
+          w='1000px'
+          bgGradient='linear(to-b, #F98820, transparent)'
+          p='24px'
+          m='25px'
+          justifyContent='center'
+          alignItems='center'
+          gap='24px'
+        >
+          <Flex alignSelf='stretch'>
+            <Text fontSize='32px' fontWeight='800' lineHeight='40px' color='white'>
+              Nhân viên thiết kế bao bì sản phẩm
+            </Text>
+          </Flex>
+          <Flex justifyContent='space-between' alignItems='center' alignSelf='stretch'>
+            <Flex gap='8px'>
+              <Image src='/static/images/icon/coin.svg' width='40' height='40'></Image>
+              <Stack gap='0px'>
+                <Text fontSize='16px' fontWeight='600' color='white'>
+                  Mức lương
+                </Text>
+                <Text fontSize='16px' fontWeight='800' color='white'>
+                  8-15 triệu
+                </Text>
+              </Stack>
+            </Flex>
+            <Flex gap='8px'>
+              <Image src='/static/images/icon/coin.svg' width='40' height='40'></Image>
+              <Stack gap='0px'>
+                <Text fontSize='16px' fontWeight='600' color='white'>
+                  Mức lương
+                </Text>
+                <Text fontSize='16px' fontWeight='800' color='white'>
+                  8-15 triệu
+                </Text>
+              </Stack>
+            </Flex>
+            <Flex gap='8px'>
+              <Image src='/static/images/icon/coin.svg' width='40' height='40'></Image>
+              <Stack gap='0px'>
+                <Text fontSize='16px' fontWeight='600' color='white'>
+                  Mức lương
+                </Text>
+                <Text fontSize='16px' fontWeight='800' color='white'>
+                  8-15 triệu
+                </Text>
+              </Stack>
+            </Flex>
+          </Flex>
+          <Flex
+            gap='4px'
+            bg='#F8A353'
+            justifyContent='center'
+            alignItems='center'
+            w='670px'
+            rounded='12px'
+          >
+            <Image src='/static/images/icon/send.svg' width='30' height='30'></Image>
+            <Text color='white'>Ứng tuyển ngay</Text>
+          </Flex>
+        </Stack>
+      </Stack>
       <Stack px='80px' py='50px' gap='42px' bg='#F0EAE9'>
         <Flex gap='32px'>
           <Stack gap='32px' flex='1 0 0'>
