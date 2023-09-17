@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Menu,
   MenuButton,
@@ -17,12 +17,20 @@ import { HiChevronDown } from 'react-icons/hi';
 import { HiMiniMapPin } from 'react-icons/hi2';
 export default function DropDown(props) {
   const data = props.data;
+  useEffect(() => {
+    setSelectedMenuItem(data[props.selected - 1]);
+  }, [props.selected, data]);
 
-  const [selectedMenuItem, setSelectedMenuItem] = useState(data[0]);
+  const [selectedMenuItem, setSelectedMenuItem] = useState(data[parseInt(props.selected) - 1]);
+  console.log(props.selected + 'props select');
   const [menuIcon, setMenuIcon] = useState(false);
-  const handleMenuItem = (text) => {
-    setSelectedMenuItem(text);
+  const handleMenuItem = (selectedIndex) => {
+    setSelectedMenuItem(data[selectedIndex - 1]);
+    if (typeof props.onChange === 'function') {
+      props.onChange(selectedIndex);
+    }
   };
+
   const handleMenuClick = () => setMenuIcon(!menuIcon);
   return (
     <Menu matchWidth>
@@ -69,8 +77,8 @@ export default function DropDown(props) {
           </Text>
         </Flex>
       </MenuButton>
-      <MenuList rounded='10px' border='1px solid #323541'>
-        {data.map((item) => (
+      <MenuList rounded='10px' border='1px solid #323541' maxH='200px' overflowY='auto'>
+        {data.map((item, index) => (
           <Flex _last={{ borderBottomWidth: 0 }} borderBottom='1px #D7D7D7 solid'>
             {selectedMenuItem === item ? (
               <Box border='2px solid #323541' roundedRight='12px' pos='fixed' h='48px'></Box>
@@ -78,7 +86,7 @@ export default function DropDown(props) {
               ''
             )}
 
-            <MenuItem h='48px' onClick={() => handleMenuItem(item)} _focus={{ bg: 'none' }}>
+            <MenuItem h='48px' onClick={() => handleMenuItem(index + 1)} _focus={{ bg: 'none' }}>
               <Text p='12px 20px' fontSize='16px' fontWeight='600' lineHeight='24px'>
                 {item}
               </Text>

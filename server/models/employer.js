@@ -22,7 +22,7 @@ module.exports = (sequelize, Sequelize) => {
     },
     job_type_id: {
       type: Sequelize.INTEGER(11),
-      allowNull: false,
+      allowNull: true,
       references: {
         model: {
           tableName: 'job_type',

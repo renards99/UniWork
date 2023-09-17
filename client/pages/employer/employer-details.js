@@ -31,10 +31,49 @@ import StatusFrame from '../../components/layout/admin/statusFrame';
 import { IoEllipse } from 'react-icons/io5';
 
 function employerDetails() {
+  const [isLoading, setIsLoading] = useState(true);
   const [tab, setTab] = useState(1);
   const [show, setShow] = useState(false);
   const [edit, setEdit] = useState(false);
   const [value, setValue] = useState('1');
+  const [userData, setUserData] = useState({});
+  const [jobType, setJobType] = useState([]);
+  const [employerId, setEmployerId] = useState(0);
+  const [selectedGender, setSelectedGender] = useState(0);
+  const [selectedJobType, setSelectedJobType] = useState(0);
+  const [facebookLink, setFacebookLink] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [employerName, setEmployerName] = useState('');
+  const [email, setEmail] = useState('');
+  const [emailError, setEmailError] = useState('');
+
+  const getEmployerById = useCallback(async () => {
+    try {
+      console.log('im in' + JSON.parse(localStorage.getItem('user')).id);
+
+      const getEmployerById = await axios.post(
+        `http://localhost:5000/employer/get-employer-by-id`,
+        {
+          id: JSON.parse(localStorage.getItem('user')).id,
+        },
+      );
+
+      if (getEmployerById.data.statusCode === 200) {
+        setUserData(getEmployerById.data.data.employer_details[0]);
+        setIsLoading(false); // Set loading to false once data is fetched
+        console.log(getEmployerById.data.data.employer_details[0]);
+        console.log('employer detail');
+      } else {
+        setIsLoading(false); // Even if there's an error in response, set loading to false
+      }
+    } catch (error) {
+      setIsLoading(false); // If there's an error, set loading to false
+    }
+  }, []);
+  useEffect(() => {
+    getEmployerById();
+  }, [getEmployerById]);
+
   const itemFilter = { location: ['Hà Nội', 'Hà Giang', 'Kon tum'] };
   const fakeData = [
     {
@@ -69,12 +108,198 @@ function employerDetails() {
   };
   const menuData = {
     jobType: ['Shipper', 'Worker', 'Khác', '...'],
-    scale: ['10-20', '25-90', '100-200', '...'],
-    gender: ['Nam', 'Nữ'],
+    scale: ['10-20', '25-90', '100-200', '200-1000', 'Trên 1000'],
+    gender: ['Nam', 'Nữ', 'Khác'],
+  };
+  const sizeMapping = {
+    1: '10-20 nhân viên',
+    2: '25-90 nhân viên',
+    3: '100-200 nhân viên',
+    4: '200-1000 nhân viên',
+    5: 'Trên 1000 nhân viên',
   };
   const handleEdit = () => setEdit(!edit);
   const handleToggle = () => setShow(!show);
   const handleTab = (value) => setTab(value);
+  const handleEditProfile = async () => {
+    try {
+      await axios.put(`http://localhost:5000/update-account`, {
+        id: employerId,
+        full_name: employerName,
+        mobile_number: phoneNumber,
+        gender: selectedGender,
+      });
+      await axios.put(`http://localhost:5000/employer/update-employer`, {
+        user_account_id: employerId,
+        job_type_id: selectedJobType,
+        facebook_link: facebookLink,
+        company_id: userData.company_id,
+      });
+      alert('Profile updated successfully.');
+    } catch (error) {}
+  };
+  const getListJobType = useCallback(async () => {
+    try {
+      const getListJobType = await axios.post(`http://localhost:5000/job-type/get-all-job-type`);
+      if (getListJobType.data.statusCode === 200) {
+        setJobType(getListJobType.data.data.map((item) => item.job_type_name));
+        console.log(getListJobType.data.data);
+      } else {
+      }
+    } catch (error) {}
+  }, []);
+  useEffect(() => {
+    getListJobType();
+  }, []);
+  // Define a function to handle the selection change
+  const handleGenderChange = (selectedValue) => {
+    console.log('Selected gender:', selectedValue);
+    setSelectedGender(selectedValue);
+    console.log(selectedGender);
+  };
+  const handleJobTypeChange = (selectedValue) => {
+    setSelectedJobType(selectedValue);
+  };
+  const handleFacebookLinkChange = (e) => {
+    const newValue = e.target.value;
+    setFacebookLink(newValue);
+  };
+  useEffect(() => {
+    setEmail(userData.email);
+    setEmployerId(userData.user_account_id);
+    setSelectedGender(userData.gender);
+    setFacebookLink(userData.facebook_link);
+    setEmployerName(userData.full_name);
+    setPhoneNumber(userData.mobile_number);
+    setSelectedJobType(userData.job_type_id);
+  }, [userData]);
+
+  // phan sua thong tin doanh nghiep
+
+  const isValidEmail = (email) => {
+    // Regular expression pattern for a simple email validation
+    const pattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    return pattern.test(email);
+  };
+
+  const [companyType, setCompanyType] = useState(0);
+  const [companyName, setCompanyName] = useState('');
+  const [companyEmail, setCompanyEmail] = useState('');
+  const [companyPhone, setCompanyPhone] = useState('');
+  const [website, setWebsite] = useState('');
+  const [taxCode, setTaxCode] = useState('');
+  const [selectedSize, setSelectedSize] = useState(0);
+  const [description, setDescription] = useState('');
+  const [companyLocation, setCompanyLocation] = useState('');
+
+  const handleCompanyTypeChange = (e) => setCompanyType(String(e));
+  const handleCompanyNameChange = (e) => setCompanyName(e.target.value);
+  const handleCompanyPhoneChange = (e) => setCompanyPhone(e.target.value);
+  const handleWebsiteChange = (e) => setWebsite(e.target.value);
+  const handleTaxCodeChange = (e) => setTaxCode(e.target.value);
+  const handleSelectedSizeChange = (e) => setSelectedSize(e);
+  const handleDescriptionChange = (e) => setDescription(e.target.value);
+  const handleCompanyLocationChange = (e) => setCompanyLocation(e.target.value);
+  const handleCompanyEmailChange = (e) => {
+    setCompanyEmail(e.target.value);
+  };
+
+  useEffect(() => {
+    setCompanyType(userData.type);
+    setCompanyName(userData.company_name);
+    setCompanyEmail(userData.company_email);
+    setCompanyPhone(userData.company_phone_number);
+    setWebsite(userData.company_website_url);
+    setTaxCode(userData.tax_code);
+    setSelectedSize(userData.size);
+    setDescription(userData.company_description);
+    setCompanyLocation(userData.company_location);
+    console.log(userData);
+  }, [userData]);
+
+  const areAllFieldsFilledCompany = () => {
+    return (
+      companyName &&
+      companyEmail &&
+      companyPhone &&
+      website &&
+      taxCode &&
+      description &&
+      selectedSize
+    );
+  };
+
+  const handleSave = async () => {
+    if (!isValidEmail(companyEmail)) {
+      setEmailError('Please enter a valid email.');
+      alert('Please enter a valid email.');
+      return;
+    } else {
+      setEmailError('');
+    }
+
+    if (areAllFieldsFilledCompany()) {
+      const companyId = userData.company_id;
+
+      if (!companyId) {
+        // Check if companyId is null or undefined
+        // If companyId doesn't exist, only run the logic to create the company
+        const createResponse = await axios.post('http://localhost:5000/company/create-company', {
+          type: companyType,
+          company_name: companyName,
+          company_email: companyEmail,
+          company_phone_number: companyPhone,
+          tax_code: taxCode,
+          size: selectedSize,
+          company_location: companyLocation,
+          company_description: description,
+          company_website_url: website,
+        });
+
+        const createdCompanyId = createResponse.data.data.id;
+        console.log(createResponse);
+
+        await axios.put('http://localhost:5000/employer/update-employer', {
+          user_account_id: employerId,
+          job_type_id: selectedJobType,
+
+          company_id: createdCompanyId,
+          facebook_link: facebookLink,
+        });
+        alert('Company created successfully.');
+        return; // Return to stop the rest of the function from running
+      }
+
+      handleEdit();
+      try {
+        // First, check if the company exists
+        const response = await axios.post(`http://localhost:5000/company/get-company-by-id`, {
+          id: companyId,
+        });
+
+        if (response.data.statusCode === 200) {
+          // If company exists, send an update request
+          await axios.put(`http://localhost:5000/company/update-company`, {
+            id: companyId,
+            type: companyType,
+            company_name: companyName,
+            company_email: companyEmail,
+            company_phone_number: companyPhone,
+            tax_code: taxCode,
+            size: selectedSize,
+            company_location: companyLocation,
+            company_description: description,
+            company_website_url: website,
+          });
+          alert('Company updated successfully.');
+        }
+      } catch (error) {
+        console.error('An error occurred:', error);
+      }
+    } else {
+      alert('Please fill all the fields before saving.');
+    }
+  };
 
   const employerInfo = (
     <Stack>
@@ -122,7 +347,7 @@ function employerDetails() {
                 <Text fontSize='14px' fontWeight='500' lineHeight='24px'>
                   Doanh nghiệp của bạn là:
                 </Text>
-                <RadioGroup onChange={setValue} value={value}>
+                <RadioGroup onChange={handleCompanyTypeChange} value={String(companyType)}>
                   <Stack direction='row'>
                     <Radio value='1'>
                       <Text fontSize='14px' fontWeight='600' lineHeight='24px'>
@@ -151,6 +376,8 @@ function employerDetails() {
                   fontSize='16px'
                   fontWeight='600px'
                   lineHeight='24px'
+                  value={companyName}
+                  onChange={handleCompanyNameChange}
                 ></Input>
               </Stack>
               <Stack gap='8px' p='0px'>
@@ -167,12 +394,14 @@ function employerDetails() {
                   fontSize='16px'
                   fontWeight='600px'
                   lineHeight='24px'
-                  value='hanhfchinh@lechongvien.vn'
+                  value={companyEmail}
+                  onChange={handleCompanyEmailChange}
                 ></Input>
+                {emailError && <Text color='red'>{emailError}</Text>}
               </Stack>
               <Stack gap='8px' p='0px'>
                 <Text fontSize='14px' fontWeight='500' lineHeight='24px'>
-                  Số điện thoại
+                  Số điện thoại:
                 </Text>
                 <Input
                   p='24px 20px'
@@ -184,6 +413,8 @@ function employerDetails() {
                   fontSize='16px'
                   fontWeight='600px'
                   lineHeight='24px'
+                  value={companyPhone}
+                  onChange={handleCompanyPhoneChange}
                 ></Input>
               </Stack>
               <Stack gap='8px' p='0px'>
@@ -200,13 +431,9 @@ function employerDetails() {
                   fontSize='16px'
                   fontWeight='600px'
                   lineHeight='24px'
+                  value={website}
+                  onChange={handleWebsiteChange}
                 ></Input>
-              </Stack>
-              <Stack gap='8px' p='0px'>
-                <Text fontSize='14px' fontWeight='500' lineHeight='24px'>
-                  Tên doanh nghiệp:
-                </Text>
-                <DropDown data={menuData.jobType} />
               </Stack>
               <Flex gap='20px' alignItems='center' p='0px'>
                 <Stack gap='8px' p='0px' w='276px'>
@@ -223,15 +450,39 @@ function employerDetails() {
                     fontSize='16px'
                     fontWeight='600px'
                     lineHeight='24px'
+                    value={taxCode}
+                    onChange={handleTaxCodeChange}
                   ></Input>
                 </Stack>
                 <Stack gap='8px' p='0px' w='276px'>
                   <Text fontSize='14px' fontWeight='500' lineHeight='24px'>
                     Quy mô (Số Lượng nhân viên)
                   </Text>
-                  <DropDown data={menuData.scale} />
+                  <DropDown
+                    data={menuData.scale}
+                    selected={selectedSize}
+                    onChange={handleSelectedSizeChange}
+                  />
                 </Stack>
               </Flex>
+              <Stack gap='8px' p='0px'>
+                <Text fontSize='14px' fontWeight='500' lineHeight='24px'>
+                  Địa chỉ:
+                </Text>
+                <Input
+                  p='24px 20px'
+                  placeholder='Địa chỉ'
+                  rounded='12px'
+                  border='1px solid #323541'
+                  focusBorderColor='none'
+                  _placeholder={{ fontSize: '14px', fontWeight: '500', lineHeight: '24px' }}
+                  fontSize='16px'
+                  fontWeight='600px'
+                  lineHeight='24px'
+                  value={companyLocation}
+                  onChange={handleCompanyLocationChange}
+                ></Input>
+              </Stack>
               <Stack gap='8px' alignItems='flex-start' alignSelf='stretch'>
                 <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
                   Mô tả doanh nghiệp
@@ -247,6 +498,8 @@ function employerDetails() {
                   fontWeight='600px'
                   lineHeight='24px'
                   height='160px'
+                  value={description}
+                  onChange={handleDescriptionChange}
                 ></Textarea>
               </Stack>
             </Stack>
@@ -259,7 +512,7 @@ function employerDetails() {
                 gap='20px'
                 rounded='12px'
                 bg='#323541'
-                onClick={handleEdit}
+                onClick={handleSave}
                 cursor='pointer'
               >
                 <Text fontSize='14px' fontWeight='400px' lineHeight='24px' color='white'>
@@ -457,7 +710,7 @@ function employerDetails() {
               <Flex gap='98px'>
                 <Stack>
                   <Text fontSize='24px' fontWeight='800' lineHeight='32px' color='white'>
-                    CÔNG TY CỔ PHẦN MODERN LIGHT VIỆT NAM
+                    {companyName}
                   </Text>
                   <Flex gap='12px'>
                     <Flex
@@ -470,7 +723,7 @@ function employerDetails() {
                       <Box fontSize='24px'>
                         <BsGlobe />
                       </Box>
-                      <Text lineHeight='24px'>https://cmcglobal.com.vn/</Text>
+                      <Text lineHeight='24px'>{website}</Text>
                     </Flex>
                     <Flex
                       fontSize='16px'
@@ -482,7 +735,7 @@ function employerDetails() {
                       <Box fontSize='24px'>
                         <HiOutlineBuildingOffice2 />
                       </Box>
-                      <Text lineHeight='24px'>125-199 nhân viên</Text>
+                      <Text lineHeight='24px'>{sizeMapping[selectedSize]}</Text>
                     </Flex>
                   </Flex>
                 </Stack>
@@ -520,25 +773,7 @@ function employerDetails() {
                     </Text>
                     <Collapse startingHeight={94} in={show}>
                       <Text fontSize='16px' fontWeight='semibold' color='#727272'>
-                        CMC Global was born from 25 years of experience in the field of ICT and more
-                        than 10 years of experience in the field of Outsourcing of CMC Technology
-                        Group, with the mission of becoming a supplier of high quality software
-                        engineer human resources, providing high quality software engineering human
-                        resources. providing IT solutions and services to the international market.
-                        Currently, CMC Global owns 700++ employees and a member company in Japan.
-                        CMC Technology Group and CMC Global are proud to be one of the leading
-                        enterprises in Vietnam in the field of software development and provision of
-                        solutions and services. Sharing the same prerequisites for the development
-                        of CMC Group: Creativity, Professionalism, Teamwork, CMC Global always
-                        strives constantly to build a strong team, pioneering in Vietnamese
-                        technology. and increasingly reaching out to the world. With the goal of
-                        bringing CMC's high-tech products and services to the world, CMC Global is
-                        building the first foundations with ambition: to have at least 2,000 people
-                        working abroad by 2022; software and service revenue from the export market
-                        is larger than the domestic market; products and services of world-class
-                        standards. In the future, in addition to CMC Japan's member company in
-                        Japan, CMC Global will open more branches in Asian countries such as
-                        Singapore, Malaysia,....
+                        {description}
                       </Text>
                     </Collapse>
                     <Flex
@@ -759,7 +994,7 @@ function employerDetails() {
                       <FiPhone />
                     </Box>
                     <Text fontSize='14px' fontWeight='400' lineHeight='24px'>
-                      {companyDetails.phone}
+                      {companyPhone}
                     </Text>
                   </Flex>
                   <Flex gap='20px'>
@@ -767,7 +1002,7 @@ function employerDetails() {
                       <BsGlobe />
                     </Box>
                     <Text fontSize='14px' fontWeight='400' lineHeight='24px'>
-                      {companyDetails.link}
+                      {website}
                     </Text>
                   </Flex>
                   <Flex gap='20px'>
@@ -775,16 +1010,9 @@ function employerDetails() {
                       <HiMiniMapPin />
                     </Box>
                     <Text fontSize='14px' fontWeight='400' lineHeight='24px'>
-                      {companyDetails.location}
+                      {companyLocation}
                     </Text>
                   </Flex>
-
-                  <Stack gap='20px'>
-                    <Text fontSize='14px' fontWeight='600' lineHeight='24px'>
-                      Địa chỉ trụ sở chính:
-                    </Text>
-                    <Box bg='#D9D9D9' h='full' w='full'></Box>
-                  </Stack>
                 </Stack>
               </Box>
             </GridItem>
@@ -987,7 +1215,7 @@ function employerDetails() {
             Email:
           </Text>
           <Text fontSize='14px' fontWeight='400' lineHeight='24px'>
-            hanhfchinh@lechongvien.vn
+            {email}
           </Text>
         </Flex>
 
@@ -1005,16 +1233,21 @@ function employerDetails() {
             fontSize='16px'
             fontWeight='600px'
             lineHeight='24px'
+            value={employerName}
+            onChange={(e) => setEmployerName(e.target.value)}
           ></Input>
         </Stack>
-
 
         <Flex gap='20px'>
           <Stack gap='8px' p='0px' flex='1 0 0'>
             <Text fontSize='14px' fontWeight='500' lineHeight='24px'>
               Giới tính:
             </Text>
-            <DropDown data={menuData.gender} />
+            <DropDown
+              data={menuData.gender}
+              selected={selectedGender}
+              onChange={handleGenderChange}
+            />
           </Stack>
           <Stack gap='8px' p='0px' flex='1 0 0'>
             <Text fontSize='14px' fontWeight='500' lineHeight='24px'>
@@ -1030,17 +1263,17 @@ function employerDetails() {
               fontSize='16px'
               fontWeight='600px'
               lineHeight='24px'
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
             ></Input>
           </Stack>
         </Flex>
 
         <Stack gap='8px' p='0px'>
           <Text fontSize='14px' fontWeight='500' lineHeight='24px'>
-
             Lĩnh vực hoạt động (ngành nghề):
-
           </Text>
-          <DropDown data={menuData.jobType} />
+          <DropDown data={jobType} selected={selectedJobType} onChange={handleJobTypeChange} />
         </Stack>
 
         <Stack gap='8px' p='0px' flex='1 0 0'>
@@ -1057,6 +1290,8 @@ function employerDetails() {
             fontSize='16px'
             fontWeight='600px'
             lineHeight='24px'
+            value={facebookLink}
+            onChange={handleFacebookLinkChange}
           ></Input>
         </Stack>
       </Stack>
@@ -1069,27 +1304,11 @@ function employerDetails() {
           gap='20px'
           rounded='12px'
           bg='#323541'
-          onClick={handleEdit}
+          onClick={handleEditProfile}
           cursor='pointer'
         >
           <Text fontSize='14px' fontWeight='400px' lineHeight='24px' color='white'>
             Lưu
-          </Text>
-        </Flex>
-        <Flex
-          w='132px'
-          p='8px 12px'
-          justifyContent='center'
-          alignItems='center'
-          gap='20px'
-          rounded='12px'
-          bg='white'
-          border='1px solid #323541'
-          onClick={handleEdit}
-          cursor='pointer'
-        >
-          <Text fontSize='14px' fontWeight='400px' lineHeight='24px' color='#323541'>
-            Hủy
           </Text>
         </Flex>
       </Flex>

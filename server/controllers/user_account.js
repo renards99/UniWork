@@ -128,15 +128,31 @@ module.exports = {
   async getUserDetails(req, res) {
     try {
       const params = req.body;
-      const { role_id } = params;
+      const { id } = params;
+      const getUser = await sequelize.query(`SELECT * FROM user_account where id = "${id}" `, {
+        type: QueryTypes.SELECT,
+      });
+      if (getUser) {
+        return responsehandler.responseWithData(res, 200, { user_details: getUser });
+      } else {
+        return responsehandler.badRequest(res, "can't get user");
+      }
+    } catch (error) {
+      return responsehandler.error(res);
+    }
+  },
+  async updateUser(req, res) {
+    try {
+      const params = req.body;
+      const { id, full_name, gender, mobile_number } = params;
       const getUser = await sequelize.query(
-        `SELECT * FROM user_account where role_id = "${role_id}" limit 1`,
+        `UPDATE user_account SET full_name = "${full_name}", gender = "${gender}",mobile_number ="${mobile_number}" where id = "${id}" `,
         {
-          type: QueryTypes.SELECT,
+          type: QueryTypes.UPDATE,
         },
       );
       if (getUser) {
-        return responsehandler.responseWithData(res, 200, { user_details: getUser });
+        return responsehandler.responseWithData(res, 200, 'success');
       } else {
         return responsehandler.badRequest(res, "can't get user");
       }
