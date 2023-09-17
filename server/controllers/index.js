@@ -27,4 +27,5 @@ module.exports = {
   service,
   job_post,
   student,
+  employer,
 };

@@ -19,7 +19,18 @@ const isValidUrl = (input) => {
 module.exports = {
   async addCompany(req, res) {
     const params = req.body;
-    const { company_name, company_description, company_website_url } = params;
+    const {
+      type,
+      company_name,
+      company_email,
+      company_phone_number,
+      tax_code,
+      size,
+      company_location,
+      company_description,
+      company_website_url,
+    } = params;
+
     if (!validateHandler.validateInput(params, company_website_url)) {
       return responseHandler.badRequest(res, 'Your input is invalid!');
     }
@@ -32,10 +43,21 @@ module.exports = {
     if (!isValidUrl(company_website_url)) {
       return responseHandler.badRequest(res, 'Website invalid!');
     }
+    const createData = {
+      type,
+      company_name,
+      company_email,
+      company_phone_number,
+      tax_code,
+      size,
+      company_location,
+      company_description,
+      company_website_url,
+    };
     try {
-      const create_company = await Company.create(params);
+      const create_company = await Company.create(createData);
       if (create_company) {
-        return responseHandler.responseWithData(res, 200, 'Create company successfully!');
+        return responseHandler.responseWithData(res, 200, create_company);
       } else {
         return responseHandler.badRequest(res, 'Can not create company, try again!');
       }
@@ -69,7 +91,17 @@ module.exports = {
   async updateCompany(req, res) {
     const params = req.body;
     try {
-      const { company_name, company_description, company_website_url } = params;
+      const {
+        type,
+        company_name,
+        company_email,
+        company_phone_number,
+        tax_code,
+        size,
+        company_location,
+        company_description,
+        company_website_url,
+      } = params;
       const id = params.id;
       if (!validateHandler.validateId(id)) {
         //check if id is float
@@ -84,7 +116,13 @@ module.exports = {
 
       if (!get_company) return responseHandler.badRequest(res, 'Company does not exist');
       const updatedData = {
+        type,
         company_name,
+        company_email,
+        company_phone_number,
+        tax_code,
+        size,
+        company_location,
         company_description,
         company_website_url,
       };
