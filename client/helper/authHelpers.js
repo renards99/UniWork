@@ -26,7 +26,7 @@ export const loginAccount = async (user, password, back_end_port, router) => {
       router.push('/employer');
     }
     if (login.data.data.dataValues.role_id == 3) {
-      router.push('/student');
+      router.push('/candidate');
     }
   } catch (error) {
     console.log(error);

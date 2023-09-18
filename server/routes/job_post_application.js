@@ -5,5 +5,9 @@ router.post(
   '/job-post-application/create-job-post-application',
   job_post_applications.createJopPostApplication,
 );
+router.post(
+  '/job-post-application/list-job-post-application',
+  job_post_applications.getListJobApplicationById,
+);
 
 module.exports = router;

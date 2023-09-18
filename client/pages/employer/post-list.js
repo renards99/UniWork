@@ -35,6 +35,8 @@ const menuData = {
   ],
 };
 
+const BACK_END_PORT = 'http://localhost:5000';
+
 function PostList() {
   const router = useRouter();
 
@@ -43,7 +45,6 @@ function PostList() {
 
   const getEmployerById = async () => {
     try {
-
       if (localStorage.getItem('user')) {
         const userId = JSON.parse(localStorage.getItem('user'))?.id;
         if (userId) {
@@ -65,11 +66,25 @@ function PostList() {
       }
     } catch (error) {}
   };
+  const [jobPostSelected, setJobPostSelected] = useState();
+  const [listJobPostApplication, setListJobPostApplication] = useState([]);
 
-  console.log(listJobPost)
+  const handleSelectedJobId = async (jobId) => {
+    setJobPostSelected(jobId); //
+    const getJobPostApplicationById = await axios.post(
+      `${BACK_END_PORT}/job-post-application/list-job-post-application`,
+      { job_post_id: jobId },
+    );
+    console.log(getJobPostApplicationById.data);
+    if (getJobPostApplicationById.data.statusCode === 200) {
+      setListJobPostApplication(getJobPostApplicationById.data.data);
+    }
+  };
+
+  console.log(listJobPostApplication);
 
   const jobItem = listJobPost.map((item) => (
-    <Flex p='16px' gap='20px'>
+    <Flex p='16px' gap='20px' onClick={() => handleSelectedJobId(item.id)} cursor={'pointer'}>
       <Box w='100px' h='100px' bg='#323541'></Box>
       <Stack justifyContent='space-between' flex='1 0 0' alignSelf='stretch'>
         <Stack gap='4px'>
@@ -80,7 +95,7 @@ function PostList() {
             {item.company_name}
           </Text>
         </Stack>
-        <StatusFrame text={item?.state == "1" ? "Đã duyệt" : "Chưa duyệt"} />
+        <StatusFrame text={item?.state == '1' ? 'Đã duyệt' : 'Chưa duyệt'} />
       </Stack>
     </Flex>
   ));
@@ -186,113 +201,73 @@ function PostList() {
           </Stack>
         </GridItem>
         {/*Right*/}
-        <GridItem>
-          <Stack gap='24px'>
-            <Box px='24px'>
-              <Flex
-                px='24px'
-                pb='8px'
-                pt='16px'
-                bg='#323541'
-                p='12px'
-                fontSize='18px'
-                roundedTop='12px'
-                gap='12px'
-                alignItems='flex-start'
-              >
-                <Text color='white' fontSize='16px' fontWeight='500' lineHeight='24px'>
-                  Ứng viên tuyển gần đây
-                </Text>
-              </Flex>
+        {jobPostSelected && (
+          <GridItem>
+            <Stack gap='24px'>
+              <Box px='24px'>
+                <Flex
+                  px='24px'
+                  pb='8px'
+                  pt='16px'
+                  bg='#323541'
+                  p='12px'
+                  fontSize='18px'
+                  roundedTop='12px'
+                  gap='12px'
+                  alignItems='flex-start'
+                >
+                  <Text color='white' fontSize='16px' fontWeight='500' lineHeight='24px'>
+                    Ứng viên tuyển gần đây
+                  </Text>
+                </Flex>
 
-              <Stack
-                p='24px'
-                justifyContent='center'
-                gap='16px'
-                border='1px'
-                borderColor='#D7D7D7'
-                roundedBottom='20px'
-              >
-                <Flex p='16px' gap='20px'>
-                  <Box w='60px' h='60px' rounded='full' bg='#323541'></Box>
-                  <Stack justifyContent='space-between' flex='1 0 0' alignSelf='stretch' gap='0px'>
-                    <Flex justifyContent='space-between'>
-                      <Stack gap='4px'>
-                        <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
-                          Nguyễn văn A
-                        </Text>
-                        <Text fontSize='14px' fontWeight='400'>
-                          Java-Dev
-                        </Text>
+                <Stack
+                  p='24px'
+                  justifyContent='center'
+                  gap='16px'
+                  border='1px'
+                  borderColor='#D7D7D7'
+                  roundedBottom='20px'
+                >
+                  {listJobPostApplication.map((jobApplication, index) => (
+                    <Flex p='16px' gap='20px' key={index}>
+                      <Box w='60px' h='60px' rounded='full' bg='#323541'></Box>
+                      <Stack
+                        justifyContent='space-between'
+                        flex='1 0 0'
+                        alignSelf='stretch'
+                        gap='0px'
+                      >
+                        <Flex justifyContent='space-between'>
+                          <Stack gap='4px'>
+                            <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
+                              {jobApplication.full_name}
+                            </Text>
+                            <Text fontSize='14px' fontWeight='400'>
+                              Java-Dev
+                            </Text>
+                          </Stack>
+                          <Text fontSize='14px' fontWeight='600'>
+                            17/08/2021
+                          </Text>
+                        </Flex>
+                        <StatusFrame
+                          text={
+                            jobApplication.state == 0
+                              ? 'Chưa duyệt'
+                              : jobApplication.state == 1
+                              ? 'Đã duyệt '
+                              : 'Bị từ chối'
+                          }
+                        />
                       </Stack>
-                      <Text fontSize='14px' fontWeight='600'>
-                        17/08/2021
-                      </Text>
                     </Flex>
-                    <StatusFrame text='Chưa duyệt' />
-                  </Stack>
-                </Flex>
-                <Flex p='16px' gap='20px'>
-                  <Box w='60px' h='60px' rounded='full' bg='#323541'></Box>
-                  <Stack justifyContent='space-between' flex='1 0 0' alignSelf='stretch' gap='0px'>
-                    <Flex justifyContent='space-between'>
-                      <Stack gap='4px'>
-                        <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
-                          Nguyễn văn A
-                        </Text>
-                        <Text fontSize='14px' fontWeight='400'>
-                          Java-Dev
-                        </Text>
-                      </Stack>
-                      <Text fontSize='14px' fontWeight='600'>
-                        17/08/2021
-                      </Text>
-                    </Flex>
-                    <StatusFrame text='Chưa duyệt' />
-                  </Stack>
-                </Flex>
-                <Flex p='16px' gap='20px'>
-                  <Box w='60px' h='60px' rounded='full' bg='#323541'></Box>
-                  <Stack justifyContent='space-between' flex='1 0 0' alignSelf='stretch' gap='0px'>
-                    <Flex justifyContent='space-between'>
-                      <Stack gap='4px'>
-                        <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
-                          Nguyễn văn A
-                        </Text>
-                        <Text fontSize='14px' fontWeight='400'>
-                          Java-Dev
-                        </Text>
-                      </Stack>
-                      <Text fontSize='14px' fontWeight='600'>
-                        17/08/2021
-                      </Text>
-                    </Flex>
-                    <StatusFrame text='Chưa duyệt' />
-                  </Stack>
-                </Flex>
-                <Flex p='16px' gap='20px'>
-                  <Box w='60px' h='60px' rounded='full' bg='#323541'></Box>
-                  <Stack justifyContent='space-between' flex='1 0 0' alignSelf='stretch' gap='0px'>
-                    <Flex justifyContent='space-between'>
-                      <Stack gap='4px'>
-                        <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
-                          Nguyễn văn A
-                        </Text>
-                        <Text fontSize='14px' fontWeight='400'>
-                          Java-Dev
-                        </Text>
-                      </Stack>
-                      <Text fontSize='14px' fontWeight='600'>
-                        17/08/2021
-                      </Text>
-                    </Flex>
-                    <StatusFrame text='Chưa duyệt' />
-                  </Stack>
-                </Flex>
-              </Stack>
-            </Box>
-          </Stack>
-        </GridItem>
+                  ))}
+                </Stack>
+              </Box>
+            </Stack>
+          </GridItem>
+        )}
       </Grid>
     </Stack>
   );

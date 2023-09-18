@@ -35,6 +35,28 @@ function JobDetails({ data, BACK_END_PORT }) {
   const handleRadioClick = (index) => {
     setRadioValue(index);
   };
+
+  const handleSubmitCv = async () => {
+    try {
+      if (localStorage.getItem('user')) {
+        const userId = JSON.parse(localStorage.getItem('user'))?.id;
+        if (userId) {
+          const submitCV = await axios.post(
+            `${BACK_END_PORT}/job-post-application/create-job-post-application`,
+            { user_account_id: userId, job_post_id: data.id, state: 0 },
+          );
+          if (submitCV.data.statusCode === 200) {
+            alert('ứng tuyển thành công');
+          } else {
+            alert('Ứng tuyển thất bại');
+          }
+        }
+      }
+    } catch (error) {
+      alert('Ứng tuyển thất bại');
+    }
+  };
+
   const fakeData = [
     {
       id: 1,
@@ -315,7 +337,7 @@ function JobDetails({ data, BACK_END_PORT }) {
                   <ModalHeader borderBottom='1px solid #818181' fontSize='24px'>
                     Ứng tuyển{' '}
                     <Text as='span' color='#F98820'>
-                      Nhân viên tư vấn
+                      {data.title}
                     </Text>
                   </ModalHeader>
                   <ModalCloseButton />
@@ -411,7 +433,13 @@ function JobDetails({ data, BACK_END_PORT }) {
                         onClick={onClose}
                         cursor='pointer'
                       >
-                        <Text fontSize='16px' fontWeight='600' lineHeight='24px' color='white'>
+                        <Text
+                          fontSize='16px'
+                          fontWeight='600'
+                          lineHeight='24px'
+                          color='white'
+                          onClick={handleSubmitCv}
+                        >
                           Xác nhận{' '}
                         </Text>
                       </Flex>

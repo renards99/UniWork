@@ -122,8 +122,9 @@ module.exports = {
   async getAllJobPost(req, res) {
     try {
       const get_all_Job_post = await sequelize.query(
-        `SELECT jp.*, c.company_name  from job_post as jp   join company as c on jp.company_id = c.id 
-      ORDER BY jp.id ASC  limit 5 offset 5`,
+      //   `SELECT jp.*, c.company_name  from job_post as jp   join company as c on jp.company_id = c.id 
+      // ORDER BY jp.id DESC  limit 5 offset 5 where jp.id=101`,
+      `SELECT jp.*, c.company_name  from job_post as jp   join company as c on jp.company_id = c.id   where jp.id=101`,
         {
           type: QueryTypes.SELECT,
         },

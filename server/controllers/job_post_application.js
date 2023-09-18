@@ -4,16 +4,15 @@ const Op = db.Sequelize.Op;
 const QueryTypes = db.Sequelize.QueryTypes;
 const responseHandler = require('../handlers/response.handler');
 const validateHandler = require('../handlers/validate.handler');
+const sequelize = db.sequelize;
 module.exports = {
   async createJopPostApplication(req, res) {
     try {
       const params = req.body;
-      const { user_account_id, job_post_id } = params;
 
       if (!validateHandler.validateInput(params)) {
         return responseHandler.badRequest(res, 'Your input is invalid!');
       }
-      updateData = { user_account_id, job_post_id };
       const create_job_post_application = await JopPostApplication.create(params);
       if (create_job_post_application) {
         return responseHandler.responseWithData(res, 200, 'Create job type successfully!');
@@ -80,18 +79,21 @@ module.exports = {
       return responseHandler.badRequest(res, 'There is something wrong with your request!');
     }
   },
-  async jobTypeById(req, res) {
+  async getListJobApplicationById(req, res) {
     const params = req.body;
     try {
-      const job_type_id = params.id;
-      if (!validateHandler.validateId(job_type_id)) {
+      const { job_post_id } = params;
+      if (!validateHandler.validateId(job_post_id)) {
         return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
       }
-      const getJobType = await Job_type.findOne({
-        where: {
-          id: job_type_id,
+      console.log(job_post_id);
+      const getJobType = await sequelize.query(
+        `SELECT * from job_post_application as jpa  join user_account as ua on jpa.user_account_id = ua.id where job_post_id = ${job_post_id}`,
+        {
+          type: QueryTypes.SELECT,
         },
-      });
+      );
+      console.log(2)
       if (getJobType) return responseHandler.responseWithData(res, 200, getJobType);
       else return responseHandler.badRequest(res, 'Can not get job type!');
     } catch (e) {}
