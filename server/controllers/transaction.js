@@ -59,7 +59,6 @@ module.exports = {
       }
 
       const jobPostDetail = {
-        id: orderId,
         title: params.title,
         work_hours: params.work_hours,
         service_id: params.service_id,
@@ -122,6 +121,7 @@ module.exports = {
         }
       }
     } catch (error) {
+      console.log(error);
       return responseHandler.badRequest(res, 'Có lỗi xảy ra khi thao tác. Vui lòng thử lại');
     }
   },
