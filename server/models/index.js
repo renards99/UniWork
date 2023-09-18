@@ -52,6 +52,7 @@ db.student = require('./student')(sequelize, Sequelize);
 db.user_account = require('./user_account')(sequelize, Sequelize);
 db.user_log = require('./user_log')(sequelize, Sequelize);
 db.role = require('./role')(sequelize, Sequelize);
+db.history_transaction = require('./history_transaction')(sequelize, Sequelize);
 
 db.employer = require('./employer')(sequelize, Sequelize);
 

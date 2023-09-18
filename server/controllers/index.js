@@ -13,6 +13,7 @@ const job_location = require('./job_location');
 const service = require('./service');
 const job_post = require('./job_post');
 const transaction = require('./transaction');
+const history_transaction = require('./history_transaction');
 
 module.exports = {
   bill,
@@ -29,5 +30,6 @@ module.exports = {
   job_post,
   student,
   employer,
-  transaction
+  transaction,
+  history_transaction,
 };

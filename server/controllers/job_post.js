@@ -120,7 +120,13 @@ module.exports = {
   },
   async getAllJobPost(req, res) {
     try {
-      const get_all_Job_post = await Job_post.findAll();
+      const get_all_Job_post = await sequelize.query(
+        `SELECT jp.*, c.company_name  from job_post as jp   join company as c on jp.company_id = c.id 
+      ORDER BY jp.id ASC  limit 5 offset 5`,
+        {
+          type: QueryTypes.SELECT,
+        },
+      );
       if (get_all_Job_post) {
         return responseHandler.responseWithData(res, 200, get_all_Job_post);
       } else {

@@ -66,7 +66,7 @@ function PostUpload() {
       const getListJobType = await axios.post(`http://localhost:5000/job-type/get-all-job-type`);
       if (getListJobType.data.statusCode === 200) {
         setJobType(getListJobType.data.data.map((item) => item.job_type_name));
-        console.log(getListJobType.data.data);
+        console.log(getListJobType.data.data);  
       } else {
       }
     } catch (error) {}
