@@ -25,6 +25,7 @@ module.exports = {
         view,
         gender,
         state,
+        experience,
       } = params;
       if (!validateHandler.validateId(service_id, job_type_id, post_by_id, company_id)) {
         return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
