@@ -21,7 +21,11 @@ import {
   MenuDivider,
   Radio,
   RadioGroup,
+  IconButton,
+  Link,
 } from '@chakra-ui/react';
+import { IoIosAddCircleOutline } from 'react-icons/io';
+import { TbEditCircle } from 'react-icons/tb';
 import {
   HiChevronDown,
   HiOutlineMail,
@@ -40,6 +44,7 @@ import {
   BsPersonVcardFill,
   BsGenderAmbiguous,
 } from 'react-icons/bs';
+import { CiSearch } from 'react-icons/ci';
 import { FiPhone } from 'react-icons/fi';
 import AdminPage from '.';
 import DatePicker from '../../components/layout/admin/datePicker';
@@ -70,6 +75,52 @@ function postsList() {
   return (
     <Stack gap='26px'>
       <EmployerHeader />
+      const ActionUNW = (
+      <Flex p={'24px 40px 0 24px'} justifyContent={'space-between'}>
+        <Flex>
+          <Flex
+            w={'406px'}
+            h={'40px'}
+            p={'8px 12px'}
+            backgroundColor={'#e7e7ea'}
+            borderRadius={'40px'}
+            alignItems={'center'}
+          >
+            <CiSearch color={'#323541'} style={{ width: '28px', height: '24px' }} />
+            <Input
+              placeHolder={'Tìm kiếm'}
+              backgroundColor={'#e7e7ea'}
+              fontSize={'16px'}
+              _hover={{ outline: 'none' }}
+              _focusVisible={{ outline: 'none' }}
+            />
+          </Flex>
+          <Box w={'24px'}></Box>
+          <Button
+            w={'132px'}
+            h={'40px'}
+            backgroundColor={'#323541'}
+            color={'#fff'}
+            borderRadius={'20px'}
+            fontSize={'14px'}
+            fontWeight={'600'}
+          >
+            Tìm kiếm
+          </Button>
+        </Flex>
+        <Flex>
+          <Link href='/employer/post-upload'>
+            <IconButton
+              icon={<IoIosAddCircleOutline style={{ width: '24px', height: '24px' }} />}
+              borderRadius={'50%'}
+              w={'40px'}
+              h={'40px'}
+              backgroundColor={'#e7e7ea'}
+            />
+          </Link>
+        </Flex>
+      </Flex>
+      );
       <Grid templateColumns='repeat(3, 1fr)' h='90vh' mt='52px' px='24px'>
         <GridItem colSpan='2'>
           {/*Left */}

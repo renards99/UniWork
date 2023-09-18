@@ -19,10 +19,10 @@ export default function SideBarAdmin(props) {
   const toastIdRef = useRef();
   const router = useRouter();
   const path = {
-    revenue: '',
-    account: '',
-    job: '',
-    setting: '',
+    revenue: '/employer/posts-list',
+    account: '/employer/candidate-list',
+    job: '/employer/service',
+    setting: '/employer/my-service',
   };
   const [navSize, changeNavSize] = useState('large');
   const [sideBarActive, setActiveSideBar] = useState(0);
@@ -106,7 +106,7 @@ export default function SideBarAdmin(props) {
             handleSetActiveSideBar={handleSetActiveSideBar}
             active={sideBarActive == 1 ? true : false}
             value={1}
-            href={path.account}
+            href={path.revenue}
           />
           <SideItem
             navSize={navSize}
@@ -115,7 +115,7 @@ export default function SideBarAdmin(props) {
             handleSetActiveSideBar={handleSetActiveSideBar}
             active={sideBarActive == 2 ? true : false}
             value={2}
-            href={path.job}
+            href={path.account}
           />
           <SideItem
             navSize={navSize}
@@ -125,15 +125,15 @@ export default function SideBarAdmin(props) {
             active={sideBarActive == 3 ? true : false}
             value={3}
             sideBarActive={sideBarActive}
-            href={path.setting}
+            href={path.job}
           />
           <SideItem
             navSize={navSize}
             icon={AiOutlineSetting}
             handleSetActiveSideBar={handleSetActiveSideBar}
             title='Dịch vụ của tôi'
-            active={sideBarActive == 3 ? true : false}
-            value={3}
+            active={sideBarActive == 4 ? true : false}
+            value={4}
             sideBarActive={sideBarActive}
             href={path.setting}
           />
