@@ -41,7 +41,13 @@ import { IoEllipse } from 'react-icons/io5';
 
 function StudentProfile() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [isModalEducationOpen, setisModalEducationOpen] = useState(false);
+  const [isModalEducationOpen, setIsModalEducationOpen] = useState(false);
+  const openModalEducation = () => {
+    setIsModalEducationOpen(true);
+  };
+  const closeModalEducation = () => {
+    setIsModalEducationOpen(false);
+  };
   // const isModalEducationOpen
   // const [isModal2Open, setIsModal2Open] = useState(false);
   const student = {
@@ -284,7 +290,7 @@ function StudentProfile() {
               <Text fontSize='24px' fontWeight='800'>
                 Học vấn
               </Text>
-              <Flex onClick={onOpen} cursor='pointer'>
+              <Flex onClick={openModalEducation} cursor='pointer'>
                 <Text fontSize='48px' fontWeight='200'>
                   +
                 </Text>
@@ -393,13 +399,12 @@ function StudentProfile() {
     </Stack>
   );
   const modalEducation = (
-    <Modal isOpen={isOpen} onClose={onClose} isCentered size='5xl'>
+    <Modal isOpen={isModalEducationOpen} onClose={closeModalEducation} isCentered size='5xl'>
       <ModalOverlay bg='none' backdropFilter='auto' backdropBlur='2px' />
       <ModalContent>
         <ModalHeader borderBottom='1px solid #818181' fontSize='24px'>
-          Ứng tuyển{' '}
           <Text as='span' color='#F98820'>
-            Nhân viên tư vấn
+            Học vấn
           </Text>
         </ModalHeader>
         <ModalCloseButton />
