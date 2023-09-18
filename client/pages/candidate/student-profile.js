@@ -12,6 +12,14 @@ import {
   RadioGroup,
   Textarea,
   StackItem,
+  useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
 } from '@chakra-ui/react';
 import { HiChevronDown, HiOutlineMail } from 'react-icons/hi';
 import { HiMiniMapPin, HiOutlineMapPin } from 'react-icons/hi2';
@@ -32,6 +40,10 @@ import StatusFrame from '../../components/layout/admin/statusFrame';
 import { IoEllipse } from 'react-icons/io5';
 
 function StudentProfile() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isModalEducationOpen, setisModalEducationOpen] = useState(false);
+  // const isModalEducationOpen
+  // const [isModal2Open, setIsModal2Open] = useState(false);
   const student = {
     id: '1',
     name: 'Nguyen Van A',
@@ -272,9 +284,11 @@ function StudentProfile() {
               <Text fontSize='24px' fontWeight='800'>
                 Học vấn
               </Text>
-              <Text fontSize='48px' fontWeight='200'>
-                +
-              </Text>
+              <Flex onClick={onOpen} cursor='pointer'>
+                <Text fontSize='48px' fontWeight='200'>
+                  +
+                </Text>
+              </Flex>
             </Flex>
           </Stack>
           {student.education.map((education) => (
@@ -378,13 +392,46 @@ function StudentProfile() {
       )}
     </Stack>
   );
-
+  const modalEducation = (
+    <Modal isOpen={isOpen} onClose={onClose} isCentered size='5xl'>
+      <ModalOverlay bg='none' backdropFilter='auto' backdropBlur='2px' />
+      <ModalContent>
+        <ModalHeader borderBottom='1px solid #818181' fontSize='24px'>
+          Ứng tuyển{' '}
+          <Text as='span' color='#F98820'>
+            Nhân viên tư vấn
+          </Text>
+        </ModalHeader>
+        <ModalCloseButton />
+        <ModalBody>
+          <Stack p='24px 24px 32px 24px' justifyContent='center' alignItems='center'>
+            <Flex
+              p='12px'
+              w='140px'
+              mt='32px'
+              rounded='12px'
+              bg='#F8A353'
+              justifyContent='center'
+              alignItems='center'
+              onClick={onClose}
+              cursor='pointer'
+            >
+              <Text fontSize='16px' fontWeight='600' lineHeight='24px' color='white'>
+                Xác nhận{' '}
+              </Text>
+            </Flex>
+          </Stack>
+        </ModalBody>
+      </ModalContent>
+    </Modal>
+  );
   return (
     <Box>
       <EmployerHeader />
 
       <Stack gap='24px' p='28px' justifyContent='center' alignItems='center' bg='#F0EAE9'>
         {employerInfo}
+        {modalEducation}
       </Stack>
     </Box>
   );
