@@ -1,13 +1,5 @@
 import { useState } from 'react';
-import {
-  BsChevronCompactLeft,
-  BsChevronCompactRight,
-  BsChevronDown,
-  BsArrowLeftCircle,
-  BsArrowRightCircle,
-} from 'react-icons/bs';
-import Paging from '../../components/paging';
-import { RxDotFilled } from 'react-icons/rx';
+import { BsChevronDown } from 'react-icons/bs';
 import {
   Box,
   Input,
@@ -15,18 +7,13 @@ import {
   Icon,
   Text,
   Stack,
-  Grid,
   Flex,
-  Tab,
-  Tabs,
-  TabList,
   Radio,
   RadioGroup,
   Modal,
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
   useDisclosure,
@@ -38,12 +25,11 @@ import { HiOutlineMapPin } from 'react-icons/hi2';
 import { BsBuilding } from 'react-icons/bs';
 import Image from 'next/image';
 import { Select } from '@chakra-ui/react';
-import CandidateHeader from '../../components/layout/candidate/header';
-import backgroundImg from '../../public/static/images/rectangle_33.png';
-import DropDown from '../../components/layout/candidate/dropDownLocation';
-import speakerIcon from '../../public/static/images/icon/speaker.svg';
+import CandidateHeader from '../../../components/layout/candidate/header';
+import axios from 'axios';
 
-function JobDetails() {
+function JobDetails({ data, BACK_END_PORT }) {
+  console.log(data);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [radioValue, setRadioValue] = useState('1');
   const handleRadioClick = (index) => {
@@ -142,8 +128,8 @@ function JobDetails() {
               <option selected hidden disabled>
                 Địa Điểm
               </option>
-              {locations.map((location) => {
-                return <option>{location}</option>;
+              {locations.map((location, index) => {
+                return <option key={index}>{location}</option>;
               })}
             </Select>
             <Select
@@ -159,8 +145,8 @@ function JobDetails() {
               <option selected hidden disabled>
                 Kinh Nghiệm
               </option>
-              {experiences.map((exp) => {
-                return <option>{exp}</option>;
+              {experiences.map((exp, index) => {
+                return <option key={index}>{exp}</option>;
               })}
             </Select>
             <Select
@@ -176,8 +162,8 @@ function JobDetails() {
               <option selected hidden disabled>
                 Mức Lương
               </option>
-              {salaries.map((salary) => {
-                return <option>{salary}</option>;
+              {salaries.map((salary, index) => {
+                return <option key={index}>{salary}</option>;
               })}
             </Select>
           </Flex>
@@ -206,7 +192,7 @@ function JobDetails() {
         >
           <Flex alignSelf='stretch'>
             <Text fontSize='32px' fontWeight='800' lineHeight='40px' color='white'>
-              Nhân viên thiết kế bao bì sản phẩm
+              {data.title}
             </Text>
           </Flex>
           <Flex justifyContent='space-between' alignItems='center' alignSelf='stretch'>
@@ -217,7 +203,7 @@ function JobDetails() {
                   Mức lương
                 </Text>
                 <Text fontSize='16px' fontWeight='800' color='white'>
-                  8-15 triệu
+                  {data.salary}
                 </Text>
               </Stack>
             </Flex>
@@ -228,7 +214,7 @@ function JobDetails() {
                   Mức lương
                 </Text>
                 <Text fontSize='16px' fontWeight='800' color='white'>
-                  8-15 triệu
+                  {data.salary}
                 </Text>
               </Stack>
             </Flex>
@@ -239,7 +225,7 @@ function JobDetails() {
                   Mức lương
                 </Text>
                 <Text fontSize='16px' fontWeight='800' color='white'>
-                  8-15 triệu
+                  {data.salary}
                 </Text>
               </Stack>
             </Flex>
@@ -271,18 +257,11 @@ function JobDetails() {
                   Mô tả công việc
                 </Text>
                 <Stack>
-                  <Text fontSize='14px' fontWeight='500'>
-                    - Công việc cụ thế sẽ trao đối trực tiếp khi phóng vấn.
-                  </Text>
-                  <Text fontSize='14px' fontWeight='500'>
-                    - Công việc cụ thế sẽ trao đối trực tiếp khi phóng vấn.
-                  </Text>
-                  <Text fontSize='14px' fontWeight='500'>
-                    - Công việc cụ thế sẽ trao đối trực tiếp khi phóng vấn.
-                  </Text>
-                  <Text fontSize='14px' fontWeight='500'>
-                    - Công việc cụ thế sẽ trao đối trực tiếp khi phóng vấn.
-                  </Text>
+                  {data.job_description.split('\n').map((text, index) => (
+                    <Text fontSize='14px' fontWeight='500' key={index}>
+                      -{' ' + text}
+                    </Text>
+                  ))}
                 </Stack>
               </Stack>
               <Stack>
@@ -310,7 +289,7 @@ function JobDetails() {
                 </Text>
                 <Stack>
                   <Text fontSize='14px' fontWeight='500'>
-                    - Công việc cụ thế sẽ trao đối trực tiếp khi phóng vấn.
+                    - {data.job_location}.
                   </Text>
                 </Stack>
                 <Text fontSize='14px' fontWeight='500'>
@@ -448,11 +427,11 @@ function JobDetails() {
               <Text fontSize='32px' fontWeight='700' lineHeight='18px'>
                 Việc làm liên quan
               </Text>
-              {fakeData.map((data) => (
-                <Flex rounded='10px' bg='white' justifyContent='space-between' p='24px'>
+              {fakeData.map((data, index) => (
+                <Flex rounded='10px' bg='white' justifyContent='space-between' p='24px' key={index}>
                   <Flex>
                     <Box>
-                      <Image src='/static/images/avatar_icon.png' width='100' height='100'></Image>
+                      <Image src='/static/images/avatar_icon.png' width='100' height='100' alt='' />
                     </Box>
                     <Flex p='12px'>
                       <Stack gap='12px'>
@@ -462,8 +441,14 @@ function JobDetails() {
                         <Text fontSize='12px' fontWeight='700' lineHeight='18px'>
                           {data.company}
                         </Text>
-                        {data.tags.map((tag) => (
-                          <Text fontSize='12px' fontWeight='700' lineHeight='18px' color='#E76F00'>
+                        {data.tags.map((tag, index) => (
+                          <Text
+                            fontSize='12px'
+                            fontWeight='700'
+                            lineHeight='18px'
+                            color='#E76F00'
+                            key={index}
+                          >
                             {tag}
                           </Text>
                         ))}
@@ -692,3 +677,19 @@ function JobDetails() {
 }
 
 export default JobDetails;
+
+export async function getServerSideProps(context) {
+  const id = context.query.id;
+  const BACK_END_PORT = 'http://localhost:5000';
+  let jobData = {};
+  const getJobById = await axios.post(`${BACK_END_PORT}/job-post/get-job-post-by-id`, { id: id });
+  if (getJobById.data.statusCode === 200) {
+    jobData = getJobById.data.data;
+  }
+  return {
+    props: {
+      data: jobData,
+      BACK_END_PORT,
+    }, // will be passed to the page component as props
+  };
+}

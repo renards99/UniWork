@@ -5,56 +5,19 @@ import {
   Stack,
   Grid,
   GridItem,
-  Collapse,
-  Menu,
-  MenuButton,
   Button,
-  MenuList,
-  MenuItem,
-  List,
-  ListItem,
-  ListIcon,
-  OrderedList,
-  UnorderedList,
   Input,
-  Textarea,
-  MenuDivider,
-  Radio,
-  RadioGroup,
   IconButton,
   Link,
 } from '@chakra-ui/react';
 import { IoIosAddCircleOutline } from 'react-icons/io';
-import { TbEditCircle } from 'react-icons/tb';
-import {
-  HiChevronDown,
-  HiOutlineMail,
-  HiChevronUp,
-  HiOutlineCurrencyDollar,
-  HiBriefcase,
-} from 'react-icons/hi';
-import DropDown from '../../components/layout/admin/dropDown';
-import { HiOutlineMapPin, HiOutlineBuildingOffice2 } from 'react-icons/hi2';
-import { GiPlayerTime } from 'react-icons/gi';
-import { LiaNewspaperSolid } from 'react-icons/lia';
-import {
-  BsExclamationCircle,
-  BsGlobe,
-  BsFillPersonPlusFill,
-  BsPersonVcardFill,
-  BsGenderAmbiguous,
-} from 'react-icons/bs';
 import { CiSearch } from 'react-icons/ci';
-import { FiPhone } from 'react-icons/fi';
-import AdminPage from '.';
-import DatePicker from '../../components/layout/admin/datePicker';
-import Image from 'next/image';
-import TempAvatar from '../../public/static/images/temporary_avatar.png';
 import EmployerHeader from '../../components/layout/employer/header';
-import { useState } from 'react';
 import StatusFrame from '../../components/layout/admin/statusFrame';
-import DropDownStatus from '../../components/layout/admin/dropDownStatus';
-import { FaCheckCircle } from 'react-icons/fa';
+import { useRouter } from 'next/router';
+import { useEffect, useState, useCallback } from 'react';
+
+import axios from 'axios';
 const menuData = {
   roles: ['Giám đốc', 'Nhân viên', 'Trợ lý', 'Quản lý', 'Phó phòng', 'Thực tập sinh'],
   workForm: [
@@ -71,7 +34,74 @@ const menuData = {
     <StatusFrame text='Hết hạn' />,
   ],
 };
-function postsList() {
+
+function PostList() {
+  const router = useRouter();
+
+  const [userData, setUserData] = useState({});
+  const [listJobPost, setListJobPost] = useState([]);
+
+  const getEmployerById = async () => {
+    try {
+
+      if (localStorage.getItem('user')) {
+        const userId = JSON.parse(localStorage.getItem('user'))?.id;
+        if (userId) {
+          const [getEmployerById, getJobPost] = await Promise.all([
+            axios.post(`http://localhost:5000/employer/get-employer-by-id`, {
+              id: userId,
+            }),
+            axios.post(`http://localhost:5000/job-post/get-all-job-post-by-id`, {
+              user_account_id: userId,
+            }),
+          ]);
+          if (getEmployerById.data.statusCode === 200) {
+            setUserData(getEmployerById.data.data.employer_details[0]);
+          }
+          if (getJobPost.data.statusCode === 200) {
+            setListJobPost(getJobPost.data.data);
+          }
+        }
+      }
+    } catch (error) {}
+  };
+
+  console.log(listJobPost)
+
+  const jobItem = listJobPost.map((item) => (
+    <Flex p='16px' gap='20px'>
+      <Box w='100px' h='100px' bg='#323541'></Box>
+      <Stack justifyContent='space-between' flex='1 0 0' alignSelf='stretch'>
+        <Stack gap='4px'>
+          <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
+            {item.title}
+          </Text>
+          <Text fontSize='14px' fontWeight='400'>
+            {item.company_name}
+          </Text>
+        </Stack>
+        <StatusFrame text={item?.state == "1" ? "Đã duyệt" : "Chưa duyệt"} />
+      </Stack>
+    </Flex>
+  ));
+
+  useEffect(() => {
+    getEmployerById();
+  }, []);
+
+  useEffect(() => {
+    const checkModal = !!router.query.payment_status;
+    const status = router.query.payment_status;
+
+    if (checkModal) {
+      if (status === '00') {
+        alert('Giao dịch thành công');
+      } else {
+        alert('Có vấn đề khi giao dịch vui lòng thử lại');
+      }
+    }
+  }, [router]);
+
   return (
     <Stack gap='26px'>
       <EmployerHeader />
@@ -88,7 +118,7 @@ function postsList() {
           >
             <CiSearch color={'#323541'} style={{ width: '28px', height: '24px' }} />
             <Input
-              placeHolder={'Tìm kiếm'}
+              placeholder={'Tìm kiếm'}
               backgroundColor={'#e7e7ea'}
               fontSize={'16px'}
               _hover={{ outline: 'none' }}
@@ -150,62 +180,7 @@ function postsList() {
                 border='1px'
                 borderColor='#D7D7D7'
               >
-                <Flex p='16px' gap='20px'>
-                  <Box w='100px' h='100px' bg='#323541'></Box>
-                  <Stack justifyContent='space-between' flex='1 0 0' alignSelf='stretch'>
-                    <Stack gap='4px'>
-                      <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
-                        Nhân viên thiết kế UI/UX (UI/UX Designer)
-                      </Text>
-                      <Text fontSize='14px' fontWeight='400'>
-                        Công ty Cổ phần Công nghệ eUp
-                      </Text>
-                    </Stack>
-                    <StatusFrame text='Chưa duyệt' />
-                  </Stack>
-                </Flex>
-                <Flex p='16px' gap='20px'>
-                  <Box w='100px' h='100px' bg='#323541'></Box>
-                  <Stack justifyContent='space-between' flex='1 0 0' alignSelf='stretch'>
-                    <Stack gap='4px'>
-                      <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
-                        Nhân viên thiết kế UI/UX (UI/UX Designer)
-                      </Text>
-                      <Text fontSize='14px' fontWeight='400'>
-                        Công ty Cổ phần Công nghệ eUp
-                      </Text>
-                    </Stack>
-                    <StatusFrame text='Chưa duyệt' />
-                  </Stack>
-                </Flex>
-                <Flex p='16px' gap='20px'>
-                  <Box w='100px' h='100px' bg='#323541'></Box>
-                  <Stack justifyContent='space-between' flex='1 0 0' alignSelf='stretch'>
-                    <Stack gap='4px'>
-                      <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
-                        Nhân viên thiết kế UI/UX (UI/UX Designer)
-                      </Text>
-                      <Text fontSize='14px' fontWeight='400'>
-                        Công ty Cổ phần Công nghệ eUp
-                      </Text>
-                    </Stack>
-                    <StatusFrame text='Chưa duyệt' />
-                  </Stack>
-                </Flex>
-                <Flex p='16px' gap='20px'>
-                  <Box w='100px' h='100px' bg='#323541'></Box>
-                  <Stack justifyContent='space-between' flex='1 0 0' alignSelf='stretch'>
-                    <Stack gap='4px'>
-                      <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
-                        Nhân viên thiết kế UI/UX (UI/UX Designer)
-                      </Text>
-                      <Text fontSize='14px' fontWeight='400'>
-                        Công ty Cổ phần Công nghệ eUp
-                      </Text>
-                    </Stack>
-                    <StatusFrame text='Chưa duyệt' />
-                  </Stack>
-                </Flex>
+                {jobItem}
               </Stack>
             </GridItem>
           </Stack>
@@ -323,4 +298,4 @@ function postsList() {
   );
 }
 
-export default postsList;
+export default PostList;

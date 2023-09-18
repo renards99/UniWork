@@ -13,5 +13,6 @@ module.exports = [
   require('./job_location'),
   require('./service'),
   require('./job_post'),
+  require('./transaction'),
   require('./history_transaction'),
 ];

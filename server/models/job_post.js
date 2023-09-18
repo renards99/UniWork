@@ -16,7 +16,7 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
       },
       work_hours: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
       service_id: {
@@ -112,6 +112,8 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.DATE,
         allowNull: false,
       },
+      createdAt: { type: Sequelize.DATE, field: 'created_at' },
+      updatedAt: { type: Sequelize.DATE, field: 'updated_at' },
     },
     {
       timestamps: true,
