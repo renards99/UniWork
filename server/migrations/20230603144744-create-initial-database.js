@@ -370,7 +370,7 @@ module.exports = {
         allowNull: false,
       },
       work_hours: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
       service_id: {

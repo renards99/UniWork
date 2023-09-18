@@ -131,6 +131,27 @@ module.exports = {
       return responseHandler.badRequest(res, 'There is something wrong with your request!');
     }
   },
+  async getAllJobPostByUserId(req, res) {
+    try {
+      const params = req.body;
+      const { user_account_id } = params;
+      const get_all_Job_post = await sequelize.query(
+        `SELECT jp.*, c.company_name  from job_post as jp  join company as c on jp.company_id = c.id WHERE jp.post_by_id=${user_account_id}
+      ORDER BY jp.id DESC ;`,
+        {
+          type: QueryTypes.SELECT,
+        },
+      );
+      if (get_all_Job_post) {
+        return responseHandler.responseWithData(res, 200, get_all_Job_post);
+      } else {
+        return responseHandler.badRequest(res, 'Can not get all job post!');
+      }
+    } catch (e) {
+      console.log(e);
+      return responseHandler.badRequest(res, 'There is something wrong with your request!');
+    }
+  },
   //
   // SELECT user_account.*, role.role_name from user_account join role where user_account.role_id= role.id and (email like "%${search}%" or fullname like"%${search}%" ) and role_name like "%${role}%" order by user_account.id
   //
