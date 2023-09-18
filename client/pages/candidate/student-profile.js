@@ -20,6 +20,7 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
+  Checkbox,
 } from '@chakra-ui/react';
 import { HiChevronDown, HiOutlineMail } from 'react-icons/hi';
 import { HiMiniMapPin, HiOutlineMapPin } from 'react-icons/hi2';
@@ -41,7 +42,20 @@ import { IoEllipse } from 'react-icons/io5';
 
 function StudentProfile() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [isModalEducationOpen, setisModalEducationOpen] = useState(false);
+  const [isModalEducationOpen, setIsModalEducationOpen] = useState(false);
+  const openModalEducation = () => {
+    setIsModalEducationOpen(true);
+  };
+  const closeModalEducation = () => {
+    setIsModalEducationOpen(false);
+  };
+  const [isModalExOpen, setIsModalExOpen] = useState(false);
+  const openModalExperience = () => {
+    setIsModalExOpen(true);
+  };
+  const closeModalExperience = () => {
+    setIsModalExOpen(false);
+  };
   // const isModalEducationOpen
   // const [isModal2Open, setIsModal2Open] = useState(false);
   const student = {
@@ -284,7 +298,7 @@ function StudentProfile() {
               <Text fontSize='24px' fontWeight='800'>
                 Học vấn
               </Text>
-              <Flex onClick={onOpen} cursor='pointer'>
+              <Flex onClick={openModalEducation} cursor='pointer'>
                 <Text fontSize='48px' fontWeight='200'>
                   +
                 </Text>
@@ -356,11 +370,13 @@ function StudentProfile() {
           <Stack gap='28px'>
             <Flex justifyContent='space-between' alignItems='center'>
               <Text fontSize='24px' fontWeight='800'>
-                Học vấn
+                Kinh nghiệm
               </Text>
-              <Text fontSize='48px' fontWeight='200'>
-                +
-              </Text>
+              <Flex onClick={openModalExperience} cursor='pointer'>
+                <Text fontSize='48px' fontWeight='200'>
+                  +
+                </Text>
+              </Flex>
             </Flex>
           </Stack>
           {student.experience.map((experience) => (
@@ -393,18 +409,110 @@ function StudentProfile() {
     </Stack>
   );
   const modalEducation = (
-    <Modal isOpen={isOpen} onClose={onClose} isCentered size='5xl'>
+    <Modal isOpen={isModalEducationOpen} onClose={closeModalEducation} isCentered size='5xl'>
       <ModalOverlay bg='none' backdropFilter='auto' backdropBlur='2px' />
       <ModalContent>
         <ModalHeader borderBottom='1px solid #818181' fontSize='24px'>
-          Ứng tuyển{' '}
           <Text as='span' color='#F98820'>
-            Nhân viên tư vấn
+            Học vấn
           </Text>
         </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <Stack p='24px 24px 32px 24px' justifyContent='center' alignItems='center'>
+            <Stack gap='8px' alignItems='flex-start' alignSelf='stretch'>
+              <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
+                Trường:
+              </Text>
+              <Input
+                p='24px 20px'
+                placeholder='Trường:'
+                rounded='12px'
+                border='1px solid #323541'
+                focusBorderColor='none'
+                _placeholder={{ fontSize: '14px', fontWeight: '500', lineHeight: '24px' }}
+                fontSize='16px'
+                fontWeight='600px'
+                lineHeight='24px'
+              ></Input>
+            </Stack>
+            <Stack gap='8px' alignItems='flex-start' alignSelf='stretch'>
+              <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
+                Chuyên ngành:
+              </Text>
+              <Input
+                p='24px 20px'
+                placeholder='Chuyên ngành:'
+                rounded='12px'
+                border='1px solid #323541'
+                focusBorderColor='none'
+                _placeholder={{ fontSize: '14px', fontWeight: '500', lineHeight: '24px' }}
+                fontSize='16px'
+                fontWeight='600px'
+                lineHeight='24px'
+              ></Input>
+            </Stack>
+            <Stack gap='8px' alignItems='flex-start' alignSelf='stretch'>
+              <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
+                Chuyên ngành:
+              </Text>
+              <Checkbox>Tôi đang học ở đây</Checkbox>
+            </Stack>
+            <Flex gap='8px' alignSelf='stretch'>
+              <Stack gap='8px' alignItems='flex-start' alignSelf='stretch'>
+                <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
+                  Bắt đầu:
+                </Text>
+                <Flex gap='8px'>
+                  <Input
+                    p='24px 20px'
+                    placeholder='Tháng/Năm'
+                    rounded='12px'
+                    border='1px solid #323541'
+                    focusBorderColor='none'
+                    _placeholder={{ fontSize: '14px', fontWeight: '500', lineHeight: '24px' }}
+                    fontSize='16px'
+                    fontWeight='600px'
+                    lineHeight='24px'
+                  ></Input>
+                </Flex>
+              </Stack>
+              <Stack gap='8px' alignItems='flex-start' alignSelf='stretch'>
+                <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
+                  Kết thúc:
+                </Text>
+                <Flex gap='8px'>
+                  <Input
+                    p='24px 20px'
+                    placeholder='Tháng/năm'
+                    rounded='12px'
+                    border='1px solid #323541'
+                    focusBorderColor='none'
+                    _placeholder={{ fontSize: '14px', fontWeight: '500', lineHeight: '24px' }}
+                    fontSize='16px'
+                    fontWeight='600px'
+                    lineHeight='24px'
+                  ></Input>
+                </Flex>
+              </Stack>
+            </Flex>
+            <Stack gap='8px' alignItems='flex-start' alignSelf='stretch'>
+              <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
+                Mô tả chi tiết
+              </Text>
+              <Textarea
+                p='24px 20px'
+                placeholder='Mô tả chi tiết...'
+                rounded='12px'
+                border='1px solid #323541'
+                focusBorderColor='none'
+                _placeholder={{ fontSize: '14px', fontWeight: '500', lineHeight: '24px' }}
+                fontSize='16px'
+                fontWeight='600px'
+                lineHeight='24px'
+                height='160px'
+              ></Textarea>
+            </Stack>
             <Flex
               p='12px'
               w='140px'
@@ -417,7 +525,132 @@ function StudentProfile() {
               cursor='pointer'
             >
               <Text fontSize='16px' fontWeight='600' lineHeight='24px' color='white'>
-                Xác nhận{' '}
+                Cập nhật
+              </Text>
+            </Flex>
+          </Stack>
+        </ModalBody>
+      </ModalContent>
+    </Modal>
+  );
+  const modalExperience = (
+    <Modal isOpen={isModalExOpen} onClose={closeModalExperience} isCentered size='5xl'>
+      <ModalOverlay bg='none' backdropFilter='auto' backdropBlur='2px' />
+      <ModalContent>
+        <ModalHeader borderBottom='1px solid #818181' fontSize='24px'>
+          <Text as='span' color='#F98820'>
+            Kinh nghiệm
+          </Text>
+        </ModalHeader>
+        <ModalCloseButton />
+        <ModalBody>
+          <Stack p='24px 24px 32px 24px' justifyContent='center' alignItems='center'>
+            <Stack gap='8px' alignItems='flex-start' alignSelf='stretch'>
+              <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
+                Công ty:
+              </Text>
+              <Input
+                p='24px 20px'
+                placeholder='Trường:'
+                rounded='12px'
+                border='1px solid #323541'
+                focusBorderColor='none'
+                _placeholder={{ fontSize: '14px', fontWeight: '500', lineHeight: '24px' }}
+                fontSize='16px'
+                fontWeight='600px'
+                lineHeight='24px'
+              ></Input>
+            </Stack>
+            <Stack gap='8px' alignItems='flex-start' alignSelf='stretch'>
+              <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
+                Chức vụ:
+              </Text>
+              <Input
+                p='24px 20px'
+                placeholder='Chuyên ngành:'
+                rounded='12px'
+                border='1px solid #323541'
+                focusBorderColor='none'
+                _placeholder={{ fontSize: '14px', fontWeight: '500', lineHeight: '24px' }}
+                fontSize='16px'
+                fontWeight='600px'
+                lineHeight='24px'
+              ></Input>
+            </Stack>
+            <Stack gap='8px' alignItems='flex-start' alignSelf='stretch'>
+              <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
+                Chuyên ngành:
+              </Text>
+              <Checkbox>Tôi đang làm việc ở đây:</Checkbox>
+            </Stack>
+            <Flex gap='8px' alignSelf='stretch'>
+              <Stack gap='8px' alignItems='flex-start' alignSelf='stretch'>
+                <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
+                  Bắt đầu:
+                </Text>
+                <Flex gap='8px'>
+                  <Input
+                    p='24px 20px'
+                    placeholder='Tháng/Năm'
+                    rounded='12px'
+                    border='1px solid #323541'
+                    focusBorderColor='none'
+                    _placeholder={{ fontSize: '14px', fontWeight: '500', lineHeight: '24px' }}
+                    fontSize='16px'
+                    fontWeight='600px'
+                    lineHeight='24px'
+                  ></Input>
+                </Flex>
+              </Stack>
+              <Stack gap='8px' alignItems='flex-start' alignSelf='stretch'>
+                <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
+                  Kết thúc:
+                </Text>
+                <Flex gap='8px'>
+                  <Input
+                    p='24px 20px'
+                    placeholder='Tháng/năm'
+                    rounded='12px'
+                    border='1px solid #323541'
+                    focusBorderColor='none'
+                    _placeholder={{ fontSize: '14px', fontWeight: '500', lineHeight: '24px' }}
+                    fontSize='16px'
+                    fontWeight='600px'
+                    lineHeight='24px'
+                  ></Input>
+                </Flex>
+              </Stack>
+            </Flex>
+            <Stack gap='8px' alignItems='flex-start' alignSelf='stretch'>
+              <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
+                Mô tả chi tiết
+              </Text>
+              <Textarea
+                p='24px 20px'
+                placeholder='Mô tả chi tiết...'
+                rounded='12px'
+                border='1px solid #323541'
+                focusBorderColor='none'
+                _placeholder={{ fontSize: '14px', fontWeight: '500', lineHeight: '24px' }}
+                fontSize='16px'
+                fontWeight='600px'
+                lineHeight='24px'
+                height='160px'
+              ></Textarea>
+            </Stack>
+            <Flex
+              p='12px'
+              w='140px'
+              mt='32px'
+              rounded='12px'
+              bg='#F8A353'
+              justifyContent='center'
+              alignItems='center'
+              onClick={onClose}
+              cursor='pointer'
+            >
+              <Text fontSize='16px' fontWeight='600' lineHeight='24px' color='white'>
+                Cập nhật
               </Text>
             </Flex>
           </Stack>
@@ -432,6 +665,7 @@ function StudentProfile() {
       <Stack gap='24px' p='28px' justifyContent='center' alignItems='center' bg='#F0EAE9'>
         {employerInfo}
         {modalEducation}
+        {modalExperience}
       </Stack>
     </Box>
   );

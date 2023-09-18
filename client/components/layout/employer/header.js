@@ -126,6 +126,42 @@ function EmployerHeader() {
                 </MenuItem>
               </Flex>
             </Link>
+            <Link href=''>
+              <Flex _last={{ borderBottomWidth: 0 }} borderBottom='1px #D7D7D7 solid'>
+                <MenuItem h='48px' _focus={{ bg: 'none' }}>
+                  <Text p='12px 20px' fontSize='16px' fontWeight='600' lineHeight='24px'>
+                    Cài đặt
+                  </Text>
+                </MenuItem>
+              </Flex>
+            </Link>
+            <Link href='/employer/change-password'>
+              <Flex _last={{ borderBottomWidth: 0 }} borderBottom='1px #D7D7D7 solid'>
+                <MenuItem h='48px' _focus={{ bg: 'none' }}>
+                  <Text p='12px 20px' fontSize='16px' fontWeight='600' lineHeight='24px'>
+                    Đổi mật khẩu
+                  </Text>
+                </MenuItem>
+              </Flex>
+            </Link>
+            <Link href='/employer/report'>
+              <Flex _last={{ borderBottomWidth: 0 }} borderBottom='1px #D7D7D7 solid'>
+                <MenuItem h='48px' _focus={{ bg: 'none' }}>
+                  <Text p='12px 20px' fontSize='16px' fontWeight='600' lineHeight='24px'>
+                    Báo cáo/Hỗ trợ
+                  </Text>
+                </MenuItem>
+              </Flex>
+            </Link>
+            <Link href=''>
+              <Flex _last={{ borderBottomWidth: 0 }} borderBottom='1px #D7D7D7 solid'>
+                <MenuItem h='48px' _focus={{ bg: 'none' }}>
+                  <Text p='12px 20px' fontSize='16px' fontWeight='600' lineHeight='24px'>
+                    Đăng xuất
+                  </Text>
+                </MenuItem>
+              </Flex>
+            </Link>
           </MenuList>
         </Menu>
         {/* <Flex
