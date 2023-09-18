@@ -60,9 +60,7 @@ function employerDetails() {
 
       if (getEmployerById.data.statusCode === 200) {
         setUserData(getEmployerById.data.data.employer_details[0]);
-        setIsLoading(false); // Set loading to false once data is fetched
-        console.log(getEmployerById.data.data.employer_details[0]);
-        console.log('employer detail');
+        setIsLoading(false);
       } else {
         setIsLoading(false); // Even if there's an error in response, set loading to false
       }
@@ -225,7 +223,8 @@ function employerDetails() {
       website &&
       taxCode &&
       description &&
-      selectedSize
+      selectedSize &&
+      companyType
     );
   };
 
@@ -255,6 +254,7 @@ function employerDetails() {
           company_description: description,
           company_website_url: website,
         });
+        getEmployerById;
 
         const createdCompanyId = createResponse.data.data.id;
         console.log(createResponse);

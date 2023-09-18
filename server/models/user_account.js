@@ -43,7 +43,7 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
         unique: true,
         validate: {
-          is: /^[0-9]{10,12}$/, // Validate phone number
+          is: /^[0-9]{7,15}$/, // Validate phone number
         },
       },
 
@@ -60,7 +60,7 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
       },
       user_image: {
-        type: Sequelize.DATE,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       short_des: {

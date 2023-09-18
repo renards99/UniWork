@@ -89,7 +89,7 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: true,
       },
       state: {
-        type: Sequelize.STRING(20),
+        type: Sequelize.INTEGER,
         allowNull: true,
       },
       created_at: {

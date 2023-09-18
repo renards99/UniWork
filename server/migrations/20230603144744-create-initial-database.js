@@ -96,7 +96,7 @@ module.exports = {
         allowNull: true,
       },
       date_of_birth: {
-        type: Sequelize.DATE,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       mobile_number: {

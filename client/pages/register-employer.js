@@ -1,3 +1,4 @@
+//before
 import {
   PinInput,
   PinInputField,
@@ -22,12 +23,156 @@ import {
 import Image from 'next/image';
 import { MdEmail } from 'react-icons/md';
 import { BsShieldFillExclamation, BsFacebook } from 'react-icons/bs';
+import { loginAccount } from '../helper/authHelpers';
 import { AiFillGoogleCircle } from 'react-icons/ai';
-import DropDown from '../components/layout/admin/dropDown';
+import DropDown from '../components/layout/employer/dropDown';
+import { useCallback, useEffect, useState } from 'react';
+import axios from 'axios';
+import { BsEye, BsEyeSlash } from 'react-icons/bs';
 function RegisterEmployer() {
+  const [errorMessage, setErrorMessage] = useState('');
+  const [jobType, setJobType] = useState([]);
+
+  const [email, setEmail] = useState('');
+  const [selectedJobType, setSelectedJobType] = useState(0);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [password, setPassword] = useState('');
+  const [confirmPassword, ConfirmPassword] = useState('');
+  const [fullname, setFullname] = useState('');
+  const [gender, setGender] = useState(0);
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [facebookLink, setFacebookLink] = useState('');
   const logo = '/static/images/logo.png';
-  const menuData = {
-    jobType: ['Shipper', 'Worker', 'Khác', '...'],
+  const getListJobType = useCallback(async () => {
+    try {
+      const getListJobType = await axios.post(`http://localhost:5000/job-type/get-all-job-type`);
+      if (getListJobType.data.statusCode === 200) {
+        setJobType(getListJobType.data.data.map((item) => item.job_type_name));
+        console.log(getListJobType.data.data);
+      } else {
+      }
+    } catch (error) {}
+  }, []);
+  useEffect(() => {
+    getListJobType();
+  }, []);
+
+  const handleFacebookLinkChange = (e) => {
+    setFacebookLink(e.target.value);
+  };
+  const handlePhoneNumberChange = (e) => {
+    setPhoneNumber(e.target.value);
+  };
+  const handleGenderChange = (selectedValue) => {
+    setGender(selectedValue);
+  };
+  const handleJobTypeChange = (selectedValue) => {
+    setSelectedJobType(selectedValue);
+    console.log(selectedValue + 'selectedvalue');
+  };
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+  const handleConfirmPasswordChange = (e) => {
+    ConfirmPassword(e.target.value);
+  };
+  const handleFullnameChange = (e) => {
+    setFullname(e.target.value);
+  };
+  const validateForm = () => {
+    if (!email.trim()) {
+      setErrorMessage('Email is required');
+      return false;
+    }
+    if (!password.trim()) {
+      setErrorMessage('Password is required');
+      return false;
+    }
+    if (!confirmPassword.trim()) {
+      setErrorMessage('Confirmation of password is required');
+      return false;
+    }
+    if (password !== confirmPassword) {
+      setErrorMessage('Password and Confirm Password should match');
+      return false;
+    }
+    if (!fullname.trim()) {
+      setErrorMessage('Full name is required');
+      return false;
+    }
+    if (!gender) {
+      setErrorMessage('Gender is required');
+      return false;
+    }
+    if (!phoneNumber.trim()) {
+      setErrorMessage('Phone number is required');
+      return false;
+    }
+    if (selectedJobType === 0) {
+      setErrorMessage('Job type is required');
+      return false;
+    }
+    setErrorMessage('');
+    // Add other validations as needed
+    return true;
+  };
+  const handleRegister = async () => {
+    if (!validateForm()) {
+      return; // Exit the function if validation fails
+    }
+    try {
+      const currentDate = new Date().toISOString().slice(0, 10);
+
+      const createAccountResponse = await axios.post('http://localhost:5000/create-account', {
+        full_name: fullname,
+        role_id: 2,
+        email: email,
+        password: password,
+        gender: gender,
+        date_of_birth: '', // Consider adding a date-picker for this
+        mobile_number: phoneNumber,
+        registration_date: currentDate,
+        is_verified: 0,
+        is_banned: 0,
+        user_image: '', // Consider adding an image uploader for this
+        short_des: '', // Consider adding a textarea for a short description
+      });
+
+      const createdAccountId = createAccountResponse.data.data.user_id;
+      console.log('checkme now');
+      console.log(createAccountResponse);
+      const createEmployer = await axios.post('http://localhost:5000/employer/create-employer', {
+        user_account_id: createdAccountId,
+        job_type_id: selectedJobType,
+        facebook_link: facebookLink,
+        company_id: null,
+        license: null,
+        other_document: null,
+      });
+      console.log(createAccountResponse.status);
+      if (createAccountResponse.status === 201 && createEmployer.status === 201) {
+        // Success! Redirect the user to the employer page.
+        try {
+          await loginAccount(email, password, 'http://localhost:5000');
+          console.log('Account created and logged in successfully!');
+        } catch (error) {
+          console.error('Error logging in after account creation:', error);
+        }
+        window.location.href = 'http://localhost:3000/employer';
+      } else {
+        console.error('Unable to create an account. Please try again.');
+      }
+    } catch (error) {
+      // Handle any errors from the API call
+      console.error(
+        'Error creating account:',
+        error.response ? error.response.data : error.message,
+      );
+    }
   };
   return (
     <Flex
@@ -58,7 +203,7 @@ function RegisterEmployer() {
           </Flex>
           <Stack>
             <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
-              Email Đăng nhập
+              Email Đăng nhập:
             </Text>
             <InputGroup>
               <InputLeftElement
@@ -69,12 +214,17 @@ function RegisterEmployer() {
                   </Box>
                 }
               />
-              <Input placeholder='Nhập Email' size='lg'></Input>
+              <Input
+                placeholder='Nhập Email'
+                size='lg'
+                value={email}
+                onChange={handleEmailChange}
+              ></Input>
             </InputGroup>
           </Stack>
           <Stack>
             <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
-              Mật khẩu
+              Mật khẩu:
             </Text>
             <InputGroup>
               <InputLeftElement
@@ -85,12 +235,23 @@ function RegisterEmployer() {
                   </Box>
                 }
               />
-              <Input placeholder='Nhập Mật khẩu' size='lg'></Input>
+              <Input
+                type={showPassword ? 'text' : 'password'}
+                placeholder='Nhập Mật khẩu'
+                size='lg'
+                value={password}
+                onChange={handlePasswordChange}
+              />
+              <InputRightElement width='4.5rem'>
+                <Button h='1.75rem' size='sm' onClick={() => setShowPassword(!showPassword)}>
+                  {showPassword ? <BsEyeSlash /> : <BsEye />}
+                </Button>
+              </InputRightElement>
             </InputGroup>
           </Stack>
           <Stack>
             <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
-              Nhập lại Mật khẩu
+              Nhập lại Mật khẩu:
             </Text>
             <InputGroup>
               <InputLeftElement
@@ -101,36 +262,61 @@ function RegisterEmployer() {
                   </Box>
                 }
               />
-              <Input placeholder='Nhập lại Mật khẩu' size='lg'></Input>
+              <Input
+                type={showConfirmPassword ? 'text' : 'password'}
+                placeholder='Nhập lại Mật khẩu'
+                size='lg'
+                value={confirmPassword}
+                onChange={handleConfirmPasswordChange}
+              />
+              <InputRightElement width='4.5rem'>
+                <Button
+                  h='1.75rem'
+                  size='sm'
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                >
+                  {showConfirmPassword ? <BsEyeSlash /> : <BsEye />}
+                </Button>
+              </InputRightElement>
             </InputGroup>
           </Stack>
           <Flex alignItems='center' gap='12px'>
             <Stack h='40px' border='4px solid #F1841D'></Stack>
             <Text fontSize='24px' fontWeight='700' lineHeight='18px' letterSpacing='0.2px'>
-              Thông tin nhà tuyển dụng
+              Thông tin nhà tuyển dụng:
             </Text>
           </Flex>
           <Stack>
             <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
-              Họ và tên
+              Họ và tên:
             </Text>
-            <Input placeholder='Nhập họ và tên' size='lg'></Input>
+            <Input
+              placeholder='Nhập họ và tên'
+              size='lg'
+              value={fullname}
+              onChange={handleFullnameChange}
+            ></Input>
           </Stack>
           <Flex gap='24px'>
             <Stack flex='1 0 0'>
               <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
-                Giới tính
+                Giới tính:
               </Text>
-              <RadioGroup>
+              <RadioGroup onChange={handleGenderChange} value={String(gender)}>
                 <Flex gap='32px'>
-                  <Radio size='lg'>
+                  <Radio size='lg' value='1'>
                     <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
                       Nam
                     </Text>
                   </Radio>
-                  <Radio size='lg'>
+                  <Radio size='lg' value='2'>
                     <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
                       Nữ
+                    </Text>
+                  </Radio>
+                  <Radio size='lg' value='3'>
+                    <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
+                      Khác
                     </Text>
                   </Radio>
                 </Flex>
@@ -138,24 +324,35 @@ function RegisterEmployer() {
             </Stack>
             <Stack flex='1 0 0'>
               <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
-                Điện thoại
+                Điện thoại:
               </Text>
-              <Input placeholder='Nhập số điện thoại' size='lg'></Input>
+              <Input
+                placeholder='Nhập số điện thoại'
+                size='lg'
+                value={phoneNumber}
+                onChange={handlePhoneNumberChange}
+              ></Input>
             </Stack>
           </Flex>
           <Stack>
             <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
-              Lĩnh vực hoạt động (ngành nghề)
+              Lĩnh vực hoạt động (ngành nghề):
             </Text>
-            <DropDown data={menuData.jobType} />
+            <DropDown data={jobType} selected={selectedJobType} onChange={handleJobTypeChange} />
           </Stack>
           <Stack>
             <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
-              facebook
+              facebook:
             </Text>
-            <Input placeholder='Nhập tài khoản facebook' size='lg'></Input>
+            <Input
+              placeholder='Nhập tài khoản facebook'
+              size='lg'
+              value={facebookLink}
+              onChange={handleFacebookLinkChange}
+            ></Input>
           </Stack>
         </Stack>
+        {errorMessage && <Text color='red'>{errorMessage}</Text>}
         <Flex
           p='8px 0px'
           w='335px'
@@ -164,6 +361,7 @@ function RegisterEmployer() {
           bg='#F6871F'
           rounded='10px'
           cursor='pointer'
+          onClick={handleRegister}
         >
           <Text fontSize='20px' fontWeight='500' color='white'>
             Đăng Ký
