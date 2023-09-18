@@ -365,6 +365,10 @@ module.exports = {
         type: Sequelize.STRING(1000),
         allowNull: false,
       },
+      experience: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       work_hours: {
         type: Sequelize.STRING(100),
         allowNull: false,
