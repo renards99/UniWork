@@ -59,6 +59,7 @@ module.exports = {
       }
 
       const jobPostDetail = {
+        id: orderId,
         title: params.title,
         work_hours: params.work_hours,
         service_id: params.service_id,
