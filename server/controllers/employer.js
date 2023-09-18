@@ -54,7 +54,8 @@ module.exports = {
   async updateEmployer(req, res) {
     try {
       const params = req.body;
-      const { user_account_id, job_type_id, facebook_link, company_id } = params;
+      const { user_account_id, job_type_id, facebook_link, company_id, license, other_document } =
+        params;
 
       // Construct the SQL update query
       let sqlUpdateQuery = `UPDATE employer SET job_type_id = "${job_type_id}", facebook_link = "${facebook_link}"`;
@@ -62,6 +63,12 @@ module.exports = {
       // If company_id is not null, then append to the update query
       if (company_id !== null) {
         sqlUpdateQuery += `, company_id="${company_id}"`;
+      }
+      if (license !== null) {
+        sqlUpdateQuery += `, license="${license}"`;
+      }
+      if (other_document !== null) {
+        sqlUpdateQuery += `, other_document="${other_document}"`;
       }
 
       sqlUpdateQuery += ` WHERE user_account_id = "${user_account_id}"`;
@@ -76,6 +83,35 @@ module.exports = {
         return responsehandler.badRequest(res, "can't update user");
       }
     } catch (error) {
+      return responsehandler.error(res);
+    }
+  },
+  async createEmployer(req, res) {
+    try {
+      const params = req.body;
+      const { user_account_id, job_type_id, facebook_link, company_id, license, other_document } =
+        params;
+      const newEmployer = {
+        user_account_id,
+        job_type_id,
+        facebook_link,
+        company_id,
+        license,
+        other_document,
+      };
+
+      const createdEmployer = await Employer.create(newEmployer);
+
+      if (createdEmployer) {
+        return responsehandler.responseWithData(res, 201, {
+          message: 'User created successfully!',
+          createdEmployer,
+        });
+      } else {
+        return responsehandler.badRequest(res, 'Unable to create user');
+      }
+    } catch (error) {
+      console.error(error);
       return responsehandler.error(res);
     }
   },

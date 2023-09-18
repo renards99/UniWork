@@ -160,6 +160,69 @@ module.exports = {
       return responsehandler.error(res);
     }
   },
+  async createAccount(req, res) {
+    try {
+      const params = req.body;
+      const {
+        full_name,
+        role_id,
+        email,
+        password,
+        gender,
+        date_of_birth,
+        mobile_number,
+        registration_date,
+        is_verified,
+        is_banned,
+        user_image,
+        short_des,
+      } = params;
+
+      // Check if the user already exists based on the email or mobile number
+      const existingUser = await UserAccount.findOne({
+        where: {
+          [Op.or]: [{ email }, { mobile_number }],
+        },
+      });
+
+      if (existingUser) {
+        return responsehandler.badRequest(res, 'Email or mobile number already in use');
+      }
+
+      // Hash the password before storing
+      const salt = bcrypt.genSaltSync(10);
+      const hashedPassword = bcrypt.hashSync(password, salt);
+
+      const newUser = {
+        full_name,
+        role_id,
+        email,
+        password: hashedPassword,
+        gender,
+        date_of_birth,
+        mobile_number,
+        registration_date,
+        is_verified,
+        is_banned,
+        user_image,
+        short_des,
+      };
+
+      const createdUser = await UserAccount.create(newUser);
+
+      if (createdUser) {
+        return responsehandler.responseWithData(res, 201, {
+          message: 'User created successfully!',
+          user_id: createdUser.id,
+        });
+      } else {
+        return responsehandler.badRequest(res, 'Unable to create user');
+      }
+    } catch (error) {
+      console.error(error);
+      return responsehandler.error(res);
+    }
+  },
   async loginAccount(req, res) {
     try {
       const params = req.body;

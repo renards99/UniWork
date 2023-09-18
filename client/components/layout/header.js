@@ -21,6 +21,7 @@ import Logo from '../../public/static/images/logo.png';
 import Avatar from '../../public/static/images/avatar_icon.png';
 import { FcGoogle } from 'react-icons/fc';
 import { BsFacebook } from 'react-icons/bs';
+import { loginAccount } from '../../helper/authHelpers';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
@@ -50,38 +51,13 @@ export default function Header(props) {
     setForgetPassword(!forgetPassword);
   }, [forgetPassword]);
 
-  const loginAccount = useCallback(async () => {
-    const submitData = {
-      user,
-      password,
-    };
+  const attemptLogin = async () => {
     try {
-      const login = await axios.post(`${props.back_end_port}/login`, submitData, {
-        withCredentials: true,
-      });
-      if (login.data.statusCode === 200) {
-        localStorage.setItem(
-          'user',
-          JSON.stringify({
-            ...login.data.data.dataValues,
-            token: login.data.data.accessToken,
-          }),
-        );
-      }
-      if (login.data.data.dataValues.role_id == 1) {
-        Cookies.set('sideBarActive', 2);
-        router.push('/admin');
-      }
-      if (login.data.data.dataValues.role_id == 2) {
-        router.push('/employer');
-      }
-      if (login.data.data.dataValues.role_id == 3) {
-        router.push('/student');
-      }
+      await loginAccount(user, password, props.back_end_port, router);
     } catch (error) {
       console.log(error);
     }
-  }, [props.back_end_port, user, password]);
+  };
 
   const LoginPopup = (
     <Modal isOpen={isOpen} onClose={onClose} size={'lg'}>
@@ -131,7 +107,7 @@ export default function Header(props) {
                     <button
                       className='bg-[#F98820] text-white rounded-md text-xl p-3'
                       type='submit'
-                      onClick={loginAccount}
+                      onClick={attemptLogin}
                     >
                       Đăng nhập
                     </button>
