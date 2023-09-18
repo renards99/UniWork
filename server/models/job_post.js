@@ -7,8 +7,12 @@ module.exports = (sequelize, Sequelize) => {
         primaryKey: true,
         autoIncrement: true,
       },
+      experience: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       title: {
-        type: Sequelize.STRING(1000),
+        type: Sequelize.STRING,
         allowNull: false,
       },
       work_hours: {
