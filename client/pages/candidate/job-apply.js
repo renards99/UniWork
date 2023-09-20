@@ -17,9 +17,6 @@ import {
   Stack,
   Grid,
   Flex,
-  Tab,
-  Tabs,
-  TabList,
   Radio,
   RadioGroup,
 } from '@chakra-ui/react';

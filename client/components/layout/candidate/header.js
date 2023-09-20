@@ -42,6 +42,7 @@ function CandidateHeader() {
       border='1px'
       borderColor='#D7D7D7'
       px='48px'
+      alignSelf='stretch'
     >
       <Flex gap='32px' alignItems='center'>
         <Link href='/'>
@@ -76,7 +77,7 @@ function CandidateHeader() {
           <LuBellDot />
         </Flex>
         {/* <Notifications /> */}
-        <DropDownHeader data={data.dropDown} />
+        <DropDownHeader />
         {/* <Flex
           rounded='40px'
           fontSize='24px'

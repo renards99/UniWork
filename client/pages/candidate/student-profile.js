@@ -21,6 +21,7 @@ import {
   ModalBody,
   ModalCloseButton,
   Checkbox,
+  Select,
 } from '@chakra-ui/react';
 import { HiChevronDown, HiOutlineMail } from 'react-icons/hi';
 import { HiMiniMapPin, HiOutlineMapPin } from 'react-icons/hi2';
@@ -56,6 +57,20 @@ function StudentProfile() {
   const closeModalExperience = () => {
     setIsModalExOpen(false);
   };
+  const [isModalCVOpen, setIsModalCVOpen] = useState(false);
+  const openModalCV = () => {
+    setIsModalCVOpen(true);
+  };
+  const closeModalCV = () => {
+    setIsModalCVOpen(false);
+  };
+  const [isModalPersonalInfoOpen, setIsModalPersonalInfoOpen] = useState(false);
+  const openModalPersonalInfo = () => {
+    setIsModalPersonalInfoOpen(true);
+  };
+  const closeModalPersonalInfo = () => {
+    setIsModalPersonalInfoOpen(false);
+  };
   // const isModalEducationOpen
   // const [isModal2Open, setIsModal2Open] = useState(false);
   const student = {
@@ -66,8 +81,13 @@ function StudentProfile() {
       'Hiện tại là sinh viên tốt nghiệp chuyên ngành Kế toán - Kiểm toán đang chờ bằng và đã làm trong lĩnh vực mà cụ thể là kế toán với kinh nghiệm 6 tháng. Tuy kinh nghiệm còn hạn chế nhưng mục tiêu của em là được làm đúng chuyên ngành mình đã học và mong muốn học hỏi để có thêm nhiều kinh nghiệm, nên em mong muốn xin vào công ty làm thực tập để từ đó trau dồi thêm kiến thức, kinh nghiệm thực tế cho bản thân.',
     cv: '0',
     education: [
-      { time: '2019-2023', profession: 'Kế toán, kiểm toán', GPA: '3.0' },
-      { time: '2019-2023', profession: 'Kế toán, kiểm toán', GPA: '3.0' },
+      { school: 'Đại học FPT', time: '2019-2023', profession: 'Kế toán, kiểm toán', GPA: '3.0' },
+      {
+        school: 'Học viện chính sách và phát triển',
+        time: '2019-2023',
+        profession: 'Kế toán, kiểm toán',
+        GPA: '3.0',
+      },
     ],
     experience: [
       {
@@ -160,6 +180,8 @@ function StudentProfile() {
                   rounded='10px'
                   justifyContent='center'
                   alignItems='center'
+                  onClick={openModalCV}
+                  cursor='pointer'
                 >
                   <Text fontSize='18px' color='white' fontWeight='800'>
                     Xem CV của tôi
@@ -172,11 +194,13 @@ function StudentProfile() {
                   justifyContent='center'
                   alignItems='center'
                   border='1px solid #F98820'
+                  onClick={openModalCV}
+                  cursor='pointer'
                 >
                   <Text fontSize='18px' color='#F98820' fontWeight='800'>
                     Thay đổi CV
                   </Text>
-                </Flex>{' '}
+                </Flex>
               </Flex>
             )}
           </Stack>
@@ -248,6 +272,8 @@ function StudentProfile() {
             rounded='10px'
             justifyContent='center'
             alignItems='center'
+            onClick={openModalPersonalInfo}
+            cursor='pointer'
           >
             <Text fontSize='18px' color='white' fontWeight='800'>
               Thêm mục
@@ -274,6 +300,8 @@ function StudentProfile() {
               rounded='10px'
               justifyContent='center'
               alignItems='center'
+              onClick={openModalEducation}
+              cursor='pointer'
             >
               <Text fontSize='18px' color='white' fontWeight='800'>
                 Thêm mục
@@ -348,6 +376,8 @@ function StudentProfile() {
               rounded='10px'
               justifyContent='center'
               alignItems='center'
+              onClick={openModalExperience}
+              cursor='pointer'
             >
               <Text fontSize='18px' color='white' fontWeight='800'>
                 Thêm mục
@@ -521,7 +551,7 @@ function StudentProfile() {
               bg='#F8A353'
               justifyContent='center'
               alignItems='center'
-              onClick={onClose}
+              onClick={closeModalEducation}
               cursor='pointer'
             >
               <Text fontSize='16px' fontWeight='600' lineHeight='24px' color='white'>
@@ -646,7 +676,303 @@ function StudentProfile() {
               bg='#F8A353'
               justifyContent='center'
               alignItems='center'
-              onClick={onClose}
+              onClick={closeModalExperience}
+              cursor='pointer'
+            >
+              <Text fontSize='16px' fontWeight='600' lineHeight='24px' color='white'>
+                Cập nhật
+              </Text>
+            </Flex>
+          </Stack>
+        </ModalBody>
+      </ModalContent>
+    </Modal>
+  );
+  const modalCV = (
+    <Modal isOpen={isModalCVOpen} onClose={closeModalCV} isCentered size='5xl'>
+      <ModalOverlay bg='none' backdropFilter='auto' backdropBlur='2px' />
+      <ModalContent>
+        <ModalHeader borderBottom='1px solid #818181' fontSize='24px'>
+          <Text as='span' color='#F98820'>
+            Kinh nghiệm
+          </Text>
+        </ModalHeader>
+        <ModalCloseButton />
+        <ModalBody>
+          <Stack gap='8px' alignSelf='stretch' justifyContent='center' alignItems='center'>
+            <Flex alignSelf='stretch'>
+              <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
+                CV của bạn
+              </Text>
+            </Flex>
+            <Stack
+              p='12px'
+              justifyContent='center'
+              alignItems='center'
+              gap='10px'
+              alignSelf='stretch'
+              height='160px'
+              bg='#1311311A'
+              rounded='12px'
+            >
+              <Image src='/static/images/upload_cloud.png' width='40' height='40'></Image>
+              <Stack
+                justifyContent='center'
+                alignItems='center'
+                fontSize='12px'
+                fontWeight='700'
+                lineHeight='20px'
+                color='#818181'
+              >
+                <Text>Kéo CV của bạn vào đây hoặc bấm để chọn file CV của bạn</Text>
+                <Text>Dung lượng file không vượt quá 5MB.</Text>
+                <Text>(Hỗ trợ tải lên file: PDF)</Text>
+              </Stack>{' '}
+            </Stack>{' '}
+            <Flex
+              p='12px'
+              w='140px'
+              mt='32px'
+              rounded='12px'
+              bg='#F8A353'
+              justifyContent='center'
+              alignItems='center'
+              onClick={closeModalCV}
+              cursor='pointer'
+            >
+              <Text fontSize='16px' fontWeight='600' lineHeight='24px' color='white'>
+                Cập nhật
+              </Text>
+            </Flex>
+          </Stack>
+        </ModalBody>
+      </ModalContent>
+    </Modal>
+  );
+  const modalPersonalInfo = (
+    <Modal isOpen={isModalPersonalInfoOpen} onClose={closeModalPersonalInfo} isCentered size='5xl'>
+      <ModalOverlay bg='none' backdropFilter='auto' backdropBlur='2px' />
+      <ModalContent>
+        <ModalHeader borderBottom='1px solid #818181' fontSize='24px'>
+          <Text as='span' color='#F98820'>
+            Thông tin trang cá nhân
+          </Text>
+        </ModalHeader>
+        <ModalCloseButton />
+        <ModalBody>
+          <Stack p='24px 24px 32px 24px' justifyContent='center' alignItems='center'>
+            <Stack gap='8px' alignItems='flex-start' alignSelf='stretch'>
+              <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
+                Họ và tên:
+              </Text>
+              <Input
+                p='24px 20px'
+                placeholder='Họ và tên:'
+                rounded='12px'
+                border='1px solid #323541'
+                focusBorderColor='none'
+                _placeholder={{ fontSize: '14px', fontWeight: '500', lineHeight: '24px' }}
+                fontSize='16px'
+                fontWeight='600px'
+                lineHeight='24px'
+              ></Input>
+            </Stack>
+            <Stack gap='8px' alignItems='flex-start' alignSelf='stretch'>
+              <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
+                Ngành nghề:
+              </Text>
+              <Input
+                p='24px 20px'
+                placeholder='Ngành nghề:'
+                rounded='12px'
+                border='1px solid #323541'
+                focusBorderColor='none'
+                _placeholder={{ fontSize: '14px', fontWeight: '500', lineHeight: '24px' }}
+                fontSize='16px'
+                fontWeight='600px'
+                lineHeight='24px'
+              ></Input>
+            </Stack>
+            {student.education === null ? (
+              <Flex alignSelf='stretch' cursor='pointer' onClick={openModalEducation}>
+                <Text fontSize='16px' fontWeight='600' lineHeight='24px' color='#F6871F'>
+                  + Thêm thông tin học vấn
+                </Text>
+              </Flex>
+            ) : (
+              <Stack gap='8px' alignItems='flex-start' alignSelf='stretch'>
+                <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
+                  Thông tin học vấn:
+                </Text>
+                <Select placeholder='Chọn trường/tổ chức' size='lg'>
+                  {student.education.map((student) => (
+                    <option value='option1'>{student.school}</option>
+                  ))}
+                </Select>
+                <Flex
+                  justifyContent='flex-end'
+                  alignSelf='stretch'
+                  cursor='pointer'
+                  onClick={openModalEducation}
+                >
+                  <Text fontSize='16px' fontWeight='600' lineHeight='24px' color='#F6871F'>
+                    + Thêm thông tin học vấn
+                  </Text>
+                </Flex>
+              </Stack>
+            )}
+            {student.experience === null ? (
+              <Flex alignSelf='stretch' cursor='pointer' onClick={openModalExperience}>
+                <Text fontSize='16px' fontWeight='600' lineHeight='24px' color='#F6871F'>
+                  + Thêm thông tin kinh nghiệm
+                </Text>
+              </Flex>
+            ) : (
+              <Stack gap='8px' alignItems='flex-start' alignSelf='stretch'>
+                <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
+                  Thông tin học vấn:
+                </Text>
+                <Select placeholder='Chọn công việc hiện tại' size='lg'>
+                  {student.experience.map((student) => (
+                    <option value='option1'>{student.title}</option>
+                  ))}
+                </Select>
+                <Flex
+                  justifyContent='flex-end'
+                  alignSelf='stretch'
+                  cursor='pointer'
+                  onClick={openModalExperience}
+                >
+                  <Text fontSize='16px' fontWeight='600' lineHeight='24px' color='#F6871F'>
+                    + Thêm thông tin kinh nghiệm
+                  </Text>
+                </Flex>
+              </Stack>
+            )}
+
+            <Stack gap='8px' alignItems='flex-start' alignSelf='stretch'>
+              <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
+                Giới tính:
+              </Text>
+              <Flex gap='220px'>
+                <Radio size='lg' colorScheme='orange' value='1' border='1px solid black'>
+                  Nam
+                </Radio>
+                <Radio size='lg' colorScheme='orange' value='2' border='1px solid black'>
+                  Nữ
+                </Radio>
+              </Flex>
+            </Stack>
+            <Flex gap='8px' alignSelf='stretch'>
+              <Stack gap='8px' alignItems='flex-start' alignSelf='stretch'>
+                <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
+                  Ngày sinh:
+                </Text>
+                <Flex gap='8px'>
+                  <Input
+                    p='24px 20px'
+                    placeholder='Ngày/Tháng/Năm'
+                    rounded='12px'
+                    border='1px solid #323541'
+                    focusBorderColor='none'
+                    _placeholder={{ fontSize: '14px', fontWeight: '500', lineHeight: '24px' }}
+                    fontSize='16px'
+                    fontWeight='600px'
+                    lineHeight='24px'
+                  ></Input>
+                </Flex>
+              </Stack>
+            </Flex>
+            <Stack gap='8px' alignItems='flex-start' alignSelf='stretch'>
+              <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
+                Địa chỉ hiện tại
+              </Text>
+              <Input
+                p='24px 20px'
+                placeholder='Nhập Địa chỉ hiện tại'
+                rounded='12px'
+                border='1px solid #323541'
+                focusBorderColor='none'
+                _placeholder={{ fontSize: '14px', fontWeight: '500', lineHeight: '24px' }}
+                fontSize='16px'
+                fontWeight='600px'
+                lineHeight='24px'
+              ></Input>
+            </Stack>
+            <Stack gap='8px' alignItems='flex-start' alignSelf='stretch'>
+              <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
+                Email liên lạc
+              </Text>
+              <Input
+                p='24px 20px'
+                placeholder='Nhập Email liên lạc'
+                rounded='12px'
+                border='1px solid #323541'
+                focusBorderColor='none'
+                _placeholder={{ fontSize: '14px', fontWeight: '500', lineHeight: '24px' }}
+                fontSize='16px'
+                fontWeight='600px'
+                lineHeight='24px'
+              ></Input>
+            </Stack>
+            <Stack gap='8px' alignItems='flex-start' alignSelf='stretch'>
+              <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
+                Số điện thoại liên lạc
+              </Text>
+              <Input
+                p='24px 20px'
+                placeholder='Nhập Số điện thoại liên lạc'
+                rounded='12px'
+                border='1px solid #323541'
+                focusBorderColor='none'
+                _placeholder={{ fontSize: '14px', fontWeight: '500', lineHeight: '24px' }}
+                fontSize='16px'
+                fontWeight='600px'
+                lineHeight='24px'
+              ></Input>
+            </Stack>
+            <Stack gap='8px' alignItems='flex-start' alignSelf='stretch'>
+              <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
+                Liên kết
+              </Text>
+              <Input
+                p='24px 20px'
+                placeholder='Nhập tài khoản mạng xã hội'
+                rounded='12px'
+                border='1px solid #323541'
+                focusBorderColor='none'
+                _placeholder={{ fontSize: '14px', fontWeight: '500', lineHeight: '24px' }}
+                fontSize='16px'
+                fontWeight='600px'
+                lineHeight='24px'
+              ></Input>
+            </Stack>
+            <Stack gap='8px' alignItems='flex-start' alignSelf='stretch'>
+              <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
+                Giới thiệu bản thân
+              </Text>
+              <Textarea
+                p='24px 20px'
+                placeholder='Mô tả chi tiết...'
+                rounded='12px'
+                border='1px solid #323541'
+                focusBorderColor='none'
+                _placeholder={{ fontSize: '14px', fontWeight: '500', lineHeight: '24px' }}
+                fontSize='16px'
+                fontWeight='600px'
+                lineHeight='24px'
+                height='160px'
+              ></Textarea>
+            </Stack>
+            <Flex
+              p='12px'
+              w='140px'
+              mt='32px'
+              rounded='12px'
+              bg='#F8A353'
+              justifyContent='center'
+              alignItems='center'
+              onClick={closeModalPersonalInfo}
               cursor='pointer'
             >
               <Text fontSize='16px' fontWeight='600' lineHeight='24px' color='white'>
@@ -666,6 +992,8 @@ function StudentProfile() {
         {employerInfo}
         {modalEducation}
         {modalExperience}
+        {modalCV}
+        {modalPersonalInfo}
       </Stack>
     </Box>
   );

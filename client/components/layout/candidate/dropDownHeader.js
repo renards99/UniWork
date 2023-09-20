@@ -13,17 +13,13 @@ import {
   Button,
   Flex,
   Avatar,
+  Link,
 } from '@chakra-ui/react';
 
 import { HiChevronDown } from 'react-icons/hi';
-export default function DropDownHeader(props) {
-  const data = props.data;
-
-  const [selectedMenuItem, setSelectedMenuItem] = useState(data[0]);
+export default function DropDownHeader() {
   const [menuIcon, setMenuIcon] = useState(false);
-  const handleMenuItem = (text) => {
-    setSelectedMenuItem(text);
-  };
+
   const handleMenuClick = () => setMenuIcon(!menuIcon);
   return (
     <Menu matchWidth>
@@ -57,26 +53,67 @@ export default function DropDownHeader(props) {
       >
         <Flex gap='20px'>
           <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
-            {selectedMenuItem}
+            Candidate
           </Text>
         </Flex>
       </MenuButton>
-      <MenuList rounded='10px' border='1px solid #323541' bg='#E8E8EB'>
-        {data.map((item) => (
-          <Flex _last={{ borderBottomWidth: 0 }} borderBottom='1px #D7D7D7 solid'>
-            {selectedMenuItem === item ? (
-              <Box border='2px solid #323541' roundedRight='12px' pos='fixed' h='48px'></Box>
-            ) : (
-              ''
-            )}
-
-            <MenuItem h='48px' onClick={() => handleMenuItem(item)} bg='#E8E8EB'>
-              <Text p='12px 20px' fontSize='16px' fontWeight='600' lineHeight='24px'>
-                {item}
-              </Text>
-            </MenuItem>
-          </Flex>
-        ))}
+      <MenuList
+        rounded='12px'
+        justifyContent='space-between'
+        alignSelf='stretch'
+        alignItems='center'
+        bg='#E8E8EB'
+        p='0px'
+      >
+        <MenuItem h='48px' bg='#E8E8EB' border='1px solid #1311311A' roundedTop='12px'>
+          <Link href='/candidate/student-profile'>
+            <Text p='12px 20px' fontSize='16px' fontWeight='600' lineHeight='24px'>
+              Xem trang cá nhân
+            </Text>
+          </Link>
+        </MenuItem>
+        <MenuItem h='48px' bg='#E8E8EB' border='1px solid #1311311A'>
+          <Link href='/candidate/change-account-info'>
+            <Text p='12px 20px' fontSize='16px' fontWeight='600' lineHeight='24px'>
+              Cài đặt thông tin
+            </Text>
+          </Link>
+        </MenuItem>
+        <MenuItem h='48px' bg='#E8E8EB' border='1px solid #1311311A'>
+          <Link href='/candidate/change-password'>
+            <Text p='12px 20px' fontSize='16px' fontWeight='600' lineHeight='24px'>
+              Đổi mật khẩu
+            </Text>
+          </Link>
+        </MenuItem>
+        <MenuItem h='48px' bg='#E8E8EB' border='1px solid #1311311A'>
+          <Link href='/candidate/job-apply'>
+            <Text p='12px 20px' fontSize='16px' fontWeight='600' lineHeight='24px'>
+              Việc làm đã ứng tuyển
+            </Text>
+          </Link>
+        </MenuItem>
+        <MenuItem h='48px' bg='#E8E8EB' border='1px solid #1311311A'>
+          <Link href='job-recommended-setting'>
+            <Text p='12px 20px' fontSize='16px' fontWeight='600' lineHeight='24px'>
+              Cài đặt gợi ý việc làm
+            </Text>
+          </Link>
+        </MenuItem>
+        <MenuItem h='48px' bg='#E8E8EB' border='1px solid #1311311A'>
+          <Link href='/candidate/report'>
+            <Text p='12px 20px' fontSize='16px' fontWeight='600' lineHeight='24px'>
+              Báo cáo/Hỗ trợ
+            </Text>
+          </Link>
+        </MenuItem>
+        <MenuItem h='48px' bg='#E8E8EB' border='1px solid #1311311A' roundedBottom='12px'>
+          <Link href=''>
+            <Text p='12px 20px' fontSize='16px' fontWeight='600' lineHeight='24px'>
+              Đăng xuất
+            </Text>
+          </Link>
+        </MenuItem>
       </MenuList>
     </Menu>
   );
