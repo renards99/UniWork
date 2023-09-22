@@ -23,6 +23,7 @@ export default function SideBarAdmin(props) {
     account: '/admin/account-manager',
     job: '/admin/job-manager',
     setting: '/admin/setting',
+    report: '/admin/report',
   };
   const [navSize, changeNavSize] = useState('large');
   const [sideBarActive, setActiveSideBar] = useState(0);
@@ -127,6 +128,16 @@ export default function SideBarAdmin(props) {
             value={3}
             sideBarActive={sideBarActive}
             href={path.setting}
+          />
+          <SideItem
+            navSize={navSize}
+            icon={AiOutlineSetting}
+            handleSetActiveSideBar={handleSetActiveSideBar}
+            title='Báo cáo/Hỗ trợ'
+            active={sideBarActive == 3 ? true : false}
+            value={4}
+            sideBarActive={sideBarActive}
+            href={path.report}
           />
         </Flex>
       </Stack>

@@ -27,6 +27,7 @@ import axios from 'axios';
 import DropDownStatus from '../../components/layout/admin/dropDownStatus';
 import StatusFrame from '../../components/layout/admin/statusFrame';
 function UserProfileEmployer() {
+  
   const menuData = {
     roles: ['Giám đốc', 'Nhân viên', 'Trợ lý', 'Quản lý', 'Phó phòng', 'Thực tập sinh'],
     workForm: [
@@ -186,13 +187,25 @@ function UserProfileEmployer() {
   const [tab, setTab] = useState(1);
   const handleTab = (index) => setTab(index);
   return (
-    <div>
+    <Stack gap='24px'>
       {/*Header*/}
       <AdminHeader />
-
+      <Tabs padding='24px'>
+        <TabList borderBottom={'none'}>
+          <Tab fontSize={'16px'} fontWeight={'600'} color={'#323541'} onClick={() => handleTab(1)}>
+            Nhà tuyển dụng
+          </Tab>
+          <Tab fontSize={'16px'} fontWeight={'600'} color={'#323541'} onClick={() => handleTab(2)}>
+            Công ty
+          </Tab>
+          <Tab fontSize={'16px'} fontWeight={'600'} color={'#323541'} onClick={() => handleTab(3)}>
+            Giấy phép kinh doanh
+          </Tab>
+        </TabList>
+      </Tabs>
       {/*Profile Content*/}
       {tab === 1 ? (
-        <Stack gap='0px'>
+        <Stack gap='0px' w='930px'>
           <Box px='24px'>
             <Flex
               px='24px'
@@ -204,10 +217,12 @@ function UserProfileEmployer() {
               roundedTop='12px'
               gap='12px'
               alignItems='flex-start'
+              justifyContent='space-between'
             >
               <Text color='white' fontSize='16px' fontWeight='500' lineHeight='24px'>
                 Hotline CSKH & Hỗ trợ
               </Text>
+              <Image></Image>
             </Flex>
 
             <Stack
@@ -228,7 +243,7 @@ function UserProfileEmployer() {
               </Flex>
 
               <Flex flex='1 0 0' alignItems='center' justifyContent='space-between'>
-                <Stack gap='20px' alignItems='center'>
+                <Stack gap='20px'>
                   <Flex gap='12px' alignItems='center'>
                     <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
                       Email:
@@ -240,7 +255,7 @@ function UserProfileEmployer() {
                   </Flex>
                   <Flex gap='12px' alignItems='center'>
                     <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
-                      Giới tính::
+                      Giới tính:
                     </Text>
 
                     <Text fontSize='14px' fontWeight='700' lineHeight='24px'>
@@ -249,29 +264,31 @@ function UserProfileEmployer() {
                   </Flex>
                   <Flex gap='12px' alignItems='center'>
                     <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
-                      Email:
+                      Facebook:
                     </Text>
 
                     <Text fontSize='14px' fontWeight='700' lineHeight='24px'>
-                      hanhfchinh@lechongvien.vn
+                      https://www.facebook.com/nguyenthao404
                     </Text>
                   </Flex>
                 </Stack>
                 <Stack gap='20px' alignItems='flex-start'>
-                  <Flex gap='12px' alignItems='flex-start'>
-                    <Box fontSize='24px'>
-                      <FiPhone />
-                    </Box>
+                  <Flex gap='12px' alignItems='center'>
+                    <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
+                      Số điện thoại:
+                    </Text>
+
                     <Text fontSize='14px' fontWeight='700' lineHeight='24px'>
-                      uniwork@gmail.com
+                      0393958505
                     </Text>
                   </Flex>
-                  <Flex gap='12px' alignItems='flex-start'>
-                    <Box fontSize='24px'>
-                      <FiPhone />
-                    </Box>
+                  <Flex gap='12px' alignItems='center'>
+                    <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
+                      Lĩnh vực hoạt động:
+                    </Text>
+
                     <Text fontSize='14px' fontWeight='700' lineHeight='24px'>
-                      Người liên hệ
+                      Nhân viên
                     </Text>
                   </Flex>
                 </Stack>
@@ -285,172 +302,176 @@ function UserProfileEmployer() {
             {/*Left */}
 
             <Stack px='24px' pt='16px' pb='20px' gap='20px'>
-              <Tabs>
-                <TabList borderBottom={'none'}>
-                  <Tab
-                    fontSize={'16px'}
-                    fontWeight={'600'}
-                    color={'#323541'}
-                    onClick={() => handleTab(1)}
-                  >
-                    Nhà tuyển dụng
-                  </Tab>
-                  <Tab
-                    fontSize={'16px'}
-                    fontWeight={'600'}
-                    color={'#323541'}
-                    onClick={() => handleTab(2)}
-                  >
-                    Công ty
-                  </Tab>
-                  <Tab
-                    fontSize={'16px'}
-                    fontWeight={'600'}
-                    color={'#323541'}
-                    onClick={() => handleTab(3)}
-                  >
-                    Giấy phép kinh doanh
-                  </Tab>
-                </TabList>
-              </Tabs>
-              <Stack>
-                <Flex>
-                  <DropDownStatus data={menuData.status}></DropDownStatus>
-                </Flex>
-                <Box colSpan='2' border='1px' borderColor='#D7D7D7' rounded='xl'>
-                  <Stack p='12px' pos='relative'>
-                    <Text fontSize='20px' fontWeight='600'>
-                      Giới Thiệu Công Ty
-                    </Text>
-                    <Collapse startingHeight={94} in={show}>
-                      <Text fontSize='16px' fontWeight='semibold' color='#727272'>
-                        {' '}
-                        {eProfile.description}
+              <Flex>
+                <DropDownStatus data={menuData.status}></DropDownStatus>
+              </Flex>{' '}
+              {tab === 2 ? (
+                <Box>
+                  <Box colSpan='2' border='1px' borderColor='#D7D7D7' rounded='xl'>
+                    <Stack p='12px' pos='relative'>
+                      <Text fontSize='20px' fontWeight='600'>
+                        Giới Thiệu Công Ty
                       </Text>
-                    </Collapse>
-                    <Flex
-                      cursor='pointer'
-                      py='12px'
-                      fontSize='16px'
-                      fontWeight='semibold'
-                      color='#727272'
-                      alignItems='center'
-                      gap='6'
-                      bg='white'
-                      w='full'
-                      onClick={handleToggle}
-                    >
-                      <Text>Xem Thêm</Text>
-                      {show ? (
-                        <Box transition='transform 0.3s ease-in-out'>
-                          <HiChevronDown />
-                        </Box>
-                      ) : (
-                        <Box transform='rotate(-180deg)' transition='transform 0.3s ease-in-out'>
-                          <HiChevronDown />
-                        </Box>
-                      )}
-                    </Flex>
-                  </Stack>
-                </Box>
-              </Stack>
-              <GridItem colSpan='2'>
-                <Flex
-                  px='24px'
-                  pb='8px'
-                  pt='16px'
-                  bg='#323541'
-                  p='12px'
-                  fontSize='18px'
-                  roundedTop='12px'
-                  gap='12px'
-                  alignItems='flex-start'
-                >
-                  <Text color='white' fontSize='16px' fontWeight='500' lineHeight='24px'>
-                    Tin tuyển dụng
-                  </Text>
-                </Flex>
-                <Stack
-                  py='24px'
-                  px='12px'
-                  justifyContent='center'
-                  gap='12px'
-                  roundedBottom='20px'
-                  border='1px'
-                  borderColor='#D7D7D7'
-                >
-                  {currentPosts.map((post) => {
-                    return (
+                      <Collapse startingHeight={94} in={show}>
+                        <Text fontSize='16px' fontWeight='semibold' color='#727272'>
+                          {' '}
+                          {eProfile.description}
+                        </Text>
+                      </Collapse>
                       <Flex
-                        px='12px'
-                        py='16px'
-                        alignItems='flex-start'
-                        gap='20px'
-                        rounded='8px'
-                        border='1px'
-                        borderColor='#D7D7D7'
+                        cursor='pointer'
+                        py='12px'
+                        fontSize='16px'
+                        fontWeight='semibold'
+                        color='#727272'
+                        alignItems='center'
+                        gap='6'
+                        bg='white'
+                        w='full'
+                        onClick={handleToggle}
                       >
-                        <Box flexShrink='0'>
-                          <Image src={PostImage} width='100' height='100'></Image>
-                        </Box>
-                        <Stack
-                          justifyContent='space-between'
-                          flex='1 0 0'
-                          alignSelf='stretch'
-                          alignItems='flex-start'
-                        >
-                          <Flex
-                            alignItems='flex-start'
-                            alignSelf='stretch'
-                            justifyContent='space-between'
-                          >
-                            <Stack alignItems='flex-start' gap='4px'>
-                              <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
-                                {post.title}
-                              </Text>
-                              <Text fontSize='14px' fontWeight='500' lineHeight='24px'>
-                                {post.company}
-                              </Text>
-                            </Stack>
-                            <Text fontSize='14px' fontWeight='600' lineHeight='24px'>
-                              {post.salary}
-                            </Text>
-                          </Flex>
-                          <Flex gap='8px'>
-                            {post.tags.map((tag) => {
-                              return (
-                                <Flex
-                                  py='2px'
-                                  px='8px'
-                                  alignItems='flex-start'
-                                  bg='#D7D7D7'
-                                  rounded='4px'
-                                >
-                                  <Text
-                                    fontSize='12px'
-                                    fontWeight='500'
-                                    lineHeight='20px'
-                                    color='#323541'
-                                  >
-                                    {tag}
-                                  </Text>
-                                </Flex>
-                              );
-                            })}
-                          </Flex>
-                        </Stack>
+                        <Text>Xem Thêm</Text>
+                        {show ? (
+                          <Box transition='transform 0.3s ease-in-out'>
+                            <HiChevronDown />
+                          </Box>
+                        ) : (
+                          <Box transform='rotate(-180deg)' transition='transform 0.3s ease-in-out'>
+                            <HiChevronDown />
+                          </Box>
+                        )}
                       </Flex>
-                    );
-                  })}
-                  <Paging
-                    itemsPerPage={itemsPerPage}
-                    totalItems={posts.length}
-                    changePage={changePage}
-                    tColor='#323541'
-                    bgColor='#D7D7D7'
-                  />
+                    </Stack>
+                  </Box>
+                  <GridItem colSpan='2'>
+                    <Flex
+                      px='24px'
+                      pb='8px'
+                      pt='16px'
+                      bg='#323541'
+                      p='12px'
+                      fontSize='18px'
+                      roundedTop='12px'
+                      gap='12px'
+                      alignItems='flex-start'
+                    >
+                      <Text color='white' fontSize='16px' fontWeight='500' lineHeight='24px'>
+                        Tin tuyển dụng
+                      </Text>
+                    </Flex>
+                    <Stack
+                      py='24px'
+                      px='12px'
+                      justifyContent='center'
+                      gap='12px'
+                      roundedBottom='20px'
+                      border='1px'
+                      borderColor='#D7D7D7'
+                    >
+                      {currentPosts.map((post) => {
+                        return (
+                          <Flex
+                            px='12px'
+                            py='16px'
+                            alignItems='flex-start'
+                            gap='20px'
+                            rounded='8px'
+                            border='1px'
+                            borderColor='#D7D7D7'
+                          >
+                            <Box flexShrink='0'>
+                              <Image src={PostImage} width='100' height='100'></Image>
+                            </Box>
+                            <Stack
+                              justifyContent='space-between'
+                              flex='1 0 0'
+                              alignSelf='stretch'
+                              alignItems='flex-start'
+                            >
+                              <Flex
+                                alignItems='flex-start'
+                                alignSelf='stretch'
+                                justifyContent='space-between'
+                              >
+                                <Stack alignItems='flex-start' gap='4px'>
+                                  <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
+                                    {post.title}
+                                  </Text>
+                                  <Text fontSize='14px' fontWeight='500' lineHeight='24px'>
+                                    {post.company}
+                                  </Text>
+                                </Stack>
+                                <Text fontSize='14px' fontWeight='600' lineHeight='24px'>
+                                  {post.salary}
+                                </Text>
+                              </Flex>
+                              <Flex gap='8px'>
+                                {post.tags.map((tag) => {
+                                  return (
+                                    <Flex
+                                      py='2px'
+                                      px='8px'
+                                      alignItems='flex-start'
+                                      bg='#D7D7D7'
+                                      rounded='4px'
+                                    >
+                                      <Text
+                                        fontSize='12px'
+                                        fontWeight='500'
+                                        lineHeight='20px'
+                                        color='#323541'
+                                      >
+                                        {tag}
+                                      </Text>
+                                    </Flex>
+                                  );
+                                })}
+                              </Flex>
+                            </Stack>
+                          </Flex>
+                        );
+                      })}
+                      <Paging
+                        itemsPerPage={itemsPerPage}
+                        totalItems={posts.length}
+                        changePage={changePage}
+                        tColor='#323541'
+                        bgColor='#D7D7D7'
+                      />
+                    </Stack>
+                  </GridItem>
+                </Box>
+              ) : (
+                <Stack gap='24px'>
+                  <Stack
+                    p='24px'
+                    gap='16px'
+                    rounded='12px'
+                    border='1px solid #D7D7D7'
+                    justifyContent='center'
+                  >
+                    <Flex alignSelf='stretch'>
+                      <Text
+                        fontSize='20px'
+                        fontWeight='700'
+                        lineHeight='28px'
+                        letterSpacing='0.2px'
+                      >
+                        Giấy phép kinh doanh
+                      </Text>
+                    </Flex>
+                    <Image src='/static/images/license.png' width='530' height='830'></Image>
+                  </Stack>
+                  <Stack p='24px' gap='16px' rounded='12px' border='1px solid #D7D7D7'>
+                    <Text fontSize='20px' fontWeight='700' lineHeight='28px' letterSpacing='0.2px'>
+                      Khác
+                    </Text>
+                    <Text fontSize='14px' fontWeight='400' color='#818181'>
+                      Không có
+                    </Text>
+                  </Stack>
                 </Stack>
-              </GridItem>
+              )}
             </Stack>
           </GridItem>
           {/*Right*/}
@@ -568,7 +589,7 @@ function UserProfileEmployer() {
           </GridItem>
         </Grid>
       )}
-    </div>
+    </Stack>
   );
 }
 export default UserProfileEmployer;
