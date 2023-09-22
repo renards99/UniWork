@@ -27,7 +27,6 @@ import axios from 'axios';
 import DropDownStatus from '../../components/layout/admin/dropDownStatus';
 import StatusFrame from '../../components/layout/admin/statusFrame';
 function UserProfileEmployer() {
-  
   const menuData = {
     roles: ['Giám đốc', 'Nhân viên', 'Trợ lý', 'Quản lý', 'Phó phòng', 'Thực tập sinh'],
     workForm: [
@@ -38,9 +37,10 @@ function UserProfileEmployer() {
     ],
     gender: ['nam', 'nữ', 'không yêu cầu'],
     status: [
-      <StatusFrame text='Chưa duyệt' />,
-      <StatusFrame text='Đã duyệt' />,
-      <StatusFrame text='Không duyệt' />,
+      <StatusFrame text='Đã xác minh' />,
+      <StatusFrame text='Chưa xác minh' />,
+      <StatusFrame text='Đã cấm' />,
+      <StatusFrame text='Không hoạt động' />,
       <StatusFrame text='Hết hạn' />,
     ],
   };
@@ -166,7 +166,6 @@ function UserProfileEmployer() {
   useEffect(() => {
     getUserAccount();
   }, []);
-  console.log(userData[0]);
   const data = userData[0];
 
   // const getCompany = useCallback(async () => {

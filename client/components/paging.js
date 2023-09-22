@@ -38,7 +38,6 @@ function Paging(props) {
   useEffect(() => {
     setCurrentPage(currentPage_help); // Update the current page value
   }, [currentPage_help]);
-  console.log('current page trong component', currentPage);
   return (
     <Flex justifyContent='center' gap={12}>
       <Button
