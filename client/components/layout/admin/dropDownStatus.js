@@ -22,20 +22,24 @@ export default function DropDownStatus(props) {
   const data = props.data;
 
   const [selectedMenuItem, setSelectedMenuItem] = useState(data[0]);
+  const [modalItem, setModalItem] = useState(data[0]);
   const [modalStatus, setModalStatus] = useState(false);
   const [menuIcon, setMenuIcon] = useState(false);
   const [banned, setBanned] = useState(false);
-  
 
   const handleBanned = () => {
     setBanned(!banned);
     setModalStatus(!modalStatus);
+    setSelectedMenuItem(modalItem);
   };
 
   const handleOpenModal = (index, selected) => {
-    if( index == 2) {
-
+    if (index == 2) {
       setModalStatus(!modalStatus);
+      setModalItem(selected);
+    } else if (index != 2 && banned) {
+      setModalStatus(!modalStatus);
+      setModalItem(selected);
     } else {
       setSelectedMenuItem(selected);
     }
@@ -138,10 +142,10 @@ export default function DropDownStatus(props) {
                 pr='54px'
                 _focus={{ bg: 'none' }}
                 h='48px'
-                onClick={()=>handleOpenModal(index, item)}
+                onClick={() => handleOpenModal(index, item)}
                 command={
                   <Box p='12px 20px' fontSize='16px' fontWeight='600' lineHeight='24px'>
-                    {index == 2 && !banned ? <StatusFrame text='Cấm' /> : item}
+                    {index == 2 ? <StatusFrame text='Cấm' /> : item}
                   </Box>
                 }
               ></MenuItem>
