@@ -21,7 +21,8 @@ import { FiPhone } from 'react-icons/fi';
 import { HiOutlineBuildingOffice2 } from 'react-icons/hi2';
 import Image from 'next/image';
 import TempAvatar from '../../public/static/images/temporary_avatar.png';
-import EmployerHeader from '../../components/layout/employer/header';
+import CandidateHeader from '../../components/layout/candidate/header';
+
 import { useCallback, useEffect, useState } from 'react';
 import PostImage from '../../public/static/images/applicationPost.png';
 import Paging from '../../components/paging';
@@ -498,7 +499,7 @@ function EmployerDetails() {
 
   return (
     <Box>
-      <EmployerHeader />
+      <CandidateHeader />
 
       <Stack alignItems='flex-start' gap='24px' p='28px'>
         {employerInfo}
