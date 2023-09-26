@@ -34,7 +34,7 @@ export default function DropDownHeader() {
         alignItems='center'
         rounded='40px'
         onClick={handleMenuClick}
-        leftIcon={<Avatar size='xs' src='' />}
+        leftIcon={<Avatar size='md' src='' />}
         rightIcon={
           menuIcon ? (
             <Box transition='transform 0.3s ease-in-out' fontSize='24px'>

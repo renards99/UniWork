@@ -268,9 +268,13 @@ function PostUpload() {
                   <Text fontSize='14px' fontWeight='500' lineHeight='24px'>
                     Thời hạn đăng
                   </Text>
-                  <Flex>
-                    <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
-                    <DatePicker selected={endDate} onChange={(date) => setEndDate(date)} />
+                  <Flex gap='20px'>
+                    <Flex border='1px solid black' justifyContent='center' alignItems='center'>
+                      <DatePicker  selected={startDate} onChange={(date) => setStartDate(date)} />
+                    </Flex>
+                    <Flex border='1px solid black' justifyContent='center' alignItems='center'>
+                      <DatePicker selected={endDate} onChange={(date) => setEndDate(date)} />
+                    </Flex>
                     <Input
                       rounded='0px 12px 12px 0px'
                       p='24px 20px'
