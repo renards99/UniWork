@@ -66,7 +66,7 @@ function Register() {
                 </Box>
               }
             />
-            <Input placeholder='Nhập Mật khẩu' size='lg'></Input>
+            <Input p='20px' placeholder='Nhập Mật khẩu' size='lg'></Input>
           </InputGroup>
         </Stack>
         <Stack width='377px'>

@@ -19,14 +19,6 @@ import {
   Checkbox,
   RadioGroup,
   Radio,
-  useDisclosure,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
 } from '@chakra-ui/react';
 import Image from 'next/image';
 import { MdEmail } from 'react-icons/md';
@@ -128,76 +120,7 @@ function RegisterEmployer() {
     // Add other validations as needed
     return true;
   };
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const [openModal, setOpenModal] = useState(true);
-  const handleModalClick = () => setOpenModal(!openModal);
-  const modal = (
-    <Modal isOpen={openModal} onClose={onClose} isCentered size='6xl'>
-      <ModalOverlay bg='none' backdropFilter='auto' backdropBlur='2px' />
-      <ModalContent>
-        {/* <ModalHeader borderBottom='1px solid #818181' fontSize='24px'>
-          Chào bạn
-          <Text as='span' color='#F98820'>
-            Nhân viên tư vấn
-          </Text>
-        </ModalHeader> */}
-        <ModalCloseButton />
-        <ModalBody>
-          <Stack justifyContent='center' alignItems='center'>
-            <Text color='#323541' fontSize='16px' fontWeight='500' lineHeight='32px'>
-              Để tối ưu tốt nhất cho trải nghiệm của bạn với UniWork,
-            </Text>
-            <Text color='#323541' fontSize='16px' fontWeight='500' lineHeight='32px'>
-              Để tối ưu tốt nhất cho trải nghiệm của bạn với TopCV,
-            </Text>
-          </Stack>
-          <Flex
-            p='24px 24px 32px 24px'
-            justifyContent='space-between'
-            alignItems='center'
-            gap='20px'
-          >
-            <Stack justifyContent='center' alignItems='center'>
-              <Image src='/static/images/employer.png' width='400' height='250'></Image>
-              <Flex
-                p='12px'
-                mt='32px'
-                rounded='full'
-                bg='#F8A353'
-                justifyContent='center'
-                alignItems='center'
-                onClick={handleModalClick}
-                cursor='pointer'
-              >
-                <Text fontSize='16px' fontWeight='600' lineHeight='24px' color='white'>
-                  Tôi là nhà tuyển dụng
-                </Text>
-              </Flex>
-            </Stack>
-            <Stack justifyContent='center' alignItems='center'>
-              <Image src='/static/images/candidate.png' width='400' height='250'></Image>
-              <Link href='/candidate/register' textDecoration='none' color='white'>
-                <Flex
-                  p='12px'
-                  mt='32px'
-                  rounded='full'
-                  bg='#F8A353'
-                  justifyContent='center'
-                  alignItems='center'
-                  cursor='pointer'
-                  textDecoration='none'
-                >
-                  <Text fontSize='16px' fontWeight='600' lineHeight='24px' color='white'>
-                    Tôi là ứng viên tìm việc
-                  </Text>
-                </Flex>
-              </Link>
-            </Stack>
-          </Flex>
-        </ModalBody>
-      </ModalContent>
-    </Modal>
-  );
+
   const handleRegister = async () => {
     if (!validateForm()) {
       return; // Exit the function if validation fails
@@ -262,7 +185,6 @@ function RegisterEmployer() {
       left='0' // Align it to the left of the viewport
       alignItems='center'
     >
-      {modal}
       <Stack
         w='50%'
         h='100%'
