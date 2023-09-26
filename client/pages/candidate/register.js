@@ -41,14 +41,12 @@ function Register() {
       alignItems='center'
     >
       <Stack
-        w='491px'
-        h='590px'
         bg='white'
         justifyContent='center'
         alignItems='center'
         rounded='30px'
         gap='18px'
-        py='32px'
+        p='50px'
       >
         <Image src={logo} width='173' height='40'></Image>
         <Text fontSize='24px' fontWeight='700' lineHeight='18px' letterSpacing='0.2px'>

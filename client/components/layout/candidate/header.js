@@ -18,6 +18,7 @@ import Logo from '../../../public/static/images/Logo.png';
 import DropDownHeader from './dropDownHeader';
 // import Notifications from './notifications';
 function CandidateHeader() {
+  const login = 1;
   const [show, setShow] = useState(false);
   const handleClick = () => {
     setShow(!show);
@@ -65,19 +66,46 @@ function CandidateHeader() {
         </Link>
       </Flex>
       <Flex gap='24px' justifyContent='flex-end' alignItems='flex-start'>
-        <Flex
-          alignItems='flex-start'
-          fontSize='24px'
-          bg='#E8E8EB'
-          p='12px'
-          rounded='40px'
-          cursor='pointer'
-          gap='10px'
-        >
-          <LuBellDot />
-        </Flex>
+        {login === 1 ? (
+          <Flex gap='20px'>
+            <Flex border='1px solid #FF6B00' p='16px 16px' rounded='12px'>
+              <Text color='#FF6B00' fontSize='20px' fontWeight='700' textAlign='center'>
+                Đăng nhập
+              </Text>
+            </Flex>
+
+            <Flex bg='#FF6B00' p='16px 16px' rounded='12px'>
+              <Text color='white' fontSize='20px' fontWeight='700' textAlign='center'>
+                Đăng ký
+              </Text>
+            </Flex>
+            <Link href='/register-employer'>
+              <Flex bg='#33271F' p='16px 16px' rounded='12px'>
+                <Text color='white' fontSize='20px' fontWeight='700' textAlign='center'>
+                  Đăng tuyển & tìm hồ sơ
+                </Text>
+              </Flex>
+            </Link>
+          </Flex>
+        ) : (
+          <Flex gap='20px'>
+            <Flex
+              alignItems='flex-start'
+              fontSize='24px'
+              bg='#E8E8EB'
+              p='12px'
+              rounded='40px'
+              cursor='pointer'
+              gap='10px'
+            >
+              <LuBellDot />
+            </Flex>
+            <DropDownHeader />
+          </Flex>
+        )}
+
         {/* <Notifications /> */}
-        <DropDownHeader />
+
         {/* <Flex
           rounded='40px'
           fontSize='24px'

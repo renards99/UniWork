@@ -356,7 +356,7 @@ function StudentProfile() {
                     </Stack>
                   </Stack>
                 </Flex>{' '}
-                <Im age src='/static/images/icon/edit2.svg' width='40' height='40'></Im>
+                <Image src='/static/images/icon/edit2.svg' width='40' height='40'></Image>
               </Flex>
               <Box></Box>
             </Stack>
