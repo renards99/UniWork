@@ -4,6 +4,7 @@ import { IoPersonCircle } from 'react-icons/io5';
 import { HiChevronDown, HiOutlineMail } from 'react-icons/hi';
 import { useState } from 'react';
 import Notifications from './notifications';
+import DropDownHeader from './dropDownHeader';
 function AdminHeader() {
   const [show, setShow] = useState(false);
   const handleClick = () => {
@@ -40,30 +41,7 @@ function AdminHeader() {
           <LuBellDot />
         </Flex> */}
         <Notifications />
-        <Flex
-          rounded='40px'
-          fontSize='24px'
-          p='12px'
-          alignItems='flex-start'
-          gap='18px'
-          bg='#E8E8EB'
-          cursor='pointer'
-          onClick={handleClick}
-        >
-          <IoPersonCircle />
-          <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
-            Administrator
-          </Text>
-          {show ? (
-            <Box transition='transform 0.3s ease-in-out'>
-              <HiChevronDown />
-            </Box>
-          ) : (
-            <Box transform='rotate(-180deg)' transition='transform 0.3s ease-in-out'>
-              <HiChevronDown />
-            </Box>
-          )}
-        </Flex>
+        <DropDownHeader />
       </Flex>
     </Flex>
   );

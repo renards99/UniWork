@@ -79,6 +79,7 @@ export default function SideBarAdmin(props) {
       justifyContent='space-between'
       id='bom-side-bar'
       backgroundColor={'#323541'}
+      position='fixed'
     >
       <Stack>
         <Link href={'/'} style={{ margin: '36px 0 95px' }}>
@@ -157,19 +158,6 @@ export default function SideBarAdmin(props) {
           />
         </Flex>
       </Stack>
-
-      <Flex padding='5% 10%' flexDirection={'column'}>
-        <SideItem
-          navSize={navSize}
-          icon={CiLogout}
-          handleSetActiveSideBar={handleSetActiveSideBar}
-          title='Đăng xuất'
-          value={99}
-          sideBarActive={sideBarActive}
-          href={path}
-        />
-        <Box h={'30px'}></Box>
-      </Flex>
     </Flex>
   );
 }

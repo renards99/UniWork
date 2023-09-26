@@ -20,6 +20,7 @@ import {
   border,
   InputGroup,
   InputLeftElement,
+  Avatar,
 } from '@chakra-ui/react';
 import Image from 'next/image';
 import { Select } from '@chakra-ui/react';
@@ -28,180 +29,18 @@ import backgroundImg from '../../public/static/images/rectangle_33.png';
 import DropDown from '../../components/layout/candidate/dropDownLocation';
 import speakerIcon from '../../public/static/images/icon/speaker.svg';
 import { HiMiniMagnifyingGlass } from 'react-icons/hi2';
+import { GiFlexibleStar } from 'react-icons/gi';
 
 function SearchingList() {
-  const locations = ['Hà Giang', 'Tuyên Quang', 'Hà Nội', '...'];
-  const experiences = ['Không Kinh Nghiệm', 'Trên 1 năm', 'Trên 2 năm', '...'];
-  const salaries = ['1-5 triệu', '5-7 triệu', '20 triệu', '...'];
-  const employers = [
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Nhà Cơm Phương Nguyễn',
-      Role: 'Shipper',
-      salary: '100k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Cơm Quang Anh',
-      Role: 'Phụ Bếp',
-      salary: '80k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Ảnh Cưới Lan Anh',
-      Role: 'Chụp Ảnh',
-      salary: '200k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
+  const topEmployer = [
+    { image: '/static/images/avatar_icon.png' },
+    { image: '/static/images/avatar_icon.png' },
+    { image: '/static/images/avatar_icon.png' },
+    { image: '/static/images/avatar_icon.png' },
+    { image: '/static/images/avatar_icon.png' },
+    { image: '/static/images/avatar_icon.png' },
+    { image: '/static/images/avatar_icon.png' },
+    { image: '/static/images/avatar_icon.png' },
   ];
   const fakeData = [
     {
@@ -209,6 +48,7 @@ function SearchingList() {
       title: 'Nhân viên thiết kế chuyên viên tư vấn thiết kế lĩnh vực kiến trúc',
       company: 'CÔNG TY ABC CỔ PHẦN VÀ THƯƠNG MẠI GLOBAL ',
       locations: 'Hà Nội, HCM',
+      info: 'Cty hoạt động và phân phối được liệu và mĩ phẩm . công ty hoạt động trên nhiều năm. với quy mô hoan 100 nhân vien',
       remainingDays: 'Còn 30 ngày để ứng tuyển',
       time: 'Cập nhật 2h trước',
       salary: '25-30 TRIỆU',
@@ -219,6 +59,7 @@ function SearchingList() {
       title: 'Nhân viên thiết kế chuyên viên tư vấn thiết kế lĩnh vực kiến trúc',
       company: 'CÔNG TY ABC CỔ PHẦN VÀ THƯƠNG MẠI GLOBAL ',
       locations: 'Hà Nội, HCM',
+      info: 'Cty hoạt động và phân phối được liệu và mĩ phẩm . công ty hoạt động trên nhiều năm. với quy mô hoan 100 nhân vien',
       remainingDays: 'Còn 30 ngày để ứng tuyển',
       time: 'Cập nhật 2h trước',
       salary: '25-30 TRIỆU',
@@ -234,6 +75,7 @@ function SearchingList() {
       title: 'Nhân viên thiết kế chuyên viên tư vấn thiết kế lĩnh vực kiến trúc',
       company: 'CÔNG TY ABC CỔ PHẦN VÀ THƯƠNG MẠI GLOBAL ',
       locations: 'Hà Nội, HCM',
+      info: 'Cty hoạt động và phân phối được liệu và mĩ phẩm . công ty hoạt động trên nhiều năm. với quy mô hoan 100 nhân vien',
       remainingDays: 'Còn 30 ngày để ứng tuyển',
       time: 'Cập nhật 2h trước',
       salary: '25-30 TRIỆU',
@@ -249,6 +91,7 @@ function SearchingList() {
       title: 'Nhân viên thiết kế chuyên viên tư vấn thiết kế lĩnh vực kiến trúc',
       company: 'CÔNG TY ABC CỔ PHẦN VÀ THƯƠNG MẠI GLOBAL ',
       locations: 'Hà Nội, HCM',
+      info: 'Cty hoạt động và phân phối được liệu và mĩ phẩm . công ty hoạt động trên nhiều năm. với quy mô hoan 100 nhân vien',
       remainingDays: 'Còn 30 ngày để ứng tuyển',
       time: 'Cập nhật 2h trước',
       salary: '25-30 TRIỆU',
@@ -259,6 +102,7 @@ function SearchingList() {
       title: 'Nhân viên thiết kế chuyên viên tư vấn thiết kế lĩnh vực kiến trúc',
       company: 'CÔNG TY ABC CỔ PHẦN VÀ THƯƠNG MẠI GLOBAL ',
       locations: 'Hà Nội, HCM',
+      info: 'Cty hoạt động và phân phối được liệu và mĩ phẩm . công ty hoạt động trên nhiều năm. với quy mô hoan 100 nhân vien',
       remainingDays: 'Còn 30 ngày để ứng tuyển',
       time: 'Cập nhật 2h trước',
       salary: '25-30 TRIỆU',
@@ -324,7 +168,7 @@ function SearchingList() {
         </Box>
       </Flex>
       <Stack bg='#F0EAE9' gap='32px'>
-        <Flex gap='32px' px='150px' justifyContent='center' pt='40px'>
+        <Flex gap='32px' px='150px' justifyContent='center' alignItems='flex-start' pt='40px'>
           <Stack gap='16px'>
             {currentData.map((data) => (
               <Flex rounded='10px' bg='white' justifyContent='space-between' p='18px'>
@@ -332,60 +176,52 @@ function SearchingList() {
                   <Box>
                     <Image src='/static/images/avatar_icon.png' width='100' height='100'></Image>
                   </Box>
-                  <Flex p='12px'>
-                    <Stack gap='12px'>
-                      <Text fontSize='24px' fontWeight='600' lineHeight='18px'>
-                        {data.title}
-                      </Text>
-                      <Text fontSize='12px' fontWeight='700' lineHeight='18px'>
+                  <Stack p='12px' gap='20px'>
+                    <Flex alignItems='center' gap='20px'>
+                      <Text fontSize='18px' fontWeight='600'>
                         {data.company}
                       </Text>
-                      {data.tags.map((tag) => (
-                        <Text fontSize='12px' fontWeight='700' lineHeight='18px' color='#E76F00'>
-                          {tag}
+                      <Text fontSize='20px' fontWeight='600' color='#9E9E9E'>
+                        Đang tuyển 0 vị trí
+                      </Text>
+                    </Flex>
+                    <Stack gap='12px'>
+                      <Flex gap='20px'>
+                        <Image src='/static/images/icon/address.svg' width='24' height='24'></Image>
+                        <Text fontSize='16px' fontWeight='700' lineHeight='18px' color='#727272'>
+                          {data.locations}
                         </Text>
-                      ))}
-
-                      <Flex gap='32px'>
-                        <Flex rounded='12px' bg='#E3E3E3' p='8px'>
-                          <Text fontSize='12px' fontWeight='600' lineHeight='18px'>
-                            {data.locations}
-                          </Text>
-                        </Flex>
-                        <Flex rounded='12px' bg='#E3E3E3' p='8px'>
-                          <Text fontSize='12px' fontWeight='600' lineHeight='18px'>
-                            {data.remainingDays}
-                          </Text>
-                        </Flex>
-                        <Flex rounded='12px' bg='#E3E3E3' p='8px'>
-                          <Text fontSize='12px' fontWeight='600' lineHeight='18px'>
-                            {data.time}
-                          </Text>
-                        </Flex>
+                      </Flex>
+                      <Flex gap='20px'>
+                        <Image src='/static/images/icon/info.svg' width='24' height='24'></Image>
+                        <Text fontSize='16px' fontWeight='700' lineHeight='18px' color='#727272'>
+                          {data.info}
+                        </Text>{' '}
                       </Flex>
                     </Stack>
-                  </Flex>
+                  </Stack>
                 </Flex>
-                <Stack justifyContent='space-between' p='12px'>
-                  <Text fontSize='16px' fontWeight='700' lineHeight='18px' color='#E76F00'>
-                    {data.salary}
-                  </Text>
-                  <Flex
-                    rounded='12px'
-                    bg='#F6871F'
-                    p='8px'
-                    justifyContent='center'
-                    alignItems='center'
-                  >
-                    <Text fontSize='12px' fontWeight='600' lineHeight='18px' color='white'>
-                      Xem CV
-                    </Text>
-                  </Flex>
-                </Stack>
               </Flex>
             ))}
           </Stack>
-          <Image src='/static/images/recruiterTop.png' width='350' height='800'></Image>
+          <Stack p='20px' bg='white' gap='20px' flexBasis='20%' alignItems='center'>
+            <Text fontSize='24px' fontWeight='600' alignSelf='start'>
+              Nhà tuyển dụng hàng đầu
+            </Text>
+            <Flex
+              p='16px'
+              wrap='wrap'
+              justifyContent='space-between'
+              alignItems='center'
+              gap='24px'
+            >
+              {topEmployer.map((employer) => (
+                <Box>
+                  <Avatar size='2xl' src=''></Avatar>
+                </Box>
+              ))}
+            </Flex>
+          </Stack>
         </Flex>
 
         <Paging
