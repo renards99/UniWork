@@ -445,7 +445,6 @@ function LandingPage() {
     );
   });
 
-  const backgroundImage = backgroundImg;
   const HomeContent = (
     <div>
       <CandidateHeader />
