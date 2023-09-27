@@ -213,7 +213,7 @@ function StudentProfile() {
           )}
         </Stack>
       </Stack>
-      <Stack bg='#FFE9C1' rounded='10px' p='28px' gap='24px' alignItems='center'>
+      {/* <Stack bg='#FFE9C1' rounded='10px' p='28px' gap='24px' alignItems='center'>
         <Stack alignSelf='stretch'>
           <Text fontSize='20px' fontWeight='600' lineHeight='18px' letterSpacing='0.2px'>
             Thống kê lượt xem từ nhà tuyển dụng
@@ -255,7 +255,7 @@ function StudentProfile() {
             </Text>
           </Stack>
         </Flex>
-      </Stack>
+      </Stack> */}
       <Flex bg='white' p='20px' justifyContent='space-between' alignItems='center' rounded='12px'>
         <Stack gap='28px'>
           <Text fontSize='24px' fontWeight='800'>
@@ -334,7 +334,12 @@ function StudentProfile() {
             </Flex>
           </Stack>
           {student.education.map((education) => (
-            <Stack justifyContent='center' gap='20px'>
+            <Stack
+              justifyContent='center'
+              gap='20px'
+              borderBottom='1px solid #D7D7D7'
+              _last={{ borderBottomWidth: 0 }}
+            >
               <Flex justifyContent='space-between' alignItems='center'>
                 <Flex alignItems='center' gap='12px'>
                   <Box bg='#FF9C43' rounded='full' p='12px'>
@@ -353,7 +358,7 @@ function StudentProfile() {
                 </Flex>{' '}
                 <Image src='/static/images/icon/edit2.svg' width='40' height='40'></Image>
               </Flex>
-              <Box border='1px solid gray'></Box>
+              <Box></Box>
             </Stack>
           ))}
         </Stack>
@@ -410,7 +415,13 @@ function StudentProfile() {
             </Flex>
           </Stack>
           {student.experience.map((experience) => (
-            <Stack justifyContent='center' gap='20px'>
+            <Stack
+              justifyContent='center'
+              gap='20px'
+              borderBottom='1px solid #D7D7D7'
+              _last={{ borderBottomWidth: 0 }}
+              py='20px'
+            >
               <Flex justifyContent='space-between' alignItems='center'>
                 <Flex alignItems='center' gap='12px'>
                   <Box bg='#FF9C43' rounded='full' p='12px'>
@@ -431,7 +442,6 @@ function StudentProfile() {
                 </Flex>{' '}
                 <Image src='/static/images/icon/edit2.svg' width='40' height='40'></Image>
               </Flex>
-              <Box border='1px solid gray'></Box>
             </Stack>
           ))}
         </Stack>

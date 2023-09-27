@@ -120,6 +120,7 @@ function RegisterEmployer() {
     // Add other validations as needed
     return true;
   };
+
   const handleRegister = async () => {
     if (!validateForm()) {
       return; // Exit the function if validation fails
