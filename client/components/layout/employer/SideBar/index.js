@@ -19,7 +19,7 @@ export default function SideBarAdmin(props) {
   const toastIdRef = useRef();
   const router = useRouter();
   const path = {
-    revenue: '/employer/posts-list',
+    revenue: '/employer/post-list',
     account: '/employer/candidate-list',
     job: '/employer/service',
     setting: '/employer/my-service',

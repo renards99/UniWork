@@ -20,17 +20,15 @@ import EmployerHeader from '../../components/layout/employer/header';
 import { useCallback, useState, useEffect } from 'react';
 import { differenceInDays } from 'date-fns';
 import 'react-datepicker/dist/react-datepicker.css';
+import { totalPriceItemInCart } from '../../helper';
 
 import axios from 'axios';
 
+const BACK_END_PORT = 'http://localhost:5000';
+
 const menuData = {
   roles: ['Giám đốc', 'Nhân viên', 'Trợ lý', 'Quản lý', 'Phó phòng', 'Thực tập sinh'],
-  workForm: [
-    'Bán thời gian - Partime',
-    'Toàn thời gian - Fulltime',
-    'Làm việc từ xa - Remote',
-    'Làm việc văn phòng và làm việc từ xa - Hybird',
-  ],
+  workForm: ['Bán thời gian - Partime', 'Toàn thời gian - Fulltime'],
   gender: ['nam', 'nữ', 'không yêu cầu'],
 };
 
@@ -52,6 +50,10 @@ function PostUpload() {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
 
+  // list services
+
+  const [listService, setListService] = useState([]);
+
   const calculateDifference = () => {
     if (startDate && endDate) {
       return differenceInDays(endDate, startDate);
@@ -64,7 +66,7 @@ function PostUpload() {
       const getListJobType = await axios.post(`http://localhost:5000/job-type/get-all-job-type`);
       if (getListJobType.data.statusCode === 200) {
         setJobType(getListJobType.data.data.map((item) => item.job_type_name));
-        console.log(getListJobType.data.data);
+        console.log(getListJobType.data.data);  
       } else {
       }
     } catch (error) {}
@@ -73,41 +75,85 @@ function PostUpload() {
     getListJobType();
   }, []);
 
-  const handleSave = () => {
-    const emptyFields = [];
+  const handleSave = async () => {
+    // const emptyFields = [];
 
-    if (!title.trim()) emptyFields.push('Title');
-    if (!workHours.trim()) emptyFields.push('Work Hours');
-    if (!serviceId) emptyFields.push('Service ID');
-    if (!jobTypeId) emptyFields.push('Job Type ID');
-    if (!postById) emptyFields.push('Post By ID');
-    if (!companyId) emptyFields.push('Company ID');
-    if (!hireNumber.trim()) emptyFields.push('Hire Number');
-    if (!jobDescription.trim()) emptyFields.push('Job Description');
-    if (!jobLocation.trim()) emptyFields.push('Job Location');
-    if (!salary.trim()) emptyFields.push('Salary');
-    if (!gender.trim()) emptyFields.push('Gender');
+    // if (!title.trim()) emptyFields.push('Title');
+    // if (!workHours.trim()) emptyFields.push('Work Hours');
+    // if (!serviceId) emptyFields.push('Service ID');
+    // if (!jobTypeId) emptyFields.push('Job Type ID');
+    // if (!postById) emptyFields.push('Post By ID');
+    // if (!companyId) emptyFields.push('Company ID');
+    // if (!hireNumber.trim()) emptyFields.push('Hire Number');
+    // if (!jobDescription.trim()) emptyFields.push('Job Description');
+    // if (!jobLocation.trim()) emptyFields.push('Job Location');
+    // if (!salary.trim()) emptyFields.push('Salary');
+    // if (!gender.trim()) emptyFields.push('Gender');
 
-    if (emptyFields.length > 0) {
-      alert(`The following fields are empty: ${emptyFields.join(', ')}`);
-      return;
-    }
+    // if (emptyFields.length > 0) {
+    //   alert(`The following fields are empty: ${emptyFields.join(', ')}`);
+    //   return;
+    // }
 
     // Logic to save data goes here
-    console.log('Data saved:', {
-      title,
-      workHours,
-      serviceId,
-      jobTypeId,
-      postById,
-      companyId,
-      hireNumber,
-      jobDescription,
-      jobLocation,
-      salary,
-      gender,
-    });
+    // console.log('Data saved:', {
+    //   title,
+    //   workHours,
+    //   serviceId,
+    //   jobTypeId,
+    //   postById,
+    //   companyId,
+    //   hireNumber,
+    //   jobDescription,
+    //   jobLocation,
+    //   salary,
+    //   gender,
+    // });
+    const jobData = {
+      title: 'bcd',
+      work_hours: 1,
+      service_id: 2,
+      job_type_id: 1,
+      post_by_id: 2,
+      company_id: 2,
+      hire_number: 'hireNumber',
+      job_location: 'jobLocation',
+      is_active: 'false',
+      salary: 'salary',
+      view: 0,
+      gender: 1,
+      state: 1,
+      apply_at: '2018-01-01',
+      expired_at: '2019-01-01',
+      created_at: '2018-01-01',
+      updated_at: '2019-01-01',
+      job_description: '',
+      experience: '',
+      price: '10000000',
+    };
+    const createPaymentRequest = await axios.post(
+      `${BACK_END_PORT}/transaction/create-payment`,
+      jobData,
+    );
+    if (createPaymentRequest.data.statusCode === 200) {
+      window.location.href = createPaymentRequest.data.data.link_payment;
+    }
   };
+
+  const getServiceJobDetails = async () => {
+    try {
+      const service = await axios.post(`${BACK_END_PORT}/service/get-all-service`);
+      if (service.data.statusCode === 200) {
+        setListService(service.data.data);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const serviceSelected = listService.filter((service, index) => service.id == serviceId)[0];
+  useEffect(() => {
+    getServiceJobDetails();
+  }, []);
   return (
     <Box>
       <EmployerHeader />
@@ -252,13 +298,21 @@ function PostUpload() {
                     <Text fontSize='14px' fontWeight='500' lineHeight='24px'>
                       Hình thức làm việc:
                     </Text>
-                    <DropDown data={menuData.roles} />
+                    <DropDown
+                      data={menuData.workForm}
+                      value={workHours}
+                      onChange={(e) => setWorkHours(e)}
+                    />
                   </Stack>
                   <Stack gap='8px' p='0px' flex='1 0 0'>
                     <Text fontSize='14px' fontWeight='500' lineHeight='24px'>
                       Giới tính:
                     </Text>
-                    <DropDown data={menuData.roles} />
+                    <DropDown
+                      data={menuData.gender}
+                      value={gender}
+                      onChange={(e) => setGender(e)}
+                    />
                   </Stack>
                 </Flex>
                 <Stack gap='8px' p='0px' flex='1 0 0'>
@@ -371,7 +425,7 @@ function PostUpload() {
                   Dịch vụ
                 </Text>
               </Flex>
-              <RadioGroup>
+              <RadioGroup onChange={setServiceId} value={serviceId}>
                 <Stack
                   p='24px'
                   justifyContent='center'
@@ -379,27 +433,39 @@ function PostUpload() {
                   border='1px'
                   borderColor='#D7D7D7'
                 >
-                  <Radio size='lg' colorScheme='blackAlpha' value='1'>
-                    <Text fontSize='14px' fontWeight='400' lineHeight='24px'>
-                      Add Label Hot
-                    </Text>
-                  </Radio>
+                  {listService.map((service, index) => (
+                    <Radio
+                      size='lg'
+                      colorScheme='blackAlpha'
+                      value={service.id?.toString()}
+                      key={index}
+                    >
+                      <Text fontSize='14px' fontWeight='400' lineHeight='24px'>
+                        {service?.service_name}
+                      </Text>
+                    </Radio>
+                  ))}
                   <Flex justifyContent='space-between' alignItems='center'>
                     <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
-                      Bài đăng 0 ngày:
+                      Bài đăng {calculateDifference() ? `${calculateDifference()} ngày` : '0 ngày'}:
                     </Text>
                     <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
-                      0đ
+                      {calculateDifference()
+                        ? totalPriceItemInCart((100000 * calculateDifference()).toString(), 1)
+                        : 0}
+                      đ
                     </Text>
                   </Flex>
-                  <Flex justifyContent='space-between' alignItems='center'>
-                    <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
-                      Add label Hot:
-                    </Text>
-                    <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
-                      1.000.000đ
-                    </Text>
-                  </Flex>
+                  {serviceSelected?.description && (
+                    <Flex justifyContent='space-between' alignItems='center'>
+                      <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
+                        {serviceSelected?.description}
+                      </Text>
+                      <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
+                        {totalPriceItemInCart(serviceSelected.price.toString(), 1)}đ
+                      </Text>
+                    </Flex>
+                  )}
                 </Stack>
                 <Stack
                   p='24px'
@@ -414,7 +480,13 @@ function PostUpload() {
                       Total:
                     </Text>
                     <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
-                      1.000.000đ
+                      {totalPriceItemInCart(
+                        (
+                          (serviceSelected?.price ? serviceSelected?.price : 0) +
+                          (calculateDifference() ? calculateDifference() * 100000 : 0)
+                        ).toString(),
+                        1,
+                      )}
                     </Text>
                   </Flex>
                 </Stack>
@@ -431,6 +503,7 @@ function PostUpload() {
                 fontWeight={'600'}
                 lineHeight='24px'
                 border='1px solid #323541'
+                onClick={handleSave}
               >
                 Xác nhận thanh toán
               </Button>

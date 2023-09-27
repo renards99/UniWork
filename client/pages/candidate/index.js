@@ -1,24 +1,20 @@
-import { useState } from 'react';
-import {
-  BsChevronCompactLeft,
-  BsChevronCompactRight,
-  BsChevronDown,
-  BsArrowLeftCircle,
-  BsArrowRightCircle,
-} from 'react-icons/bs';
-import Paging from '../../components/paging';
-import { RxDotFilled } from 'react-icons/rx';
+import { useEffect, useState } from 'react';
+import { BsChevronDown, BsArrowLeftCircle, BsArrowRightCircle } from 'react-icons/bs';
 import { Box, Input, Button, Icon, Text, Stack, Grid, Flex } from '@chakra-ui/react';
 import Image from 'next/image';
 import { Select } from '@chakra-ui/react';
 import CandidateHeader from '../../components/layout/candidate/header';
-import backgroundImg from '../../public/static/images/rectangle_33.png';
 import DropDown from '../../components/layout/candidate/dropDownLocation';
 import speakerIcon from '../../public/static/images/icon/speaker.svg';
+import axios from 'axios';
+import { useRouter } from 'next/router';
+
+const BACK_END_PORT = 'http://localhost:5000';
 
 function LandingPage() {
+  const router = useRouter();
   const backgroundFooter = '/static/images/footer_background.png';
-  const trends = [
+  const [trends, setTrends] = useState([
     {
       id: 1,
       avatar: '',
@@ -82,7 +78,7 @@ function LandingPage() {
       location: 'Hà Nội',
       tag: 1,
     },
-  ];
+  ]);
   const topCarreer = [
     {
       id: 1,
@@ -362,6 +358,92 @@ function LandingPage() {
 
   //change page
   const changePage = (pageNumber) => setCurrentPage(pageNumber);
+  const getListTrendingJob = async () => {
+    try {
+      const listTrendingJob = await axios.post(`${BACK_END_PORT}/job-post/get-all-job-post`);
+      if (listTrendingJob.data.statusCode === 200) {
+        setTrends(listTrendingJob.data.data);
+      }
+    } catch (e) {}
+  };
+  const handleJobDetail = (id) => {
+    router.push({
+      pathname: `/candidate/job-details/${id}`,
+    });
+  };
+
+  const TrendContent = trends.map((trend) => {
+    return (
+      <Stack
+        rounded='10px'
+        p='20px 10px'
+        gap='20px'
+        bg='white'
+        cursor={'pointer'}
+        onClick={() => handleJobDetail(trend.id)}
+      >
+        <Flex gap='14px'>
+          <Box bg='black' boxSize='60px' rounded='full'></Box>
+          <Stack gap='12px'>
+            <Flex gap='8px' alignItems='center'>
+              {trend.tag === 1 ? (
+                <Flex rounded='12px' bg='#F98820' p=' 10px 20px'>
+                  <Text
+                    color='white'
+                    fontSize='16px'
+                    fontWeight='600'
+                    lineHeight='10px'
+                    letterSpacing='0.2px'
+                  >
+                    Gấp
+                  </Text>
+                </Flex>
+              ) : trend.tag === 2 ? (
+                <Flex rounded='12px' bg='#D22F2F' p=' 10px 20px'>
+                  <Text
+                    color='White'
+                    fontSize='16px'
+                    fontWeight='600'
+                    lineHeight='10px'
+                    letterSpacing='0.2px'
+                  >
+                    Hot
+                  </Text>
+                </Flex>
+              ) : (
+                ''
+              )}
+
+              <Text fontSize='16px' fontWeight='700' lineHeight='18px' letterSpacing='0.2px'>
+                {trend.title}
+              </Text>
+            </Flex>
+            <Text
+              color='#727272'
+              fontSize='14px'
+              fontWeight='700'
+              lineHeight='18px'
+              letterSpacing='0.2px'
+            >
+              {trend.company_name}
+            </Text>
+          </Stack>
+        </Flex>
+        <Flex gap='8px'>
+          <Flex rounded='12px' bg='#F4F5F5' p=' 10px 20px'>
+            <Text fontSize='16px' fontWeight='600' lineHeight='10px' letterSpacing='0.2px'>
+              {trend.salary}
+            </Text>
+          </Flex>
+          <Flex rounded='12px' bg='#F4F5F5' p=' 10px 20px'>
+            <Text fontSize='16px' fontWeight='600' lineHeight='10px' letterSpacing='0.2px'>
+              {trend.job_location}
+            </Text>
+          </Flex>
+        </Flex>
+      </Stack>
+    );
+  });
 
   const backgroundImage = backgroundImg;
   const HomeContent = (
@@ -548,76 +630,7 @@ function LandingPage() {
           </Flex>
         </Flex>
         <Grid templateColumns='repeat(3, 1fr)' gap='30px'>
-          {trends.map((trend) => {
-            return (
-              <Stack rounded='10px' p='20px 10px' gap='20px' bg='white'>
-                <Flex gap='14px'>
-                  <Box bg='black' boxSize='60px' rounded='full'></Box>
-                  <Stack gap='12px'>
-                    <Flex gap='8px' alignItems='center'>
-                      {trend.tag === 1 ? (
-                        <Flex rounded='12px' bg='#F98820' p=' 10px 20px'>
-                          <Text
-                            color='white'
-                            fontSize='16px'
-                            fontWeight='600'
-                            lineHeight='10px'
-                            letterSpacing='0.2px'
-                          >
-                            Gấp
-                          </Text>
-                        </Flex>
-                      ) : trend.tag === 2 ? (
-                        <Flex rounded='12px' bg='#D22F2F' p=' 10px 20px'>
-                          <Text
-                            color='White'
-                            fontSize='16px'
-                            fontWeight='600'
-                            lineHeight='10px'
-                            letterSpacing='0.2px'
-                          >
-                            Hot
-                          </Text>
-                        </Flex>
-                      ) : (
-                        ''
-                      )}
-
-                      <Text
-                        fontSize='16px'
-                        fontWeight='700'
-                        lineHeight='18px'
-                        letterSpacing='0.2px'
-                      >
-                        Nhân viên thiết kế. In ấn
-                      </Text>
-                    </Flex>
-                    <Text
-                      color='#727272'
-                      fontSize='14px'
-                      fontWeight='700'
-                      lineHeight='18px'
-                      letterSpacing='0.2px'
-                    >
-                      CÔNG TY ABC CỔ PHẦN VÀ THƯƠNG MẠI...
-                    </Text>
-                  </Stack>
-                </Flex>
-                <Flex gap='8px'>
-                  <Flex rounded='12px' bg='#F4F5F5' p=' 10px 20px'>
-                    <Text fontSize='16px' fontWeight='600' lineHeight='10px' letterSpacing='0.2px'>
-                      25-30 Triệu
-                    </Text>
-                  </Flex>
-                  <Flex rounded='12px' bg='#F4F5F5' p=' 10px 20px'>
-                    <Text fontSize='16px' fontWeight='600' lineHeight='10px' letterSpacing='0.2px'>
-                      Hà Nội
-                    </Text>
-                  </Flex>
-                </Flex>
-              </Stack>
-            );
-          })}
+          {TrendContent}
         </Grid>
       </Stack>
       <Stack px='305px' py='50px'>
@@ -773,6 +786,12 @@ function LandingPage() {
       /> */}
     </div>
   );
+
+  useEffect(() => {
+    getListTrendingJob();
+  }, []);
+
+  console.log(trends);
   return <div>{HomeContent}</div>;
 }
 

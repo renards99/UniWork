@@ -370,7 +370,7 @@ module.exports = {
         allowNull: false,
       },
       work_hours: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
       service_id: {
@@ -552,6 +552,39 @@ module.exports = {
       other_document: {
         type: Sequelize.STRING,
         allowNull: true,
+      },
+    });
+
+    await queryInterface.createTable('job_post_application', {
+      id: {
+        type: Sequelize.INTEGER(11),
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      user_account_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: {
+            tableName: 'user_account',
+          },
+          key: 'id',
+        },
+      },
+      job_post_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: {
+            tableName: 'job_post',
+          },
+          key: 'id',
+        },
+      },
+      state: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
       },
     });
 

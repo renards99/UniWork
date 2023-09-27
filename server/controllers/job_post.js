@@ -25,6 +25,7 @@ module.exports = {
         view,
         gender,
         state,
+        experience,
       } = params;
       if (!validateHandler.validateId(service_id, job_type_id, post_by_id, company_id)) {
         return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
@@ -120,7 +121,35 @@ module.exports = {
   },
   async getAllJobPost(req, res) {
     try {
-      const get_all_Job_post = await Job_post.findAll();
+      const get_all_Job_post = await sequelize.query(
+      //   `SELECT jp.*, c.company_name  from job_post as jp   join company as c on jp.company_id = c.id 
+      // ORDER BY jp.id DESC  limit 5 offset 5 where jp.id=101`,
+      `SELECT jp.*, c.company_name  from job_post as jp   join company as c on jp.company_id = c.id   where jp.id=101`,
+        {
+          type: QueryTypes.SELECT,
+        },
+      );
+      if (get_all_Job_post) {
+        return responseHandler.responseWithData(res, 200, get_all_Job_post);
+      } else {
+        return responseHandler.badRequest(res, 'Can not get all job post!');
+      }
+    } catch (e) {
+      console.log(e);
+      return responseHandler.badRequest(res, 'There is something wrong with your request!');
+    }
+  },
+  async getAllJobPostByUserId(req, res) {
+    try {
+      const params = req.body;
+      const { user_account_id } = params;
+      const get_all_Job_post = await sequelize.query(
+        `SELECT jp.*, c.company_name  from job_post as jp  join company as c on jp.company_id = c.id WHERE jp.post_by_id=${user_account_id}
+      ORDER BY jp.id DESC ;`,
+        {
+          type: QueryTypes.SELECT,
+        },
+      );
       if (get_all_Job_post) {
         return responseHandler.responseWithData(res, 200, get_all_Job_post);
       } else {
