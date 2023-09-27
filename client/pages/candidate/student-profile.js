@@ -40,9 +40,11 @@ import axios from 'axios';
 import DropDown from '../../components/layout/employer/dropDown';
 import StatusFrame from '../../components/layout/admin/statusFrame';
 import { IoEllipse } from 'react-icons/io5';
+import PDFViewer from '../../components/pdf';
 
 function StudentProfile() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [myCV, setMyCV] = useState();
   const [isModalEducationOpen, setIsModalEducationOpen] = useState(false);
   const openModalEducation = () => {
     setIsModalEducationOpen(true);
@@ -61,8 +63,19 @@ function StudentProfile() {
   const openModalCV = () => {
     setIsModalCVOpen(true);
   };
-  const closeModalCV = () => {
-    setIsModalCVOpen(false);
+
+  const [cvLink, setCvLink] = useState();
+
+  const closeModalCV = async () => {
+    try {
+      const formData = new FormData();
+      formData.append('cv_file', myCV);
+      const uploadCV = await axios.post('http://localhost:5000/upload-cv', formData);
+      if (uploadCV.data.statusCode === 200) {
+        setCvLink(uploadCV.data.data.cv_file);
+        setIsModalCVOpen(false);
+      }
+    } catch (e) {}
   };
   const [isModalPersonalInfoOpen, setIsModalPersonalInfoOpen] = useState(false);
   const openModalPersonalInfo = () => {
@@ -719,13 +732,21 @@ function StudentProfile() {
               p='12px'
               justifyContent='center'
               alignItems='center'
-              gap='10px'
+              gap='0px'
               alignSelf='stretch'
               height='160px'
               bg='#1311311A'
               rounded='12px'
             >
-              <Image src='/static/images/upload_cloud.png' width='40' height='40'></Image>
+              <Input
+                onChange={(e) => setMyCV(e.target.files[0])}
+                type='file'
+                // display={'none'}
+                id='cv'
+              />
+              <label for='cv' style={{ cursor: "pointer"}}>
+                <Image src='/static/images/upload_cloud.png' width='40' height='40'></Image>
+              </label>
               <Stack
                 justifyContent='center'
                 alignItems='center'
@@ -1004,6 +1025,7 @@ function StudentProfile() {
         {modalExperience}
         {modalCV}
         {modalPersonalInfo}
+        {cvLink && <PDFViewer url={cvLink} />}
       </Stack>
     </Box>
   );
