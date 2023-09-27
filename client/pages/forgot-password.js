@@ -83,6 +83,7 @@ export default function ForgotPassword() {
                 <Input placeholder='Nhập Email' size='lg'></Input>
               </InputGroup>
             </Stack>
+
             <Flex
               p='15px 20px'
               w='335px'
@@ -92,9 +93,10 @@ export default function ForgotPassword() {
               bg='#F6871F'
               rounded='10px'
               cursor='pointer'
+              onClick={() => handleTab(2)}
             >
               <Text fontSize='20px' fontWeight='500' color='white'>
-                Đăng Ký
+                Xác nhận
               </Text>
             </Flex>
           </Stack>
@@ -114,28 +116,28 @@ export default function ForgotPassword() {
                 <PinInputField />
               </PinInput>
             </Flex>
-            <Flex justifyContent='space-between' w='100%'>
-              <Text fontSize='16px' fontWeight='500'>
-                Yêu cầu gửi lại mã sau 59 giây
-              </Text>
+            <Flex justifyContent='flex-end' w='100%'>
               <Link fontSize='16px' fontWeight='500'>
                 Gửi lại otp
               </Link>
             </Flex>
-            <Flex
-              p='15px 20px'
-              w='335px'
-              justifyContent='center'
-              alignItems='center'
-              h='45px'
-              bg='#F6871F'
-              rounded='10px'
-              cursor='pointer'
-            >
-              <Text fontSize='20px' fontWeight='500' color='white'>
-                Đăng Ký
-              </Text>
-            </Flex>
+            <Link href='/login'>
+              <Flex
+                p='15px 20px'
+                w='335px'
+                justifyContent='center'
+                alignItems='center'
+                h='45px'
+                bg='#F6871F'
+                rounded='10px'
+                cursor='pointer'
+                onClick={() => handleTab(3)}
+              >
+                <Text fontSize='20px' fontWeight='500' color='white'>
+                  Xác nhận
+                </Text>
+              </Flex>
+            </Link>
           </Stack>
         ) : tab === 3 ? (
           <Stack justifyContent='center' alignItems='center' gap='32px'>
@@ -180,6 +182,7 @@ export default function ForgotPassword() {
               bg='#F6871F'
               rounded='10px'
               cursor='pointer'
+              onClick={() => handleTab(4)}
             >
               <Text fontSize='20px' fontWeight='500' color='white'>
                 Xác nhận
@@ -218,28 +221,30 @@ export default function ForgotPassword() {
         {tab === 4 ? (
           ''
         ) : (
-          <Flex alignItems='center' gap='12px'>
-            <Box fontSize='24px'>
-              <AiOutlineArrowLeft />
-            </Box>
-            <Text fontSize='14px' fontWeight='700' lineHeight='20px' letterSpacing='0.2px'>
-              Quay lại đăng nhập
-            </Text>
-          </Flex>
+          <Link href='/login'>
+            <Flex alignItems='center' gap='12px'>
+              <Box fontSize='24px'>
+                <AiOutlineArrowLeft />
+              </Box>
+              <Text fontSize='14px' fontWeight='700' lineHeight='20px' letterSpacing='0.2px'>
+                Quay lại đăng nhập
+              </Text>
+            </Flex>
+          </Link>
         )}
 
         <Tabs variant='soft-rounded' colorScheme='orange'>
           <TabList gap='12px'>
-            <Tab border='1px solid #F6871F' bg='white' onClick={() => handleTab(1)}>
+            <Tab border='1px solid #F6871F' bg='white' isDisabled>
               1
             </Tab>
-            <Tab border='1px solid #F6871F' bg='white' onClick={() => handleTab(2)}>
+            <Tab border='1px solid #F6871F' bg='white' isDisabled>
               2
             </Tab>
-            <Tab border='1px solid #F6871F' bg='white' onClick={() => handleTab(3)}>
+            <Tab border='1px solid #F6871F' bg='white' isDisabled>
               3
             </Tab>
-            <Tab border='1px solid #F6871F' bg='white' onClick={() => handleTab(4)}>
+            <Tab border='1px solid #F6871F' bg='white' isDisabled>
               4
             </Tab>
           </TabList>

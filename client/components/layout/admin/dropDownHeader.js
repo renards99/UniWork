@@ -34,7 +34,7 @@ export default function DropDownHeader() {
         alignItems='center'
         rounded='40px'
         onClick={handleMenuClick}
-        leftIcon={<Avatar size='md' src='' />}
+        leftIcon={<Avatar size='xs' src='' />}
         rightIcon={
           menuIcon ? (
             <Box transition='transform 0.3s ease-in-out' fontSize='24px'>
@@ -53,7 +53,7 @@ export default function DropDownHeader() {
       >
         <Flex gap='20px'>
           <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
-            Candidate
+            Admin
           </Text>
         </Flex>
       </MenuButton>
@@ -72,13 +72,7 @@ export default function DropDownHeader() {
             </Text>
           </Link>
         </MenuItem>
-        <MenuItem h='48px' bg='#E8E8EB' border='1px solid #1311311A'>
-          <Link href='/candidate/change-account-info'>
-            <Text p='12px 20px' fontSize='16px' fontWeight='600' lineHeight='24px'>
-              Cài đặt thông tin
-            </Text>
-          </Link>
-        </MenuItem>
+
         <MenuItem h='48px' bg='#E8E8EB' border='1px solid #1311311A'>
           <Link href='/candidate/change-password'>
             <Text p='12px 20px' fontSize='16px' fontWeight='600' lineHeight='24px'>
@@ -89,14 +83,7 @@ export default function DropDownHeader() {
         <MenuItem h='48px' bg='#E8E8EB' border='1px solid #1311311A'>
           <Link href='/candidate/job-apply'>
             <Text p='12px 20px' fontSize='16px' fontWeight='600' lineHeight='24px'>
-              Việc làm đã ứng tuyển
-            </Text>
-          </Link>
-        </MenuItem>
-        <MenuItem h='48px' bg='#E8E8EB' border='1px solid #1311311A'>
-          <Link href='job-recommended-setting'>
-            <Text p='12px 20px' fontSize='16px' fontWeight='600' lineHeight='24px'>
-              Cài đặt gợi ý việc làm
+              Nhật ký hoạt động
             </Text>
           </Link>
         </MenuItem>
