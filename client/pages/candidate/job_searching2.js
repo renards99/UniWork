@@ -29,8 +29,11 @@ import CandidateHeader from '../../components/layout/candidate/header';
 import backgroundImg from '../../public/static/images/rectangle_33.png';
 import DropDown from '../../components/layout/candidate/dropDownLocation';
 import speakerIcon from '../../public/static/images/icon/speaker.svg';
-
+import { useRouter } from 'next/router';
 function JobSearching2() {
+  const router = useRouter();
+  const { query, location, experience, salary } = router.query;
+
   const backgroundFooter = '/static/images/footer_background.png';
   const trends = [
     {
@@ -50,51 +53,6 @@ function JobSearching2() {
       salary: '25-30TRIỆU',
       location: 'Hà Nội',
       tag: 2,
-    },
-    {
-      id: 3,
-      avatar: '',
-      title: 'Nhân viên thiết kế. in ấn.....',
-      company: 'CÔNG TY ABC CỔ PHẦN VÀ THƯƠNG MẠI...',
-      salary: '25-30TRIỆU',
-      location: 'Hà Nội',
-      tag: 1,
-    },
-    {
-      id: 4,
-      avatar: '',
-      title: 'Nhân viên thiết kế. in ấn.....',
-      company: 'CÔNG TY ABC CỔ PHẦN VÀ THƯƠNG MẠI...',
-      salary: '25-30TRIỆU',
-      location: 'Hà Nội',
-      tag: 0,
-    },
-    {
-      id: 5,
-      avatar: '',
-      title: 'Nhân viên thiết kế. in ấn.....',
-      company: 'CÔNG TY ABC CỔ PHẦN VÀ THƯƠNG MẠI...',
-      salary: '25-30TRIỆU',
-      location: 'Hà Nội',
-      tag: 1,
-    },
-    {
-      id: 6,
-      avatar: '',
-      title: 'Nhân viên thiết kế. in ấn.....',
-      company: 'CÔNG TY ABC CỔ PHẦN VÀ THƯƠNG MẠI...',
-      salary: '25-30TRIỆU',
-      location: 'Hà Nội',
-      tag: '1',
-    },
-    {
-      id: 7,
-      avatar: '',
-      title: 'Nhân viên thiết kế. in ấn.....',
-      company: 'CÔNG TY ABC CỔ PHẦN VÀ THƯƠNG MẠI...',
-      salary: '25-30TRIỆU',
-      location: 'Hà Nội',
-      tag: 1,
     },
   ];
   const fakeData = [
@@ -123,31 +81,6 @@ function JobSearching2() {
         'thưởng nghỉ lễ , tết',
       ],
     },
-    {
-      id: 3,
-      title: 'Nhân viên thiết kế chuyên viên tư vấn thiết kế lĩnh vực kiến trúc',
-      company: 'CÔNG TY ABC CỔ PHẦN VÀ THƯƠNG MẠI GLOBAL ',
-      locations: 'Hà Nội, HCM',
-      remainingDays: 'Còn 30 ngày để ứng tuyển',
-      time: 'Cập nhật 2h trước',
-      salary: '25-30TRIỆU',
-      tags: [
-        'thu nhập trợ cấp',
-        'được cấp thiết bị làm việc',
-        'Thử việc 100% lương',
-        'thưởng nghỉ lễ , tết',
-      ],
-    },
-    {
-      id: 4,
-      title: 'Nhân viên thiết kế chuyên viên tư vấn thiết kế lĩnh vực kiến trúc',
-      company: 'CÔNG TY ABC CỔ PHẦN VÀ THƯƠNG MẠI GLOBAL ',
-      locations: 'Hà Nội, HCM',
-      remainingDays: 'Còn 30 ngày để ứng tuyển',
-      time: 'Cập nhật 2h trước',
-      salary: '25-30TRIỆU',
-      tags: [''],
-    },
   ];
   const locations = ['Hà Giang', 'Tuyên Quang', 'Hà Nội', '...'];
   const experiences = ['Không Kinh Nghiệm', 'Trên 1 năm', 'Trên 2 năm', '...'];
@@ -165,162 +98,6 @@ function JobSearching2() {
       Role: 'Phụ Bếp',
       salary: '80k/1h',
     },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Ảnh Cưới Lan Anh',
-      Role: 'Chụp Ảnh',
-      salary: '200k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
   ];
   const slides = [
     {
@@ -329,44 +106,12 @@ function JobSearching2() {
     {
       url: 'https://www.boydcorp.com/images/careers/Career-Opportunities.jpg',
     },
-    {
-      url: 'https://intracen.org/sites/default/files/styles/content_full/public/media/image/media_image/2022/03/08/job-opportunities-02.jpg?itok=xJscdSNp',
-    },
-    {
-      url: 'https://cdn2.vectorstock.com/i/1000x1000/16/71/career-opportunities-at-job-fair-were-hiring-vector-28351671.jpg',
-    },
-    {
-      url: 'https://www.eusa.eu/documents/eusa/News/2018/join_our_team.jpg',
-    },
   ];
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const prevSlide = () => {
-    const isFirstSlide = currentIndex === 0;
-    const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
-    setCurrentIndex(newIndex);
-  };
-  const nextSlide = () => {
-    const isLastSlide = currentIndex === slides.length - 1;
-    const newIndex = isLastSlide ? 0 : currentIndex + 1;
-    setCurrentIndex(newIndex);
-  };
-  const goToSlide = (slideIndex) => {
-    setCurrentIndex(slideIndex);
-  };
   const [tabState, setTabState] = useState(0);
   const toggleTab = (index) => {
     setTabState(index);
-  };
-  const nextTab = () => {
-    const isLastTab = tabState === 3;
-    const newTab = isLastTab ? 0 : tabState + 1;
-    setTabState(newTab);
-  };
-  const preTab = () => {
-    const isFirstTab = tabState === 0;
-    const newTab = isFirstTab ? 3 : tabState - 1;
-    setTabState(newTab);
   };
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;

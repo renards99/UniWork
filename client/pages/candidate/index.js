@@ -7,78 +7,43 @@ import CandidateHeader from '../../components/layout/candidate/header';
 import DropDown from '../../components/layout/candidate/dropDownLocation';
 import speakerIcon from '../../public/static/images/icon/speaker.svg';
 import axios from 'axios';
+import Pagination from '../../components/paging';
 import { useRouter } from 'next/router';
 
 const BACK_END_PORT = 'http://localhost:5000';
 
 function LandingPage() {
+  const itemsPerPage = 10;
+  const [currentPage, setCurrentPage] = useState(1);
+  const changePage = (pageNumber) => setCurrentPage(pageNumber);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const [trends, setTrends] = useState([]);
+
   const router = useRouter();
+
   const backgroundFooter = '/static/images/footer_background.png';
-  const [trends, setTrends] = useState([
-    {
-      id: 1,
-      avatar: '',
-      title: 'Nhân viên thiết kế. in ấn.....',
-      company: 'CÔNG TY ABC CỔ PHẦN VÀ THƯƠNG MẠI...',
-      salary: '25-30TRIỆU',
-      location: 'Hà Nội',
-      tag: 1,
-    },
-    {
-      id: 2,
-      avatar: '',
-      title: 'Nhân viên thiết kế. in ấn.....',
-      company: 'CÔNG TY ABC CỔ PHẦN VÀ THƯƠNG MẠI...',
-      salary: '25-30TRIỆU',
-      location: 'Hà Nội',
-      tag: 2,
-    },
-    {
-      id: 3,
-      avatar: '',
-      title: 'Nhân viên thiết kế. in ấn.....',
-      company: 'CÔNG TY ABC CỔ PHẦN VÀ THƯƠNG MẠI...',
-      salary: '25-30TRIỆU',
-      location: 'Hà Nội',
-      tag: 1,
-    },
-    {
-      id: 4,
-      avatar: '',
-      title: 'Nhân viên thiết kế. in ấn.....',
-      company: 'CÔNG TY ABC CỔ PHẦN VÀ THƯƠNG MẠI...',
-      salary: '25-30TRIỆU',
-      location: 'Hà Nội',
-      tag: 0,
-    },
-    {
-      id: 5,
-      avatar: '',
-      title: 'Nhân viên thiết kế. in ấn.....',
-      company: 'CÔNG TY ABC CỔ PHẦN VÀ THƯƠNG MẠI...',
-      salary: '25-30TRIỆU',
-      location: 'Hà Nội',
-      tag: 1,
-    },
-    {
-      id: 6,
-      avatar: '',
-      title: 'Nhân viên thiết kế. in ấn.....',
-      company: 'CÔNG TY ABC CỔ PHẦN VÀ THƯƠNG MẠI...',
-      salary: '25-30TRIỆU',
-      location: 'Hà Nội',
-      tag: '1',
-    },
-    {
-      id: 7,
-      avatar: '',
-      title: 'Nhân viên thiết kế. in ấn.....',
-      company: 'CÔNG TY ABC CỔ PHẦN VÀ THƯƠNG MẠI...',
-      salary: '25-30TRIỆU',
-      location: 'Hà Nội',
-      tag: 1,
-    },
-  ]);
+
+  const [query, setQuery] = useState('');
+  const [location, setLocation] = useState(null);
+  const [experience, setExperience] = useState(null);
+  const [salary, setSalary] = useState(null);
+
+  const locations = ['Hà Giang', 'Tuyên Quang', 'Hà Nội', '...'];
+  const experiences = ['Không Kinh Nghiệm', 'Trên 1 năm', 'Trên 2 năm', '...'];
+  const salaries = ['1-5 triệu', '5-7 triệu', '20 triệu', '...'];
+
+  const handleSearch = () => {
+    const queryParams = new URLSearchParams();
+
+    if (query) queryParams.append('query', query);
+    if (location) queryParams.append('location', location);
+    if (experience) queryParams.append('experience', experience);
+    if (salary) queryParams.append('salary', salary);
+
+    // Redirect to search results page with the parameters
+    router.push(`/candidate/job_searching2?${queryParams.toString()}`);
+  };
   const topCarreer = [
     {
       id: 1,
@@ -92,47 +57,8 @@ function LandingPage() {
       title: 'Kinh doanh / bán hàng',
       quantity: '12312 việc làm',
     },
-
-    {
-      id: 3,
-      image: '/static/images/business.png',
-      title: 'Kinh doanh / bán hàng',
-      quantity: '12312 việc làm',
-    },
-    {
-      id: 4,
-      image: '/static/images/business.png',
-      title: 'Kinh doanh / bán hàng',
-      quantity: '12312 việc làm',
-    },
-    {
-      id: 5,
-      image: '/static/images/business.png',
-      title: 'Kinh doanh / bán hàng',
-      quantity: '12312 việc làm',
-    },
-    {
-      id: 6,
-      image: '/static/images/business.png',
-      title: 'Kinh doanh / bán hàng',
-      quantity: '12312 việc làm',
-    },
-    {
-      id: 7,
-      image: '/static/images/business.png',
-      title: 'Kinh doanh / bán hàng',
-      quantity: '12312 việc làm',
-    },
-    {
-      id: 8,
-      image: '/static/images/business.png',
-      title: 'Kinh doanh / bán hàng',
-      quantity: '12312 việc làm',
-    },
   ];
-  const locations = ['Hà Giang', 'Tuyên Quang', 'Hà Nội', '...'];
-  const experiences = ['Không Kinh Nghiệm', 'Trên 1 năm', 'Trên 2 năm', '...'];
-  const salaries = ['1-5 triệu', '5-7 triệu', '20 triệu', '...'];
+
   const employers = [
     {
       image: '/static/images/food_store.png',
@@ -146,162 +72,6 @@ function LandingPage() {
       Role: 'Phụ Bếp',
       salary: '80k/1h',
     },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Ảnh Cưới Lan Anh',
-      Role: 'Chụp Ảnh',
-      salary: '200k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
-    {
-      image: '/static/images/food_store.png',
-      Name: 'Tạp Hóa Sky Mart',
-      Role: 'Nhân Viên bán hàng',
-      salary: '70k/1h',
-    },
   ];
   const slides = [
     {
@@ -309,15 +79,6 @@ function LandingPage() {
     },
     {
       url: 'https://www.boydcorp.com/images/careers/Career-Opportunities.jpg',
-    },
-    {
-      url: 'https://intracen.org/sites/default/files/styles/content_full/public/media/image/media_image/2022/03/08/job-opportunities-02.jpg?itok=xJscdSNp',
-    },
-    {
-      url: 'https://cdn2.vectorstock.com/i/1000x1000/16/71/career-opportunities-at-job-fair-were-hiring-vector-28351671.jpg',
-    },
-    {
-      url: 'https://www.eusa.eu/documents/eusa/News/2018/join_our_team.jpg',
     },
   ];
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -349,15 +110,11 @@ function LandingPage() {
     const newTab = isFirstTab ? 3 : tabState - 1;
     setTabState(newTab);
   };
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 4;
   //get current Posts
   const lastItemIndex = currentPage * itemsPerPage;
   const firstItemIndex = lastItemIndex - itemsPerPage;
   const currentEmployers = employers.slice(firstItemIndex, lastItemIndex);
 
-  //change page
-  const changePage = (pageNumber) => setCurrentPage(pageNumber);
   const getListTrendingJob = async () => {
     try {
       const listTrendingJob = await axios.post(`${BACK_END_PORT}/job-post/get-all-job-post`);
@@ -444,7 +201,7 @@ function LandingPage() {
       </Stack>
     );
   });
-
+  const slicedData = TrendContent.slice(startIndex, endIndex);
   const HomeContent = (
     <div>
       <CandidateHeader />
@@ -472,6 +229,8 @@ function LandingPage() {
             boxShadow='md'
             mb='20px'
             rounded='xl'
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
           />
 
           <Box display='flex' justifyContent='space-between'>
@@ -483,13 +242,17 @@ function LandingPage() {
               bg='gray.100'
               size='lg'
               rounded='xl'
+              onChange={(e) => setLocation(e.target.value)}
+              defaultValue='' // for a controlled component
             >
-              <option selected hidden disabled>
+              <option value='' hidden disabled>
                 Địa Điểm
               </option>
-              {locations.map((location) => {
-                return <option>{location}</option>;
-              })}
+              {locations.map((loc) => (
+                <option key={loc} value={loc}>
+                  {loc}
+                </option>
+              ))}
             </Select>
             <Select
               focusBorderColor='#F98820'
@@ -500,13 +263,17 @@ function LandingPage() {
               size='lg'
               mx='90px'
               rounded='xl'
+              onChange={(e) => setExperience(e.target.value)}
+              defaultValue=''
             >
-              <option selected hidden disabled>
+              <option value='' hidden disabled>
                 Kinh Nghiệm
               </option>
-              {experiences.map((exp) => {
-                return <option>{exp}</option>;
-              })}
+              {experiences.map((exp) => (
+                <option key={exp} value={exp}>
+                  {exp}
+                </option>
+              ))}
             </Select>
             <Select
               focusBorderColor='#F98820'
@@ -516,16 +283,28 @@ function LandingPage() {
               bg='gray.100'
               size='lg'
               rounded='xl'
+              onChange={(e) => setSalary(e.target.value)}
+              defaultValue=''
             >
-              <option selected hidden disabled>
+              <option value='' hidden disabled>
                 Mức Lương
               </option>
-              {salaries.map((salary) => {
-                return <option>{salary}</option>;
-              })}
+              {salaries.map((sal) => (
+                <option key={sal} value={sal}>
+                  {sal}
+                </option>
+              ))}
             </Select>
           </Box>
-          <Button bg='#F98820' textColor='white' py='16px' px='30px' mt='16px' fontSize='2xl'>
+          <Button
+            bg='#F98820'
+            textColor='white'
+            py='16px'
+            px='30px'
+            mt='16px'
+            fontSize='2xl'
+            onClick={handleSearch}
+          >
             Tìm Kiếm
           </Button>
         </Box>
@@ -533,102 +312,110 @@ function LandingPage() {
           <Image width='600' height='600' src='/static/images/home_page1.png' />
         </Box>
       </Flex>
-      <Stack px='305px' py='50px' gap='32px' bg='#F0EAE9'>
-        <Text fontSize='32px' fontWeight='800' lineHeight='40px' letterSpacing='0.1px'>
-          Việc làm hấp dẫn
-        </Text>
-        <Flex justifyContent='space-between' alignItems='center'>
-          <DropDown data={locations} />
-          <Flex gap='24px'>
-            <Box fontSize='42px' cursor='pointer' onClick={preTab}>
-              <BsArrowLeftCircle />
-            </Box>
-            <Flex
-              alignItems='center'
-              justifyContent='center'
-              p='12px'
-              bg={tabState === 0 ? 'orange' : 'white'}
-              rounded='12px'
-              onClick={() => toggleTab(0)}
-              cursor='pointer'
-            >
-              <Text
-                color={tabState === 0 ? 'white' : 'black'}
-                fontSize='16px'
-                fontWeight='700'
-                lineHeight='18px'
-                letterSpacing='0.2px'
+      <>
+        <Stack px='305px' py='50px' gap='32px' bg='#F0EAE9'>
+          <Text fontSize='32px' fontWeight='800' lineHeight='40px' letterSpacing='0.1px'>
+            Việc làm hấp dẫn
+          </Text>
+          <Flex justifyContent='space-between' alignItems='center'>
+            <DropDown data={locations} />
+            <Flex gap='24px'>
+              <Box fontSize='42px' cursor='pointer' onClick={preTab}>
+                <BsArrowLeftCircle />
+              </Box>
+              <Flex
+                alignItems='center'
+                justifyContent='center'
+                p='12px'
+                bg={tabState === 0 ? 'orange' : 'white'}
+                rounded='12px'
+                onClick={() => toggleTab(0)}
+                cursor='pointer'
               >
-                Ngẫu nhiên
-              </Text>
-            </Flex>
+                <Text
+                  color={tabState === 0 ? 'white' : 'black'}
+                  fontSize='16px'
+                  fontWeight='700'
+                  lineHeight='18px'
+                  letterSpacing='0.2px'
+                >
+                  Ngẫu nhiên
+                </Text>
+              </Flex>
 
-            <Flex
-              alignItems='center'
-              justifyContent='center'
-              p='12px'
-              bg={tabState === 1 ? 'orange' : 'white'}
-              rounded='12px'
-              onClick={() => toggleTab(1)}
-              cursor='pointer'
-            >
-              <Text
-                color={tabState === 1 ? 'white' : 'black'}
-                fontSize='16px'
-                fontWeight='700'
-                lineHeight='18px'
-                letterSpacing='0.2px'
+              <Flex
+                alignItems='center'
+                justifyContent='center'
+                p='12px'
+                bg={tabState === 1 ? 'orange' : 'white'}
+                rounded='12px'
+                onClick={() => toggleTab(1)}
+                cursor='pointer'
               >
-                Hà Nội
-              </Text>
-            </Flex>
-            <Flex
-              alignItems='center'
-              justifyContent='center'
-              p='12px'
-              bg={tabState === 2 ? 'orange' : 'white'}
-              rounded='12px'
-              onClick={() => toggleTab(2)}
-              cursor='pointer'
-            >
-              <Text
-                color={tabState === 2 ? 'white' : 'black'}
-                fontSize='16px'
-                fontWeight='700'
-                lineHeight='18px'
-                letterSpacing='0.2px'
+                <Text
+                  color={tabState === 1 ? 'white' : 'black'}
+                  fontSize='16px'
+                  fontWeight='700'
+                  lineHeight='18px'
+                  letterSpacing='0.2px'
+                >
+                  Hà Nội
+                </Text>
+              </Flex>
+              <Flex
+                alignItems='center'
+                justifyContent='center'
+                p='12px'
+                bg={tabState === 2 ? 'orange' : 'white'}
+                rounded='12px'
+                onClick={() => toggleTab(2)}
+                cursor='pointer'
               >
-                Cầu Giấy
-              </Text>
-            </Flex>
-            <Flex
-              alignItems='center'
-              justifyContent='center'
-              p='12px'
-              bg={tabState === 3 ? 'orange' : 'white'}
-              rounded='12px'
-              onClick={() => toggleTab(3)}
-              cursor='pointer'
-            >
-              <Text
-                color={tabState === 3 ? 'white' : 'black'}
-                fontSize='16px'
-                fontWeight='700'
-                lineHeight='18px'
-                letterSpacing='0.2px'
+                <Text
+                  color={tabState === 2 ? 'white' : 'black'}
+                  fontSize='16px'
+                  fontWeight='700'
+                  lineHeight='18px'
+                  letterSpacing='0.2px'
+                >
+                  Cầu Giấy
+                </Text>
+              </Flex>
+              <Flex
+                alignItems='center'
+                justifyContent='center'
+                p='12px'
+                bg={tabState === 3 ? 'orange' : 'white'}
+                rounded='12px'
+                onClick={() => toggleTab(3)}
+                cursor='pointer'
               >
-                Hồ Chí Minh
-              </Text>
+                <Text
+                  color={tabState === 3 ? 'white' : 'black'}
+                  fontSize='16px'
+                  fontWeight='700'
+                  lineHeight='18px'
+                  letterSpacing='0.2px'
+                >
+                  Hồ Chí Minh
+                </Text>
+              </Flex>
+              <Box fontSize='42px' onClick={nextTab} cursor='pointer'>
+                <BsArrowRightCircle />
+              </Box>
             </Flex>
-            <Box fontSize='42px' onClick={nextTab} cursor='pointer'>
-              <BsArrowRightCircle />
-            </Box>
           </Flex>
-        </Flex>
-        <Grid templateColumns='repeat(3, 1fr)' gap='30px'>
-          {TrendContent}
-        </Grid>
-      </Stack>
+          <Grid templateColumns='repeat(3, 1fr)' gap='30px'>
+            {slicedData}
+          </Grid>
+          <Pagination
+            currentPage={currentPage}
+            itemsPerPage={itemsPerPage}
+            totalItems={TrendContent.length}
+            changePage={changePage}
+          />
+        </Stack>
+      </>
       <Stack px='305px' py='50px'>
         <Text fontSize='4xl' fontWeight='semibold '>
           Công ty hàng đầu
@@ -777,13 +564,6 @@ function LandingPage() {
           </Stack>
         </Stack>
       </Stack>
-      {/* <Paging
-        itemsPerPage={itemsPerPage}
-        totalItems={employers.length}
-        changePage={changePage}
-        bgColor='#F98820'
-        tColor='white'
-      /> */}
     </div>
   );
 

@@ -49,8 +49,6 @@ function employerDetails() {
 
   const getEmployerById = useCallback(async () => {
     try {
-      console.log('im in' + JSON.parse(localStorage.getItem('user')).id);
-
       const getEmployerById = await axios.post(
         `http://localhost:5000/employer/get-employer-by-id`,
         {
@@ -267,6 +265,7 @@ function employerDetails() {
           facebook_link: facebookLink,
         });
         alert('Company created successfully.');
+        handleEdit();
         return; // Return to stop the rest of the function from running
       }
 

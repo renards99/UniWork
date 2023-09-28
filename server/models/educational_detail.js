@@ -38,8 +38,8 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.INTEGER(5),
         allowNull: false,
       },
-      cgpa: {
-        type: Sequelize.STRING(10),
+      description: {
+        type: Sequelize.STRING,
         allowNull: false,
       },
     },

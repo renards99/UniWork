@@ -105,7 +105,7 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
       },
       apply_at: {
-        type: Sequelize.STRING(20),
+        type: Sequelize.STRING,
         allowNull: false,
       },
       expired_at: {

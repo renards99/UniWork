@@ -123,10 +123,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      short_des: {
-        type: Sequelize.STRING(1000),
-        allowNull: false,
-      },
+
       refresh_access_token: {
         type: Sequelize.STRING(1000),
       },
@@ -219,6 +216,10 @@ module.exports = {
         type: Sequelize.STRING(100),
         allowNull: true,
       },
+      short_des: {
+        type: Sequelize.STRING(1000),
+        allowNull: false,
+      },
     });
 
     await queryInterface.createTable('educational_detail', {
@@ -258,8 +259,8 @@ module.exports = {
         type: Sequelize.INTEGER(5),
         allowNull: false,
       },
-      cgpa: {
-        type: Sequelize.STRING(10),
+      description: {
+        type: Sequelize.STRING,
         allowNull: false,
       },
     });
@@ -295,6 +296,10 @@ module.exports = {
       },
       company_name: {
         type: Sequelize.STRING(100),
+        allowNull: false,
+      },
+      description: {
+        type: Sequelize.STRING,
         allowNull: false,
       },
     });
@@ -459,7 +464,7 @@ module.exports = {
         allowNull: false,
       },
       apply_at: {
-        type: Sequelize.STRING(20),
+        type: Sequelize.STRING,
         allowNull: false,
       },
       expired_at: {
