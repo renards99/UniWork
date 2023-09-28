@@ -366,18 +366,8 @@ function JobSearching() {
   const HomeContent = (
     <div>
       <CandidateHeader />
-      <Flex
-        h='465px'
-        px='150px'
-        display='flex'
-        justifyContent='space-evenly'
-        alignItems='flex-end'
-        bg='#333333'
-      >
-        <Box h='465px' bg='transparent' minW='30%' pt='50px'>
-          <Text className='unw-homepage-text' color='white'>
-            Tìm Việc Làm
-          </Text>
+      <Stack px='150px' justifyContent='space-evenly' alignItems='flex-end' bg='#333333' pt='20px'>
+        <Flex bg='transparent' gap='0px'>
           <Input
             focusBorderColor='#F98820'
             borderColor='transparent'
@@ -388,19 +378,25 @@ function JobSearching() {
             fontSize='2xl'
             fontWeight='medium'
             boxShadow='md'
-            mb='20px'
-            rounded='xl'
+            rounded='none'
+            roundedLeft='xl'
+            w='800px'
+            h='60px'
           />
 
-          <Box display='flex' justifyContent='space-between'>
+          <Flex gap='40px'>
             <Select
               focusBorderColor='#F98820'
               borderColor='transparent'
+              borderLeft='2px solid #CBCBCB'
               icon={<Icon as={BsChevronDown} />}
               className='unw-homepage-select'
               bg='gray.100'
-              size='lg'
-              rounded='xl'
+              w='160px'
+              h='60px'
+              rounded='none'
+              roundedRight='xl'
+              fontSize='16px'
             >
               <option selected hidden disabled>
                 Địa Điểm
@@ -415,9 +411,10 @@ function JobSearching() {
               icon={<Icon as={BsChevronDown} />}
               className='unw-homepage-select'
               bg='gray.100'
-              size='lg'
-              mx='90px'
               rounded='xl'
+              w='160px'
+              h='60px'
+              fontSize='16px'
             >
               <option selected hidden disabled>
                 Kinh Nghiệm
@@ -432,8 +429,10 @@ function JobSearching() {
               icon={<Icon as={BsChevronDown} />}
               className='unw-homepage-select'
               bg='gray.100'
-              size='lg'
               rounded='xl'
+              w='160px'
+              h='60px'
+              fontSize='16px'
             >
               <option selected hidden disabled>
                 Mức Lương
@@ -442,15 +441,24 @@ function JobSearching() {
                 return <option>{salary}</option>;
               })}
             </Select>
-          </Box>
-          <Button bg='#F98820' textColor='white' py='16px' px='30px' mt='16px' fontSize='2xl'>
+          </Flex>
+          <Button
+            bg='#F98820'
+            textColor='white'
+            py='16px'
+            px='30px'
+            w='160px'
+            h='60px'
+            ml='24px'
+            fontSize='2xl'
+          >
             Tìm Kiếm
           </Button>
-        </Box>
+        </Flex>
         <Box>
-          <Image width='600' height='600' src='/static/images/home_page1.png' />
+          <Image width='420' height='280' src='/static/images/home_page1.png' />
         </Box>
-      </Flex>
+      </Stack>
       <Stack px='305px' py='50px' gap='32px' bg='#F0EAE9'>
         <Text fontSize='32px' fontWeight='800' lineHeight='40px' letterSpacing='0.1px'>
           Việc làm hấp dẫn

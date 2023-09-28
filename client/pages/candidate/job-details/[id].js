@@ -121,6 +121,7 @@ function JobDetails({ data, BACK_END_PORT }) {
               h='60px'
               rounded='none'
               roundedRight='xl'
+              fontSize='16px'
             >
               <option selected hidden disabled>
                 Địa Điểm
@@ -138,6 +139,7 @@ function JobDetails({ data, BACK_END_PORT }) {
               rounded='xl'
               w='160px'
               h='60px'
+              fontSize='16px'
             >
               <option selected hidden disabled>
                 Kinh Nghiệm
@@ -155,6 +157,7 @@ function JobDetails({ data, BACK_END_PORT }) {
               rounded='xl'
               w='160px'
               h='60px'
+              fontSize='16px'
             >
               <option selected hidden disabled>
                 Mức Lương

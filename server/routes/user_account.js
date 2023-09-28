@@ -1,7 +1,9 @@
 const user_accounts = require('../controllers').user_accounts;
 var router = require('express').Router();
+const multer = require('multer');
 
-console.log(user_accounts);
+const upload = multer({ storage: multer.memoryStorage() });
+
 
 router.post('/login', user_accounts.loginAccount);
 router.post('/create-account', user_accounts.createAccount);
@@ -10,5 +12,7 @@ router.post('/list-accounts', user_accounts.listAccounts);
 router.post('/account-details', user_accounts.getUserDetails);
 router.put('/update-account', user_accounts.updateUser);
 router.post('/logout', user_accounts.logoutAccount);
+
+router.post('/upload-cv', upload.single('cv_file'), user_accounts.uploadFile);
 
 module.exports = router;

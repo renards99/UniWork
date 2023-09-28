@@ -211,7 +211,10 @@ function LandingPage() {
         display='flex'
         justifyContent='space-evenly'
         alignItems='flex-end'
-        bg='#333333'
+        bgImage="url('static/images/rectangle_33.png')" // Replace with your image path
+        bgSize='cover'
+        bgPosition='center'
+        bgRepeat='no-repeat'
       >
         <Box h='465px' bg='transparent' minW='30%' pt='50px'>
           <Text className='unw-homepage-text' color='white'>
@@ -432,8 +435,6 @@ function LandingPage() {
                   <Text fontSize='4xl' fontWeight='medium'>
                     {employer.Name}
                   </Text>
-                  <Text fontSize='3xl'>{employer.Role} </Text>
-                  <Text fontSize='2xl'>{employer.salary}</Text>
                 </Stack>
               );
             })}
@@ -459,8 +460,6 @@ function LandingPage() {
                   <Text fontSize='4xl' fontWeight='medium'>
                     {employer.Name}
                   </Text>
-                  <Text fontSize='3xl'>{employer.Role} </Text>
-                  <Text fontSize='2xl'>{employer.salary}</Text>
                 </Stack>
               );
             })}

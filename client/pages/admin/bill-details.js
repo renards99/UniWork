@@ -36,54 +36,87 @@ function BillDetails() {
   const data = [
     {
       id: 1,
-      job_name: 'Dịch vụ đăng bài tuyển dụng trong 4 tuần',
-      price: '2.000.000 đ',
+      job_name: 'Tuyển Android Dev',
+      job_company: 'Công ty ABC',
       career: 'Công nghệ thông tin',
-      capacity: '1',
-
-      total: '2.000.000 đ',
+      date: '12/12/2022',
+      status: 1,
     },
     {
       id: 2,
-      job_name: 'Dịch vụ đăng bài tuyển dụng trong 4 tuần',
-      price: '2.000.000 đ',
+      job_name: 'Tuyển Java Dev cho website Nhật',
+      job_company: 'Công ty Dược phẩm Long Châu',
       career: 'Công nghệ thông tin',
-      capacity: '2',
-
-      total: '4.000.000 đ',
+      date: '12/11/2022',
+      status: 2,
     },
     {
       id: 3,
       job_name: 'Tuyển Android Dev',
-      price: '2.000.000 đ',
+      job_company: 'Công ty TNHH AFC',
       career: 'Công nghệ thông tin',
-      capacity: '3',
-      total: '6.000.000 đ',
+      date: '30/03/2022',
+      status: 0,
     },
   ];
   const TableContent = data.map((item, index) => {
     return (
       <Tr>
         <Td>{item.job_name}</Td>
-        <Td>
-          <Flex alignItems='center' justifyContent='center'>
-            {item.price}
-          </Flex>
-        </Td>
-        <Td>
-          {' '}
-          <Flex alignItems='center' justifyContent='center'>
-            {item.capacity}
-          </Flex>
-        </Td>
+        <Td>{item.job_name}</Td>
+        <Td>{item.date}</Td>
 
-        <Td textAlign={'center'}>{item.total}</Td>
+        <Td textAlign={'center'}>
+          {item.status == 1 ? (
+            <Box
+              backgroundColor={'#C7F5D9'}
+              w='134px'
+              padding='6px 10px'
+              h='28px'
+              borderRadius={'12px'}
+              margin={'0 auto'}
+              textAlign={'center'}
+            >
+              <Text fontSize={'14px'} fontWeight={'500'} color={'#036000'}>
+                Đã duyệt
+              </Text>
+            </Box>
+          ) : item.status == 2 ? (
+            <Box
+              backgroundColor={'#FFC0C0'}
+              w='134px'
+              padding='6px 10px'
+              h='28px'
+              borderRadius={'12px'}
+              margin={'0 auto'}
+              textAlign={'center'}
+            >
+              <Text fontSize={'14px'} fontWeight={'500'} color={'#BC0000'}>
+                Chưa duyệt
+              </Text>
+            </Box>
+          ) : (
+            <Box
+              backgroundColor={'#D3DFF9'}
+              w='134px'
+              padding='6px 10px'
+              h='28px'
+              borderRadius={'12px'}
+              margin={'0 auto'}
+              textAlign={'center'}
+            >
+              <Text fontSize={'14px'} fontWeight={'500'} color={'#0036AA'}>
+                Hết hạn
+              </Text>
+            </Box>
+          )}
+        </Td>
       </Tr>
     );
   });
 
   const TableUNW = (
-    <Box>
+    <>
       <TableContainer marginTop={'28px'}>
         <Table variant='simple' className='unw-table-custom'>
           <Thead>
@@ -135,7 +168,7 @@ function BillDetails() {
           </Tbody>
         </Table>
       </TableContainer>
-    </Box>
+    </>
   );
   return (
     <Box>

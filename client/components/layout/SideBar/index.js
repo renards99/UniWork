@@ -23,6 +23,7 @@ export default function SideBarAdmin(props) {
     account: '/admin/account-manager',
     job: '/admin/job-manager',
     setting: '/admin/setting',
+    report: '/admin/report',
   };
   const [navSize, changeNavSize] = useState('large');
   const [sideBarActive, setActiveSideBar] = useState(0);
@@ -78,6 +79,7 @@ export default function SideBarAdmin(props) {
       justifyContent='space-between'
       id='bom-side-bar'
       backgroundColor={'#323541'}
+      position='fixed'
     >
       <Stack>
         <Link href={'/'} style={{ margin: '36px 0 95px' }}>
@@ -119,30 +121,43 @@ export default function SideBarAdmin(props) {
           />
           <SideItem
             navSize={navSize}
-            icon={AiOutlineSetting}
-            suffixIcon={sideBarActive == 3 ? IoIosArrowDown : IoIosArrowUp}
+            icon={SlHandbag}
+            title='Quản lí dịch vụ'
             handleSetActiveSideBar={handleSetActiveSideBar}
-            title='Cài đặt'
+            active={sideBarActive == 2 ? true : false}
+            value={2}
+            href={path.job}
+          />
+          <SideItem
+            navSize={navSize}
+            icon={SlHandbag}
+            title='Hộp thư'
+            handleSetActiveSideBar={handleSetActiveSideBar}
+            active={sideBarActive == 2 ? true : false}
+            value={2}
+            href={path.job}
+          />
+          <SideItem
+            navSize={navSize}
+            icon={AiOutlineSetting}
+            handleSetActiveSideBar={handleSetActiveSideBar}
+            title='Báo cáo/Hỗ trợ'
             active={sideBarActive == 3 ? true : false}
-            value={3}
+            value={4}
             sideBarActive={sideBarActive}
-            href={path.setting}
+            href={path.report}
+          />
+          <SideItem
+            navSize={navSize}
+            icon={SlHandbag}
+            title='Danh sách hóa đơn'
+            handleSetActiveSideBar={handleSetActiveSideBar}
+            active={sideBarActive == 2 ? true : false}
+            value={2}
+            href={path.job}
           />
         </Flex>
       </Stack>
-
-      <Flex padding='5% 10%' flexDirection={'column'}>
-        <SideItem
-          navSize={navSize}
-          icon={CiLogout}
-          handleSetActiveSideBar={handleSetActiveSideBar}
-          title='Đăng xuất'
-          value={99}
-          sideBarActive={sideBarActive}
-          href={path}
-        />
-        <Box h={'30px'}></Box>
-      </Flex>
     </Flex>
   );
 }

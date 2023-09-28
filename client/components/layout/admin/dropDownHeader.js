@@ -17,46 +17,8 @@ import {
 } from '@chakra-ui/react';
 
 import { HiChevronDown } from 'react-icons/hi';
-
-import { useRouter } from 'next/router';
-export default function DropDownHeader(props) {
-  const router = useRouter();
-  const data = props.data;
-
-  const [selectedMenuItem, setSelectedMenuItem] = useState(data[0]);
+export default function DropDownHeader() {
   const [menuIcon, setMenuIcon] = useState(false);
-  async function handleLogout() {
-    const userIdentifier = JSON.parse(localStorage.getItem('user')).email; // Retrieve the logged-in user's email or mobile number
-
-    try {
-      const response = await fetch('http://localhost:5000/logout', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ user: userIdentifier }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        console.log(data.message);
-        window.location.href = 'http://localhost:3000/';
-      } else {
-        console.error(`There was an error logging out: ${data.message}`);
-      }
-    } catch (error) {
-      console.error('Failed to make the logout request:', error);
-    }
-  }
-  const handleMenuItem = (text) => {
-    setSelectedMenuItem(text);
-
-    // Check if the selected item is "Đăng xuất"
-    if (text === 'Đăng xuất') {
-      handleLogout(); // Navigate to /logout
-    }
-  };
 
   const handleMenuClick = () => setMenuIcon(!menuIcon);
   return (
@@ -72,7 +34,7 @@ export default function DropDownHeader(props) {
         alignItems='center'
         rounded='40px'
         onClick={handleMenuClick}
-        leftIcon={<Avatar size='md' src='' />}
+        leftIcon={<Avatar size='xs' src='' />}
         rightIcon={
           menuIcon ? (
             <Box transition='transform 0.3s ease-in-out' fontSize='24px'>
@@ -91,7 +53,7 @@ export default function DropDownHeader(props) {
       >
         <Flex gap='20px'>
           <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
-            Candidate
+            Admin
           </Text>
         </Flex>
       </MenuButton>
@@ -110,13 +72,7 @@ export default function DropDownHeader(props) {
             </Text>
           </Link>
         </MenuItem>
-        <MenuItem h='48px' bg='#E8E8EB' border='1px solid #1311311A'>
-          <Link href='/candidate/change-account-info'>
-            <Text p='12px 20px' fontSize='16px' fontWeight='600' lineHeight='24px'>
-              Cài đặt thông tin
-            </Text>
-          </Link>
-        </MenuItem>
+
         <MenuItem h='48px' bg='#E8E8EB' border='1px solid #1311311A'>
           <Link href='/candidate/change-password'>
             <Text p='12px 20px' fontSize='16px' fontWeight='600' lineHeight='24px'>
@@ -127,14 +83,7 @@ export default function DropDownHeader(props) {
         <MenuItem h='48px' bg='#E8E8EB' border='1px solid #1311311A'>
           <Link href='/candidate/job-apply'>
             <Text p='12px 20px' fontSize='16px' fontWeight='600' lineHeight='24px'>
-              Việc làm đã ứng tuyển
-            </Text>
-          </Link>
-        </MenuItem>
-        <MenuItem h='48px' bg='#E8E8EB' border='1px solid #1311311A'>
-          <Link href='job-recommended-setting'>
-            <Text p='12px 20px' fontSize='16px' fontWeight='600' lineHeight='24px'>
-              Cài đặt gợi ý việc làm
+              Nhật ký hoạt động
             </Text>
           </Link>
         </MenuItem>

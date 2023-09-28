@@ -89,7 +89,7 @@ function Login() {
           <Checkbox size='lg' fontSize='14px' fontWeight='500'>
             Nhớ mật khẩu
           </Checkbox>
-          <Link fontSize='14px' fontWeight='500'>
+          <Link fontSize='14px' fontWeight='500' href='/forgot-password'>
             Quên mật khẩu?
           </Link>
         </Flex>

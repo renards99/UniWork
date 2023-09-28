@@ -30,6 +30,7 @@ const menuData = {
   roles: ['Giám đốc', 'Nhân viên', 'Trợ lý', 'Quản lý', 'Phó phòng', 'Thực tập sinh'],
   workForm: ['Bán thời gian - Partime', 'Toàn thời gian - Fulltime'],
   gender: ['nam', 'nữ', 'không yêu cầu'],
+  experience: ['Mô tả công việc', 'Dưới 1 năm', '2 năm', '3 năm', '4 năm', '5 năm', 'Trên 5 năm'],
 };
 
 function PostUpload() {
@@ -248,24 +249,13 @@ function PostUpload() {
                     onChange={(e) => setSalary(e.target.value)}
                   ></Input>
                 </Stack>
-                <Stack gap='8px' p='0px'>
+                <Stack gap='8px' p='0px' flex='1 0 0'>
                   <Text fontSize='14px' fontWeight='500' lineHeight='24px'>
-                    Kinh nghiệm:
+                    Ngành nghề:
                   </Text>
-                  <Input
-                    p='24px 20px'
-                    placeholder='Kinh nghiệm'
-                    rounded='12px'
-                    border='1px solid #323541'
-                    focusBorderColor='none'
-                    _placeholder={{ fontSize: '14px', fontWeight: '500', lineHeight: '24px' }}
-                    fontSize='16px'
-                    fontWeight='600px'
-                    lineHeight='24px'
-                    value={experience}
-                    onChange={(e) => setExperience(e.target.value)}
-                  ></Input>
+                  <DropDown data={jobType} selected={jobTypeId} onChange={setJobTypeId} />
                 </Stack>
+
                 <Flex gap='20px' alignItems='center' alignSelf='stretch'>
                   <Stack gap='8px' p='0px' flex='1 0 0'>
                     <Text fontSize='14px' fontWeight='500' lineHeight='24px'>
@@ -287,9 +277,22 @@ function PostUpload() {
                   </Stack>
                   <Stack gap='8px' p='0px' flex='1 0 0'>
                     <Text fontSize='14px' fontWeight='500' lineHeight='24px'>
-                      Ngành nghề:
+                      Kinh nghiệm:
                     </Text>
-                    <DropDown data={jobType} selected={jobTypeId} onChange={setJobTypeId} />
+                    {/* <Input
+                      p='24px 20px'
+                      placeholder='Kinh nghiệm'
+                      rounded='12px'
+                      border='1px solid #323541'
+                      focusBorderColor='none'
+                      _placeholder={{ fontSize: '14px', fontWeight: '500', lineHeight: '24px' }}
+                      fontSize='16px'
+                      fontWeight='600px'
+                      lineHeight='24px'
+                      value={experience}
+                      onChange={(e) => setExperience(e.target.value)}
+                    ></Input> */}
+                    <DropDown data={jobType} />
                   </Stack>
                 </Flex>
               </Stack>
@@ -345,9 +348,13 @@ function PostUpload() {
                   <Text fontSize='14px' fontWeight='500' lineHeight='24px'>
                     Thời hạn đăng
                   </Text>
-                  <Flex>
-                    <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
-                    <DatePicker selected={endDate} onChange={(date) => setEndDate(date)} />
+                  <Flex gap='20px'>
+                    <Flex border='1px solid black' justifyContent='center' alignItems='center'>
+                      <DatePicker  selected={startDate} onChange={(date) => setStartDate(date)} />
+                    </Flex>
+                    <Flex border='1px solid black' justifyContent='center' alignItems='center'>
+                      <DatePicker selected={endDate} onChange={(date) => setEndDate(date)} />
+                    </Flex>
                     <Input
                       rounded='0px 12px 12px 0px'
                       p='24px 20px'

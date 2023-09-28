@@ -6,6 +6,19 @@ const QueryTypes = db.Sequelize.QueryTypes;
 const sequelize = db.sequelize;
 const jwt = require('jsonwebtoken');
 const responsehandler = require('../handlers/response.handler');
+const { initializeApp } = require('firebase/app');
+const { getAnalytics } = require('firebase/analytics');
+const { getStorage, ref, getDownloadURL, uploadBytesResumable } = require('firebase/storage');
+const { firebaseConfig } = require('../config/firebase_config');
+const multer = require('multer');
+
+const giveCurrentDateTime = () => {
+  const today = new Date();
+  const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+  const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+  const dateTime = date + ' ' + time;
+  return dateTime;
+};
 
 const generateRefreshToken = (user) => {
   return jwt.sign(
@@ -316,6 +329,31 @@ module.exports = {
         res,
         'Something wrong when trying to refresh. Try again later',
       );
+    }
+  },
+  async uploadFile(req, res) {
+    initializeApp(firebaseConfig);
+    const storage = getStorage();
+    try {
+      const dateTime = giveCurrentDateTime();
+
+      const storageRef = ref(storage, `cv/${req.file.originalname + '-' + dateTime}`);
+
+      const metadata = {
+        contentType: req.file.mimetype,
+      };
+
+      const snapshot = await uploadBytesResumable(storageRef, req.file.buffer, metadata);
+
+      // Grab the public url
+      const downloadURL = await getDownloadURL(snapshot.ref);
+      return responsehandler.responseWithData(res, 200, {
+        message: 'Upload successful',
+        cv_file: downloadURL,
+      });
+    } catch (error) {
+      console.log(error);
+      return responsehandler.error(res);
     }
   },
 };
