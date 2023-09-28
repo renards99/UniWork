@@ -2,7 +2,7 @@ module.exports = (sequelize, Sequelize) => {
   const Student = sequelize.define(
     'student',
     {
-       id: {
+      id: {
         type: Sequelize.INTEGER(11),
         primaryKey: true,
         autoIncrement: true,
@@ -21,6 +21,10 @@ module.exports = (sequelize, Sequelize) => {
       cv: {
         type: Sequelize.STRING(100),
         allowNull: true,
+      },
+      short_des: {
+        type: Sequelize.STRING(1000),
+        allowNull: false,
       },
     },
     {

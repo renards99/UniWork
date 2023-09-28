@@ -17,8 +17,46 @@ import {
 } from '@chakra-ui/react';
 
 import { HiChevronDown } from 'react-icons/hi';
-export default function DropDownHeader() {
+
+import { useRouter } from 'next/router';
+export default function DropDownHeader(props) {
+  const router = useRouter();
+  const data = props.data;
+
+  const [selectedMenuItem, setSelectedMenuItem] = useState(data[0]);
   const [menuIcon, setMenuIcon] = useState(false);
+  async function handleLogout() {
+    const userIdentifier = JSON.parse(localStorage.getItem('user')).email; // Retrieve the logged-in user's email or mobile number
+
+    try {
+      const response = await fetch('http://localhost:5000/logout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ user: userIdentifier }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log(data.message);
+        window.location.href = 'http://localhost:3000/';
+      } else {
+        console.error(`There was an error logging out: ${data.message}`);
+      }
+    } catch (error) {
+      console.error('Failed to make the logout request:', error);
+    }
+  }
+  const handleMenuItem = (text) => {
+    setSelectedMenuItem(text);
+
+    // Check if the selected item is "Đăng xuất"
+    if (text === 'Đăng xuất') {
+      handleLogout(); // Navigate to /logout
+    }
+  };
 
   const handleMenuClick = () => setMenuIcon(!menuIcon);
   return (

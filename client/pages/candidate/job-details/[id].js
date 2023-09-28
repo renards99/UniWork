@@ -83,31 +83,6 @@ function JobDetails({ data, BACK_END_PORT }) {
         'thưởng nghỉ lễ , tết',
       ],
     },
-    {
-      id: 3,
-      title: 'Nhân viên thiết kế chuyên viên tư vấn thiết kế lĩnh vực kiến trúc',
-      company: 'CÔNG TY ABC CỔ PHẦN VÀ THƯƠNG MẠI GLOBAL ',
-      locations: 'Hà Nội, HCM',
-      remainingDays: 'Còn 30 ngày để ứng tuyển',
-      time: 'Cập nhật 2h trước',
-      salary: '25-30TRIỆU',
-      tags: [
-        'thu nhập trợ cấp',
-        'được cấp thiết bị làm việc',
-        'Thử việc 100% lương',
-        'thưởng nghỉ lễ , tết',
-      ],
-    },
-    {
-      id: 4,
-      title: 'Nhân viên thiết kế chuyên viên tư vấn thiết kế lĩnh vực kiến trúc',
-      company: 'CÔNG TY ABC CỔ PHẦN VÀ THƯƠNG MẠI GLOBAL ',
-      locations: 'Hà Nội, HCM',
-      remainingDays: 'Còn 30 ngày để ứng tuyển',
-      time: 'Cập nhật 2h trước',
-      salary: '25-30TRIỆU',
-      tags: [''],
-    },
   ];
   const locations = ['Hà Giang', 'Tuyên Quang', 'Hà Nội', '...'];
   const experiences = ['Không Kinh Nghiệm', 'Trên 1 năm', 'Trên 2 năm', '...'];

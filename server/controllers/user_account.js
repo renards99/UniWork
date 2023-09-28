@@ -306,14 +306,17 @@ module.exports = {
   async logoutAccount(req, res) {
     const params = req.body;
     const { id } = params;
+
     try {
       const deleteRefreshToken = await UserAccount.update(
         { refresh_access_token: null },
         { where: { id } },
       );
+
       if (deleteRefreshToken) {
         res.clearCookie('user_account_data');
         res.clearCookie('refreshAccessToken');
+        console.log('dang xuat than hcon');
         return responsehandler.ok(res, 'Logout success!');
       } else {
         return responsehandler.badRequest(

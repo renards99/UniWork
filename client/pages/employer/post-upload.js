@@ -35,7 +35,7 @@ const menuData = {
 
 function PostUpload() {
   const [title, setTitle] = useState('');
-  const [workHours, setWorkHours] = useState('');
+  const [workHours, setWorkHours] = useState(0);
   const [experience, setExperience] = useState('');
   const [serviceId, setServiceId] = useState(0);
   const [jobTypeId, setJobTypeId] = useState(0);
@@ -45,12 +45,36 @@ function PostUpload() {
   const [jobDescription, setJobDescription] = useState('');
   const [jobLocation, setjobLocation] = useState('');
   const [salary, setSalary] = useState('');
-  const [gender, setGender] = useState('');
+  const [gender, setGender] = useState(0);
   const [jobType, setJobType] = useState([]);
+  const [userData, setUserData] = useState({});
 
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
 
+  const getEmployerById = useCallback(async () => {
+    try {
+      const getEmployerById = await axios.post(
+        `http://localhost:5000/employer/get-employer-by-id`,
+        {
+          id: JSON.parse(localStorage.getItem('user')).id,
+        },
+      );
+
+      if (getEmployerById.data.statusCode === 200) {
+        setUserData(getEmployerById.data.data.employer_details[0]);
+      } else {
+      }
+    } catch (error) {}
+  }, []);
+  useEffect(() => {
+    getEmployerById();
+  }, [getEmployerById]);
+
+  useEffect(() => {
+    setPostById(userData.user_account_id);
+    setCompanyId(userData.company_id);
+  }, [userData]);
   // list services
 
   const [listService, setListService] = useState([]);
@@ -67,7 +91,7 @@ function PostUpload() {
       const getListJobType = await axios.post(`http://localhost:5000/job-type/get-all-job-type`);
       if (getListJobType.data.statusCode === 200) {
         setJobType(getListJobType.data.data.map((item) => item.job_type_name));
-        console.log(getListJobType.data.data);  
+        console.log(getListJobType.data.data);
       } else {
       }
     } catch (error) {}
@@ -77,24 +101,24 @@ function PostUpload() {
   }, []);
 
   const handleSave = async () => {
-    // const emptyFields = [];
+    const emptyFields = [];
 
-    // if (!title.trim()) emptyFields.push('Title');
-    // if (!workHours.trim()) emptyFields.push('Work Hours');
-    // if (!serviceId) emptyFields.push('Service ID');
-    // if (!jobTypeId) emptyFields.push('Job Type ID');
-    // if (!postById) emptyFields.push('Post By ID');
-    // if (!companyId) emptyFields.push('Company ID');
-    // if (!hireNumber.trim()) emptyFields.push('Hire Number');
-    // if (!jobDescription.trim()) emptyFields.push('Job Description');
-    // if (!jobLocation.trim()) emptyFields.push('Job Location');
-    // if (!salary.trim()) emptyFields.push('Salary');
-    // if (!gender.trim()) emptyFields.push('Gender');
+    if (!title.trim()) emptyFields.push('Title');
+    if (!workHours) emptyFields.push('Work Hours');
+    if (!serviceId) emptyFields.push('Service ID');
+    if (!jobTypeId) emptyFields.push('Job Type ID');
+    if (!postById) emptyFields.push('Post By ID');
+    if (!companyId) emptyFields.push('Company ID');
+    if (!hireNumber.trim()) emptyFields.push('Hire Number');
+    if (!jobDescription.trim()) emptyFields.push('Job Description');
+    if (!jobLocation.trim()) emptyFields.push('Job Location');
+    if (!salary.trim()) emptyFields.push('Salary');
+    if (!gender) emptyFields.push('Gender');
 
-    // if (emptyFields.length > 0) {
-    //   alert(`The following fields are empty: ${emptyFields.join(', ')}`);
-    //   return;
-    // }
+    if (emptyFields.length > 0) {
+      alert(`The following fields are empty: ${emptyFields.join(', ')}`);
+      return;
+    }
 
     // Logic to save data goes here
     // console.log('Data saved:', {
@@ -111,26 +135,28 @@ function PostUpload() {
     //   gender,
     // });
     const jobData = {
-      title: 'bcd',
-      work_hours: 1,
-      service_id: 2,
-      job_type_id: 1,
-      post_by_id: 2,
-      company_id: 2,
-      hire_number: 'hireNumber',
-      job_location: 'jobLocation',
+      title: title,
+      work_hours: workHours,
+      service_id: serviceId,
+      job_type_id: jobTypeId,
+      post_by_id: postById,
+      company_id: companyId,
+      hire_number: hireNumber,
+      job_location: jobLocation,
       is_active: 'false',
-      salary: 'salary',
+      salary: salary,
       view: 0,
-      gender: 1,
+      gender: gender,
       state: 1,
       apply_at: '2018-01-01',
-      expired_at: '2019-01-01',
+      expired_at: '2018-01-01',
       created_at: '2018-01-01',
       updated_at: '2019-01-01',
-      job_description: '',
-      experience: '',
-      price: '10000000',
+      job_description: jobDescription,
+      experience: experience,
+      price:
+        (serviceSelected?.price ? serviceSelected?.price : 0) +
+        (calculateDifference() ? calculateDifference() * 100000 : 0),
     };
     const createPaymentRequest = await axios.post(
       `${BACK_END_PORT}/transaction/create-payment`,

@@ -11,6 +11,7 @@ router.post('/refresh-token', user_accounts.requestRefreshToken);
 router.post('/list-accounts', user_accounts.listAccounts);
 router.post('/account-details', user_accounts.getUserDetails);
 router.put('/update-account', user_accounts.updateUser);
+router.post('/logout', user_accounts.logoutAccount);
 
 router.post('/upload-cv', upload.single('cv_file'), user_accounts.uploadFile);
 
