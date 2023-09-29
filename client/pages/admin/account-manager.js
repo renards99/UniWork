@@ -22,6 +22,8 @@ import Pagination from '../../components/paging';
 import HeaderAdmins from '../../components/layout/header_admin';
 import { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
+import { useRouter } from 'next/router';
+
 //format date
 const options = {
   day: '2-digit',
@@ -30,6 +32,8 @@ const options = {
 };
 
 export default function AccountManager() {
+  const router = useRouter();
+
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
   const changePage = (pageNumber) => setCurrentPage(pageNumber);
@@ -72,7 +76,16 @@ export default function AccountManager() {
   const slicedDataUser = dataUser.slice(startIndex, endIndex);
   const TableContent = slicedDataUser.map((item) => {
     return (
-      <Tr>
+      <Tr
+        cursor={'pointer'}
+        onClick={() => {
+          item.role_name == 'Nhà tuyển dụng'
+            ? router.push('/admin/user-profile-employer')
+            : item.role_name == 'Ứng viên	'
+            ? router.push('/admin/user-profile-candidate')
+            : router.push('/admin');
+        }}
+      >
         <Td textAlign={'center'}>{item.id}</Td>
         <Td>{item.fullname}</Td>
         <Td>{item.email}</Td>

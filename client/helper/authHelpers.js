@@ -1,5 +1,9 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
+<<<<<<< HEAD
+=======
+
+>>>>>>> fb60dded1381be86a7b5765e7431aa7bd5e36ce7
 export const loginAccount = async (user, password, back_end_port, router) => {
   const submitData = {
     user,
@@ -20,10 +24,10 @@ export const loginAccount = async (user, password, back_end_port, router) => {
     }
     if (login.data.data.dataValues.role_id == 1) {
       Cookies.set('sideBarActive', 2);
-      router.push('/admin');
+      router.push('/admin/account-manager');
     }
     if (login.data.data.dataValues.role_id == 2) {
-      router.push('/employer');
+      router.push('/employer/employer-details');
     }
     if (login.data.data.dataValues.role_id == 3) {
       router.push('/candidate');
