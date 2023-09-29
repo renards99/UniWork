@@ -356,6 +356,31 @@ module.exports = {
       return responsehandler.error(res);
     }
   },
+  async uploadImage(req, res) {
+    initializeApp(firebaseConfig);
+    const storage = getStorage();
+    try {
+      const dateTime = giveCurrentDateTime();
+
+      const storageRef = ref(storage, `images/${req.file.originalname + '-' + dateTime}`);
+
+      const metadata = {
+        contentType: req.file.mimetype,
+      };
+
+      const snapshot = await uploadBytesResumable(storageRef, req.file.buffer, metadata);
+
+      // Grab the public url
+      const downloadURL = await getDownloadURL(snapshot.ref);
+      return responsehandler.responseWithData(res, 200, {
+        message: 'Upload successful',
+        cv_file: downloadURL,
+      });
+    } catch (error) {
+      console.log(error);
+      return responsehandler.error(res);
+    }
+  },
   async changePassword(req, res) {
     try {
       const params = req.body;
