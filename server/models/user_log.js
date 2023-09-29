@@ -18,12 +18,12 @@ module.exports = (sequelize, Sequelize) => {
         },
         onDelete: 'cascade',
       },
-      last_login_date: {
-        type: Sequelize.DATE,
+      description: {
+        type: Sequelize.STRING,
         allowNull: false,
       },
-      last_job_apply_at: {
-        type: Sequelize.DATE,
+      created_at: {
+        type: Sequelize.STRING,
         allowNull: false,
       },
     },

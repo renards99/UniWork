@@ -21,6 +21,7 @@ import { useCallback, useState, useEffect } from 'react';
 import { differenceInDays } from 'date-fns';
 import 'react-datepicker/dist/react-datepicker.css';
 import { totalPriceItemInCart } from '../../helper';
+import { format } from 'date-fns';
 
 import axios from 'axios';
 
@@ -30,13 +31,13 @@ const menuData = {
   roles: ['Giám đốc', 'Nhân viên', 'Trợ lý', 'Quản lý', 'Phó phòng', 'Thực tập sinh'],
   workForm: ['Bán thời gian - Partime', 'Toàn thời gian - Fulltime'],
   gender: ['nam', 'nữ', 'không yêu cầu'],
-  experience: ['Mô tả công việc', 'Dưới 1 năm', '2 năm', '3 năm', '4 năm', '5 năm', 'Trên 5 năm'],
+  experience: ['Dưới 1 năm', '1 năm', '2 năm', '3 năm', '4 năm', '5 năm', 'Trên 5 năm'],
 };
 
 function PostUpload() {
   const [title, setTitle] = useState('');
   const [workHours, setWorkHours] = useState(0);
-  const [experience, setExperience] = useState('');
+  const [experience, setExperience] = useState(0);
   const [serviceId, setServiceId] = useState(0);
   const [jobTypeId, setJobTypeId] = useState(0);
   const [postById, setPostById] = useState(0);
@@ -148,8 +149,8 @@ function PostUpload() {
       view: 0,
       gender: gender,
       state: 1,
-      apply_at: '2018-01-01',
-      expired_at: '2018-01-01',
+      apply_at: format(new Date(startDate), 'yyyy-MM-dd HH:mm:ss'),
+      expired_at: format(new Date(endDate), 'yyyy-MM-dd HH:mm:ss'),
       created_at: '2018-01-01',
       updated_at: '2019-01-01',
       job_description: jobDescription,
@@ -279,20 +280,11 @@ function PostUpload() {
                     <Text fontSize='14px' fontWeight='500' lineHeight='24px'>
                       Kinh nghiệm:
                     </Text>
-                    {/* <Input
-                      p='24px 20px'
-                      placeholder='Kinh nghiệm'
-                      rounded='12px'
-                      border='1px solid #323541'
-                      focusBorderColor='none'
-                      _placeholder={{ fontSize: '14px', fontWeight: '500', lineHeight: '24px' }}
-                      fontSize='16px'
-                      fontWeight='600px'
-                      lineHeight='24px'
-                      value={experience}
-                      onChange={(e) => setExperience(e.target.value)}
-                    ></Input> */}
-                    <DropDown data={jobType} />
+                    <DropDown
+                      data={menuData.experience}
+                      selected={experience}
+                      onChange={setExperience}
+                    />
                   </Stack>
                 </Flex>
               </Stack>
@@ -350,7 +342,7 @@ function PostUpload() {
                   </Text>
                   <Flex gap='20px'>
                     <Flex border='1px solid black' justifyContent='center' alignItems='center'>
-                      <DatePicker  selected={startDate} onChange={(date) => setStartDate(date)} />
+                      <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
                     </Flex>
                     <Flex border='1px solid black' justifyContent='center' alignItems='center'>
                       <DatePicker selected={endDate} onChange={(date) => setEndDate(date)} />

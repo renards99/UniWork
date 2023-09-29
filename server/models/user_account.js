@@ -63,10 +63,6 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      short_des: {
-        type: Sequelize.STRING(1000),
-        allowNull: false,
-      },
       refresh_access_token: {
         type: Sequelize.STRING(1000),
       },

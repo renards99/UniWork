@@ -33,83 +33,59 @@ const formatDate = (dateString) => {
   return `${day}/${month}/${year}`;
 };
 export default function JobManager() {
-  const data = [
-    {
-      id: 1,
-      job_name: 'Tuyển Android Dev',
-      job_company: 'Công ty ABC',
-      career: 'Công nghệ thông tin',
-      date: '12/12/2022',
-      status: 1,
-    },
-    {
-      id: 2,
-      job_name: 'Tuyển Java Dev cho website Nhật',
-      job_company: 'Công ty Dược phẩm Long Châu',
-      career: 'Công nghệ thông tin',
-      date: '12/11/2022',
-      status: 2,
-    },
-    {
-      id: 3,
-      job_name: 'Tuyển Android Dev',
-      job_company: 'Công ty TNHH AFC',
-      career: 'Công nghệ thông tin',
-      date: '30/03/2022',
-      status: 0,
-    },
-  ];
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
   const changePage = (pageNumber) => setCurrentPage(pageNumber);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
 
-  const [dataUser, setDataUser] = useState([]);
-  const [param, setParam] = useState({ search: '', role: '' });
+  const [jobPostList, setJobPostList] = useState([]);
+  const [param, setParam] = useState({ search: '', state: '' });
 
+  const [state, setState] = useState();
   const [search, setSearch] = useState();
-  const [role, setRole] = useState();
-  const handleSearch = useCallback((value, role) => {
-    setRole(role);
+  const handleSearch = useCallback((value, state) => {
+    setState(state);
     setSearch(value);
     changePage(1);
     setParam({ ...param, search: value });
-    getListAccounts(value, role);
+    getListJob(value, state);
   }, []);
 
-  const getListAccounts = useCallback(
-    async (search, role) => {
+  const getListJob = useCallback(
+    async (search, state) => {
       try {
-        const getListAccounts = await axios.post(`http://localhost:5000/job-post/get-all-post`, {
+        const getListJob = await axios.post(`http://localhost:5000/job-post/get-all-job-post`, {
           ...param,
           search: search ? search : param.search,
-          role: role ? role : param.role,
+          state: state ? state : param.state,
         });
-        if (getListAccounts.data.statusCode === 200) {
-          setDataUser(getListAccounts.data.data.list_user);
+        if (getListJob.data.statusCode === 200) {
+          setJobPostList(getListJob.data.data);
+          console.log('set thanh cong');
+          console.log(getListJob.data.data);
         } else {
         }
       } catch (error) {}
     },
     [param],
   );
-  console.log(dataUser);
+  console.log(search + 'search');
   useEffect(() => {
-    getListAccounts();
+    getListJob();
   }, []);
 
-  const slicedDataUser = dataUser.slice(startIndex, endIndex);
+  const slicedjobPostList = jobPostList.slice(startIndex, endIndex);
 
-  const TableContent = slicedDataUser.map((item, index) => {
-    console.log(item);
+  const TableContent = slicedjobPostList.map((item, index) => {
     return (
       <Tr>
         <Td textAlign={'center'}>{item.main_id}</Td>
         <Td>{item.title}</Td>
         <Td>{item.company_name}</Td>
-        <Td>{item.job_type_name}</Td>
+
         <Td textAlign={'center'}>{formatDate(item.apply_at)}</Td>
+        <Td textAlign={'center'}>{formatDate(item.expired_at)}</Td>
         <Td textAlign={'center'}>
           {item.state == 2 ? (
             <Box
@@ -168,8 +144,8 @@ export default function JobManager() {
               <th style={{ width: '5%' }}>ID</th>
               <th style={{ width: '20%' }}>Tên công việc</th>
               <th style={{ width: '25%' }}>Tên công ty</th>
-              <th>Ngành nghề</th>
-              <th>Ngày đăng</th>
+              <th>Ngày áp dụng</th>
+              <th>Ngày kết thúc</th>
               <th style={{ width: '15%' }}>Trạng thái</th>
             </Tr>
           </Thead>
@@ -179,7 +155,7 @@ export default function JobManager() {
       <Pagination
         currentPage={currentPage}
         itemsPerPage={itemsPerPage}
-        totalItems={dataUser.length}
+        totalItems={jobPostList.length}
         changePage={changePage}
       />
     </>
@@ -254,7 +230,8 @@ export default function JobManager() {
             fontSize={'16px'}
             _hover={{ outline: 'none' }}
             _focusVisible={{ outline: 'none' }}
-            onChange={(e) => handleSearch(e.target.value, role)}
+            value={search}
+            onChange={(e) => handleSearch(e.target.value, state)}
           />
         </Flex>
         <Box w={'24px'}></Box>

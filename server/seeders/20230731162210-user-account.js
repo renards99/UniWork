@@ -17,7 +17,6 @@ module.exports = {
         is_banned: false,
         user_image:
           'https://www.google.com/url?sa=i&url=https%3A%2F%2Fpixabay.com%2Fimages%2Fsearch%2Fnature%2F&psig=AOvVaw1wkv00c9PQhVr-wCoFnaX7&ust=1690907381255000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNifk4KvuYADFQAAAAAdAAAAABAE',
-        short_des: 'Nhà sáng lập công ty BSS',
       },
       {
         full_name: 'Ngô Trung Nghĩa',
@@ -31,7 +30,6 @@ module.exports = {
         is_verified: true,
         is_banned: false,
         user_image: 'https://cdn.love-shayari.co/wp-content/uploads/2021/10/sun-rise.jpg',
-        short_des: 'Nhà sáng lập công ty Google',
       },
       {
         full_name: 'A B C',
@@ -46,7 +44,6 @@ module.exports = {
         is_banned: false,
         user_image:
           'https://img.freepik.com/premium-photo/image-colorful-galaxy-sky-generative-ai_791316-9864.jpg?w=2000',
-        short_des: 'Sinh viên trường đại học FPT',
       },
       {
         full_name: 'Chu Quốc Huy',
@@ -61,7 +58,6 @@ module.exports = {
         is_banned: false,
         user_image:
           'https://img.freepik.com/premium-photo/image-colorful-galaxy-sky-generative-ai_791316-9864.jpg?w=2000',
-        short_des: 'Sinh viên trường đại học FPT',
       },
       {
         full_name: 'Nguyen Thi An',
@@ -75,7 +71,6 @@ module.exports = {
         is_verified: true,
         is_banned: false,
         user_image: 'https://example.com/an.jpg',
-        short_des: 'Software Engineer',
       },
       {
         full_name: 'Tran Van A',
@@ -89,7 +84,6 @@ module.exports = {
         is_verified: true,
         is_banned: false,
         user_image: 'https://example.com/tranva.jpg',
-        short_des: 'Marketing Specialist',
       },
       {
         full_name: 'Le Thi B',
@@ -103,7 +97,6 @@ module.exports = {
         is_verified: true,
         is_banned: false,
         user_image: 'https://example.com/lethib.jpg',
-        short_des: 'Graphic Designer',
       },
       {
         full_name: 'Nguyen Van B',
@@ -117,7 +110,6 @@ module.exports = {
         is_verified: true,
         is_banned: false,
         user_image: 'https://example.com/nguyenvanb.jpg',
-        short_des: 'Sales Manager',
       },
       {
         full_name: 'Pham Thi C',
@@ -131,7 +123,6 @@ module.exports = {
         is_verified: true,
         is_banned: false,
         user_image: 'https://example.com/phamthic.jpg',
-        short_des: 'Content Writer',
       },
       {
         full_name: 'Lâm Văn Thành',
@@ -145,7 +136,6 @@ module.exports = {
         is_verified: false,
         is_banned: true,
         user_image: 'https://dummyimage.com/332x97',
-        short_des: 'Young heavy nature writer goal music.',
       },
       {
         full_name: 'Trần Minh Thông',
@@ -159,7 +149,6 @@ module.exports = {
         is_verified: true,
         is_banned: true,
         user_image: 'https://placekitten.com/745/860',
-        short_des: 'They scene at purpose discover hand must.',
       },
       {
         full_name: 'Đoàn Thanh Tân',
@@ -173,7 +162,6 @@ module.exports = {
         is_verified: true,
         is_banned: false,
         user_image: 'https://picsum.photos/299/419',
-        short_des: 'Item individual model chair.',
       },
       {
         full_name: 'Trần Tất Thắng',
@@ -187,7 +175,6 @@ module.exports = {
         is_verified: true,
         is_banned: false,
         user_image: 'https://picsum.photos/725/827',
-        short_des: 'Region avoid western yes.',
       },
       {
         full_name: 'Lê Hoàng Quân',
@@ -201,7 +188,6 @@ module.exports = {
         is_verified: false,
         is_banned: false,
         user_image: 'https://picsum.photos/348/298',
-        short_des: 'Gas question like somebody those piece region.',
       },
       {
         full_name: 'Nguyễn Vũ Trường Sơn',
@@ -215,7 +201,6 @@ module.exports = {
         is_verified: true,
         is_banned: false,
         user_image: 'https://picsum.photos/22/933',
-        short_des: 'Republican generation open certain.',
       },
       {
         full_name: 'Diệp Vương Thắng',
@@ -229,7 +214,6 @@ module.exports = {
         is_verified: true,
         is_banned: false,
         user_image: 'https://placekitten.com/639/147',
-        short_des: 'Message itself language establish material spend.',
       },
       {
         full_name: 'Nguyễn Echam Samuel',
@@ -243,7 +227,6 @@ module.exports = {
         is_verified: true,
         is_banned: false,
         user_image: 'https://dummyimage.com/460x508',
-        short_des: 'Reveal drug final last name people include.',
       },
       {
         full_name: 'Nguyễn Anh Tấn',
@@ -257,7 +240,6 @@ module.exports = {
         is_verified: true,
         is_banned: false,
         user_image: 'https://picsum.photos/441/363',
-        short_des: 'Reason little message claim machine laugh.',
       },
       {
         full_name: 'Nguyễn Cao Trường',
@@ -271,7 +253,6 @@ module.exports = {
         is_verified: false,
         is_banned: false,
         user_image: 'https://picsum.photos/664/869',
-        short_des: 'Front full good political region where board beyond.',
       },
       {
         full_name: 'Nguyễn Xuân Sang',
@@ -285,7 +266,6 @@ module.exports = {
         is_verified: false,
         is_banned: false,
         user_image: 'https://picsum.photos/683/281',
-        short_des: 'Where cup five space.',
       },
       {
         full_name: 'Trịnh Đức Thiện',
@@ -299,7 +279,6 @@ module.exports = {
         is_verified: false,
         is_banned: true,
         user_image: 'https://dummyimage.com/77x768',
-        short_des: 'Entire case win increase west weight local.',
       },
       {
         full_name: 'Vũ Hoàng Hải Sơn',
@@ -313,7 +292,6 @@ module.exports = {
         is_verified: true,
         is_banned: false,
         user_image: 'https://dummyimage.com/969x757',
-        short_des: 'Stock present fill TV beat thank grow.',
       },
       {
         full_name: 'Phan Xuân Thắng',
@@ -327,7 +305,6 @@ module.exports = {
         is_verified: true,
         is_banned: true,
         user_image: 'https://placekitten.com/65/496',
-        short_des: 'Whether difference within attention it.',
       },
       {
         full_name: 'Nguyễn Chí Thanh',
@@ -341,7 +318,6 @@ module.exports = {
         is_verified: true,
         is_banned: true,
         user_image: 'https://picsum.photos/348/143',
-        short_des: 'Traditional international over a thus drop each.',
       },
       {
         full_name: 'Phan Duy Quốc',
@@ -355,7 +331,6 @@ module.exports = {
         is_verified: true,
         is_banned: false,
         user_image: 'https://placekitten.com/744/215',
-        short_des: 'Writer ball guess.',
       },
       {
         full_name: 'Nguyễn Viết Sơn',
@@ -369,7 +344,6 @@ module.exports = {
         is_verified: false,
         is_banned: false,
         user_image: 'https://placekitten.com/174/470',
-        short_des: 'Account baby guess meeting maintain.',
       },
       {
         full_name: 'Phan Đức Sơn',
@@ -383,7 +357,6 @@ module.exports = {
         is_verified: true,
         is_banned: true,
         user_image: 'https://picsum.photos/758/295',
-        short_des: 'President democratic official foreign.',
       },
       {
         full_name: 'Nguyễn Echam Samuel',
@@ -397,7 +370,6 @@ module.exports = {
         is_verified: false,
         is_banned: false,
         user_image: 'https://picsum.photos/42/926',
-        short_des: 'Left fill better society town.',
       },
       {
         full_name: 'Ngô Vũ Sang',
@@ -411,7 +383,6 @@ module.exports = {
         is_verified: false,
         is_banned: true,
         user_image: 'https://picsum.photos/611/665',
-        short_des: 'Station local reason.',
       },
       {
         full_name: 'Vũ Minh Thái',
@@ -425,7 +396,6 @@ module.exports = {
         is_verified: false,
         is_banned: true,
         user_image: 'https://picsum.photos/293/912',
-        short_des: 'Ask likely nation family.',
       },
       {
         full_name: 'Diệp Vương Thắng',
@@ -439,7 +409,6 @@ module.exports = {
         is_verified: false,
         is_banned: true,
         user_image: 'https://dummyimage.com/116x368',
-        short_des: 'Movie recent free.',
       },
       {
         full_name: 'Bùi Minh Quân',
@@ -453,7 +422,6 @@ module.exports = {
         is_verified: false,
         is_banned: true,
         user_image: 'https://dummyimage.com/946x338',
-        short_des: 'Stuff full even try.',
       },
       {
         full_name: 'Nguyễn Trung Sơn',
@@ -467,7 +435,6 @@ module.exports = {
         is_verified: true,
         is_banned: false,
         user_image: 'https://dummyimage.com/421x46',
-        short_des: 'At visit may keep hold.',
       },
       {
         full_name: 'Trần Quang Văn Thư',
@@ -481,7 +448,6 @@ module.exports = {
         is_verified: false,
         is_banned: false,
         user_image: 'https://placekitten.com/487/511',
-        short_des: 'Appear instead traditional word difficult share seat.',
       },
       {
         full_name: 'Vũ Thị Hoài Sơn',
@@ -495,7 +461,6 @@ module.exports = {
         is_verified: false,
         is_banned: true,
         user_image: 'https://picsum.photos/357/696',
-        short_des: 'Political simple against usually than key great including.',
       },
       {
         full_name: 'Nguyễn Văn Thịnh',
@@ -509,7 +474,6 @@ module.exports = {
         is_verified: true,
         is_banned: false,
         user_image: 'https://picsum.photos/792/933',
-        short_des: 'Its half amount tonight contain establish.',
       },
       {
         full_name: 'Nguyễn Tiến Thành',
@@ -523,7 +487,6 @@ module.exports = {
         is_verified: false,
         is_banned: true,
         user_image: 'https://placekitten.com/262/132',
-        short_des: 'Once civil artist society since.',
       },
       {
         full_name: 'Trần Minh Sang',
@@ -537,7 +500,6 @@ module.exports = {
         is_verified: false,
         is_banned: true,
         user_image: 'https://placekitten.com/912/445',
-        short_des: 'Customer member federal safe trouble authority quality reduce.',
       },
       {
         full_name: 'Lê Tấn Thạnh',
@@ -551,7 +513,6 @@ module.exports = {
         is_verified: false,
         is_banned: false,
         user_image: 'https://picsum.photos/608/892',
-        short_des: 'Although my agency fight take once blood.',
       },
       {
         full_name: 'Trần Minh Thông',
@@ -565,7 +526,6 @@ module.exports = {
         is_verified: true,
         is_banned: false,
         user_image: 'https://picsum.photos/692/301',
-        short_des: 'More TV though blue between piece enjoy president.',
       },
       {
         full_name: 'Nguyễn Bỉnh Khiêm',
@@ -579,7 +539,6 @@ module.exports = {
         is_verified: false,
         is_banned: false,
         user_image: 'https://dummyimage.com/905x723',
-        short_des: 'Understand network name.',
       },
       {
         full_name: 'Lê Hà Xuân Thái',
@@ -593,7 +552,6 @@ module.exports = {
         is_verified: true,
         is_banned: true,
         user_image: 'https://picsum.photos/821/909',
-        short_des: 'Just range fact theory college.',
       },
       {
         full_name: 'Trần Thị Minh Sương',
@@ -607,7 +565,6 @@ module.exports = {
         is_verified: false,
         is_banned: true,
         user_image: 'https://dummyimage.com/1013x818',
-        short_des: 'Less compare close role whatever person federal.',
       },
       {
         full_name: 'Lê Công Tài',
@@ -621,7 +578,6 @@ module.exports = {
         is_verified: true,
         is_banned: true,
         user_image: 'https://placekitten.com/868/157',
-        short_des: 'Goal plant black imagine.',
       },
       {
         full_name: 'Lê Quang',
@@ -635,7 +591,6 @@ module.exports = {
         is_verified: false,
         is_banned: false,
         user_image: 'https://picsum.photos/362/454',
-        short_des: 'Mission produce understand event Congress around.',
       },
       {
         full_name: 'Phan Khánh Thuận',
@@ -649,7 +604,6 @@ module.exports = {
         is_verified: true,
         is_banned: true,
         user_image: 'https://picsum.photos/902/285',
-        short_des: 'Bar student he ahead common available.',
       },
       {
         full_name: 'Trương Trọng Quân',
@@ -663,7 +617,6 @@ module.exports = {
         is_verified: true,
         is_banned: false,
         user_image: 'https://placekitten.com/167/471',
-        short_des: 'Whom opportunity score probably page doctor.',
       },
       {
         full_name: 'Võ Hoàng Phương',
@@ -677,7 +630,6 @@ module.exports = {
         is_verified: false,
         is_banned: true,
         user_image: 'https://picsum.photos/67/374',
-        short_des: 'Smile American evidence behind.',
       },
       {
         full_name: 'Vũ Hoàng Hải Sơn',
@@ -691,7 +643,6 @@ module.exports = {
         is_verified: false,
         is_banned: true,
         user_image: 'https://dummyimage.com/456x478',
-        short_des: 'Form today same majority another.',
       },
       {
         full_name: 'Vũ Thị Phương',
@@ -705,7 +656,6 @@ module.exports = {
         is_verified: false,
         is_banned: false,
         user_image: 'https://placekitten.com/704/70',
-        short_des: 'Court compare operation defense toward.',
       },
       {
         full_name: 'Bùi Minh Quân',
@@ -719,7 +669,6 @@ module.exports = {
         is_verified: true,
         is_banned: true,
         user_image: 'https://picsum.photos/835/334',
-        short_des: 'Sound performance cut yourself.',
       },
       {
         full_name: 'Lê Hà Xuân Thái',
@@ -733,7 +682,6 @@ module.exports = {
         is_verified: false,
         is_banned: false,
         user_image: 'https://placekitten.com/44/584',
-        short_des: 'Machine population eat voice her admit including town.',
       },
       {
         full_name: 'Phạm Thanh Quốc',
@@ -747,7 +695,6 @@ module.exports = {
         is_verified: true,
         is_banned: false,
         user_image: 'https://dummyimage.com/23x187',
-        short_des: 'Even door student any prevent here offer plan.',
       },
       {
         full_name: 'Lê Tấn Thạnh',
@@ -761,7 +708,6 @@ module.exports = {
         is_verified: false,
         is_banned: true,
         user_image: 'https://picsum.photos/449/98',
-        short_des: 'Anything again note practice lose prove identify.',
       },
       {
         full_name: 'Đàm Văn Thiện',
@@ -775,7 +721,6 @@ module.exports = {
         is_verified: false,
         is_banned: true,
         user_image: 'https://dummyimage.com/331x896',
-        short_des: 'Program everybody easy site former bag.',
       },
       {
         full_name: 'Trần Văn Dö',
@@ -789,7 +734,6 @@ module.exports = {
         is_verified: true,
         is_banned: true,
         user_image: 'https://placekitten.com/50/685',
-        short_des: 'Young coach safe never.',
       },
       {
         full_name: 'Nguyễn Đức Thông',
@@ -803,7 +747,6 @@ module.exports = {
         is_verified: true,
         is_banned: false,
         user_image: 'https://picsum.photos/200/547',
-        short_des: 'Technology hair thing past case study stock.',
       },
       {
         full_name: 'Đinh Văn Phượng',
@@ -817,7 +760,6 @@ module.exports = {
         is_verified: false,
         is_banned: false,
         user_image: 'https://dummyimage.com/386x700',
-        short_des: 'Full fight car bad with once effort.',
       },
       {
         full_name: 'Vũ Hồng Tâm',
@@ -831,7 +773,6 @@ module.exports = {
         is_verified: false,
         is_banned: false,
         user_image: 'https://picsum.photos/897/719',
-        short_des: 'Quality research spend policy wife.',
       },
       {
         full_name: 'Lê Công Tài',
@@ -845,7 +786,6 @@ module.exports = {
         is_verified: false,
         is_banned: true,
         user_image: 'https://picsum.photos/131/935',
-        short_des: 'Evidence region officer watch expert.',
       },
       {
         full_name: 'Võ Tiến Sĩ',
@@ -859,7 +799,6 @@ module.exports = {
         is_verified: false,
         is_banned: false,
         user_image: 'https://picsum.photos/151/1004',
-        short_des: 'Yes turn after president analysis necessary serve.',
       },
       {
         full_name: 'Nguyễn Đức Thông',
@@ -873,7 +812,6 @@ module.exports = {
         is_verified: false,
         is_banned: false,
         user_image: 'https://placekitten.com/993/721',
-        short_des: 'Spend agency drop too.',
       },
       {
         full_name: 'Nguyễn Ngọc Phương',
@@ -887,7 +825,6 @@ module.exports = {
         is_verified: true,
         is_banned: true,
         user_image: 'https://picsum.photos/858/362',
-        short_des: 'Positive those brother be number decade artist.',
       },
       {
         full_name: 'Lê Phú Quý',
@@ -901,7 +838,6 @@ module.exports = {
         is_verified: true,
         is_banned: true,
         user_image: 'https://picsum.photos/801/420',
-        short_des: 'Carry message stock drive drop.',
       },
       {
         full_name: 'Phạm Thanh Quốc',
@@ -915,7 +851,6 @@ module.exports = {
         is_verified: false,
         is_banned: true,
         user_image: 'https://dummyimage.com/653x232',
-        short_des: 'Describe big cover gas condition from.',
       },
       {
         full_name: 'Nguyễn Minh Phương',
@@ -929,7 +864,6 @@ module.exports = {
         is_verified: true,
         is_banned: true,
         user_image: 'https://placekitten.com/425/804',
-        short_des: 'Use here standard local simple.',
       },
       {
         full_name: 'Trịnh Đức Thiện',
@@ -943,7 +877,6 @@ module.exports = {
         is_verified: true,
         is_banned: true,
         user_image: 'https://placekitten.com/569/738',
-        short_des: 'Measure analysis marriage center.',
       },
       {
         full_name: 'Phan Khánh Thuận',
@@ -957,7 +890,6 @@ module.exports = {
         is_verified: true,
         is_banned: false,
         user_image: 'https://picsum.photos/47/695',
-        short_des: 'Politics up federal return.',
       },
       {
         full_name: 'Trần Thị Minh Sương',
@@ -971,7 +903,6 @@ module.exports = {
         is_verified: false,
         is_banned: false,
         user_image: 'https://placekitten.com/746/580',
-        short_des: 'Campaign speech left himself process computer within crime.',
       },
       {
         full_name: 'Trần Quang Văn Thư',
@@ -985,7 +916,6 @@ module.exports = {
         is_verified: true,
         is_banned: false,
         user_image: 'https://dummyimage.com/307x176',
-        short_des: 'Best always opportunity oil economic.',
       },
       {
         full_name: 'Lê Ngọc Thuận',
@@ -999,7 +929,6 @@ module.exports = {
         is_verified: true,
         is_banned: false,
         user_image: 'https://picsum.photos/379/830',
-        short_des: 'Beyond fall audience administration industry compare sea.',
       },
       {
         full_name: 'Nguyễn Công Thành',
@@ -1013,7 +942,6 @@ module.exports = {
         is_verified: true,
         is_banned: true,
         user_image: 'https://dummyimage.com/641x157',
-        short_des: 'Quality discussion go data risk far change.',
       },
       {
         full_name: 'Vũ Văn Thành',
@@ -1027,7 +955,6 @@ module.exports = {
         is_verified: true,
         is_banned: false,
         user_image: 'https://dummyimage.com/816x61',
-        short_des: 'To why may doctor seven idea test.',
       },
       {
         full_name: 'Nguyễn Ngọc Thân',
@@ -1041,7 +968,6 @@ module.exports = {
         is_verified: true,
         is_banned: false,
         user_image: 'https://placekitten.com/901/888',
-        short_des: 'Will exist million race hour provide.',
       },
       {
         full_name: 'Hồ Nguyễn Xuân Thanh',
@@ -1055,7 +981,6 @@ module.exports = {
         is_verified: true,
         is_banned: true,
         user_image: 'https://placekitten.com/843/302',
-        short_des: 'Hear will step protect throw ahead report example.',
       },
       {
         full_name: 'Nguyễn Tiến Thành',
@@ -1069,7 +994,6 @@ module.exports = {
         is_verified: false,
         is_banned: false,
         user_image: 'https://picsum.photos/536/489',
-        short_des: 'Response third give make art tree not.',
       },
       {
         full_name: 'Nguyễn Hữu Thế',
@@ -1083,7 +1007,6 @@ module.exports = {
         is_verified: false,
         is_banned: false,
         user_image: 'https://picsum.photos/352/999',
-        short_des: 'Interesting plant stock shoulder hope development child will.',
       },
       {
         full_name: 'Lý Quốc Quyền',
@@ -1097,7 +1020,6 @@ module.exports = {
         is_verified: true,
         is_banned: true,
         user_image: 'https://dummyimage.com/925x1013',
-        short_des: 'Open another risk company last consumer shoulder.',
       },
       {
         full_name: 'Võ Đức Thảo',
@@ -1111,7 +1033,6 @@ module.exports = {
         is_verified: true,
         is_banned: true,
         user_image: 'https://dummyimage.com/45x538',
-        short_des: 'Away lose every strategy raise north movie.',
       },
       {
         full_name: 'Võ Tiến Sĩ',
@@ -1125,7 +1046,6 @@ module.exports = {
         is_verified: true,
         is_banned: false,
         user_image: 'https://placekitten.com/379/991',
-        short_des: 'This feel member laugh himself fall.',
       },
       {
         full_name: 'Lê Tiến Thành',
@@ -1139,7 +1059,6 @@ module.exports = {
         is_verified: true,
         is_banned: false,
         user_image: 'https://picsum.photos/191/414',
-        short_des: 'Control of friend air.',
       },
       {
         full_name: 'Trần Tất Thắng',
@@ -1153,7 +1072,6 @@ module.exports = {
         is_verified: false,
         is_banned: true,
         user_image: 'https://picsum.photos/303/303',
-        short_des: 'Economy lose power speak movement alone talk difficult.',
       },
       {
         full_name: 'Lê Anh Sơn',
@@ -1167,7 +1085,6 @@ module.exports = {
         is_verified: false,
         is_banned: true,
         user_image: 'https://picsum.photos/564/923',
-        short_des: 'Free policy sure deep gun nothing drive.',
       },
       {
         full_name: 'Nguyễn Anh Tấn',
@@ -1181,7 +1098,6 @@ module.exports = {
         is_verified: true,
         is_banned: false,
         user_image: 'https://picsum.photos/555/364',
-        short_des: 'Question finally outside.',
       },
       {
         full_name: 'Nguyễn Đình Thi',
@@ -1195,7 +1111,6 @@ module.exports = {
         is_verified: true,
         is_banned: false,
         user_image: 'https://placekitten.com/845/805',
-        short_des: 'Voice fact article century way their woman.',
       },
       {
         full_name: 'Nguyễn Hồng Thông',
@@ -1209,7 +1124,6 @@ module.exports = {
         is_verified: true,
         is_banned: false,
         user_image: 'https://picsum.photos/833/702',
-        short_des: 'These series radio people message.',
       },
       {
         full_name: 'Nguyễn Viết Sơn',
@@ -1223,7 +1137,6 @@ module.exports = {
         is_verified: false,
         is_banned: false,
         user_image: 'https://picsum.photos/289/617',
-        short_des: 'Coach air past investment entire summer.',
       },
       {
         full_name: 'Võ Thanh Sanh',
@@ -1237,7 +1150,6 @@ module.exports = {
         is_verified: true,
         is_banned: true,
         user_image: 'https://dummyimage.com/932x581',
-        short_des: 'Kind piece piece.',
       },
       {
         full_name: 'Nguyễn Bỉnh Khiêm',
@@ -1251,7 +1163,6 @@ module.exports = {
         is_verified: false,
         is_banned: true,
         user_image: 'https://picsum.photos/73/100',
-        short_des: 'Another whom body opportunity lot miss.',
       },
       {
         full_name: 'Phạm Minh Quân',
@@ -1265,7 +1176,6 @@ module.exports = {
         is_verified: true,
         is_banned: true,
         user_image: 'https://placekitten.com/295/392',
-        short_des: 'Education plan box writer through.',
       },
       {
         full_name: 'Vũ Thị Hoài Sơn',
@@ -1279,7 +1189,6 @@ module.exports = {
         is_verified: false,
         is_banned: true,
         user_image: 'https://placekitten.com/217/272',
-        short_des: 'Leave break strong improve staff.',
       },
       {
         full_name: 'Lý Quốc Quyền',
@@ -1293,7 +1202,6 @@ module.exports = {
         is_verified: false,
         is_banned: false,
         user_image: 'https://dummyimage.com/960x595',
-        short_des: 'Defense key enough day sign theory throughout.',
       },
       {
         full_name: 'Lê Anh Sơn',
@@ -1307,7 +1215,6 @@ module.exports = {
         is_verified: true,
         is_banned: false,
         user_image: 'https://placekitten.com/655/260',
-        short_des: 'Over movement each stay figure.',
       },
       {
         full_name: 'Phạm Minh Quân',
@@ -1321,7 +1228,6 @@ module.exports = {
         is_verified: false,
         is_banned: false,
         user_image: 'https://picsum.photos/64/809',
-        short_des: 'Safe catch all everybody meeting mother.',
       },
       {
         full_name: 'Nguyễn Công Thành',
@@ -1335,7 +1241,6 @@ module.exports = {
         is_verified: false,
         is_banned: false,
         user_image: 'https://picsum.photos/252/196',
-        short_des: 'Laugh trade win tell attorney service these.',
       },
       {
         full_name: 'Trần Văn Dö',
@@ -1349,7 +1254,6 @@ module.exports = {
         is_verified: false,
         is_banned: false,
         user_image: 'https://dummyimage.com/36x423',
-        short_des: 'Strategy word put.',
       },
       {
         full_name: 'Vũ Hồng Tâm',
@@ -1363,7 +1267,6 @@ module.exports = {
         is_verified: true,
         is_banned: false,
         user_image: 'https://picsum.photos/316/670',
-        short_des: 'Describe fly station hot.',
       },
       {
         full_name: 'Nguyễn Vũ Trường Sơn',
@@ -1377,7 +1280,6 @@ module.exports = {
         is_verified: true,
         is_banned: true,
         user_image: 'https://placekitten.com/391/384',
-        short_des: 'Impact rather security phone difference always teacher.',
       },
       {
         full_name: 'Võ Tiến Sĩ',
@@ -1391,7 +1293,6 @@ module.exports = {
         is_verified: false,
         is_banned: true,
         user_image: 'https://picsum.photos/36/210',
-        short_des: 'Loss brother dark moment late expect.',
       },
       {
         full_name: 'Nguyễn Ngọc Phương',
@@ -1405,7 +1306,6 @@ module.exports = {
         is_verified: true,
         is_banned: false,
         user_image: 'https://placekitten.com/360/457',
-        short_des: 'Camera successful always security admit prevent.',
       },
       {
         full_name: 'Nguyễn Tiến Thành',
@@ -1419,7 +1319,6 @@ module.exports = {
         is_verified: false,
         is_banned: true,
         user_image: 'https://dummyimage.com/602x232',
-        short_des: 'Room lawyer people lay executive worry alone.',
       },
       {
         full_name: 'Trần Thế Sơn',
@@ -1433,7 +1332,6 @@ module.exports = {
         is_verified: false,
         is_banned: false,
         user_image: 'https://dummyimage.com/458x206',
-        short_des: 'Century book treat note same.',
       },
       {
         full_name: 'Nguyễn Văn Thịnh',
@@ -1447,7 +1345,6 @@ module.exports = {
         is_verified: false,
         is_banned: true,
         user_image: 'https://picsum.photos/765/510',
-        short_des: 'Benefit make first would garden.',
       },
       {
         full_name: 'Dương Chí Tâm',
@@ -1461,7 +1358,6 @@ module.exports = {
         is_verified: true,
         is_banned: true,
         user_image: 'https://picsum.photos/196/305',
-        short_des: 'Lose fine where difficult north capital.',
       },
       {
         full_name: 'Nguyễn Ngọc Sơn',
@@ -1475,7 +1371,6 @@ module.exports = {
         is_verified: false,
         is_banned: false,
         user_image: 'https://dummyimage.com/306x993',
-        short_des: 'Market particular first above not center.',
       },
       {
         full_name: 'Bùi Minh Quân',
@@ -1489,7 +1384,6 @@ module.exports = {
         is_verified: true,
         is_banned: true,
         user_image: 'https://dummyimage.com/251x763',
-        short_des: 'Mission the church half.',
       },
       {
         full_name: 'Lưu Nguyễn Quốc Sơn',
@@ -1503,7 +1397,6 @@ module.exports = {
         is_verified: false,
         is_banned: true,
         user_image: 'https://picsum.photos/68/230',
-        short_des: 'Step city arm matter.',
       },
       {
         full_name: 'Nguyễn Vũ Ngọc Quyên',
@@ -1517,7 +1410,6 @@ module.exports = {
         is_verified: false,
         is_banned: false,
         user_image: 'https://picsum.photos/599/874',
-        short_des: 'Economic artist computer politics wish professional.',
       },
       {
         full_name: 'Đỗ Minh Tâm',
@@ -1531,7 +1423,6 @@ module.exports = {
         is_verified: false,
         is_banned: true,
         user_image: 'https://dummyimage.com/1015x765',
-        short_des: 'Right sign model.',
       },
     ]);
   },

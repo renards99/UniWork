@@ -9,11 +9,17 @@ module.exports = {
     const params = req.body;
     const user_account_id = params.user_account_id;
 
-    if (!validateHandler.validateId(user_account_id)) {
-      return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
-    }
+    // if (!validateHandler.validateId(user_account_id)) {
+    //   return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+    // }
     try {
-      const userLog = await UserLog.findOne({ where: { user_account_id } });
+      const userLog = await UserLog.findAll({
+        where: { user_account_id },
+        order: [
+          ['created_at', 'DESC'], // Order by created_at in descending order
+        ],
+      });
+
       if (userLog) {
         return responsehandler.responseWithData(res, 200, userLog);
       } else {
@@ -25,13 +31,14 @@ module.exports = {
   },
   async createUserLog(req, res) {
     const params = req.body;
-    if (!validateHandler.validateInput(params)) {
-      return responseHandler.badRequest(res, 'Your input is invalid!');
-    }
-    if (!validateHandler.validateId(params.user_account_id)) {
-      return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
-    }
+    // if (!validateHandler.validateInput(params)) {
+    //   return responseHandler.badRequest(res, 'Your input is invalid!');
+    // }
+    // if (!validateHandler.validateId(params.user_account_id)) {
+    //   return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+    // }
     try {
+      params.created_at = new Date();
       const userLog = await UserLog.create(params);
       if (userLog) {
         return responsehandler.responseWithData(res, 200, 'Create user log success');
