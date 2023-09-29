@@ -24,7 +24,7 @@ export const loginAccount = async (user, password, back_end_port, router) => {
       router.push('/admin');
     }
     if (login.data.data.dataValues.role_id == 2) {
-      router.push('/employer');
+      router.push('/employer/employer-details');
     }
     if (login.data.data.dataValues.role_id == 3) {
       router.push('/candidate');
