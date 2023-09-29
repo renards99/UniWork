@@ -203,7 +203,7 @@ function LandingPage() {
   });
   const slicedData = TrendContent.slice(startIndex, endIndex);
   const HomeContent = (
-    <div>
+    <div >
       <CandidateHeader />
       <Flex
         h='465px'

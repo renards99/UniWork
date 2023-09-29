@@ -83,7 +83,7 @@ function BillDetails() {
   });
 
   const TableUNW = (
-    <Box>
+    <Box ml='316px'>
       <TableContainer marginTop={'28px'}>
         <Table variant='simple' className='unw-table-custom'>
           <Thead>

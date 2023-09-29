@@ -186,7 +186,7 @@ function UserProfileEmployer() {
   const [tab, setTab] = useState(1);
   const handleTab = (index) => setTab(index);
   return (
-    <Stack gap='24px'>
+    <Stack gap='24px' ml='316px'>
       {/*Header*/}
       <AdminHeader />
       <Tabs padding='24px'>

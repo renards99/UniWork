@@ -1045,7 +1045,7 @@ function StudentProfile() {
     </Modal>
   );
   return (
-    <Box>
+    <Box >
       <CandidateHeader />
       <Stack gap='24px' p='28px' justifyContent='center' alignItems='center' bg='#F0EAE9'>
         {employerInfo}
