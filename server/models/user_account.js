@@ -9,7 +9,7 @@ module.exports = (sequelize, Sequelize) => {
       },
       full_name: {
         type: Sequelize.STRING(100),
-        allowNull: false,
+        allowNull: true,
       },
       role_id: {
         type: Sequelize.INTEGER(11),
@@ -36,11 +36,11 @@ module.exports = (sequelize, Sequelize) => {
       },
       date_of_birth: {
         type: Sequelize.STRING(20),
-        allowNull: false,
+        allowNull: true,
       },
       mobile_number: {
         type: Sequelize.STRING(20),
-        allowNull: false,
+        allowNull: true,
         unique: true,
         validate: {
           is: /^[0-9]{7,15}$/, // Validate phone number
