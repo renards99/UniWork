@@ -156,7 +156,7 @@ function Service() {
     }
   };
   return (
-    <Box>
+    <Box ml='316px'>
       <EmployerHeader />
       <Stack p='36px' gap='32px'>
         <Stack gap='20px'>

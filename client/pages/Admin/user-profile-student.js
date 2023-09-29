@@ -25,7 +25,7 @@ function UserProfileStudent() {
     male: true,
   };
   return (
-    <div>
+    <div ml='316px'>
       {/*Header*/}
 
       <AdminHeader />
