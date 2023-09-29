@@ -32,7 +32,7 @@ import { FiPhone } from 'react-icons/fi';
 import { HiOutlineBuildingOffice2 } from 'react-icons/hi2';
 import Image from 'next/image';
 import TempAvatar from '../../public/static/images/temporary_avatar.png';
-import EmployerHeader from '../../components/layout/employer/header';
+import CandidateHeader from '../../components/layout/candidate/header';
 import { useCallback, useEffect, useState } from 'react';
 import PostImage from '../../public/static/images/applicationPost.png';
 import Paging from '../../components/paging';
@@ -63,7 +63,13 @@ function StudentProfile() {
   const openModalCV = () => {
     setIsModalCVOpen(true);
   };
-
+  const [isModalShowCVOpen, setIsModalShowCVOpen] = useState(false);
+  const openModalShowCV = () => {
+    setIsModalShowCVOpen(true);
+  };
+  const closeModalShowCV = () => {
+    setIsModalShowCVOpen(false);
+  };
   const [cvLink, setCvLink] = useState();
 
   const closeModalCV = async () => {
@@ -193,7 +199,7 @@ function StudentProfile() {
                   rounded='10px'
                   justifyContent='center'
                   alignItems='center'
-                  onClick={openModalCV}
+                  onClick={openModalShowCV}
                   cursor='pointer'
                 >
                   <Text fontSize='18px' color='white' fontWeight='800'>
@@ -744,7 +750,7 @@ function StudentProfile() {
                 // display={'none'}
                 id='cv'
               />
-              <label for='cv' style={{ cursor: "pointer"}}>
+              <label for='cv' style={{ cursor: 'pointer' }}>
                 <Image src='/static/images/upload_cloud.png' width='40' height='40'></Image>
               </label>
               <Stack
@@ -775,6 +781,29 @@ function StudentProfile() {
                 Cập nhật
               </Text>
             </Flex>
+          </Stack>
+        </ModalBody>
+      </ModalContent>
+    </Modal>
+  );
+  const modalShowCV = (
+    <Modal isOpen={isModalShowCVOpen} onClose={closeModalShowCV} isCentered size='5xl'>
+      <ModalOverlay bg='none' backdropFilter='auto' backdropBlur='2px' />
+      <ModalContent>
+        <ModalHeader borderBottom='1px solid #818181' fontSize='24px'>
+          <Text as='span' color='#F98820'>
+            Kinh nghiệm
+          </Text>
+        </ModalHeader>
+        <ModalCloseButton />
+        <ModalBody>
+          <Stack gap='8px' alignSelf='stretch' justifyContent='center' alignItems='center'>
+            <Flex alignSelf='stretch'>
+              <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
+                CV của bạn
+              </Text>
+            </Flex>
+            {cvLink && <PDFViewer url={cvLink} />}
           </Stack>
         </ModalBody>
       </ModalContent>
@@ -1017,15 +1046,14 @@ function StudentProfile() {
   );
   return (
     <Box>
-      <EmployerHeader />
-
+      <CandidateHeader />
       <Stack gap='24px' p='28px' justifyContent='center' alignItems='center' bg='#F0EAE9'>
         {employerInfo}
         {modalEducation}
         {modalExperience}
         {modalCV}
         {modalPersonalInfo}
-        {cvLink && <PDFViewer url={cvLink} />}
+        {modalShowCV}
       </Stack>
     </Box>
   );

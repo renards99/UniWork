@@ -16,33 +16,21 @@ import {
   ModalBody,
   ModalCloseButton,
 } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
+import { BsFacebook } from 'react-icons/bs';
+import { FcGoogle } from 'react-icons/fc';
 import { LuBellDot } from 'react-icons/lu';
-import { IoPersonCircle } from 'react-icons/io5';
-import { HiChevronDown, HiOutlineMail } from 'react-icons/hi';
-import { useState } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import Image from 'next/image';
 import Logo from '../../../public/static/images/Logo.png';
 import DropDownHeader from './dropDownHeader';
+import axios from 'axios';
+import Cookies from 'js-cookie';
 // import Notifications from './notifications';
-function CandidateHeader() {
-  const login = 1;
-  const [show, setShow] = useState(false);
-  const handleClick = () => {
-    setShow(!show);
-  };
-  const data = {
-    dropDown: [
-      'Xem trang cá nhân',
-      'Quản lý CV',
-      'Cái đặt thông tin ',
-      'Đổi mật khẩu',
-      'Việc làm đã ứng tuyển',
-      'Cài đặt gợi ý việc làm',
-      'Báo cáo/ Hỗ trợ',
-      'Đăng xuất',
-    ],
-  };
+function CandidateHeader(props) {
+  const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
 
   const modal = (
     <Modal isOpen={isOpen} onClose={onClose} isCentered size='6xl'>
@@ -115,6 +103,143 @@ function CandidateHeader() {
       </ModalContent>
     </Modal>
   );
+  const [userId, setUserId] = useState('');
+  useEffect(() => {
+    setUserId(JSON.parse(localStorage.getItem('user'))?.id);
+  });
+  console.log(userId);
+
+  const [forgetPassword, setForgetPassword] = useState(false);
+  const [user, setUser] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleUser = useCallback(
+    (value) => {
+      setUser(value);
+    },
+    [user],
+  );
+
+  const handlePassword = useCallback(
+    (value) => {
+      setPassword(value);
+    },
+    [password],
+  );
+
+  const changeForgetPassword = useCallback(() => {
+    setForgetPassword(!forgetPassword);
+  }, [forgetPassword]);
+
+  const attemptLogin = async () => {
+    try {
+      await loginAccount(user, password, props.back_end_port, router);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const LoginPopup = (
+    <Modal isOpen={isLoginOpen} onClose={setIsLoginOpen} size={'lg'}>
+      <ModalOverlay />
+      <ModalContent>
+        <ModalCloseButton />
+        <ModalBody className={'unw-login-form'} minHeight={!forgetPassword ? '500px' : '420px'}>
+          <Text fontSize={24} marginTop={'20px'} textAlign={'center'} fontWeight={'bold'}>
+            {!forgetPassword ? 'Đăng nhập' : 'Quên mật khẩu'}
+          </Text>
+          {!forgetPassword ? (
+            <Stack padding={'0 10px'} marginTop={'10px'}>
+              <div className='h-auto max-w-[400px] bg-white'>
+                <div className='text-center'>
+                  <div className='p-4 bg-blue-500 text-white text-xl font-medium rounded-md my-4 items-center flex justify-between cursor-pointer'>
+                    <BsFacebook className='text-4xl'></BsFacebook>
+                    <a className='mr-5'>Tiếp Tục với Facebook</a>
+                  </div>
+                  <div className='p-4 border border-black text-xl font-medium rounded-md my-8 items-center flex justify-between cursor-pointer'>
+                    <FcGoogle className='text-4xl'></FcGoogle>
+                    <a className='mr-5'>Tiếp Tục với Google</a>
+                  </div>
+                  <div className='my-4 flex items-center'>
+                    <div class='flex-grow h-[1px] bg-black'></div>
+                    <span className='px-2 text-xl font-semibold'>Hoặc</span>
+                    <div class='flex-grow h-[1px] bg-black'></div>
+                  </div>
+                  <div className='flex flex-col '>
+                    <input
+                      className='p-4 text-xl border border-gray-400 focus:outline-none my-4 rounded-md'
+                      type='text'
+                      placeholder='Email/ Số điện thoại'
+                      onChange={(e) => {
+                        handleUser(e.target.value);
+                      }}
+                      value={user}
+                    />
+                    <input
+                      className='p-4 text-xl border border-gray-400 focus:outline-none my-4 rounded-md'
+                      type='password'
+                      placeholder='Mật khẩu'
+                      onChange={(e) => {
+                        handlePassword(e.target.value);
+                      }}
+                      value={password}
+                    />
+                    <button
+                      className='bg-[#F98820] text-white rounded-md text-xl p-3'
+                      type='submit'
+                      onClick={attemptLogin}
+                    >
+                      Đăng nhập
+                    </button>
+                  </div>
+                  <div className='flex justify-between p-4'>
+                    <div className='flex items-center'>
+                      <input type='checkbox' className='mr-2 cursor-pointer'></input>
+                      <label className='font-medium text-lg'>Nhớ mật khẩu</label>
+                    </div>
+                    <a
+                      className='text-lg text-[#F98820] cursor-pointer'
+                      onClick={changeForgetPassword}
+                    >
+                      Quên mật khẩu?
+                    </a>
+                  </div>
+
+                  <div className='flex-grow h-[1px] bg-black'></div>
+                  <div className='p-4 text-lg'>
+                    Mới sử dụng lần đầu?{' '}
+                    <a className='text-[#F98820] cursor-pointer'>Đăng Ký Ngay</a>
+                  </div>
+                  <Box height={5}></Box>
+                </div>
+              </div>
+            </Stack>
+          ) : (
+            <Stack>
+              <Text className={'title'} marginTop={'30px'}>
+                Nhập email/sdt của bạn để khôi phục mật khẩu của bạn. bạn sẽ nhận được một tin nhắn
+                có hướng dẫn để giúp bạn giải quyết các vấn đề của mình
+              </Text>
+              <Input
+                className={'unw-input'}
+                placeholder='Email hoặc số điện thoại'
+                marginTop={'20px'}
+                fontSize={'1.125rem'}
+              />
+              <Box height={'10px'}></Box>
+
+              <Button className={'unw-forget-password-button'}>Gửi</Button>
+              <Box height={'10px'}></Box>
+
+              <Text className='unw-forget-password-return' onClick={changeForgetPassword}>
+                Quay lại giao diện đăng nhập
+              </Text>
+            </Stack>
+          )}
+        </ModalBody>
+      </ModalContent>
+    </Modal>
+  );
   return (
     <Flex
       h='10vh'
@@ -125,37 +250,38 @@ function CandidateHeader() {
       px='48px'
       alignSelf='stretch'
     >
+      {LoginPopup}
       {modal}
       <Flex gap='32px' alignItems='center'>
         <Link href='/'>
           <Image src={Logo} height={'40'} width={'170'} />
         </Link>
-        <Link href='/' _hover={{ textDecoration: 'none' }}>
+        <Link href='/candidate/job_searching' _hover={{ textDecoration: 'none' }}>
           <Text fontSize='20px' fontWeight='700' lineHeight='24px' letterSpacing='0.2px'>
             Việc làm
           </Text>
         </Link>
-        <Link href='/' _hover={{ textDecoration: 'none' }}>
+        <Link href='/candidate/searching-employer' _hover={{ textDecoration: 'none' }}>
           <Text fontSize='20px' fontWeight='700' lineHeight='24px' letterSpacing='0.2px'>
             Công ty
           </Text>
         </Link>
-        <Link href='/' _hover={{ textDecoration: 'none' }}>
+        <Link href='/candidate/searching-small-business' _hover={{ textDecoration: 'none' }}>
           <Text fontSize='20px' fontWeight='700' lineHeight='24px' letterSpacing='0.2px'>
             Cửa hàng
           </Text>
         </Link>
       </Flex>
       <Flex gap='24px' justifyContent='flex-end' alignItems='flex-start'>
-        {login === 1 ? (
+        {userId === '' ? (
           <Flex gap='20px'>
-            <Link href='/register-candidate'>
-              <Flex border='1px solid #FF6B00' p='16px 16px' rounded='12px'>
-                <Text color='#FF6B00' fontSize='20px' fontWeight='700' textAlign='center'>
-                  Đăng nhập
-                </Text>
-              </Flex>
-            </Link>
+            {/* <Link href='/login'> */}
+            <Flex border='1px solid #FF6B00' p='16px 16px' rounded='12px' onClick={setIsLoginOpen}>
+              <Text color='#FF6B00' fontSize='20px' fontWeight='700' textAlign='center'>
+                Đăng nhập
+              </Text>
+            </Flex>
+            {/* </Link> */}
             <Link href='/register-employer'>
               <Flex bg='#FF6B00' p='16px 16px' rounded='12px'>
                 <Text color='white' fontSize='20px' fontWeight='700' textAlign='center'>
