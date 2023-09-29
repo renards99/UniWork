@@ -92,6 +92,10 @@ function RegisterEmployer() {
       setErrorMessage('Password is required');
       return false;
     }
+    if (password.length <= 6) {
+      setErrorMessage('Password must be more than 6 characters');
+      return false;
+    }
     if (!confirmPassword.trim()) {
       setErrorMessage('Confirmation of password is required');
       return false;
@@ -117,13 +121,12 @@ function RegisterEmployer() {
       return false;
     }
     setErrorMessage('');
-    // Add other validations as needed
     return true;
   };
 
   const handleRegister = async () => {
     if (!validateForm()) {
-      return; // Exit the function if validation fails
+      return;
     }
     try {
       const currentDate = new Date().toISOString().slice(0, 10);
@@ -134,18 +137,15 @@ function RegisterEmployer() {
         email: email,
         password: password,
         gender: gender,
-        date_of_birth: '', // Consider adding a date-picker for this
+        date_of_birth: '',
         mobile_number: phoneNumber,
         registration_date: currentDate,
         is_verified: 0,
         is_banned: 0,
-        user_image: '', // Consider adding an image uploader for this
-        short_des: '', // Consider adding a textarea for a short description
+        user_image: '',
       });
 
       const createdAccountId = createAccountResponse.data.data.user_id;
-      console.log('checkme now');
-      console.log(createAccountResponse);
       const createEmployer = await axios.post('http://localhost:5000/employer/create-employer', {
         user_account_id: createdAccountId,
         job_type_id: selectedJobType,
@@ -156,7 +156,6 @@ function RegisterEmployer() {
       });
       console.log(createAccountResponse.status);
       if (createAccountResponse.status === 201 && createEmployer.status === 201) {
-        // Success! Redirect the user to the employer page.
         try {
           await loginAccount(email, password, 'http://localhost:5000');
           console.log('Account created and logged in successfully!');
@@ -168,7 +167,6 @@ function RegisterEmployer() {
         console.error('Unable to create an account. Please try again.');
       }
     } catch (error) {
-      // Handle any errors from the API call
       console.error(
         'Error creating account:',
         error.response ? error.response.data : error.message,
@@ -176,15 +174,7 @@ function RegisterEmployer() {
     }
   };
   return (
-    <Flex
-      h='100vh' // Set the height to cover the entire viewport
-      w='100vw' // Set the width to cover the entire viewport
-      minH='100%' // Ensure the Box covers the entire viewport height
-      minW='100%' // Ensure the Box covers the entire viewport width
-      top='0' // Align it to the top of the viewport
-      left='0' // Align it to the left of the viewport
-      alignItems='center'
-    >
+    <Flex h='100vh' w='100vw' minH='100%' minW='100%' top='0' left='0' alignItems='center'>
       <Stack
         w='50%'
         h='100%'
