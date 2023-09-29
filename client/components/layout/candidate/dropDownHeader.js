@@ -71,7 +71,7 @@ export default function DropDownHeader(props) {
         alignSelf='stretch'
         alignItems='center'
         rounded='40px'
-        onClick={handleMenuClick}
+        // onClick={handleMenuClick}
         leftIcon={<Avatar size='md' src='' />}
         rightIcon={
           menuIcon ? (

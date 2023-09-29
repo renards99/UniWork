@@ -17,10 +17,31 @@ import {
 } from '@chakra-ui/react';
 
 import { HiChevronDown } from 'react-icons/hi';
+import axios from 'axios';
 export default function DropDownHeader() {
   const [menuIcon, setMenuIcon] = useState(false);
 
   const handleMenuClick = () => setMenuIcon(!menuIcon);
+
+  async function handleLogOut() {
+    console.log(2)
+    const id = JSON.parse(localStorage.getItem('user')).id; // Retrieve the logged-in user's email or mobile number
+    console.log(1)
+    try {
+      const response = await axios.post('http://localhost:5000/logout', {
+        id,
+      });
+      if (response.data.statusCode == 200) {
+        localStorage.removeItem('user');
+        router.push('/');
+      } else {
+        console.error(`There was an error logging out: ${data.message}`);
+      }
+    } catch (error) {
+      console.error('Failed to make the logout request:', error);
+    }
+  }
+
   return (
     <Menu matchWidth>
       <MenuButton
@@ -33,7 +54,7 @@ export default function DropDownHeader() {
         alignSelf='stretch'
         alignItems='center'
         rounded='40px'
-        onClick={handleMenuClick}
+        // onClick={handleMenuClick}
         leftIcon={<Avatar size='xs' src='' />}
         rightIcon={
           menuIcon ? (
@@ -94,12 +115,16 @@ export default function DropDownHeader() {
             </Text>
           </Link>
         </MenuItem>
-        <MenuItem h='48px' bg='#E8E8EB' border='1px solid #1311311A' roundedBottom='12px'>
-          <Link href=''>
-            <Text p='12px 20px' fontSize='16px' fontWeight='600' lineHeight='24px'>
-              Đăng xuất
-            </Text>
-          </Link>
+        <MenuItem
+          h='48px'
+          bg='#E8E8EB'
+          border='1px solid #1311311A'
+          roundedBottom='12px'
+          onClick={handleLogOut}
+        >
+          <Text p='12px 20px' fontSize='16px' fontWeight='600' lineHeight='24px'>
+            Đăng xuất
+          </Text>
         </MenuItem>
       </MenuList>
     </Menu>

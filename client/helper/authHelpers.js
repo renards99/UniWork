@@ -20,10 +20,10 @@ export const loginAccount = async (user, password, back_end_port, router) => {
     }
     if (login.data.data.dataValues.role_id == 1) {
       Cookies.set('sideBarActive', 2);
-      router.push('/admin');
+      router.push('/admin/account-manager');
     }
     if (login.data.data.dataValues.role_id == 2) {
-      router.push('/employer');
+      router.push('/employer/post-list');
     }
     if (login.data.data.dataValues.role_id == 3) {
       router.push('/candidate');

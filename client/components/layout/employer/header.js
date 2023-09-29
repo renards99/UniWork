@@ -22,8 +22,13 @@ import { IoPersonCircle } from 'react-icons/io5';
 import { HiChevronDown, HiOutlineMail } from 'react-icons/hi';
 import { useState } from 'react';
 import Image from 'next/image';
+import axios from 'axios';
+import { useRouter } from 'next/router';
+
+
 // import Notifications from './notifications';
 function EmployerHeader() {
+  const router = useRouter()
   const [show, setShow] = useState(false);
   const handleClick = () => {
     setShow(!show);
@@ -34,6 +39,26 @@ function EmployerHeader() {
   const path = {
     cart: '/employer/cart',
   };
+
+  
+  async function handleLogOut() {
+    const id = JSON.parse(localStorage.getItem('user')).id; // Retrieve the logged-in user's email or mobile number
+
+    try {
+      const response = await axios.post('http://localhost:5000/logout', {
+        id,
+      });
+      if (response.data.statusCode == 200) {
+        localStorage.removeItem('user')
+        router.push("/")
+      } else {
+        console.error(`There was an error logging out: ${data.message}`);
+      }
+    } catch (error) {
+      console.error('Failed to make the logout request:', error);
+    }
+  }
+
   return (
     <Flex
       h='10vh'
@@ -93,7 +118,7 @@ function EmployerHeader() {
             alignItems='center'
             border='1px solid #818181'
             rounded='12px'
-            onClick={handleMenuClick}
+            // onClick={handleMenuClick}
             rightIcon={
               menuIcon ? (
                 <Box transition='transform 0.3s ease-in-out' fontSize='24px'>
@@ -153,41 +178,15 @@ function EmployerHeader() {
                 </MenuItem>
               </Flex>
             </Link>
-            <Link href=''>
-              <Flex _last={{ borderBottomWidth: 0 }} borderBottom='1px #D7D7D7 solid'>
-                <MenuItem h='48px' _focus={{ bg: 'none' }}>
-                  <Text p='12px 20px' fontSize='16px' fontWeight='600' lineHeight='24px'>
-                    Đăng xuất
-                  </Text>
-                </MenuItem>
-              </Flex>
-            </Link>
+            <Flex _last={{ borderBottomWidth: 0 }} borderBottom='1px #D7D7D7 solid'>
+              <MenuItem h='48px' _focus={{ bg: 'none' }} onClick={handleLogOut}>
+                <Text p='12px 20px' fontSize='16px' fontWeight='600' lineHeight='24px'>
+                  Đăng xuất
+                </Text>
+              </MenuItem>
+            </Flex>
           </MenuList>
         </Menu>
-        {/* <Flex
-          rounded='40px'
-          fontSize='24px'
-          p='12px'
-          alignItems='flex-start'
-          gap='18px'
-          bg='#E8E8EB'
-          cursor='pointer'
-          onClick={handleClick}
-        >
-          <IoPersonCircle />
-          <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
-            Administrator
-          </Text>
-          {show ? (
-            <Box transition='transform 0.3s ease-in-out'>
-              <HiChevronDown />
-            </Box>
-          ) : (
-            <Box transform='rotate(-180deg)' transition='transform 0.3s ease-in-out'>
-              <HiChevronDown />
-            </Box>
-          )}
-        </Flex> */}
       </Flex>
     </Flex>
   );
