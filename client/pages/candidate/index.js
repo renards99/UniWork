@@ -202,6 +202,18 @@ function LandingPage() {
     );
   });
   const slicedData = TrendContent.slice(startIndex, endIndex);
+
+  const handleFindJob = async (title, jobLocation, salaries, experience) => {
+    const submitData = {
+      title,
+      job_location: jobLocation,
+      experience,
+      salary: salaries,
+    };
+
+    const findAllJobPostings = await axios.post(`${BACK_END_PORT}//`)
+  }
+
   const HomeContent = (
     <div>
       <CandidateHeader />

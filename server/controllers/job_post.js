@@ -229,4 +229,21 @@ module.exports = {
       return responseHandler.error(res);
     }
   },
+  async findAllJobPost (req, res) {
+    try {
+      const params = req.body;
+      const { title, job_location, experience, salary } = params
+      
+      
+
+
+      if (getAllPost) {
+        return responseHandler.responseWithData(res, 200, { list_user: getAllPost });
+      } else {
+        return responseHandler.badRequest(res, "can't get list user");
+      }
+    } catch (error) {
+      return responseHandler.error(res);
+    }
+  }
 };
