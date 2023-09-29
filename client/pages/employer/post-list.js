@@ -95,7 +95,7 @@ function PostList() {
             {item.company_name}
           </Text>
         </Stack>
-        <StatusFrame text={item?.state == '1' ? 'Đã duyệt' : 'Chưa duyệt'} />
+        <StatusFrame text={item?.state == '1' ? 'Chưa duyệt' : 'Đã duyệt'} />
       </Stack>
     </Flex>
   ));

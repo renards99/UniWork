@@ -146,12 +146,12 @@ module.exports = {
         },
         onDelete: 'cascade',
       },
-      last_login_date: {
-        type: Sequelize.DATE,
+      description: {
+        type: Sequelize.STRING,
         allowNull: false,
       },
-      last_job_apply_at: {
-        type: Sequelize.DATE,
+      created_at: {
+        type: Sequelize.STRING,
         allowNull: false,
       },
     });
@@ -215,10 +215,6 @@ module.exports = {
       cv: {
         type: Sequelize.STRING(100),
         allowNull: true,
-      },
-      short_des: {
-        type: Sequelize.STRING(1000),
-        allowNull: false,
       },
     });
 
@@ -371,7 +367,7 @@ module.exports = {
         allowNull: false,
       },
       experience: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER(2),
         allowNull: false,
       },
       work_hours: {
@@ -618,6 +614,15 @@ module.exports = {
         allowNull: false,
       },
     });
+    await queryInterface.sequelize.query(`
+        CREATE EVENT IF NOT EXISTS update_state
+        ON SCHEDULE EVERY 1 DAY
+        STARTS TIMESTAMP(CURRENT_DATE)
+        DO
+        UPDATE your_table
+        SET state = 3
+        WHERE CURRENT_DATE > DATE(expired_at) AND state != 3;
+    `);
   },
 
   down: async (queryInterface, Sequelize) => {},

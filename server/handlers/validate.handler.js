@@ -112,13 +112,13 @@ function validateYear(year) {
 }
 function validateId(...inputs) {
   for (const input of inputs) {
-    const parsedInput = Number(input);
+    const parsedInput = Number(input); // This converts string "1" to number 1
 
     if (!Number.isInteger(parsedInput) || parsedInput <= 0) {
-      return false; // Return false if any input is not a positive integer
+      return false;
     }
   }
-  return true; // Return true if all inputs are valid positive integers
+  return true;
 }
 function validateState(input) {
   const validStates = ['accepted', 'waiting', 'denied'];

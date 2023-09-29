@@ -121,10 +121,48 @@ module.exports = {
   },
   async getAllJobPost(req, res) {
     try {
+      const params = req.body;
+      const { search, state } = params;
+      let query = `SELECT jp.*, c.company_name from job_post as jp join company as c on jp.company_id = c.id`;
+
+      if (search || state) {
+        query += ' WHERE';
+      }
+
+      if (search) {
+        query += ` (jp.title like "%${search}%" OR c.company_name LIKE "%${search}%")`;
+      }
+
+      if (search && state) {
+        query += ' AND';
+      }
+
+      if (state) {
+        query += ` jp.state like "%${state}%" `;
+      }
+
+      query += ' ORDER BY jp.id DESC';
+
+      const get_all_Job_post = await sequelize.query(query, {
+        type: QueryTypes.SELECT,
+      });
+
+      if (get_all_Job_post) {
+        return responseHandler.responseWithData(res, 200, get_all_Job_post);
+      } else {
+        return responseHandler.badRequest(res, 'Can not get all job post!');
+      }
+    } catch (e) {
+      console.log(e);
+      return responseHandler.badRequest(res, 'There is something wrong with your request!');
+    }
+  },
+  async getAllActiveJobPost(req, res) {
+    try {
       const get_all_Job_post = await sequelize.query(
         //   `SELECT jp.*, c.company_name  from job_post as jp   join company as c on jp.company_id = c.id
         // ORDER BY jp.id DESC  limit 5 offset 5 where jp.id=101`,
-        `SELECT jp.*, c.company_name  from job_post as jp   join company as c on jp.company_id = c.id   ORDER BY RAND ( )  `,
+        `SELECT jp.*, c.company_name  from job_post as jp   join company as c on jp.company_id = c.id where jp.state =2 and jp.is_active=1  ORDER BY RAND ( )  `,
         {
           type: QueryTypes.SELECT,
         },

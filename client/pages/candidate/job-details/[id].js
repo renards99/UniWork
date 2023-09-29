@@ -27,6 +27,7 @@ import Image from 'next/image';
 import { Select } from '@chakra-ui/react';
 import CandidateHeader from '../../../components/layout/candidate/header';
 import axios from 'axios';
+import { format } from 'date-fns';
 
 function JobDetails({ data, BACK_END_PORT }) {
   console.log(data);
@@ -34,6 +35,12 @@ function JobDetails({ data, BACK_END_PORT }) {
   const [radioValue, setRadioValue] = useState('1');
   const handleRadioClick = (index) => {
     setRadioValue(index);
+  };
+  const menuData = {
+    roles: ['Giám đốc', 'Nhân viên', 'Trợ lý', 'Quản lý', 'Phó phòng', 'Thực tập sinh'],
+    workForm: ['Bán thời gian - Partime', 'Toàn thời gian - Fulltime'],
+    gender: ['nam', 'nữ', 'không yêu cầu'],
+    experience: ['Dưới 1 năm', '1 năm', '2 năm', '3 năm', '4 năm', '5 năm', 'Trên 5 năm'],
   };
 
   const handleSubmitCv = async () => {
@@ -426,7 +433,7 @@ function JobDetails({ data, BACK_END_PORT }) {
                 </ModalContent>
               </Modal>
               <Text fontSize='14px' fontWeight='500'>
-                Hạn nộp hồ sơ: 09/08/2023.
+                Hạn nộp hồ sơ: {format(new Date(data.expired_at), 'dd-MM-yyyy ')}.
               </Text>
             </Stack>
             <Stack gap='24px'>
@@ -559,7 +566,7 @@ function JobDetails({ data, BACK_END_PORT }) {
                         Kinh nghiệm
                       </Text>
                       <Text fontsize='18px' fontWeight='600'>
-                        Không có yêu cầu kinh nghiệm
+                        {menuData.experience[data.experience - 1]}
                       </Text>
                     </Stack>
                   </Flex>
@@ -570,7 +577,7 @@ function JobDetails({ data, BACK_END_PORT }) {
                         Số lượng tuyển
                       </Text>
                       <Text fontsize='18px' fontWeight='600'>
-                        100 người
+                        {data.hire_number}
                       </Text>
                     </Stack>
                   </Flex>
@@ -581,7 +588,7 @@ function JobDetails({ data, BACK_END_PORT }) {
                         Hình thức làm việc
                       </Text>
                       <Text fontsize='18px' fontWeight='600'>
-                        Toàn thời Giang
+                        {menuData.workForm[data.work_hours - 1]}
                       </Text>
                     </Stack>
                   </Flex>
@@ -592,7 +599,7 @@ function JobDetails({ data, BACK_END_PORT }) {
                         Giới tính
                       </Text>
                       <Text fontsize='18px' fontWeight='600'>
-                        Không yêu cầu
+                        {menuData.gender[data.gender - 1]}
                       </Text>
                     </Stack>
                   </Flex>

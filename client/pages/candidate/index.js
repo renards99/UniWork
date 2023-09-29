@@ -13,7 +13,7 @@ import { useRouter } from 'next/router';
 const BACK_END_PORT = 'http://localhost:5000';
 
 function LandingPage() {
-  const itemsPerPage = 10;
+  const itemsPerPage = 9;
   const [currentPage, setCurrentPage] = useState(1);
   const changePage = (pageNumber) => setCurrentPage(pageNumber);
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -117,7 +117,7 @@ function LandingPage() {
 
   const getListTrendingJob = async () => {
     try {
-      const listTrendingJob = await axios.post(`${BACK_END_PORT}/job-post/get-all-job-post`);
+      const listTrendingJob = await axios.post(`${BACK_END_PORT}/job-post/get-all-active-job-post`);
       if (listTrendingJob.data.statusCode === 200) {
         setTrends(listTrendingJob.data.data);
       }

@@ -22,22 +22,42 @@ import { IoIosAddCircleOutline } from 'react-icons/io';
 import { TbEditCircle } from 'react-icons/tb';
 import Pagination from '../../components/paging';
 import HeaderAdmins from '../../components/layout/header_admin';
+import { useState, useEffect, useCallback } from 'react';
+
+import axios from 'axios';
 
 function ManageAdminActivity() {
+  const [logList, setLogList] = useState([]);
+  const [userId, setUserId] = useState(0);
+
+  const getAdminLog = useCallback(async () => {
+    try {
+      const getAdminLog = await axios.post(`http://localhost:5000/user-log/get-user-log-by-id`, {
+        user_account_id: userId,
+      });
+      console.log(getAdminLog);
+      if (getAdminLog.data.statusCode === 200) {
+        setLogList(getAdminLog.data.data);
+        console.log(getAdminLog.data.data);
+        console.log('haha');
+      } else {
+      }
+    } catch (error) {}
+  }, [userId]);
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+      setUserId(parsedUser.id);
+    }
+
+    getAdminLog();
+  }, [getAdminLog]);
+
   const activityData = [
     {
       date: '29 Tháng 8, 2023',
       activity: [
-        {
-          avatar: '',
-          adminName: 'Quản trị viên Nguyễn Uyên',
-          action: 'vừa duyệt bài đăng của nhà tuyển dụng empoyern_o1@.gmail.com',
-        },
-        {
-          avatar: '',
-          adminName: 'Quản trị viên Nguyễn Uyên',
-          action: 'đã thêm Dịch vụ mới: Combo Quảng Cáo Tuyển dụng',
-        },
         {
           avatar: '',
           adminName: 'Quản trị viên Nguyễn Uyên',
@@ -69,16 +89,6 @@ function ManageAdminActivity() {
     {
       date: '1 Tháng 9, 2023',
       activity: [
-        {
-          avatar: '',
-          adminName: 'Quản trị viên Nguyễn Uyên',
-          action: 'vừa duyệt bài đăng của nhà tuyển dụng empoyern_o1@.gmail.com',
-        },
-        {
-          avatar: '',
-          adminName: 'Quản trị viên Nguyễn Uyên',
-          action: 'đã thêm Dịch vụ mới: Combo Quảng Cáo Tuyển dụng',
-        },
         {
           avatar: '',
           adminName: 'Quản trị viên Nguyễn Uyên',
@@ -145,22 +155,17 @@ function ManageAdminActivity() {
       <HeaderAdmins title={'Nhật ký hoạt động'} />
       {ActionUNW}
       <Stack gap='20px' p='24px'>
-        {activityData.map((data) => (
-          <Stack gap='20px'>
-            <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
-              {data.date}
+        {logList.map((data, index) => (
+          <Stack gap='20px' key={index}>
+            <Text fontSize='22px' fontWeight='600' lineHeight='24px'>
+              {data.created_at}
             </Text>
-            {data.activity.map((activity) => (
-              <Flex _last={{ borderBottomWidth: 0 }} borderBottom='1px solid #BABABA' py='20px'>
-                <Avatar size='xl' name='Christian Nwamba' src='https://bit.ly/code-beast' />{' '}
-                <Text fontSize='14px' fontWeight='600' lineHeight='24px'>
-                  {activity.adminName}
-                  <Text as='span' fontWeight='400'>
-                    {activity.action}
-                  </Text>
-                </Text>
-              </Flex>
-            ))}
+            <Flex _last={{ borderBottomWidth: 0 }} borderBottom='1px solid #BABABA' py='20px'>
+              <Avatar size='xl' name='Christian Nwamba' src='https://bit.ly/code-beast' />{' '}
+              <Text fontSize='20px' fontWeight='600' lineHeight='24px'>
+                {data.description}
+              </Text>
+            </Flex>
           </Stack>
         ))}
       </Stack>

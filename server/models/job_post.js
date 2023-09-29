@@ -8,7 +8,7 @@ module.exports = (sequelize, Sequelize) => {
         autoIncrement: true,
       },
       experience: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER(2),
         allowNull: false,
       },
       title: {

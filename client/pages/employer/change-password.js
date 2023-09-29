@@ -1,19 +1,56 @@
-import {
-  Box,
-  Flex,
-  Text,
-  Stack,
-  Grid,
-  GridItem,
-  Collapse,
-  Input,
-  Button,
-  Radio,
-  RadioGroup,
-  Textarea,
-} from '@chakra-ui/react';
+import { Box, Flex, Text, Stack, Input, Button } from '@chakra-ui/react';
 import EmployerHeader from '../../components/layout/employer/header';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import bcrypt from 'bcryptjs';
+
 function ChangePassword() {
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmNewPassword, setConfirmNewPassword] = useState('');
+  const [userId, setUserId] = useState('');
+  const [email, setEmail] = useState('');
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) {
+      setUserId(user.id);
+      setEmail(user.email); // Adjust this depending on the actual structure of your stored user object
+    }
+  }, []);
+  const handleSave = async () => {
+    if (newPassword.length <= 6) {
+      alert('New password must be more than 6 characters!');
+      return;
+    }
+    if (newPassword !== confirmNewPassword) {
+      alert('New password and confirm password do not match!');
+      return;
+    }
+    try {
+      // You will need to change this endpoint to your actual endpoint where you handle the password changing
+      const response = await axios.post('http://localhost:5000/change-password', {
+        id: userId,
+        currentPassword,
+        newPassword,
+      });
+      console.log(response);
+      if (response.data.statusCode === 200) {
+        alert('Password changed successfully!');
+        window.location.href = 'http://localhost:3000/employer';
+      } else {
+        alert('Error changing password!');
+      }
+    } catch (error) {
+      console.error('There was an error changing the password!', error);
+    }
+  };
+
+  const handleCancel = () => {
+    setCurrentPassword('');
+    setNewPassword('');
+    setConfirmNewPassword('');
+  };
   return (
     <Box>
       <EmployerHeader />
@@ -40,7 +77,7 @@ function ChangePassword() {
             </Text>
             <Input
               p='24px 20px'
-              value='hanhchinh@lechongvien.vn'
+              value={email}
               rounded='12px'
               border='1px solid #323541'
               focusBorderColor='none'
@@ -67,6 +104,8 @@ function ChangePassword() {
               fontSize='16px'
               fontWeight='600px'
               lineHeight='24px'
+              value={currentPassword}
+              onChange={(e) => setCurrentPassword(e.target.value)}
             ></Input>
           </Stack>
 
@@ -85,6 +124,8 @@ function ChangePassword() {
                 fontSize='16px'
                 fontWeight='600px'
                 lineHeight='24px'
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
               ></Input>
             </Stack>
           </Flex>
@@ -102,6 +143,8 @@ function ChangePassword() {
               fontSize='16px'
               fontWeight='600px'
               lineHeight='24px'
+              value={confirmNewPassword}
+              onChange={(e) => setConfirmNewPassword(e.target.value)}
             ></Input>
           </Stack>
         </Stack>
@@ -115,6 +158,7 @@ function ChangePassword() {
             rounded='12px'
             bg='#323541'
             cursor='pointer'
+            onClick={handleSave}
           >
             <Text fontSize='14px' fontWeight='400px' lineHeight='24px' color='white'>
               Lưu
@@ -130,6 +174,7 @@ function ChangePassword() {
             bg='white'
             border='1px solid #323541'
             cursor='pointer'
+            onClick={handleCancel}
           >
             <Text fontSize='14px' fontWeight='400px' lineHeight='24px' color='#323541'>
               Hủy

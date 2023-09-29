@@ -123,7 +123,7 @@ module.exports = {
       const params = req.body;
       const { search, role } = params;
       const getAllUsers = await sequelize.query(
-        `SELECT user_account.*, role.role_name from user_account join role where user_account.role_id= role.id and (email like "%${search}%" or fullname like"%${search}%" ) and role_name like "%${role}%" order by user_account.id   `,
+        `SELECT user_account.*, role.role_name from user_account join role where user_account.role_id= role.id and (email like "%${search}%" or full_name like"%${search}%" ) and role_name like "%${role}%" order by user_account.id   `,
         {
           type: QueryTypes.SELECT,
         },
@@ -351,6 +351,56 @@ module.exports = {
         message: 'Upload successful',
         cv_file: downloadURL,
       });
+    } catch (error) {
+      console.log(error);
+      return responsehandler.error(res);
+    }
+  },
+  async changePassword(req, res) {
+    try {
+      const params = req.body;
+      const { id, currentPassword, newPassword } = params;
+
+      if (!id || !currentPassword || !newPassword) {
+        return responsehandler.badRequest(
+          res,
+          'User ID, current password, and new password are required',
+        );
+      }
+
+      // Retrieve the user's current hashed password from the database
+      const user = await UserAccount.findOne({ where: { id } });
+
+      if (!user) {
+        return responsehandler.badRequest(res, 'User not found');
+      }
+
+      // Compare the current password with the stored hashed password
+      const isMatch = await bcrypt.compare(currentPassword, user.password);
+
+      if (!isMatch) {
+        return responsehandler.badRequest(res, 'Current password is incorrect');
+      }
+
+      // Hash the new password before saving it
+      const salt = bcrypt.genSaltSync(10);
+      const hashedPassword = bcrypt.hashSync(newPassword, salt);
+
+      // Update the user's password in the database
+      const updatePassword = await sequelize.query(
+        'UPDATE user_account SET password = ? WHERE id = ?',
+        {
+          replacements: [hashedPassword, id],
+          type: sequelize.QueryTypes.UPDATE,
+        },
+      );
+
+      if (updatePassword[1] > 0) {
+        // Assuming that updatePassword[1] returns the number of affected rows
+        return responsehandler.responseWithData(res, 200, 'Password updated successfully');
+      } else {
+        return responsehandler.badRequest(res, 'Failed to update password');
+      }
     } catch (error) {
       console.log(error);
       return responsehandler.error(res);
