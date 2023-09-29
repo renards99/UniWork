@@ -25,7 +25,7 @@ import Logo from '../../../public/static/images/Logo.png';
 import DropDownHeader from './dropDownHeader';
 // import Notifications from './notifications';
 function CandidateHeader() {
-  const login = 1;
+  const login = 0;
   const [show, setShow] = useState(false);
   const handleClick = () => {
     setShow(!show);
@@ -130,17 +130,17 @@ function CandidateHeader() {
         <Link href='/'>
           <Image src={Logo} height={'40'} width={'170'} />
         </Link>
-        <Link href='/' _hover={{ textDecoration: 'none' }}>
+        <Link href='/candidate/job_searching' _hover={{ textDecoration: 'none' }}>
           <Text fontSize='20px' fontWeight='700' lineHeight='24px' letterSpacing='0.2px'>
             Việc làm
           </Text>
         </Link>
-        <Link href='/' _hover={{ textDecoration: 'none' }}>
+        <Link href='/candidate/searching-employer' _hover={{ textDecoration: 'none' }}>
           <Text fontSize='20px' fontWeight='700' lineHeight='24px' letterSpacing='0.2px'>
             Công ty
           </Text>
         </Link>
-        <Link href='/' _hover={{ textDecoration: 'none' }}>
+        <Link href='/candidate/searching-small-business' _hover={{ textDecoration: 'none' }}>
           <Text fontSize='20px' fontWeight='700' lineHeight='24px' letterSpacing='0.2px'>
             Cửa hàng
           </Text>
@@ -149,7 +149,7 @@ function CandidateHeader() {
       <Flex gap='24px' justifyContent='flex-end' alignItems='flex-start'>
         {login === 1 ? (
           <Flex gap='20px'>
-            <Link href='/register-candidate'>
+            <Link href='/login'>
               <Flex border='1px solid #FF6B00' p='16px 16px' rounded='12px'>
                 <Text color='#FF6B00' fontSize='20px' fontWeight='700' textAlign='center'>
                   Đăng nhập

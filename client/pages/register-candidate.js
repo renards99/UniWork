@@ -50,7 +50,7 @@ function Register() {
       >
         <Image src={logo} width='173' height='40'></Image>
         <Text fontSize='24px' fontWeight='700' lineHeight='18px' letterSpacing='0.2px'>
-          Đăng nhập
+          Đăng ký
         </Text>
         <Text fontSize='15px' fontWeight='500' lineHeight='18px' letterSpacing='0.2px'>
           Chào mừng bạn đã quay trở lại!
