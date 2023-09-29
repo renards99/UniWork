@@ -374,7 +374,7 @@ module.exports = {
       const downloadURL = await getDownloadURL(snapshot.ref);
       return responsehandler.responseWithData(res, 200, {
         message: 'Upload successful',
-        cv_file: downloadURL,
+        image_file: downloadURL,
       });
     } catch (error) {
       console.log(error);
