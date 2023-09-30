@@ -11,6 +11,7 @@ const { getAnalytics } = require('firebase/analytics');
 const { getStorage, ref, getDownloadURL, uploadBytesResumable } = require('firebase/storage');
 const { firebaseConfig } = require('../config/firebase_config');
 const multer = require('multer');
+const nodemailer = require('nodemailer');
 
 const giveCurrentDateTime = () => {
   const today = new Date();
@@ -484,6 +485,50 @@ module.exports = {
       } else {
         return responsehandler.badRequest(res, 'Failed to update password');
       }
+    } catch (error) {
+      console.log(error);
+      return responsehandler.error(res);
+    }
+  },
+  async sendEmail(req, res) {
+    try {
+      const params = req.body;
+      const { to, subject, text } = params;
+
+      if (!to || !subject || !text) {
+        return responsehandler.badRequest(res, 'Recipient, subject, and text are required');
+      }
+
+      const transporter = nodemailer.createTransport({
+        host: 'smtp.ethereal.email',
+        port: 587,
+        auth: {
+          user: 'ezequiel37@ethereal.email',
+          pass: '19baHk2xWkrg3q8rzN',
+        },
+      });
+
+      const mailOptions = {
+        from: 'uniwork.g9@gmail.com', // Replace with your email
+        to: to,
+        subject: subject,
+        text: text,
+      };
+
+      // Using promise to wait for the email to be sent before sending the response
+      await new Promise((resolve, reject) => {
+        transporter.sendMail(mailOptions, (error, info) => {
+          if (error) {
+            console.log(error);
+            reject(error);
+          } else {
+            console.log('Email sent: ' + info.response);
+            resolve(info);
+          }
+        });
+      });
+
+      return responsehandler.responseWithData(res, 200, 'Email sent successfully');
     } catch (error) {
       console.log(error);
       return responsehandler.error(res);

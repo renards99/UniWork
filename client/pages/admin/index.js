@@ -1,7 +1,6 @@
 import { Text, Flex, Input, Stack, Box, Button } from '@chakra-ui/react';
 import { MdArrowBackIosNew, MdContactSupport, MdOutlineArrowForwardIos } from 'react-icons/md';
 import { useCallback, useState } from 'react';
-
 export default function AdminPage(props) {
   const now = new Date();
   const [month, setMonth] = useState(now.getMonth());

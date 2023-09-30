@@ -86,14 +86,6 @@ function PostDetails() {
       expiredAt: 'Còn 12 ngày nữa để ứng tuyển',
       image: '',
     },
-    {
-      title: 'NHÂN VIÊN HÀNH CHÍNH NHÂN SỰ - 1 NĂM KINH NGHIỆM THU NHẬP 9TR-12TR',
-      company: 'CÔNG TY CỔ PHẦN MODERN LIGHT VIỆT NAM',
-      salary: '9-12 triệu',
-      location: 'Hà Nội',
-      expiredAt: 'Còn 12 ngày nữa để ứng tuyển',
-      image: '',
-    },
   ];
   const menuData = {
     roles: ['Giám đốc', 'Nhân viên', 'Trợ lý', 'Quản lý', 'Phó phòng', 'Thực tập sinh'],

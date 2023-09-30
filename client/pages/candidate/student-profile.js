@@ -1171,6 +1171,7 @@ function StudentProfile() {
   };
 
   useEffect(() => {
+
     if (router.query.id) {
       getUserAccount(id);
     } else {
@@ -1186,6 +1187,7 @@ function StudentProfile() {
       }
     }
   }, [router]);
+
 
   return (
     <Box>
