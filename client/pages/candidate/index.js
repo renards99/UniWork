@@ -503,9 +503,6 @@ function LandingPage() {
               return (
                 <Stack minH='380px' maxH='380px' minW='250px' maxW='250px' textAlign='center'>
                   <Image className='mx-auto' width='250' height='100' src={employer.image}></Image>
-                  <Text fontSize='4xl' fontWeight='medium'>
-                    {employer.Name}
-                  </Text>
                 </Stack>
               );
             })}
@@ -528,9 +525,6 @@ function LandingPage() {
               return (
                 <Stack minH='380px' maxH='380px' minW='250px' maxW='250px' textAlign='center'>
                   <Image className='mx-auto' width='250' height='100' src={employer.image}></Image>
-                  <Text fontSize='4xl' fontWeight='medium'>
-                    {employer.Name}
-                  </Text>
                 </Stack>
               );
             })}

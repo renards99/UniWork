@@ -297,7 +297,7 @@ export default function JobManager() {
           Tìm kiếm
         </Button>
       </Flex>
-      <Flex>
+      {/* <Flex>
         <IconButton
           icon={<IoIosAddCircleOutline style={{ width: '24px', height: '24px' }} />}
           borderRadius={'50%'}
@@ -313,7 +313,7 @@ export default function JobManager() {
           h={'40px'}
           backgroundColor={'#e7e7ea'}
         />
-      </Flex>
+      </Flex> */}
     </Flex>
   );
 
