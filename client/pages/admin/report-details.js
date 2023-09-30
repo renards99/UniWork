@@ -62,7 +62,7 @@ const reportData = {
 };
 function report() {
   return (
-    <Stack gap='26px' ml='312px'>
+    <Stack gap='26px' ml='316px'>
       <AdminHeader />
       <Grid templateColumns='repeat(3, 1fr)' h='90vh' mt='52px' px='24px'>
         <GridItem colSpan='2'>

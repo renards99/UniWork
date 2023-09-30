@@ -250,7 +250,7 @@ export default function AccountManager() {
   );
 
   return (
-    <Box>
+    <Box ml='316px'>
       <HeaderAdmins title={'Quản lí tài khoản'} />
       {ActionUNW}
       {TabUNW}

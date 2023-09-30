@@ -108,7 +108,7 @@ function Cart() {
   });
 
   return (
-    <Box>
+    <Box ml='316px'>
       <EmployerHeader />
       <Grid templateColumns='repeat(3, 1fr)' h='90vh' mt='52px' px='24px'>
         <GridItem colSpan='2'>

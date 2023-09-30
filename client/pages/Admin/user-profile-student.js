@@ -73,7 +73,7 @@ function UserProfileStudent() {
   }, [router]);
 
   return (
-    <div>
+    <div ml='316px'>
       {/*Header*/}
 
       <AdminHeader />

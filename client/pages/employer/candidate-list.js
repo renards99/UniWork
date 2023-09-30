@@ -182,7 +182,7 @@ function CandidateList() {
   );
 
   return (
-    <Box>
+    <Box ml='316px'>
       <HeaderAdmins title={'Quản lí tuyển dụng'} />
       {ActionUNW}
 

@@ -217,7 +217,7 @@ function EmployerSearching() {
   const changePage = (pageNumber) => setCurrentPage(pageNumber);
 
   const HomeContent = (
-    <div>
+    <div >
       <CandidateHeader />
       <Flex
         h='465px'

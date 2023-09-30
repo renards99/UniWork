@@ -11,6 +11,7 @@ import {
   Radio,
   RadioGroup,
   Textarea,
+  Image,
 } from '@chakra-ui/react';
 import { HiChevronDown, HiOutlineMail } from 'react-icons/hi';
 import { HiMiniMapPin, HiOutlineMapPin } from 'react-icons/hi2';
@@ -19,7 +20,7 @@ import { LiaNewspaperSolid } from 'react-icons/lia';
 import { BsExclamationCircle, BsGlobe } from 'react-icons/bs';
 import { FiPhone } from 'react-icons/fi';
 import { HiOutlineBuildingOffice2 } from 'react-icons/hi2';
-import Image from 'next/image';
+
 import TempAvatar from '../../public/static/images/temporary_avatar.png';
 import EmployerHeader from '../../components/layout/employer/header';
 import { useCallback, useEffect, useState } from 'react';
@@ -46,6 +47,7 @@ function employerDetails() {
   const [employerName, setEmployerName] = useState('');
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
+  const [userImage, setUserImage] = useState('');
 
   const getEmployerById = useCallback(async () => {
     try {
@@ -446,6 +448,7 @@ function employerDetails() {
                     lineHeight='24px'
                     value={taxCode}
                     onChange={handleTaxCodeChange}
+                    type='tel'
                   ></Input>
                 </Stack>
                 <Stack gap='8px' p='0px' w='276px'>
@@ -1187,7 +1190,7 @@ function employerDetails() {
       </Flex>
       <Stack p='24px' justifyContent='center' gap='20px' border='1px solid #818181'>
         <Flex gap='20px' alignItems='center' alignSelf='stretch'>
-          <Box bg='#323541' w='100px' h='100px' rounded='full'></Box>
+          <Image src={userImage} boxSize='100px' rounded='full'></Image>
           <Flex
             w='132px'
             p='8px 12px'
@@ -1309,7 +1312,7 @@ function employerDetails() {
     </Stack>
   );
   return (
-    <Box>
+    <Box ml='316px'>
       <EmployerHeader />
 
       <Stack alignItems='flex-start' gap='24px' p='28px'>

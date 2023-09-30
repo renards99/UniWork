@@ -122,7 +122,7 @@ function SearchingList() {
   const changePage = (pageNumber) => setCurrentPage(pageNumber);
 
   const HomeContent = (
-    <div>
+    <div >
       <CandidateHeader />
       <Flex px='150px' gap='40px' alignItems='center' bg='#01004C'>
         <Stack bg='transparent' minW='30%' pt='50px' justifyContent='center'>

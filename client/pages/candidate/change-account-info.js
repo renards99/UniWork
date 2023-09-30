@@ -20,7 +20,7 @@ function changeAccountInfo() {
     job: ['Chọn ngành nghề', 'CNTT', 'IT'],
   };
   return (
-    <Stack justifyContent='center' alignItems='center'>
+    <Stack justifyContent='center' alignItems='center' >
       <CandidateHeader />
 
       <Stack gap='0' w='930px' px='24px' justifyContent='center' alignItems='center'>

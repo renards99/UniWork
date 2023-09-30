@@ -51,7 +51,7 @@ function ChangePassword() {
     setConfirmNewPassword('');
   };
   return (
-    <Box>
+    <Box ml='316px'>
       <EmployerHeader />
       <Stack gap='0' w='620px' px='24px' pb='8px' pt='16px'>
         <Flex

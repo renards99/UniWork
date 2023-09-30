@@ -21,7 +21,7 @@ function JobRecommendedSetting() {
     job: ['Chọn ngành nghề', 'CNTT', 'IT'],
   };
   return (
-    <Stack justifyContent='center' alignItems='center' gap='0'>
+    <Stack justifyContent='center' alignItems='center' gap='0' >
       <CandidateHeader />
       <Image src='/static/images/job_recommended_image.png' width='930' height='300'></Image>
       <Stack gap='0' w='980px' px='24px' justifyContent='center' alignItems='center'>

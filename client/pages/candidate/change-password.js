@@ -15,7 +15,7 @@ import {
 import CandidateHeader from '../../components/layout/candidate/header';
 function ChangePassword() {
   return (
-    <Stack justifyContent='center' alignItems='center'>
+    <Stack justifyContent='center' alignItems='center' >
       <CandidateHeader />
       <Stack
         gap='0'
