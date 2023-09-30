@@ -17,6 +17,7 @@ import {
   InputRightElement,
   Checkbox,
 } from '@chakra-ui/react';
+import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import Image from 'next/image';
 import { MdEmail } from 'react-icons/md';
 import { BsShieldFillExclamation, BsFacebook } from 'react-icons/bs';
@@ -30,13 +31,21 @@ function Register() {
   const [password, setPassword] = useState(''); // Added state for password
   const [confirmPassword, setConfirmPassword] = useState(''); // Added state for confirmPassword
   const [errorMessage, setErrorMessage] = useState(''); // Added state for error message
-
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const validateEmail = (email) => {
+    const re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    return re.test(String(email).toLowerCase());
+  };
   const validateForm = () => {
     if (!email.trim()) {
       setErrorMessage('Email is required');
       return false;
     }
-
+    if (!validateEmail(email)) {
+      setErrorMessage('Invalid email format');
+      return;
+    }
     if (password.length <= 5) {
       setErrorMessage('Password must be more than 5 characters');
       return false;
@@ -73,14 +82,16 @@ function Register() {
       is_banned: 0,
       user_image: '',
     });
+    console.log('tao xong acc');
     const createdAccountId = createAccountResponse.data.data.user_id;
-    const createEmployer = await axios.post('http://localhost:5000/student/create-student', {
+    const createCandidate = await axios.post('http://localhost:5000/student/create-student', {
       user_account_id: createdAccountId,
       cv: null,
-      short_des: null,
+      short_des: '',
     });
     console.log(createAccountResponse.status);
-    if (createAccountResponse.status === 201 && createEmployer.status === 201) {
+    console.log(createCandidate.status);
+    if (createAccountResponse.status === 201 && createCandidate.status === 200) {
       try {
         await loginAccount(email, password, 'http://localhost:5000');
         console.log('Account created and logged in successfully!');
@@ -154,11 +165,17 @@ function Register() {
               }
             />
             <Input
+              type={showPassword ? 'text' : 'password'}
               placeholder='Nhập Mật khẩu'
               size='lg'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             ></Input>
+            <InputRightElement width='4.5rem'>
+              <Button h='1.75rem' size='sm' onClick={() => setShowPassword(!showPassword)}>
+                {showPassword ? <BsEyeSlash /> : <BsEye />}
+              </Button>
+            </InputRightElement>
           </InputGroup>
         </Stack>
         <Stack width='377px'>
@@ -173,11 +190,21 @@ function Register() {
               }
             />
             <Input
+              type={showConfirmPassword ? 'text' : 'password'}
               placeholder='Nhập lại Mật khẩu'
               size='lg'
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             ></Input>
+            <InputRightElement width='4.5rem'>
+              <Button
+                h='1.75rem'
+                size='sm'
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              >
+                {showConfirmPassword ? <BsEyeSlash /> : <BsEye />}
+              </Button>
+            </InputRightElement>
           </InputGroup>
         </Stack>
         <Flex justifyContent='space-between' w='377px'>

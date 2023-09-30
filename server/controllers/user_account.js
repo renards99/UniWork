@@ -188,15 +188,25 @@ module.exports = {
         is_verified,
         is_banned,
         user_image,
-        short_des,
       } = params;
 
       // Check if the user already exists based on the email or mobile number
-      const existingUser = await UserAccount.findOne({
-        where: {
-          [Op.or]: [{ email }, { mobile_number }],
-        },
-      });
+      let existingUser;
+
+      if (mobile_number) {
+        // Checks if mobile_number is not null, undefined, or empty
+        existingUser = await UserAccount.findOne({
+          where: {
+            [Op.or]: [{ email }, { mobile_number }],
+          },
+        });
+      } else {
+        existingUser = await UserAccount.findOne({
+          where: {
+            email,
+          },
+        });
+      }
 
       if (existingUser) {
         return responsehandler.badRequest(res, 'Email or mobile number already in use');
@@ -218,7 +228,6 @@ module.exports = {
         is_verified,
         is_banned,
         user_image,
-        short_des,
       };
 
       const createdUser = await UserAccount.create(newUser);

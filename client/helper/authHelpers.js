@@ -1,9 +1,5 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
-<<<<<<< HEAD
-=======
-
->>>>>>> fb60dded1381be86a7b5765e7431aa7bd5e36ce7
 export const loginAccount = async (user, password, back_end_port, router) => {
   const submitData = {
     user,

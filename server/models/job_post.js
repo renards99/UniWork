@@ -68,8 +68,16 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: true,
       },
       job_description: {
-        type: Sequelize.STRING(10000),
+        type: Sequelize.STRING,
         allowNull: false,
+      },
+      job_requirement: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      job_benefit: {
+        type: Sequelize.STRING,
+        allowNull: true,
       },
       job_location: {
         type: Sequelize.STRING(200),
