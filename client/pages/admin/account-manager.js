@@ -19,7 +19,7 @@ import { CiSearch } from 'react-icons/ci';
 import ShieldCheck from '../../public/static/images/icon/shield_check.svg';
 import ShieldWarning from '../../public/static/images/icon/shield_warning.svg';
 import Pagination from '../../components/paging';
-import HeaderAdmins from '../../components/layout/header_admin';
+import HeaderAdmins from '../../components/layout/admin/header';
 import { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
