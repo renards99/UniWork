@@ -372,7 +372,7 @@ function JobDetails({ data, BACK_END_PORT }) {
                             h='160px'
                           />
                         </Stack>
-                      ) : radioValue === '2' ? (
+                      ) : radioValue === '3' ? (
                         <Stack gap='8px' alignSelf='stretch'>
                           <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
                             CV của bạn
