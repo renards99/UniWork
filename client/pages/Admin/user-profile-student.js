@@ -57,7 +57,7 @@ function UserProfileStudent() {
           job_type: userData.job_type_name,
           facebook_link: userData.facebook_link,
           subScriptionDate: convertToLocaleDateTime(userData.registration_date),
-          dob: convertToLocaleDateTime(userData.dob)
+          dob: convertToLocaleDateTime(userData.dob),
         });
         handleGetJobByCompany(userData.company_id);
       } else {

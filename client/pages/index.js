@@ -335,3 +335,8 @@ export default function HomePage() {
   );
   return <div>{HomeContent}</div>;
 }
+export async function getServerSideProps() {
+  const BACK_END_PORT = 'http://localhost:5000';
+
+  return { props: { port: BACK_END_PORT } };
+}

@@ -434,7 +434,10 @@ function JobDetails({ data, BACK_END_PORT }) {
                 </ModalContent>
               </Modal>
               <Text fontSize='14px' fontWeight='500'>
-                Hạn nộp hồ sơ: {format(new Date(data.expired_at), 'dd-MM-yyyy ')}.
+                Hạn nộp hồ sơ:{' '}
+                {data.expired_at && !isNaN(new Date(data.expired_at).valueOf())
+                  ? format(new Date(data.expired_at), 'dd-MM-yyyy')
+                  : 'N/A'}
               </Text>
             </Stack>
             <Stack gap='24px'>

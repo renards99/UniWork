@@ -213,7 +213,7 @@ module.exports = {
         onDelete: 'cascade',
       },
       cv: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING(1000),
         allowNull: true,
       },
       short_des: {

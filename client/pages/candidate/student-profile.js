@@ -37,13 +37,18 @@ import CandidateHeader from '../../components/layout/candidate/header';
 import { useCallback, useEffect, useState } from 'react';
 import PostImage from '../../public/static/images/applicationPost.png';
 import Paging from '../../components/paging';
-import axios from 'axios';
 import DropDown from '../../components/layout/employer/dropDown';
 import StatusFrame from '../../components/layout/admin/statusFrame';
 import { IoEllipse } from 'react-icons/io5';
 import PDFViewer from '../../components/pdf';
 import { AiFillCamera } from 'react-icons/ai';
+
+import axios from 'axios';
+import { useRouter } from 'next/router';
+import { convertToLocaleDateTime } from '../../helper';
+
 function StudentProfile() {
+  const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [myCV, setMyCV] = useState();
   const [avatar, setAvatar] = useState();
@@ -81,11 +86,26 @@ function StudentProfile() {
       formData.append('cv_file', myCV);
       const uploadCV = await axios.post('http://localhost:5000/upload-cv', formData);
       if (uploadCV.data.statusCode === 200) {
-        setCvLink(uploadCV.data.data.cv_file);
-        console.log(cvLink);
-        setIsModalCVOpen(false);
+        const user = localStorage.getItem('user');
+        if (user) {
+          let userData = JSON.parse(user);
+          if (userData) {
+            const { id } = userData;
+            const updateCV = await axios.put('http://localhost:5000/student/update-student', {
+              id,
+              cv: uploadCV.data.data.cv_file,
+            });
+            if (updateCV.data.statusCode === 200) {
+              alert('Student updated successfully');
+              setCvLink(uploadCV.data.data.cv_file);
+              setEProfile({ ...eProfile, cv: uploadCV.data.data.cv_file });
+              setIsModalCVOpen(false);
+            }
+          }
+        }
       }
     } catch (e) {
+      console.log(e);
       setIsModalCVOpen(false);
     }
   };
@@ -110,6 +130,8 @@ function StudentProfile() {
   };
   // const isModalEducationOpen
   // const [isModal2Open, setIsModal2Open] = useState(false);
+  const [eProfile, setEProfile] = useState({});
+
   const student = {
     id: '1',
     name: 'Nguyen Van A',
@@ -207,13 +229,11 @@ function StudentProfile() {
           <Flex gap='98px' pl='20px' py='8px' justifyContent='flex-end'>
             <Stack>
               <Text fontSize='24px' fontWeight='800' lineHeight='32px'>
-                CÔNG TY CỔ PHẦN MODERN LIGHT VIỆT NAM
+                {eProfile.full_name}
               </Text>
-              {student.title === null ? (
-                ''
-              ) : (
+              {eProfile.job_type && (
                 <Flex fontSize='16px' fontWeight='500'>
-                  <Text lineHeight='24px'>{student.title}</Text>
+                  <Text lineHeight='24px'>{eProfile.job_type}</Text>
                 </Flex>
               )}
             </Stack>
@@ -231,7 +251,7 @@ function StudentProfile() {
             </label>
           </Flex>{' '}
           <Stack px='20px' py='28px'>
-            {student.cv === '1' ? (
+            {!eProfile.cv ? (
               <Flex gap='15px'>
                 <Flex
                   w='200px'
@@ -239,6 +259,8 @@ function StudentProfile() {
                   bg='#F98820'
                   rounded='10px'
                   justifyContent='center'
+                  onClick={openModalCV}
+                  cursor={'pointer'}
                   alignItems='center'
                 >
                   <Text fontSize='18px' color='white' fontWeight='800'>
@@ -279,12 +301,10 @@ function StudentProfile() {
               </Flex>
             )}
           </Stack>
-          {student.description != null ? (
+          {student.description && (
             <Text fontSize='16px' fontWeight='500' lineHeight='24px' p='40px'>
-              {student.description}
+              {eProfile.short_des}
             </Text>
-          ) : (
-            ''
           )}
         </Stack>
       </Stack>
@@ -774,7 +794,14 @@ function StudentProfile() {
     </Modal>
   );
   const modalCV = (
-    <Modal isOpen={isModalCVOpen} onClose={closeModalCV} isCentered size='5xl'>
+    <Modal
+      isOpen={isModalCVOpen}
+      onClose={() => {
+        setIsModalCVOpen(false);
+      }}
+      isCentered
+      size='5xl'
+    >
       <ModalOverlay bg='none' backdropFilter='auto' backdropBlur='2px' />
       <ModalContent>
         <ModalHeader borderBottom='1px solid #818181' fontSize='24px'>
@@ -859,6 +886,7 @@ function StudentProfile() {
                 CV của bạn
               </Text>
             </Flex>
+            {cvLink && <PDFViewer url={cvLink} />}
           </Stack>
         </ModalBody>
       </ModalContent>
@@ -1099,6 +1127,53 @@ function StudentProfile() {
       </ModalContent>
     </Modal>
   );
+
+  const getUserAccount = async (id) => {
+    try {
+      const getUserAccount = await axios.post(`http://localhost:5000/student-details`, {
+        id,
+      });
+      if (getUserAccount.data.statusCode == 200) {
+        const userData = getUserAccount.data.data.user_details[0];
+        setEProfile({
+          role:
+            userData.role == 1
+              ? 'Quản trị viên'
+              : userData.role == 2
+              ? 'Nhà tuyển dụng'
+              : 'Ứng viên',
+          email: userData.email,
+          phone: userData.mobile_number,
+          full_name: userData.full_name,
+          image: userData.user_image,
+          gender: userData.gender,
+          id: userData.id,
+          gender: userData.gender == 1 ? 'Nam' : userData.gender == 2 ? 'Nữ' : 'Không yêu cầu',
+          job_type: userData.job_type_name,
+          facebook_link: userData.facebook_link,
+          subScriptionDate: convertToLocaleDateTime(userData.registration_date),
+          dob: convertToLocaleDateTime(userData.dob),
+          short_des: userData.short_des,
+          cv: userData.cv,
+        });
+        setCvLink(userData.cv);
+        handleGetJobByCompany(userData.company_id);
+      } else {
+      }
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    const user = localStorage.getItem('user');
+    if (user) {
+      let userData = JSON.parse(user);
+      if (userData) {
+        const { id } = userData;
+        getUserAccount(id);
+      }
+    }
+  }, []);
+
   return (
     <Box>
       <CandidateHeader />
@@ -1109,7 +1184,6 @@ function StudentProfile() {
         {modalCV}
         {modalPersonalInfo}
         {modalShowCV}
-        {cvLink && <PDFViewer url={cvLink} />}
       </Stack>
     </Box>
   );
