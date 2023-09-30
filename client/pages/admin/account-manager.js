@@ -87,7 +87,7 @@ export default function AccountManager() {
         }}
       >
         <Td textAlign={'center'}>{item.id}</Td>
-        <Td>{item.fullname}</Td>
+        <Td>{item.full_name}</Td>
         <Td>{item.email}</Td>
         <Td>{item.role_name}</Td>
         <Td textAlign={'center'}>

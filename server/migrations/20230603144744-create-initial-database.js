@@ -427,15 +427,15 @@ module.exports = {
         allowNull: true,
       },
       job_description: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(10000),
         allowNull: false,
       },
       job_requirement: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(1000),
         allowNull: true,
       },
       job_benefit: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(1000),
         allowNull: true,
       },
       job_location: {

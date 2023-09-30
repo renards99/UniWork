@@ -38,12 +38,30 @@ const BACK_END_PORT = 'http://localhost:5000';
 
 function PostDetails() {
   const router = useRouter();
+  const { id } = router.query;
   const [menuIcon, setMenuIcon] = useState(false);
   const [activeIcon, setActiveIcon] = useState(0);
-  const handleActiveIcon = (value) => setActiveIcon(value);
-  const handleMenuClick = () => setMenuIcon(!menuIcon);
+  const handleApprove = async () => {
+    const aprrovePost = await axios.put(`${BACK_END_PORT}/job-post/update-job-post`, {
+      id: id,
+      state: 2,
+    });
+    if (aprrovePost.data.statusCode == 200) {
+      alert(`update post successfully`);
+      window.location.href = 'http://localhost:3000/admin/job-manager';
+    }
+  };
+  const handleDeny = async () => {
+    const denyPost = await axios.put(`${BACK_END_PORT}/job-post/update-job-post`, {
+      id: id,
+      state: 4,
+    });
+    if (denyPost.data.statusCode == 200) {
+      alert(`deny post successfully`);
+      window.location.href = 'http://localhost:3000/admin/job-manager';
+    }
+  };
   const [edit, setEdit] = useState(false);
-  const handleEditClick = () => setEdit(!edit);
   const [fakeData, setFakeData] = useState({});
   const [eProfile, setEProfile] = useState({});
 
@@ -87,7 +105,6 @@ function PostDetails() {
   };
 
   useEffect(() => {
-    const { id } = router.query;
     if (id) {
       handleJobPost(id);
     }
@@ -377,84 +394,44 @@ function PostDetails() {
   );
   const buttons = (
     <Flex alignItems='flex-start' gap='20px'>
-      {!edit ? (
-        <Flex gap='20px'>
-          <Flex
-            onClick={handleEditClick}
-            justifyContent='center'
-            alignItems='center'
-            color='white'
-            bg='#323541'
-            rounded='20px'
-            w='132px'
-            mt='20px'
-            py='8px'
-            px='12px'
-            fontSize='16px'
-            cursor='pointer'
-          >
-            <Text fontSize='14px' fontWeight='600' lineHeight='24px'>
-              Chỉnh sửa
-            </Text>
-          </Flex>
-          <Flex
-            justifyContent='center'
-            alignItems='center'
-            color='#323541'
-            bg='white'
-            rounded='20px'
-            w='132px'
-            mt='20px'
-            py='8px'
-            px='12px'
-            fontSize='16px'
-            cursor='pointer'
-            border='1px'
-            borderColor='#323541'
-          >
-            Ẩn bài đăng
-          </Flex>
+      <Flex gap='20px'>
+        <Flex
+          onClick={handleApprove}
+          justifyContent='center'
+          alignItems='center'
+          color='white'
+          bg='#323541'
+          rounded='20px'
+          w='132px'
+          mt='20px'
+          py='8px'
+          px='12px'
+          fontSize='16px'
+          cursor='pointer'
+        >
+          <Text fontSize='14px' fontWeight='600' lineHeight='24px'>
+            Duyệt bài
+          </Text>
         </Flex>
-      ) : (
-        <Flex gap='20px'>
-          <Flex
-            onClick={handleEditClick}
-            justifyContent='center'
-            alignItems='center'
-            color='white'
-            bg='#323541'
-            rounded='20px'
-            w='132px'
-            mt='20px'
-            py='8px'
-            px='12px'
-            fontSize='16px'
-            cursor='pointer'
-          >
-            <Text fontSize='14px' fontWeight='600' lineHeight='24px'>
-              Lưu
-            </Text>
-          </Flex>
-          <Flex
-            justifyContent='center'
-            alignItems='center'
-            color='#323541'
-            bg='white'
-            rounded='20px'
-            w='132px'
-            mt='20px'
-            py='8px'
-            px='12px'
-            fontSize='16px'
-            cursor='pointer'
-            border='1px'
-            borderColor='#323541'
-            onClick={handleEditClick}
-          >
-            Hủy
-          </Flex>
+        <Flex
+          justifyContent='center'
+          alignItems='center'
+          color='#323541'
+          bg='white'
+          rounded='20px'
+          w='132px'
+          mt='20px'
+          py='8px'
+          px='12px'
+          fontSize='16px'
+          cursor='pointer'
+          border='1px'
+          borderColor='#323541'
+          onClick={handleDeny}
+        >
+          Từ chối
         </Flex>
-      )}
+      </Flex>
     </Flex>
   );
 
@@ -744,7 +721,12 @@ function PostDetails() {
         <Stack gap='40px'>
           <Stack p='12px' justifyContent='center' alignItems='center' fontWeight='semibold'>
             <Box overflow='hidden' rounded='full'>
-              <img src={fakeData?.image} width='160' height='160' style={{borderRadius: "50%", height: "160px"}}/>
+              <img
+                src={fakeData?.image}
+                width='160'
+                height='160'
+                style={{ borderRadius: '50%', height: '160px' }}
+              />
             </Box>
             <Text fontSize='24px' fontWeight='800' lineHeight='32px'>
               {eProfile.companyName}

@@ -115,7 +115,7 @@ export default function JobManager() {
                 Chưa duyệt
               </Text>
             </Box>
-          ) : (
+          ) : item.state == 3 ? (
             <Box
               backgroundColor={'#FFC0C0'}
               w='134px'
@@ -127,6 +127,20 @@ export default function JobManager() {
             >
               <Text fontSize={'14px'} fontWeight={'500'} color={'#BC0000'}>
                 Hết hạn
+              </Text>
+            </Box>
+          ) : (
+            <Box
+              backgroundColor={'#FFC0C0'}
+              w='134px'
+              padding='6px 10px'
+              h='28px'
+              borderRadius={'12px'}
+              margin={'0 auto'}
+              textAlign={'center'}
+            >
+              <Text fontSize={'14px'} fontWeight={'500'} color={'#BC0000'}>
+                Từ chối
               </Text>
             </Box>
           )}
@@ -207,6 +221,17 @@ export default function JobManager() {
           }}
         >
           Hết hạn
+        </Tab>
+        <Tab
+          fontSize={'16px'}
+          fontWeight={'600'}
+          color={'#323541'}
+          onClick={() => {
+            changePage(1);
+            handleSearch(search, '4');
+          }}
+        >
+          Từ chối
         </Tab>
       </TabList>
     </Tabs>

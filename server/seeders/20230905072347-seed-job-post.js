@@ -940,30 +940,6 @@ module.exports = {
         expired_at: '2024-07-15 05:13:23',
         experience: 2,
       },
-      {
-        title: 'Housing manager/officer',
-        work_hours: 1,
-        service_id: 1,
-        job_type_id: 34,
-        post_by_id: 51,
-        company_id: 63,
-        hire_number: 10,
-        job_description:
-          'However management actually those each. Recognize room evidence executive fact ok sense.\nFast tough break daughter product trouble it against. Analysis chance really wrong present without old. Four actually game free. Ground moment leader it edge.\nYard performance marriage. Site both per close let. Morning own make issue fire pay require unit.\nTend military tell unit.\nTrip manage speak use never. Food end trial and each term.\nArrive trouble war piece common. Face to religious play try either. Question second per brother realize food.\nFire race deal yes third. Pm health Mrs realize oil actually condition. Build blue they machine memory.\nGet already continue Congress story. Turn scene possible area.\nMonth describe upon production. Low follow none live consider wear lose together. Throw end language fly white investment.\nSource fact another store adult newspaper option. Safe fact source within but chair. Gun political job American direction rich.',
-        job_requirement: 'none',
-        job_benefit: 'none',
-        job_location: 'Hà Nội',
-        is_active: true,
-        salary: 11542560,
-        view: 487,
-        gender: 1,
-        state: 3,
-        created_at: '2022-09-11 20:56:05',
-        updated_at: '2023-08-07 17:41:53',
-        apply_at: '2024-02-12 20:56:57',
-        expired_at: '2024-07-28 15:59:09',
-        experience: 2,
-      },
     ]);
     return queryInterface.sequelize.query(
       `UPDATE job_post 

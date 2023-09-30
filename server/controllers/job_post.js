@@ -69,26 +69,23 @@ module.exports = {
   },
   async updateJobPost(req, res) {
     const params = req.body;
-    const is_active = params.is_active;
+    const { is_active, state } = params;
     try {
       const job_post_id = params.id;
-      if (!validateHandler.validateId(job_post_id)) {
-        return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
-      }
+      // if (!validateHandler.validateId(job_post_id)) {
+      //   return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+      // }
 
-      if (!validateHandler.validateInput(params)) {
-        return responseHandler.badRequest(res, 'Your input is invalid!');
-      }
-      const updatedData = {
-        is_active,
-      };
+      // if (!validateHandler.validateInput(params)) {
+      //   return responseHandler.badRequest(res, 'Your input is invalid!');
+      // }
       const getJobPost = await Job_post.findOne({
         where: {
           id: job_post_id,
         },
       });
       if (!getJobPost) return responseHandler.badRequest(res, 'job post does not exist!');
-      const updateJobPost = await Job_post.update(updatedData, {
+      const updateJobPost = await Job_post.update(params, {
         where: {
           id: job_post_id,
         },

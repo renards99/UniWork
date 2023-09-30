@@ -90,7 +90,7 @@ module.exports = (sequelize, Sequelize) => {
 
       salary: {
         type: Sequelize.DOUBLE,
-        defaultValue: 0
+        defaultValue: 0,
       },
       view: {
         type: Sequelize.INTEGER(50),
