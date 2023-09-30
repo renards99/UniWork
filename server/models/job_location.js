@@ -8,19 +8,19 @@ module.exports = (sequelize, Sequelize) => {
         autoIncrement: true,
       },
       street_address: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING(1000),
         allowNull: false,
       },
       city: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING(1000),
         allowNull: false,
       },
       province: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING(1000),
         allowNull: false,
       },
       zip_code: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING(1000),
         allowNull: true,
       },
     },

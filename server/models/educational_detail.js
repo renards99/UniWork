@@ -19,11 +19,11 @@ module.exports = (sequelize, Sequelize) => {
         onDelete: 'cascade',
       },
       major: {
-        type: Sequelize.STRING(20),
+        type: Sequelize.STRING,
         allowNull: false,
       },
       insitude_university_name: {
-        type: Sequelize.STRING(20),
+        type: Sequelize.STRING,
         allowNull: false,
       },
       starting_year: {
@@ -35,7 +35,7 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
       },
       description: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(10000),
         allowNull: false,
       },
     },

@@ -64,7 +64,7 @@ module.exports = (sequelize, Sequelize) => {
         onDelete: 'cascade',
       },
       hire_number: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING(1000),
         allowNull: true,
       },
       job_description: {

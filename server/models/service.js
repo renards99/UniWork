@@ -8,11 +8,11 @@ module.exports = (sequelize, Sequelize) => {
         autoIncrement: true,
       },
       service_name: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING(1000),
         allowNull: true,
       },
       description: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING(1000),
         allowNull: true,
       },
       price: {

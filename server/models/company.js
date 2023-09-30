@@ -12,11 +12,11 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
       },
       company_name: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING(1000),
         allowNull: false,
       },
       company_email: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING(1000),
         allowNull: false,
       },
       company_phone_number: {
@@ -44,7 +44,7 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
       },
       company_website_url: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING(1000),
         allowNull: true,
       },
     },

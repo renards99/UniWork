@@ -57,7 +57,6 @@ function PostDetails() {
     });
 
     if (aprrovePost.data.statusCode == 200) {
-
       try {
         const emailRes = await axios.post(`${BACK_END_PORT}/send-email`, {
           to: `${eProfile.email}`, // Replace with the user's email address
@@ -1039,21 +1038,6 @@ function PostDetails() {
               </Text>
             </Flex>
           </Stack>
-          <Flex
-            justifyContent='center'
-            alignItems='center'
-            bg='#323541'
-            color='white'
-            rounded='20px'
-            py='8px'
-            px='12px'
-            fontSize='16px'
-            gap='20px'
-          >
-            <Text fontSize='14px' fontWeight='600' lineHeight='24px'>
-              Chỉnh sửa thông tin
-            </Text>
-          </Flex>
         </Stack>
       </Stack>
     </GridItem>
