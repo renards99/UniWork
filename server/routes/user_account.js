@@ -14,5 +14,7 @@ router.post('/logout', user_accounts.logoutAccount);
 router.post('/change-password', user_accounts.changePassword);
 router.post('/upload-cv', upload.single('cv_file'), user_accounts.uploadFile);
 router.post('/upload-image', upload.single('image_file'), user_accounts.uploadImage);
+router.put('/ban-user', user_accounts.banUser);
+router.post('/student-details', user_accounts.getUserStudent);
 
 module.exports = router;

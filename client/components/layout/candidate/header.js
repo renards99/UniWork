@@ -255,7 +255,7 @@ function CandidateHeader(props) {
         <Link href='/'>
           <Image src={Logo} height={'40'} width={'170'} />
         </Link>
-        <Link href='/candidate/job_searching' _hover={{ textDecoration: 'none' }}>
+        <Link href='/candidate' _hover={{ textDecoration: 'none' }}>
           <Text fontSize='20px' fontWeight='700' lineHeight='24px' letterSpacing='0.2px'>
             Việc làm
           </Text>

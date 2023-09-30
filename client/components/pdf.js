@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Flex } from '@chakra-ui/react';
+import { Flex, Stack } from '@chakra-ui/react';
 import { Document, Page, pdfjs } from 'react-pdf';
 
 // Configure PDF.js worker URL
@@ -32,7 +32,7 @@ function PDFViewer({ url }) {
   return (
     <div className='pdf-viewer'>
       <Document file={pdfData} onLoadSuccess={onDocumentLoadSuccess}>
-        <Flex>
+        <Stack>
           {Array.from(new Array(numPages), (el, index) => (
             <Flex margin={"10px"}>
                 <Page
@@ -43,7 +43,7 @@ function PDFViewer({ url }) {
                 />
             </Flex>
           ))}
-        </Flex>
+        </Stack>
       </Document>
     </div>
   );

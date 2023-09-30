@@ -28,9 +28,14 @@ import DropDownStatus from '../../components/layout/admin/dropDownStatus';
 import StatusFrame from '../../components/layout/admin/statusFrame';
 import { useRouter } from 'next/router';
 import { convertToLocaleDateTime, totalPriceItemInCart } from '../../helper';
+
 const BACK_END_PORT = 'http://localhost:5000';
 
 function UserProfileEmployer() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
   const router = useRouter();
   const menuData = {
     roles: ['Giám đốc', 'Nhân viên', 'Trợ lý', 'Quản lý', 'Phó phòng', 'Thực tập sinh'],
@@ -58,12 +63,12 @@ function UserProfileEmployer() {
         company_id: id,
       });
       if (getJob.data.statusCode === 200) {
-        const jobData = getJob.data.data.list_job
+        const jobData = getJob.data.data.list_job;
         setPost(
           jobData.map((job, index) => ({
             imageUrl: '../../public/static/images/applicationPost.png',
             title: job.title,
-            salary: totalPriceItemInCart(job?.salary.toString(), 1) + " VND",
+            salary: totalPriceItemInCart(job?.salary.toString(), 1) + ' VND',
             company: job.company_name,
             tags: [job.job_location, `${job.experience} năm kinh nghiệm`],
           })),
@@ -86,10 +91,6 @@ function UserProfileEmployer() {
 
   const handleToggle = () => setShow(!show);
 
-  const [param, setParam] = useState({ role_id: 2 });
-  const [userData, setUserData] = useState({});
-  const [postData, setPostData] = useState([]);
- 
   const getUserAccount = async (id) => {
     try {
       const getUserAccount = await axios.post(`http://localhost:5000/account-details`, {
@@ -99,9 +100,9 @@ function UserProfileEmployer() {
         const userData = getUserAccount.data.data.user_details[0];
         setEProfile({
           role:
-            userData.role == 1
+            userData.role_id == 1
               ? 'Quản trị viên'
-              : userData.role == 2
+              : userData.role_id == 2
               ? 'Nhà tuyển dụng'
               : 'Ứng viên',
           email: userData.email,
@@ -124,6 +125,8 @@ function UserProfileEmployer() {
           companyEmail: userData.company_email,
           companyPhone: userData.company_phone_number,
           size: userData.size,
+          isVerified: userData.is_verified,
+          is_banned: userData.is_banned,
         });
         handleGetJobByCompany(userData.company_id);
       } else {
@@ -140,6 +143,27 @@ function UserProfileEmployer() {
 
   const [tab, setTab] = useState(1);
   const handleTab = (index) => setTab(index);
+
+  const handleBan = async () => {
+    const banResponse = await axios.put(`${BACK_END_PORT}/ban-user`, {
+      id: eProfile.id,
+      is_banned: 1,
+    });
+    if (banResponse.data.statusCode == 200) {
+      alert(`ban user successfully`);
+      window.location.href = 'http://localhost:3000/admin/account-manager';
+    }
+  };
+  handleUnban = async () => {
+    const unbanResponse = await axios.put(`${BACK_END_PORT}/ban-user`, {
+      id: eProfile.id,
+      is_banned: 0,
+    });
+    if (unbanResponse.data.statusCode == 200) {
+      alert(`unban user successfully`);
+      window.location.href = 'http://localhost:3000/admin/account-manager';
+    }
+  };
   return (
     <Stack gap='24px' ml='316px'>
       {/*Header*/}
@@ -178,7 +202,6 @@ function UserProfileEmployer() {
               </Text>
               <Image></Image>
             </Flex>
-
             <Stack
               p='24px'
               justifyContent='center'
@@ -238,7 +261,7 @@ function UserProfileEmployer() {
                     </Text>
 
                     <Text fontSize='14px' fontWeight='700' lineHeight='24px'>
-                      {eProfile?.mobile_number}
+                      {eProfile?.phone}
                     </Text>
                   </Flex>
                   <Flex gap='12px' alignItems='center'>
@@ -253,7 +276,115 @@ function UserProfileEmployer() {
                 </Stack>
               </Flex>
             </Stack>
+
+            {eProfile.is_banned == 0 ? (
+              <Flex
+                onClick={toggleModal}
+                justifyContent='center'
+                alignItems='center'
+                color='white'
+                bg='#323541'
+                rounded='20px'
+                w='132px'
+                mt='20px'
+                py='8px'
+                px='12px'
+                fontSize='16px'
+                cursor='pointer'
+              >
+                <Text fontSize='14px' fontWeight='600' lineHeight='24px'>
+                  Cấm người dùng
+                </Text>
+              </Flex>
+            ) : (
+              <Flex
+                onClick={toggleModal}
+                justifyContent='center'
+                alignItems='center'
+                color='white'
+                bg='#323541'
+                rounded='20px'
+                w='132px'
+                mt='20px'
+                py='8px'
+                px='12px'
+                fontSize='16px'
+                cursor='pointer'
+              >
+                <Text fontSize='14px' fontWeight='600' lineHeight='24px'>
+                  Bỏ cấm
+                </Text>
+              </Flex>
+            )}
           </Box>
+          <>
+            {isModalOpen && (
+              <Box
+                position='fixed'
+                top='0'
+                left='0'
+                width='100%'
+                height='100%'
+                backgroundColor='rgba(0, 0, 0, 0.5)'
+                display='flex'
+                justifyContent='center'
+                alignItems='center'
+                zIndex='1000'
+              >
+                <Box backgroundColor='#323541' padding='20px' borderRadius='12px'>
+                  <Text color='white' fontSize='20px' mb='20px'>
+                    {eProfile.is_banned == 0
+                      ? 'Bạn có chắc muốn cấm tài khoản này?'
+                      : 'Bạn có chắc muốn bỏ cấm tài khoản này?'}
+                  </Text>
+                  <Flex gap='20px' justifyContent='center' alignItems='center'>
+                    <Flex
+                      onClick={() => {
+                        user.is_banned === 0 ? handleBan() : handleUnban();
+                        setIsModalOpen(false);
+                      }}
+                      justifyContent='center'
+                      alignItems='center'
+                      color='white'
+                      bg='#FF5733'
+                      rounded='20px'
+                      w='100px'
+                      py='8px'
+                      px='12px'
+                      fontSize='16px'
+                      cursor='pointer'
+                    >
+                      <Text fontSize='14px' fontWeight='600'>
+                        Xác nhận
+                      </Text>
+                    </Flex>
+                    <Flex
+                      onClick={toggleModal}
+                      justifyContent='center'
+                      alignItems='center'
+                      color='#323541'
+                      bg='white'
+                      rounded='20px'
+                      w='100px'
+                      py='8px'
+                      px='12px'
+                      fontSize='16px'
+                      cursor='pointer'
+                      border='1px solid #323541'
+                    >
+                      <Text fontSize='14px' fontWeight='600'>
+                        Hủy
+                      </Text>
+                    </Flex>
+                  </Flex>
+                </Box>
+              </Box>
+            )}
+
+            <Stack gap='0px' w='930px'>
+              {/*... rest of your code */}
+            </Stack>
+          </>
         </Stack>
       ) : (
         <Grid templateColumns='repeat(3, 1fr)' h='90vh'>
@@ -262,7 +393,49 @@ function UserProfileEmployer() {
 
             <Stack px='24px' pt='16px' pb='20px' gap='20px'>
               <Flex>
-                <DropDownStatus data={menuData.status}></DropDownStatus>
+                {eProfile.isVerified == 0 ? (
+                  <Box
+                    backgroundColor={'#C7F5D9'}
+                    w='134px'
+                    padding='6px 10px'
+                    h='28px'
+                    borderRadius={'12px'}
+                    margin={'0 auto'}
+                    textAlign={'center'}
+                  >
+                    <Text fontSize={'14px'} fontWeight={'500'} color={'#036000'}>
+                      Chưa xác minh
+                    </Text>
+                  </Box>
+                ) : eProfile.isVerified == 1 ? (
+                  <Box
+                    backgroundColor={'#D3DFF9'}
+                    w='134px'
+                    padding='6px 10px'
+                    h='28px'
+                    borderRadius={'12px'}
+                    margin={'0 auto'}
+                    textAlign={'center'}
+                  >
+                    <Text fontSize={'14px'} fontWeight={'500'} color={'#0036AA'}>
+                      Đã xác minh
+                    </Text>
+                  </Box>
+                ) : (
+                  <Box
+                    backgroundColor={'#FFC0C0'}
+                    w='134px'
+                    padding='6px 10px'
+                    h='28px'
+                    borderRadius={'12px'}
+                    margin={'0 auto'}
+                    textAlign={'center'}
+                  >
+                    <Text fontSize={'14px'} fontWeight={'500'} color={'#BC0000'}>
+                      Hết hạn
+                    </Text>
+                  </Box>
+                )}
               </Flex>{' '}
               {tab === 2 ? (
                 <Box>
@@ -442,7 +615,12 @@ function UserProfileEmployer() {
               <Stack gap='40px'>
                 <Stack p='12px' justifyContent='center' alignItems='center' fontWeight='semibold'>
                   <Box overflow='hidden' rounded='full'>
-                    <img src={eProfile.image} width='160' height='160' style={{borderRadius: "50%", height: "160px"}}/>
+                    <img
+                      src={eProfile.image}
+                      width='160'
+                      height='160'
+                      style={{ borderRadius: '50%', height: '160px' }}
+                    />
                   </Box>
                   <Text fontSize='24px' fontWeight='800' lineHeight='32px'>
                     {eProfile.companyName}
@@ -528,21 +706,6 @@ function UserProfileEmployer() {
                     </Text>
                   </Flex>
                 </Stack>
-                <Flex
-                  justifyContent='center'
-                  alignItems='center'
-                  bg='#323541'
-                  color='white'
-                  rounded='20px'
-                  py='8px'
-                  px='12px'
-                  fontSize='16px'
-                  gap='20px'
-                >
-                  <Text fontSize='14px' fontWeight='600' lineHeight='24px'>
-                    Chỉnh sửa thông tin
-                  </Text>
-                </Flex>
               </Stack>
             </Stack>
           </GridItem>

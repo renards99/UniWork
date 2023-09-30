@@ -10,6 +10,5 @@ router.post('/job-post/get-all-active-job-post', job_posts.getAllActiveJobPost);
 router.post('/job-post/get-all-job-post-by-id', job_posts.getAllJobPostByUserId);
 router.post('/job-post/find-all-job', job_posts.findAllJobPost);
 router.post('/job-post/get-job-by-company', job_posts.getAllPostsByCompany);
-router.post('/job-post/approve-job-post', job_posts.getAllPostsByCompany);
 
 module.exports = router;

@@ -162,6 +162,34 @@ module.exports = {
       return responsehandler.error(res);
     }
   },
+
+  async getUserStudent(req, res) {
+    try {
+      const params = req.body;
+      const { id } = params;
+      const getUser = await sequelize.query(
+        `SELECT ua.*, ua.date_of_birth as dob , jt.job_type_name, e.facebook_link, st.short_des, st.cv FROM user_account as ua
+          left join employer as e on e.user_account_id = ua.id
+          left join company as c on e.company_id = c.id
+          left join job_type as jt on jt.id = e.job_type_id
+          left join experience_detail as ed on ed.user_account_id  =  ua.id
+          left join educational_detail as edu on edu.user_account_id = ua.id
+          left join student as st on st.user_account_id =  ua.id
+          where ua.id =  ${id} `,
+        {
+          type: QueryTypes.SELECT,
+        },
+      );
+      if (getUser) {
+        return responsehandler.responseWithData(res, 200, { user_details: getUser });
+      } else {
+        return responsehandler.badRequest(res, "can't get user");
+      }
+    } catch (error) {
+      return responsehandler.error(res);
+    }
+  },
+
   async updateUser(req, res) {
     try {
       const params = req.body;
@@ -178,6 +206,20 @@ module.exports = {
         return responsehandler.badRequest(res, "can't get user");
       }
     } catch (error) {
+      return responsehandler.error(res);
+    }
+  },
+  async banUser(req, res) {
+    const params = req.body;
+    const { id, is_banned } = params;
+    try {
+      const banResponse = await UserAccount.update({ is_banned }, { where: { id } });
+      if (banResponse) {
+        return responsehandler.responseWithData(res, 200, 'Ban success!');
+      } else {
+        return responsehandler.badRequest(res, 'Can not Ban!');
+      }
+    } catch (err) {
       return responsehandler.error(res);
     }
   },
