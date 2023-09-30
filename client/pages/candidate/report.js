@@ -57,7 +57,7 @@ const menuData = {
 };
 function report() {
   return (
-    <Stack gap='26px'>
+    <Stack gap='26px' >
       <EmployerHeader />
       <Grid templateColumns='repeat(3, 1fr)' h='90vh' mt='52px' px='24px'>
         <GridItem colSpan='2'>

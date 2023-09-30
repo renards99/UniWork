@@ -1,7 +1,5 @@
 import { useState } from 'react';
 import {
-  BsChevronCompactLeft,
-  BsChevronCompactRight,
   BsChevronDown,
   BsArrowLeftCircle,
   BsArrowRightCircle,
@@ -12,11 +10,11 @@ import { Box, Input, Button, Icon, Text, Stack, Grid, Flex } from '@chakra-ui/re
 import Image from 'next/image';
 import { Select } from '@chakra-ui/react';
 import CandidateHeader from '../../components/layout/candidate/header';
-import backgroundImg from '../../public/static/images/rectangle_33.png';
 import DropDown from '../../components/layout/candidate/dropDownLocation';
-import speakerIcon from '../../public/static/images/icon/speaker.svg';
+import { useRouter } from 'next/router';
 
 function JobSearching() {
+  const router = useRouter()
   const backgroundFooter = '/static/images/footer_background.png';
   const trends = [
     {
@@ -363,8 +361,14 @@ function JobSearching() {
   //change page
   const changePage = (pageNumber) => setCurrentPage(pageNumber);
 
+  
+
+  useEffect(()=> {
+    // handleFindJob()
+  },[])
+
   const HomeContent = (
-    <div>
+    <div >
       <CandidateHeader />
       <Stack px='150px' justifyContent='space-evenly' alignItems='flex-end' bg='#333333' pt='20px'>
         <Flex bg='transparent' gap='0px'>

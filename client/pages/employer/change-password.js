@@ -34,7 +34,6 @@ function ChangePassword() {
         currentPassword,
         newPassword,
       });
-      console.log(response);
       if (response.data.statusCode === 200) {
         alert('Password changed successfully!');
         window.location.href = 'http://localhost:3000/employer';
@@ -52,7 +51,7 @@ function ChangePassword() {
     setConfirmNewPassword('');
   };
   return (
-    <Box>
+    <Box ml='316px'>
       <EmployerHeader />
       <Stack gap='0' w='620px' px='24px' pb='8px' pt='16px'>
         <Flex

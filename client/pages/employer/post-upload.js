@@ -92,7 +92,6 @@ function PostUpload() {
       const getListJobType = await axios.post(`http://localhost:5000/job-type/get-all-job-type`);
       if (getListJobType.data.statusCode === 200) {
         setJobType(getListJobType.data.data.map((item) => item.job_type_name));
-        console.log(getListJobType.data.data);
       } else {
       }
     } catch (error) {}
@@ -183,7 +182,7 @@ function PostUpload() {
     getServiceJobDetails();
   }, []);
   return (
-    <Box>
+    <Box ml='316px'>
       <EmployerHeader />
       <Grid templateColumns='repeat(3, 1fr)' h='90vh' mt='52px' px='24px'>
         <GridItem colSpan='2'>

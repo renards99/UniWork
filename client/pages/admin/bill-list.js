@@ -74,7 +74,6 @@ export default function JobManager() {
   const slicedDataUser = dataUser.slice(startIndex, endIndex);
 
   const TableContent = slicedDataUser.map((item, index) => {
-    console.log(item);
     return (
       <Tr>
         <Td textAlign={'center'}>{item.main_id}</Td>
@@ -210,7 +209,7 @@ export default function JobManager() {
   );
 
   return (
-    <Box>
+    <Box ml='316px'>
       <HeaderAdmins title={'Quản lí tuyển dụng'} />
       {ActionUNW}
 

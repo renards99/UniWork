@@ -27,4 +27,17 @@ function toatalInCart(cart_items, vart, status_price) {
   return result;
 }
 
-export { totalPriceItemInCart, toatalInCart };
+function convertToLocaleDateTime(inputDateString) {
+  var date = new Date(inputDateString);
+
+  var day = date.getDate();
+  var month = date.getMonth() + 1; // Months are zero-based, so add 1
+  var year = date.getFullYear();
+
+  var formattedDate =
+    day.toString().padStart(2, '0') + '/' + month.toString().padStart(2, '0') + '/' + year;
+
+  return formattedDate;
+}
+
+export { totalPriceItemInCart, toatalInCart, convertToLocaleDateTime };

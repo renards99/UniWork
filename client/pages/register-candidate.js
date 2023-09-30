@@ -94,7 +94,6 @@ function Register() {
     if (createAccountResponse.status === 201 && createCandidate.status === 200) {
       try {
         await loginAccount(email, password, 'http://localhost:5000');
-        console.log('Account created and logged in successfully!');
       } catch (error) {
         console.error('Error logging in after account creation:', error);
       }

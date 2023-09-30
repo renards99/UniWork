@@ -22,7 +22,6 @@ export default function DropDown(props) {
   }, [props.selected, data]);
 
   const [selectedMenuItem, setSelectedMenuItem] = useState(data[parseInt(props.selected) - 1]);
-  console.log(props.selected + 'props select');
   const [menuIcon, setMenuIcon] = useState(false);
   const handleMenuItem = (selectedIndex) => {
     setSelectedMenuItem(data[selectedIndex - 1]);

@@ -97,7 +97,7 @@ function CandidateDetails() {
   const [action, setAction] = useState(1);
 
   return (
-    <Box>
+    <Box ml='316px'>
       <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose} isCentered size='xl'>
         <ModalOverlay bg='none' backdropFilter='auto' backdropBlur='2px' />
         {action == 1 ? (

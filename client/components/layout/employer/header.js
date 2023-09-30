@@ -25,10 +25,9 @@ import Image from 'next/image';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 
-
 // import Notifications from './notifications';
 function EmployerHeader() {
-  const router = useRouter()
+  const router = useRouter();
   const [show, setShow] = useState(false);
   const handleClick = () => {
     setShow(!show);
@@ -40,7 +39,6 @@ function EmployerHeader() {
     cart: '/employer/cart',
   };
 
-  
   async function handleLogOut() {
     const id = JSON.parse(localStorage.getItem('user')).id; // Retrieve the logged-in user's email or mobile number
 
@@ -49,8 +47,8 @@ function EmployerHeader() {
         id,
       });
       if (response.data.statusCode == 200) {
-        localStorage.removeItem('user')
-        router.push("/")
+        localStorage.removeItem('user');
+        router.push('/');
       } else {
         console.error(`There was an error logging out: ${data.message}`);
       }
@@ -105,19 +103,15 @@ function EmployerHeader() {
             //   </Box>
             // }
             _hover='none'
-            _focus={{ bg: 'none' }}
-            _expanded={{ bg: 'none' }}
-            bg='none'
+            bg='#E8E8EB'
             as={Button}
             gap='20px'
-            py='22px'
-            pl='24px'
-            pr='12px'
+            py='24px'
+            px='24px'
             justifyContent='space-between'
             alignSelf='stretch'
             alignItems='center'
-            border='1px solid #818181'
-            rounded='12px'
+            rounded='40px'
             // onClick={handleMenuClick}
             rightIcon={
               menuIcon ? (
@@ -141,7 +135,15 @@ function EmployerHeader() {
               </Text>
             </Flex>
           </MenuButton>
-          <MenuList rounded='10px' border='1px solid #323541' maxH='200px' overflowY='auto'>
+          <MenuList
+            rounded='12px'
+            justifyContent='space-between'
+            alignSelf='stretch'
+            alignItems='center'
+            bg='#E8E8EB'
+            p='0px'
+            overflowY='auto'
+          >
             <Link href='/employer/employer-details'>
               <Flex _last={{ borderBottomWidth: 0 }} borderBottom='1px #D7D7D7 solid'>
                 <MenuItem h='48px' _focus={{ bg: 'none' }}>

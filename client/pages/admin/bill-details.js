@@ -171,7 +171,7 @@ function BillDetails() {
     </>
   );
   return (
-    <Box>
+    <Box ml='316px'>
       <EmployerHeader />
       <Stack gap='22px' p='30px'>
         <Flex gap='24px' alignItems='center'>

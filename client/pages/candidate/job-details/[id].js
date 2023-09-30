@@ -30,7 +30,6 @@ import axios from 'axios';
 import { format } from 'date-fns';
 
 function JobDetails({ data, BACK_END_PORT }) {
-  console.log(data);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [radioValue, setRadioValue] = useState('1');
   const handleRadioClick = (index) => {

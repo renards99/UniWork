@@ -75,13 +75,11 @@ function PostList() {
       `${BACK_END_PORT}/job-post-application/list-job-post-application`,
       { job_post_id: jobId },
     );
-    console.log(getJobPostApplicationById.data);
     if (getJobPostApplicationById.data.statusCode === 200) {
       setListJobPostApplication(getJobPostApplicationById.data.data);
     }
   };
 
-  console.log(listJobPostApplication);
 
   const jobItem = listJobPost.map((item) => (
     <Flex p='16px' gap='20px' onClick={() => handleSelectedJobId(item.id)} cursor={'pointer'}>
@@ -118,7 +116,7 @@ function PostList() {
   }, [router]);
 
   return (
-    <Stack gap='26px'>
+    <Stack gap='26px' ml='316px'>
       <EmployerHeader />
       const ActionUNW = (
       <Flex p={'24px 40px 0 24px'} justifyContent={'space-between'}>
