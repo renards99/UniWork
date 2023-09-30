@@ -293,51 +293,70 @@ function CandidateDetails() {
             </Stack>
           </Box>
           <Box>
-            {isStringEmpty(profile.CV) ? (
-              <Grid templateColumns='repeat(2, 1fr)' gap={6}>
-                <GridItem border='1px' borderColor='#D7D7D7' rounded='12px'>
-                  <Stack pt='16px' pb='20px' px='20px' gap='12px'>
-                    <Text fontSize='20px' fontWeight='600' lineHeight='28px' letterSpacing='0.2px'>
-                      Học vấn
-                    </Text>
-                    <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
-                      {profile.university}
-                    </Text>
-                    <Text fontSize='14px' fontWeight='500' lineHeight='24px' color='#727272'>
-                      Chuyên ngành: {profile.specialized}
-                    </Text>
-                    <Text fontSize='14px' fontWeight='500' lineHeight='24px' color='#727272'>
-                      Thời gian: {profile.jobTime}
-                    </Text>
-                  </Stack>
-                </GridItem>
-                <GridItem border='1px' borderColor='#D7D7D7' rounded='12px'>
-                  <Stack pt='16px' pb='20px' px='20px' gap='12px'>
-                    <Text fontSize='20px' fontWeight='600' lineHeight='28px' letterSpacing='0.2px'>
-                      Kinh Nghiệm
-                    </Text>
-                    <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
-                      {profile.experience}
-                    </Text>
-                    <Text fontSize='14px' fontWeight='500' lineHeight='24px' color='#727272'>
-                      Vị Trí: {profile.position}
-                    </Text>
-                    <Text fontSize='14px' fontWeight='500' lineHeight='24px' color='#727272'>
-                      Thời gian: {profile.time}
-                    </Text>
-                  </Stack>
-                </GridItem>
-                <GridItem colSpan='2' border='1px' borderColor='#D7D7D7' rounded='xl'>
-                  <Stack pt='16px' pb='20px' px='20px' gap='12px'>
-                    <Text fontSize='20px' fontWeight='600' lineHeight='28px' letterSpacing='0.2px'>
-                      Mô tả{' '}
-                    </Text>
-                    <Text fontSize='14px' fontWeight='500' lineHeight='24px' color='#727272'>
-                      {profile.description}
-                    </Text>
-                  </Stack>
-                </GridItem>
-              </Grid>
+            {!isStringEmpty(profile.CV) ? (
+              <Stack gap='12px'>
+                <Stack
+                  pt='16px'
+                  pb='20px'
+                  px='20px'
+                  gap='12px'
+                  border='1px'
+                  borderColor='#D7D7D7'
+                  rounded='xl'
+                >
+                  <Text fontSize='20px' fontWeight='600' lineHeight='28px' letterSpacing='0.2px'>
+                    Giới thiệu về bản thân
+                  </Text>
+                  <Text fontSize='14px' fontWeight='500' lineHeight='24px' color='#727272'>
+                    {profile.description}
+                  </Text>
+                </Stack>
+                <Stack
+                  pt='16px'
+                  pb='20px'
+                  px='20px'
+                  gap='12px'
+                  border='1px'
+                  borderColor='#D7D7D7'
+                  rounded='xl'
+                >
+                  <Text fontSize='20px' fontWeight='600' lineHeight='28px' letterSpacing='0.2px'>
+                    Học vấn
+                  </Text>
+                  <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
+                    {profile.university}
+                  </Text>
+                  <Text fontSize='14px' fontWeight='500' lineHeight='24px' color='#727272'>
+                    Chuyên ngành: {profile.specialized}
+                  </Text>
+                  <Text fontSize='14px' fontWeight='500' lineHeight='24px' color='#727272'>
+                    Thời gian: {profile.jobTime}
+                  </Text>
+                </Stack>
+
+                <Stack
+                  pt='16px'
+                  pb='20px'
+                  px='20px'
+                  gap='12px'
+                  border='1px'
+                  borderColor='#D7D7D7'
+                  rounded='xl'
+                >
+                  <Text fontSize='20px' fontWeight='600' lineHeight='28px' letterSpacing='0.2px'>
+                    Kinh Nghiệm
+                  </Text>
+                  <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
+                    {profile.experience}
+                  </Text>
+                  <Text fontSize='14px' fontWeight='500' lineHeight='24px' color='#727272'>
+                    Vị Trí: {profile.position}
+                  </Text>
+                  <Text fontSize='14px' fontWeight='500' lineHeight='24px' color='#727272'>
+                    Thời gian: {profile.time}
+                  </Text>
+                </Stack>
+              </Stack>
             ) : (
               <Box>
                 <Flex

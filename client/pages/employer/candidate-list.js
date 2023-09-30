@@ -129,7 +129,7 @@ function CandidateList() {
   );
 
   const ActionUNW = (
-    <Flex p={'24px 40px 0 24px'} justifyContent={'space-between'}>
+    <Flex p={'24px 40px 0 24px'}>
       <Flex>
         <Flex
           w={'406px'}
@@ -160,23 +160,6 @@ function CandidateList() {
         >
           Tìm kiếm
         </Button>
-      </Flex>
-      <Flex>
-        <IconButton
-          icon={<IoIosAddCircleOutline style={{ width: '24px', height: '24px' }} />}
-          borderRadius={'50%'}
-          w={'40px'}
-          h={'40px'}
-          backgroundColor={'#e7e7ea'}
-        />
-        <Box w={'20px'}></Box>
-        <IconButton
-          icon={<TbEditCircle style={{ width: '24px', height: '24px' }} />}
-          borderRadius={'50%'}
-          w={'40px'}
-          h={'40px'}
-          backgroundColor={'#e7e7ea'}
-        />
       </Flex>
     </Flex>
   );
