@@ -197,7 +197,12 @@ function UserProfileStudent() {
             <Stack gap='40px'>
               <Stack p='12px' justifyContent='center' alignItems='center' fontWeight='semibold'>
                 <Box overflow='hidden' rounded='full'>
-                  <Image src={TempAvatar} width='160' height='160'></Image>
+                  <img
+                    src={eProfile.image}
+                    width='160'
+                    height='160'
+                    style={{ borderRadius: '50%', height: '160px' }}
+                  />
                 </Box>
                 <Text fontSize='24px' fontWeight='800' lineHeight='32px'>
                   {eProfile.full_name}
