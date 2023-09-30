@@ -243,6 +243,9 @@ function JobDetails({ data, BACK_END_PORT }) {
             alignItems='center'
             w='670px'
             rounded='12px'
+            p='12px'
+            cursor='pointer'
+            onClick={onOpen}
           >
             <Image src='/static/images/icon/send.svg' width='30' height='30'></Image>
             <Text color='white'>Ứng tuyển ngay</Text>
