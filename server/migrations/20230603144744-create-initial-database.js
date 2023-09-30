@@ -594,6 +594,10 @@ module.exports = {
           key: 'id',
         },
       },
+      cv: {
+        type: Sequelize.STRING(1000),
+        allowNull: false,
+      },
       state: {
         type: Sequelize.INTEGER,
         allowNull: false,
