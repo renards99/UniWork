@@ -251,6 +251,7 @@ function StudentProfile() {
             </label>
           </Flex>{' '}
           <Stack px='20px' py='28px'>
+
             {!eProfile.cv ? (
               <Flex gap='15px'>
                 <Flex
@@ -262,6 +263,8 @@ function StudentProfile() {
                   onClick={openModalCV}
                   cursor={'pointer'}
                   alignItems='center'
+                  onClick={openModalCV}
+                  cursor='pointer'
                 >
                   <Text fontSize='18px' color='white' fontWeight='800'>
                     Tải CV lên
