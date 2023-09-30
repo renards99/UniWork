@@ -148,11 +148,11 @@ module.exports = {
       },
       description: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       created_at: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
     });
 
@@ -213,7 +213,7 @@ module.exports = {
         onDelete: 'cascade',
       },
       cv: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING(1000),
         allowNull: true,
       },
       short_des: {

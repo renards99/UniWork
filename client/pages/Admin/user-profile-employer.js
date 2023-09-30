@@ -37,23 +37,6 @@ function UserProfileEmployer() {
     setIsModalOpen(!isModalOpen);
   };
   const router = useRouter();
-  const menuData = {
-    roles: ['Giám đốc', 'Nhân viên', 'Trợ lý', 'Quản lý', 'Phó phòng', 'Thực tập sinh'],
-    workForm: [
-      'Bán thời gian - Partime',
-      'Toàn thời gian - Fulltime',
-      'Làm việc từ xa - Remote',
-      'Làm việc văn phòng và làm việc từ xa - Hybird',
-    ],
-    gender: ['nam', 'nữ', 'không yêu cầu'],
-    status: [
-      <StatusFrame type='0' text='Đã xác minh' />,
-      <StatusFrame type='1' text='Chưa xác minh' />,
-      <StatusFrame type='2' text='Đã cấm' />,
-      <StatusFrame type='3' text='Không hoạt động' />,
-      <StatusFrame type='4' text='Hết hạn' />,
-    ],
-  };
 
   const [eProfile, setEProfile] = useState({});
   const [posts, setPost] = useState([]);
@@ -145,6 +128,8 @@ function UserProfileEmployer() {
   const handleTab = (index) => setTab(index);
 
   const handleBan = async () => {
+    const fullName = JSON.parse(localStorage.getItem('user'))?.full_name;
+    const userId = JSON.parse(localStorage.getItem('user'))?.id;
     const banResponse = await axios.put(`${BACK_END_PORT}/ban-user`, {
       id: eProfile.id,
       is_banned: 1,
@@ -153,8 +138,12 @@ function UserProfileEmployer() {
       alert(`ban user successfully`);
       window.location.href = 'http://localhost:3000/admin/account-manager';
     }
+    const log = await axios.post(`${BACK_END_PORT}/user-log/create-user-log`, {
+      user_account_id: userId,
+      description: `Quản trị viên ${fullName} đã cấm người dùng: ${eProfile.email} -id: ${eProfile.id}`,
+    });
   };
-  handleUnban = async () => {
+  const handleUnban = async () => {
     const unbanResponse = await axios.put(`${BACK_END_PORT}/ban-user`, {
       id: eProfile.id,
       is_banned: 0,
@@ -340,7 +329,7 @@ function UserProfileEmployer() {
                   <Flex gap='20px' justifyContent='center' alignItems='center'>
                     <Flex
                       onClick={() => {
-                        user.is_banned === 0 ? handleBan() : handleUnban();
+                        eProfile.is_banned === 0 ? handleBan() : handleUnban();
                         setIsModalOpen(false);
                       }}
                       justifyContent='center'

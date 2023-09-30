@@ -33,7 +33,6 @@ import DropDownStatus from '../../components/layout/admin/dropDownStatus';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { totalPriceItemInCart, convertToLocaleDateTime } from '../../helper';
-
 const BACK_END_PORT = 'http://localhost:5000';
 
 function PostDetails() {
@@ -58,6 +57,16 @@ function PostDetails() {
     });
 
     if (aprrovePost.data.statusCode == 200) {
+      try {
+        const emailRes = await axios.post(`${BACK_END_PORT}/send-email`, {
+          to: `${eProfile.email}`, // Replace with the user's email address
+          subject: 'uniwork: Thông Báo Duyệt Bài Đăng',
+          text: 'Chúc mừng! Bài đăng của bạn trên uniwork đã được duyệt thành công.',
+        });
+        console.log('Email sent response:', emailRes.data);
+      } catch (error) {
+        console.error('Error sending email via API:', error);
+      }
       alert(`update post successfully`);
       window.location.href = 'http://localhost:3000/admin/job-manager';
     }
@@ -66,6 +75,10 @@ function PostDetails() {
     const denyPost = await axios.put(`${BACK_END_PORT}/job-post/update-job-post`, {
       id: id,
       state: 4,
+    });
+    const log = await axios.post(`${BACK_END_PORT}/user-log/create-user-log`, {
+      user_account_id: userId,
+      description: `Quản trị viên ${fullName} đã từ chối bài đăng: ${fakeData.jobName} -id: ${id}`,
     });
     if (denyPost.data.statusCode == 200) {
       alert(`deny post successfully`);
@@ -77,6 +90,10 @@ function PostDetails() {
       id: id,
       state: 5,
     });
+    const log = await axios.post(`${BACK_END_PORT}/user-log/create-user-log`, {
+      user_account_id: userId,
+      description: `Quản trị viên ${fullName} đã ẩn bài đăng: ${fakeData.jobName} -id: ${id}`,
+    });
     if (hidePost.data.statusCode == 200) {
       alert(`hide post successfully`);
       window.location.href = 'http://localhost:3000/admin/job-manager';
@@ -86,6 +103,10 @@ function PostDetails() {
     const hidePost = await axios.put(`${BACK_END_PORT}/job-post/update-job-post`, {
       id: id,
       state: 2,
+    });
+    const log = await axios.post(`${BACK_END_PORT}/user-log/create-user-log`, {
+      user_account_id: userId,
+      description: `Quản trị viên ${fullName} đã bỏ ẩn bài đăng: ${fakeData.jobName} -id: ${id}`,
     });
     if (hidePost.data.statusCode == 200) {
       alert(`Show post successfully`);
