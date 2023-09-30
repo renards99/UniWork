@@ -231,7 +231,7 @@ function StudentProfile() {
             </label>
           </Flex>{' '}
           <Stack px='20px' py='28px'>
-            {student.cv === '1' ? (
+            {!myCV ? (
               <Flex gap='15px'>
                 <Flex
                   w='200px'
@@ -240,6 +240,8 @@ function StudentProfile() {
                   rounded='10px'
                   justifyContent='center'
                   alignItems='center'
+                  onClick={openModalCV}
+                  cursor='pointer'
                 >
                   <Text fontSize='18px' color='white' fontWeight='800'>
                     Tải CV lên
@@ -782,7 +784,9 @@ function StudentProfile() {
             Kinh nghiệm
           </Text>
         </ModalHeader>
+
         <ModalCloseButton />
+
         <ModalBody>
           <Stack gap='8px' alignSelf='stretch' justifyContent='center' alignItems='center'>
             <Flex alignSelf='stretch'>
@@ -790,38 +794,39 @@ function StudentProfile() {
                 CV của bạn
               </Text>
             </Flex>
-            <Stack
-              p='12px'
-              justifyContent='center'
-              alignItems='center'
-              gap='0px'
-              alignSelf='stretch'
-              height='160px'
-              bg='#1311311A'
-              rounded='12px'
-            >
-              <Input
-                onChange={(e) => setMyCV(e.target.files[0])}
-                type='file'
-                // display={'none'}
-                id='cv'
-              />
-              <label for='cv' style={{ cursor: 'pointer' }}>
-                <Image src='/static/images/upload_cloud.png' width='40' height='40'></Image>
-              </label>
+            <label for='cv' style={{ cursor: 'pointer' }}>
               <Stack
+                p='12px'
                 justifyContent='center'
                 alignItems='center'
-                fontSize='12px'
-                fontWeight='700'
-                lineHeight='20px'
-                color='#818181'
+                gap='0px'
+                alignSelf='stretch'
+                height='160px'
+                bg='#1311311A'
+                rounded='12px'
               >
-                <Text>Kéo CV của bạn vào đây hoặc bấm để chọn file CV của bạn</Text>
-                <Text>Dung lượng file không vượt quá 5MB.</Text>
-                <Text>(Hỗ trợ tải lên file: PDF)</Text>
+                <Input
+                  hidden
+                  onChange={(e) => setMyCV(e.target.files[0])}
+                  type='file'
+                  // display={'none'}
+                  id='cv'
+                />
+                <Image src='/static/images/upload_cloud.png' width='40' height='40'></Image>
+                <Stack
+                  justifyContent='center'
+                  alignItems='center'
+                  fontSize='12px'
+                  fontWeight='700'
+                  lineHeight='20px'
+                  color='#818181'
+                >
+                  <Text>Kéo CV của bạn vào đây hoặc bấm để chọn file CV của bạn</Text>
+                  <Text>Dung lượng file không vượt quá 5MB.</Text>
+                  <Text>(Hỗ trợ tải lên file: PDF)</Text>
+                </Stack>{' '}
               </Stack>{' '}
-            </Stack>{' '}
+            </label>
             <Flex
               p='12px'
               w='140px'
@@ -859,6 +864,7 @@ function StudentProfile() {
                 CV của bạn
               </Text>
             </Flex>
+            {cvLink && <PDFViewer url={cvLink} />}
           </Stack>
         </ModalBody>
       </ModalContent>
@@ -1109,7 +1115,6 @@ function StudentProfile() {
         {modalCV}
         {modalPersonalInfo}
         {modalShowCV}
-        {cvLink && <PDFViewer url={cvLink} />}
       </Stack>
     </Box>
   );
