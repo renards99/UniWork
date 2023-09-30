@@ -13,5 +13,8 @@ router.post(
   '/job-post-application/list-job-post-application',
   job_post_applications.getListJobApplicationById,
 );
-router.post('/job-post-application/get-job-post-application-by-candicate-id-and-job-id', job_post_applications.getJobApplicationByCandidateId)
+router.post(
+  '/job-post-application/get-job-post-application-by-candicate-id-and-job-id',
+  job_post_applications.getJobApplicationByCandidateId,
+);
 module.exports = router;

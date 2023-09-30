@@ -251,9 +251,7 @@ function StudentProfile() {
             </label>
           </Flex>{' '}
           <Stack px='20px' py='28px'>
-
             {!eProfile.cv ? (
-
               <Flex gap='15px'>
                 <Flex
                   w='200px'
@@ -1171,7 +1169,6 @@ function StudentProfile() {
   };
 
   useEffect(() => {
-
     if (router.query.id) {
       getUserAccount(id);
     } else {
@@ -1187,7 +1184,6 @@ function StudentProfile() {
       }
     }
   }, [router]);
-
 
   return (
     <Box>

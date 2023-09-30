@@ -50,9 +50,7 @@ module.exports = {
       return responsehandler.badRequest(res, 'Id must be integer ! Try again!');
     }
     try {
-
-      const student = await Student.update({cv: params.cv}, { where: { user_account_id: id } });
-
+      const student = await Student.update({ cv: params.cv }, { where: { user_account_id: id } });
       if (student) {
         return responsehandler.responseWithData(res, 200, 'Student profile update successfully');
       } else {

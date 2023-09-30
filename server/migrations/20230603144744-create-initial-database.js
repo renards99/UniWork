@@ -9,7 +9,7 @@ module.exports = {
         autoIncrement: true,
       },
       role_name: {
-        type: Sequelize.STRING(20),
+        type: Sequelize.STRING,
         allowNull: false,
       },
     });
@@ -25,11 +25,11 @@ module.exports = {
         allowNull: false,
       },
       company_name: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING,
         allowNull: false,
       },
       company_email: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING,
         allowNull: false,
       },
       company_location: {
@@ -37,7 +37,7 @@ module.exports = {
         allowNull: false,
       },
       company_phone_number: {
-        type: Sequelize.STRING(20),
+        type: Sequelize.STRING,
         allowNull: false,
         unique: true,
         validate: {
@@ -57,7 +57,7 @@ module.exports = {
         allowNull: false,
       },
       company_website_url: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING,
         allowNull: true,
       },
     });
@@ -69,7 +69,7 @@ module.exports = {
         autoIncrement: true,
       },
       full_name: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING,
         allowNull: true,
       },
       role_id: {
@@ -84,11 +84,11 @@ module.exports = {
         onDelete: 'cascade',
       },
       email: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING,
         allowNull: false,
       },
       password: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING,
         allowNull: false,
       },
       gender: {
@@ -100,7 +100,7 @@ module.exports = {
         allowNull: false,
       },
       mobile_number: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING,
         allowNull: true,
         unique: true,
         validate: {
@@ -174,15 +174,15 @@ module.exports = {
         onDelete: 'cascade',
       },
       request_name: {
-        type: Sequelize.STRING(20),
+        type: Sequelize.STRING,
         allowNull: false,
       },
       request_description: {
-        type: Sequelize.STRING(20),
+        type: Sequelize.STRING,
         allowNull: false,
       },
       state: {
-        type: Sequelize.STRING(20),
+        type: Sequelize.STRING,
         allowNull: true,
       },
       created_at: {
@@ -240,11 +240,11 @@ module.exports = {
         onDelete: 'cascade',
       },
       major: {
-        type: Sequelize.STRING(20),
+        type: Sequelize.STRING,
         allowNull: false,
       },
       insitude_university_name: {
-        type: Sequelize.STRING(20),
+        type: Sequelize.STRING,
         allowNull: false,
       },
       starting_year: {
@@ -256,7 +256,7 @@ module.exports = {
         allowNull: false,
       },
       description: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(10000),
         allowNull: false,
       },
     });
@@ -279,19 +279,19 @@ module.exports = {
         onDelete: 'cascade',
       },
       start_date: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING,
         allowNull: false,
       },
       end_date: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING,
         allowNull: true,
       },
       job_title: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING,
         allowNull: true,
       },
       company_name: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING,
         allowNull: false,
       },
       description: {
@@ -307,11 +307,11 @@ module.exports = {
         autoIncrement: true,
       },
       service_name: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING,
         allowNull: true,
       },
       description: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING(1000),
         allowNull: true,
       },
       price: {
@@ -327,7 +327,7 @@ module.exports = {
         autoIncrement: true,
       },
       job_type_name: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING,
         allowNull: false,
       },
     });
@@ -339,19 +339,19 @@ module.exports = {
         autoIncrement: true,
       },
       street_address: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING,
         allowNull: false,
       },
       city: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING,
         allowNull: false,
       },
       province: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING,
         allowNull: false,
       },
       zip_code: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING,
         allowNull: true,
       },
     });
@@ -419,7 +419,7 @@ module.exports = {
         onDelete: 'cascade',
       },
       hire_number: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING,
         allowNull: true,
       },
       job_description: {
@@ -456,7 +456,7 @@ module.exports = {
         allowNull: true,
       },
       state: {
-        type: Sequelize.STRING(20),
+        type: Sequelize.STRING,
         allowNull: true,
       },
       created_at: {

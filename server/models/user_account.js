@@ -8,7 +8,7 @@ module.exports = (sequelize, Sequelize) => {
         autoIncrement: true,
       },
       full_name: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING(1000),
         allowNull: true,
       },
       role_id: {
@@ -23,11 +23,11 @@ module.exports = (sequelize, Sequelize) => {
         onDelete: 'cascade',
       },
       email: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING(1000),
         allowNull: false,
       },
       password: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING(1000),
         allowNull: false,
       },
       gender: {
@@ -39,7 +39,7 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
       },
       mobile_number: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING(1000),
         allowNull: true,
         unique: true,
         validate: {

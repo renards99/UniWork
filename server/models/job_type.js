@@ -8,7 +8,7 @@ module.exports = (sequelize, Sequelize) => {
         autoIncrement: true,
       },
       job_type_name: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING(1000),
         allowNull: false,
       },
     },

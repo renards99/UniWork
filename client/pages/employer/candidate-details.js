@@ -28,6 +28,7 @@ import { BsExclamationCircle, BsCalendar4, BsGenderMale, BsGenderFemale } from '
 import { convertToLocaleDateTime } from '../../helper';
 import { useRouter } from 'next/router';
 import axios from 'axios';
+import PDFViewer from '../../components/pdf';
 
 function isStringEmpty(str) {
   console.log(str);
@@ -138,8 +139,9 @@ function CandidateDetails() {
           { user_account_id: userId, job_post_id: jobId, state: state },
         );
         if (acceptCv.data.statusCode === 200) {
+          window.location.href = 'http://localhost:3000/employer/post-list';
           alert('Đã xử lí cv');
-          onClose()
+          onClose();
         }
       } catch (err) {
         console.log(err);
@@ -344,7 +346,6 @@ function CandidateDetails() {
             </Stack>
           </Box>
           <Box>
-
             {!status?.cv ? (
               <Grid templateColumns='repeat(2, 1fr)' gap={6}>
                 <GridItem border='1px' borderColor='#D7D7D7' rounded='12px'>
@@ -412,7 +413,7 @@ function CandidateDetails() {
                 </Flex>
                 <Stack justifyContent='center' alignItems='center'>
                   <Box>
-                    <Image src={profile.CV} objectFit='fill'></Image>
+                    <PDFViewer url={status?.cv} />
                   </Box>
                 </Stack>
               </Box>
@@ -470,7 +471,12 @@ function CandidateDetails() {
             <Stack gap='40px'>
               <Stack p='12px' justifyContent='center' alignItems='center' fontWeight='semibold'>
                 <Box overflow='hidden' rounded='full'>
-                  <Image src={TempAvatar} width='160' height='160'></Image>
+                  <img
+                    src={profile?.image}
+                    width='100'
+                    height='100'
+                    style={{ borderRadius: '50%', width: '160px', height: '160px' }}
+                  />
                 </Box>
                 <Text fontSize='24px' fontWeight='800' lineHeight='32px'>
                   {profile?.full_name}
