@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { BsChevronDown, BsArrowLeftCircle, BsArrowRightCircle } from 'react-icons/bs';
+
 import Paging from '../../components/paging';
 import { FaLocationDot } from 'react-icons/fa6';
 import { Box, Input, Button, Icon, Text, Stack, Grid, Flex } from '@chakra-ui/react';
@@ -8,8 +9,11 @@ import { Select } from '@chakra-ui/react';
 import CandidateHeader from '../../components/layout/candidate/header';
 
 import DropDown from '../../components/layout/candidate/dropDownLocation';
+import { useRouter } from 'next/router';
+
 
 function JobSearching() {
+  const router = useRouter()
   const backgroundFooter = '/static/images/footer_background.png';
   const trends = [
     {
@@ -355,6 +359,12 @@ function JobSearching() {
 
   //change page
   const changePage = (pageNumber) => setCurrentPage(pageNumber);
+
+  
+
+  useEffect(()=> {
+    // handleFindJob()
+  },[])
 
   const HomeContent = (
     <div>

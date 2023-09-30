@@ -69,26 +69,23 @@ module.exports = {
   },
   async updateJobPost(req, res) {
     const params = req.body;
-    const is_active = params.is_active;
+    const { is_active, state } = params;
     try {
       const job_post_id = params.id;
-      if (!validateHandler.validateId(job_post_id)) {
-        return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
-      }
+      // if (!validateHandler.validateId(job_post_id)) {
+      //   return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+      // }
 
-      if (!validateHandler.validateInput(params)) {
-        return responseHandler.badRequest(res, 'Your input is invalid!');
-      }
-      const updatedData = {
-        is_active,
-      };
+      // if (!validateHandler.validateInput(params)) {
+      //   return responseHandler.badRequest(res, 'Your input is invalid!');
+      // }
       const getJobPost = await Job_post.findOne({
         where: {
           id: job_post_id,
         },
       });
       if (!getJobPost) return responseHandler.badRequest(res, 'job post does not exist!');
-      const updateJobPost = await Job_post.update(updatedData, {
+      const updateJobPost = await Job_post.update(params, {
         where: {
           id: job_post_id,
         },
@@ -105,16 +102,20 @@ module.exports = {
   },
   async getJobPostById(req, res) {
     const params = req.body;
+    const { id } = params;
     try {
-      const job_post_id = params.id;
-      if (!validateHandler.validateId(job_post_id)) {
+      if (!validateHandler.validateId(id)) {
         return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
       }
-      const get_job_post = await Job_post.findOne({
-        where: {
-          id: job_post_id,
-        },
+      let query = `select jp.*, c.company_name, ua.user_image, ua.full_name, ua.role_id, ua.email, ua.registration_date, ua.mobile_number, c.tax_code, c.size, c.company_website_url, c.company_location  from job_post as jp 
+                    join company as c on c.id = jp.company_id 
+                    join user_account as ua on ua.id = jp.post_by_id
+                    where jp.id = ${id}`;
+
+      const get_job_post = await sequelize.query(query, {
+        type: QueryTypes.SELECT,
       });
+
       if (get_job_post) return responseHandler.responseWithData(res, 200, get_job_post);
       else return responseHandler.badRequest(res, 'Can not get job post!');
     } catch (e) {}
@@ -222,6 +223,60 @@ module.exports = {
       );
       if (getAllPost) {
         return responseHandler.responseWithData(res, 200, { list_user: getAllPost });
+      } else {
+        return responseHandler.badRequest(res, "can't get list user");
+      }
+    } catch (error) {
+      return responseHandler.error(res);
+    }
+  },
+  async findAllJobPost(req, res) {
+    try {
+      const params = req.body;
+      const { title, job_location, experience, salary } = params;
+
+      let query = `select jp.*, c.company_name from job_post as jp join company as c on c.id = jp.company_id where jp.title like "%${title}%" `;
+      if (salary == 0) {
+        query += `and (jp.salary >= 1000000 and jp.salary <= 5000000) `;
+      } else if (salary == 1) {
+        query += `and (jp.salary >= 5000000 and jp.salary <= 7000000) `;
+      } else if (salary == 2) {
+        query += `and (jp.salary >= 10000000 and jp.salary <= 20000000) `;
+      } else if (salary == 3) {
+        query += `and jp.salary >= 20000000 `;
+      }
+      if (experience) {
+        query += `and jp.experience > ${experience} `;
+      }
+      if (job_location) {
+        query += `and jp.job_location like "%${job_location}%" `;
+      }
+      const getAllPost = await sequelize.query(query, {
+        type: QueryTypes.SELECT,
+      });
+
+      if (getAllPost) {
+        return responseHandler.responseWithData(res, 200, { list_user: getAllPost });
+      } else {
+        return responseHandler.badRequest(res, "can't get list user");
+      }
+    } catch (error) {
+      return responseHandler.error(res);
+    }
+  },
+  async getAllPostsByCompany(req, res) {
+    try {
+      const params = req.body;
+
+      const { company_id } = params;
+      const getAllPost = await sequelize.query(
+        `select jp.*, c.company_name from job_post as jp join company as c on c.id = jp.company_id where c.id = ${company_id}`,
+        {
+          type: QueryTypes.SELECT,
+        },
+      );
+      if (getAllPost) {
+        return responseHandler.responseWithData(res, 200, { list_job: getAllPost });
       } else {
         return responseHandler.badRequest(res, "can't get list user");
       }
