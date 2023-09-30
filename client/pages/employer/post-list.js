@@ -116,7 +116,7 @@ function PostList() {
   }, [router]);
 
   return (
-    <Stack gap='26px'>
+    <Stack gap='26px' ml='316px'>
       <EmployerHeader />
       const ActionUNW = (
       <Flex p={'24px 40px 0 24px'} justifyContent={'space-between'}>

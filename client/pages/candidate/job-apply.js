@@ -62,7 +62,7 @@ function JobApply() {
   //change page
 
   const HomeContent = (
-    <div>
+    <div >
       <CandidateHeader />
 
       <Stack px='80px' py='50px' gap='42px' bg='#F0EAE9'>

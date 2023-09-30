@@ -847,7 +847,7 @@ function PostDetails() {
     </GridItem>
   );
   return (
-    <div>
+    <div ml='316px'>
       {/*Header*/}
       <AdminHeader />
 

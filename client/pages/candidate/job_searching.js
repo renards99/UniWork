@@ -368,7 +368,7 @@ function JobSearching() {
   },[])
 
   const HomeContent = (
-    <div>
+    <div >
       <CandidateHeader />
       <Stack px='150px' justifyContent='space-evenly' alignItems='flex-end' bg='#333333' pt='20px'>
         <Flex bg='transparent' gap='0px'>
