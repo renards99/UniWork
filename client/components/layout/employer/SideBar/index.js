@@ -13,6 +13,7 @@ import Image from 'next/image';
 import LogoAdmin from '../../../../public/static/images/logo_admin.png';
 import Cookies from 'js-cookie';
 import Link from 'next/link';
+import { BsExclamationCircle } from 'react-icons/bs';
 
 export default function SideBarAdmin(props) {
   const toast = useToast();
@@ -23,6 +24,7 @@ export default function SideBarAdmin(props) {
     account: '/employer/candidate-list',
     job: '/employer/service',
     setting: '/employer/my-service',
+    report: '/employer/report',
   };
   const [navSize, changeNavSize] = useState('large');
   const [sideBarActive, setActiveSideBar] = useState(0);
@@ -93,16 +95,7 @@ export default function SideBarAdmin(props) {
         >
           <SideItem
             navSize={navSize}
-            icon={AiOutlinePieChart}
-            title='Thống kê số liệu'
-            handleSetActiveSideBar={handleSetActiveSideBar}
-            active={sideBarActive == 0 ? true : false}
-            value={0}
-            href={path.revenue}
-          />
-          <SideItem
-            navSize={navSize}
-            icon={HiOutlineUsers}
+            icon={SlHandbag}
             title='Tin tuyển dụng'
             handleSetActiveSideBar={handleSetActiveSideBar}
             active={sideBarActive == 1 ? true : false}
@@ -111,12 +104,22 @@ export default function SideBarAdmin(props) {
           />
           <SideItem
             navSize={navSize}
-            icon={SlHandbag}
+            icon={HiOutlineUsers}
             title='Quản lí CV'
             handleSetActiveSideBar={handleSetActiveSideBar}
             active={sideBarActive == 2 ? true : false}
             value={2}
             href={path.account}
+          />
+          <SideItem
+            navSize={navSize}
+            icon={BsExclamationCircle}
+            handleSetActiveSideBar={handleSetActiveSideBar}
+            title='Báo cáo/Hỗ trợ'
+            active={sideBarActive == 3 ? true : false}
+            value={3}
+            sideBarActive={sideBarActive}
+            href={path.report}
           />
           <SideItem
             navSize={navSize}
