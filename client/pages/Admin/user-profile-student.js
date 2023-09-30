@@ -16,6 +16,10 @@ import axios from 'axios';
 const BACK_END_PORT = 'http://localhost:5000';
 
 function UserProfileStudent() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
   const [eProfile, setEProfile] = useState({});
   const router = useRouter();
   const profile = {
@@ -58,6 +62,10 @@ function UserProfileStudent() {
           facebook_link: userData.facebook_link,
           subScriptionDate: convertToLocaleDateTime(userData.registration_date),
           dob: convertToLocaleDateTime(userData.dob),
+
+          isVerified: userData.is_verified,
+          is_banned: userData.is_banned,
+
         });
         handleGetJobByCompany(userData.company_id);
       } else {
@@ -71,7 +79,32 @@ function UserProfileStudent() {
       getUserAccount(id);
     }
   }, [router]);
-
+  const handleBan = async () => {
+    const fullName = JSON.parse(localStorage.getItem('user'))?.full_name;
+    const userId = JSON.parse(localStorage.getItem('user'))?.id;
+    const banResponse = await axios.put(`${BACK_END_PORT}/ban-user`, {
+      id: eProfile.id,
+      is_banned: 1,
+    });
+    if (banResponse.data.statusCode == 200) {
+      alert(`ban user successfully`);
+      window.location.href = 'http://localhost:3000/admin/account-manager';
+    }
+    const log = await axios.post(`${BACK_END_PORT}/user-log/create-user-log`, {
+      user_account_id: userId,
+      description: `Quản trị viên ${fullName} đã cấm người dùng: ${eProfile.email} -id: ${eProfile.id}`,
+    });
+  };
+  const handleUnban = async () => {
+    const unbanResponse = await axios.put(`${BACK_END_PORT}/ban-user`, {
+      id: eProfile.id,
+      is_banned: 0,
+    });
+    if (unbanResponse.data.statusCode == 200) {
+      alert(`unban user successfully`);
+      window.location.href = 'http://localhost:3000/admin/account-manager';
+    }
+  };
   return (
     <div ml='316px'>
       {/*Header*/}
@@ -149,41 +182,114 @@ function UserProfileStudent() {
                   <Image src={PdfImage} objectFit='fill'></Image>
                 </Box>
                 <Flex gap='20px'>
-                  <Flex
-                    justifyContent='center'
-                    alignItems='center'
-                    color='white'
-                    bg='#323541'
-                    rounded='20px'
-                    w='132px'
-                    mt='20px'
-                    py='8px'
-                    px='12px'
-                    fontSize='16px'
-                    cursor='pointer'
-                  >
-                    <Text fontSize='14px' fontWeight='600' lineHeight='24px'>
-                      Tải xuống
-                    </Text>
-                  </Flex>
-                  <Flex
-                    justifyContent='center'
-                    alignItems='center'
-                    color='#323541'
-                    bg='white'
-                    rounded='20px'
-                    w='132px'
-                    mt='20px'
-                    py='8px'
-                    px='12px'
-                    fontSize='16px'
-                    cursor='pointer'
-                    border='1px'
-                    borderColor='#323541'
-                  >
-                    Xem online
-                  </Flex>
+                  {eProfile.is_banned == 0 ? (
+                    <Flex
+                      onClick={toggleModal}
+                      justifyContent='center'
+                      alignItems='center'
+                      color='white'
+                      bg='#323541'
+                      rounded='20px'
+                      w='132px'
+                      mt='20px'
+                      py='8px'
+                      px='12px'
+                      fontSize='16px'
+                      cursor='pointer'
+                    >
+                      <Text fontSize='14px' fontWeight='600' lineHeight='24px'>
+                        Cấm người dùng
+                      </Text>
+                    </Flex>
+                  ) : (
+                    <Flex
+                      onClick={toggleModal}
+                      justifyContent='center'
+                      alignItems='center'
+                      color='white'
+                      bg='#323541'
+                      rounded='20px'
+                      w='132px'
+                      mt='20px'
+                      py='8px'
+                      px='12px'
+                      fontSize='16px'
+                      cursor='pointer'
+                    >
+                      <Text fontSize='14px' fontWeight='600' lineHeight='24px'>
+                        Bỏ cấm
+                      </Text>
+                    </Flex>
+                  )}
                 </Flex>
+                <>
+                  {isModalOpen && (
+                    <Box
+                      position='fixed'
+                      top='0'
+                      left='0'
+                      width='100%'
+                      height='100%'
+                      backgroundColor='rgba(0, 0, 0, 0.5)'
+                      display='flex'
+                      justifyContent='center'
+                      alignItems='center'
+                      zIndex='1000'
+                    >
+                      <Box backgroundColor='#323541' padding='20px' borderRadius='12px'>
+                        <Text color='white' fontSize='20px' mb='20px'>
+                          {eProfile.is_banned == 0
+                            ? 'Bạn có chắc muốn cấm tài khoản này?'
+                            : 'Bạn có chắc muốn bỏ cấm tài khoản này?'}
+                        </Text>
+                        <Flex gap='20px' justifyContent='center' alignItems='center'>
+                          <Flex
+                            onClick={() => {
+                              eProfile.is_banned == 0 ? handleBan() : handleUnban();
+                              setIsModalOpen(false);
+                            }}
+                            justifyContent='center'
+                            alignItems='center'
+                            color='white'
+                            bg='#FF5733'
+                            rounded='20px'
+                            w='100px'
+                            py='8px'
+                            px='12px'
+                            fontSize='16px'
+                            cursor='pointer'
+                          >
+                            <Text fontSize='14px' fontWeight='600'>
+                              Xác nhận
+                            </Text>
+                          </Flex>
+                          <Flex
+                            onClick={toggleModal}
+                            justifyContent='center'
+                            alignItems='center'
+                            color='#323541'
+                            bg='white'
+                            rounded='20px'
+                            w='100px'
+                            py='8px'
+                            px='12px'
+                            fontSize='16px'
+                            cursor='pointer'
+                            border='1px solid #323541'
+                          >
+                            <Text fontSize='14px' fontWeight='600'>
+                              Hủy
+                            </Text>
+                          </Flex>
+                        </Flex>
+                      </Box>
+                    </Box>
+                  )}
+
+                  <Stack gap='0px' w='930px'>
+                    {/*... rest of your code */}
+                  </Stack>
+                </>
               </Stack>
             </GridItem>
           </Grid>
@@ -266,21 +372,6 @@ function UserProfileStudent() {
                   </Text>
                 </Flex>
               </Stack>
-              <Flex
-                justifyContent='center'
-                alignItems='center'
-                bg='#323541'
-                color='white'
-                rounded='20px'
-                py='8px'
-                px='12px'
-                fontSize='16px'
-                gap='20px'
-              >
-                <Text fontSize='14px' fontWeight='600' lineHeight='24px'>
-                  Chỉnh sửa thông tin
-                </Text>
-              </Flex>
             </Stack>
           </Stack>
         </GridItem>

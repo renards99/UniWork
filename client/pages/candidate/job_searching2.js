@@ -54,17 +54,26 @@ function JobSearching2() {
         submitData,
       );
       if (findAllJobPostings.data.statusCode == 200) {
+        const currentDate = new Date();
         setFakeData(
-          findAllJobPostings.data.data.list_user.map((job, index) => ({
-            id: job.id,
-            title: job.title,
-            company: job.company_name,
-            locations: job.job_location,
-            remainingDays: 'Còn 30 ngày để ứng tuyển',
-            time: 'Cập nhật 2h trước',
-            salary: totalPriceItemInCart(job.salary.toString(), 1),
-            tags: [''],
-          })),
+          findAllJobPostings.data.data.list_user.map((job, index) => {
+            // Replace 'job.expired_at' with the actual field name that contains the expiry date
+            const expiryDate = new Date(job.expired_at);
+            const remainingDays = Math.ceil((expiryDate - currentDate) / (1000 * 60 * 60 * 24));
+            const lastUpdatedDate = new Date(job.updated_at);
+            const differenceInHours = Math.abs(currentDate - lastUpdatedDate) / (1000 * 60 * 60);
+            const roundedDifference = Math.round(differenceInHours);
+            return {
+              id: job.id,
+              title: job.title,
+              company: job.company_name,
+              locations: job.job_location,
+              remainingDays: `Còn ${remainingDays > 0 ? remainingDays : 0} ngày để ứng tuyển`,
+              time: `Cập nhật ${roundedDifference} giờ trước`,
+              salary: totalPriceItemInCart(job.salary.toString(), 1),
+              tags: [''],
+            };
+          }),
         );
       }
     } catch (error) {
@@ -173,7 +182,7 @@ function JobSearching2() {
   };
 
   const HomeContent = (
-    <div >
+    <div>
       <CandidateHeader />
       <Stack px='150px' justifyContent='space-evenly' alignItems='flex-end' bg='#333333' pt='20px'>
         <Flex bg='transparent' gap='0px'>
@@ -311,7 +320,7 @@ function JobSearching2() {
           <Stack gap='32px' flex='1 0 0'>
             {fakeData.map((data) => (
               <Flex
-                cursor={"pointer"}
+                cursor={'pointer'}
                 rounded='10px'
                 bg='white'
                 justifyContent='space-between'

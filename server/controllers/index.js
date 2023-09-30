@@ -1,7 +1,7 @@
 const bill = require('./bill');
 const role = require('./role');
 const request = require('./request');
-const user_accounts = require('./user_account');
+const user_account = require('./user_account');
 const user_log = require('./user_log');
 const student = require('./student');
 const employer = require('./employer');
@@ -19,7 +19,7 @@ const job_post_application = require('./job_post_application');
 module.exports = {
   bill,
   role,
-  user_accounts,
+  user_account,
   user_log,
   education_detail,
   experience_detail,

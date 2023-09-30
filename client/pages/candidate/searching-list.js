@@ -70,44 +70,6 @@ function SearchingList() {
         'thưởng nghỉ lễ , tết',
       ],
     },
-    {
-      id: 3,
-      title: 'Nhân viên thiết kế chuyên viên tư vấn thiết kế lĩnh vực kiến trúc',
-      company: 'CÔNG TY ABC CỔ PHẦN VÀ THƯƠNG MẠI GLOBAL ',
-      locations: 'Hà Nội, HCM',
-      info: 'Cty hoạt động và phân phối được liệu và mĩ phẩm . công ty hoạt động trên nhiều năm. với quy mô hoan 100 nhân vien',
-      remainingDays: 'Còn 30 ngày để ứng tuyển',
-      time: 'Cập nhật 2h trước',
-      salary: '25-30 TRIỆU',
-      tags: [
-        'thu nhập trợ cấp',
-        'được cấp thiết bị làm việc',
-        'Thử việc 100% lương',
-        'thưởng nghỉ lễ , tết',
-      ],
-    },
-    {
-      id: 4,
-      title: 'Nhân viên thiết kế chuyên viên tư vấn thiết kế lĩnh vực kiến trúc',
-      company: 'CÔNG TY ABC CỔ PHẦN VÀ THƯƠNG MẠI GLOBAL ',
-      locations: 'Hà Nội, HCM',
-      info: 'Cty hoạt động và phân phối được liệu và mĩ phẩm . công ty hoạt động trên nhiều năm. với quy mô hoan 100 nhân vien',
-      remainingDays: 'Còn 30 ngày để ứng tuyển',
-      time: 'Cập nhật 2h trước',
-      salary: '25-30 TRIỆU',
-      tags: [''],
-    },
-    {
-      id: 5,
-      title: 'Nhân viên thiết kế chuyên viên tư vấn thiết kế lĩnh vực kiến trúc',
-      company: 'CÔNG TY ABC CỔ PHẦN VÀ THƯƠNG MẠI GLOBAL ',
-      locations: 'Hà Nội, HCM',
-      info: 'Cty hoạt động và phân phối được liệu và mĩ phẩm . công ty hoạt động trên nhiều năm. với quy mô hoan 100 nhân vien',
-      remainingDays: 'Còn 30 ngày để ứng tuyển',
-      time: 'Cập nhật 2h trước',
-      salary: '25-30 TRIỆU',
-      tags: [''],
-    },
   ];
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -122,7 +84,7 @@ function SearchingList() {
   const changePage = (pageNumber) => setCurrentPage(pageNumber);
 
   const HomeContent = (
-    <div >
+    <div>
       <CandidateHeader />
       <Flex px='150px' gap='40px' alignItems='center' bg='#01004C'>
         <Stack bg='transparent' minW='30%' pt='50px' justifyContent='center'>

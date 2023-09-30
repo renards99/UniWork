@@ -251,7 +251,9 @@ function StudentProfile() {
             </label>
           </Flex>{' '}
           <Stack px='20px' py='28px'>
+
             {!eProfile.cv ? (
+
               <Flex gap='15px'>
                 <Flex
                   w='200px'
@@ -262,6 +264,8 @@ function StudentProfile() {
                   onClick={openModalCV}
                   cursor={'pointer'}
                   alignItems='center'
+                  onClick={openModalCV}
+                  cursor='pointer'
                 >
                   <Text fontSize='18px' color='white' fontWeight='800'>
                     Tải CV lên
@@ -1167,15 +1171,23 @@ function StudentProfile() {
   };
 
   useEffect(() => {
-    const user = localStorage.getItem('user');
-    if (user) {
-      let userData = JSON.parse(user);
-      if (userData) {
-        const { id } = userData;
-        getUserAccount(id);
+
+    if (router.query.id) {
+      getUserAccount(id);
+    } else {
+      const user = localStorage.getItem('user');
+      if (user) {
+        let userData = JSON.parse(user);
+        if (userData) {
+          const { id, role_id } = userData;
+          if (role_id == 3) {
+            getUserAccount(id);
+          }
+        }
       }
     }
-  }, []);
+  }, [router]);
+
 
   return (
     <Box>

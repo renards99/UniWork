@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { BsChevronDown } from 'react-icons/bs';
 import {
   Box,
@@ -29,6 +28,7 @@ import { Select } from '@chakra-ui/react';
 import CandidateHeader from '../../../components/layout/candidate/header';
 import axios from 'axios';
 import { format } from 'date-fns';
+import { useState, useEffect } from 'react';
 
 function JobDetails({ data, BACK_END_PORT }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -44,18 +44,41 @@ function JobDetails({ data, BACK_END_PORT }) {
   };
 
   const handleSubmitCv = async () => {
+    // console.log(radioValue);
+    // return
     try {
       if (localStorage.getItem('user')) {
         const userId = JSON.parse(localStorage.getItem('user'))?.id;
+        let cvRadio3;
+        if (radioValue == 3) {
+          const formData = new FormData();
+          formData.append('cv_file', myCV);
+          const uploadCV = await axios.post('http://localhost:5000/upload-cv', formData);
+          if (uploadCV.data.statusCode === 200) {
+            cvRadio3 = uploadCV.data.data.cv_file;
+          }
+        }
         if (userId) {
+          const submitData = {
+            user_account_id: userId,
+            job_post_id: data.id,
+            state: 0,
+            cv:
+              radioValue == 1
+                ? `http://localhost:3000/candidate/student-profile?id=${userId}`
+                : radioValue == 2
+                ? cv
+                : cvRadio3,
+          };
           const submitCV = await axios.post(
             `${BACK_END_PORT}/job-post-application/create-job-post-application`,
-            { user_account_id: userId, job_post_id: data.id, state: 0 },
+            submitData,
           );
           if (submitCV.data.statusCode === 200) {
-            alert('ứng tuyển thành công');
+            alert(submitCV.data.data);
+            onClose()
           } else {
-            alert('Ứng tuyển thất bại');
+            alert(submitCV.data.data);
           }
         }
       }
@@ -91,9 +114,103 @@ function JobDetails({ data, BACK_END_PORT }) {
       ],
     },
   ];
-  const locations = ['Hà Giang', 'Tuyên Quang', 'Hà Nội', '...'];
-  const experiences = ['Không Kinh Nghiệm', 'Trên 1 năm', 'Trên 2 năm', '...'];
-  const salaries = ['1-5 triệu', '5-7 triệu', '20 triệu', '...'];
+  const unSortedLocations = [
+    'An Giang',
+    'Kon Tum',
+    'Bà Rịa – Vũng Tàu',
+    'Lai Châu',
+    'Bắc Giang',
+    'Lâm Đồng',
+    'Bắc Kạn',
+    'Lạng Sơn',
+    'Bạc Liêu',
+    'Lào Cai',
+    'Bắc Ninh',
+    'Long An',
+    'Bến Tre',
+    'Nam Định',
+    'Bình Định',
+    'Nghệ An',
+    'Bình Dương',
+    'Ninh Bình',
+    'Bình Phước',
+    'Ninh Thuận',
+    'Bình Thuận',
+    'Phú Thọ',
+    'Cà Mau',
+    'Phú Yên',
+    'Cần Thơ',
+    'Quảng Bình',
+    'Cao Bằng',
+    'Quảng Nam',
+    'Đà Nẵng',
+    'Quảng Ngãi',
+    'Đắk Lắk',
+    'Quảng Ninh',
+    'Đắk Nông',
+    'Quảng Trị',
+    'Điện Biên',
+    'Sóc Trăng',
+    'Đồng Nai',
+    'Sơn La',
+    'Đồng Tháp',
+    'Tây Ninh',
+    'Gia Lai',
+    'Thái Bình',
+    'Hà Giang',
+    'Thái Nguyên',
+    'Hà Nam',
+    'Thanh Hóa',
+    'Hà Nội',
+    'Thừa Thiên Huế',
+    'Hà Tĩnh',
+    'Tiền Giang',
+    'Hải Dương',
+    'TP Hồ Chí Minh',
+    'Hải Phòng',
+    'Trà Vinh',
+    'Hậu Giang',
+    'Tuyên Quang',
+    'Hòa Bình',
+    'Vĩnh Long',
+    'Hưng Yên',
+    'Vĩnh Phúc',
+    'Khánh Hòa',
+    'Yên Bái',
+    'Kiên Giang',
+  ];
+
+  const locations = unSortedLocations.sort((a, b) =>
+    a.localeCompare(b, 'en', { sensitivity: 'base' }),
+  );
+  const experiences = ['Dưới 1 năm', '1 năm', '2 năm', '3 năm', '4 năm', '5 năm', 'Trên 5 năm'];
+  const salaries = ['dưới 5 triệu', '5-7 triệu', '7-15 triệu', '15-30 triệu', 'Trên 30 triệu'];
+
+  const [cv, setCv] = useState('');
+
+  const handleGetCvUser = async (id) => {
+    try {
+      const getCv = await axios.post(`http://localhost:5000/student/get-student-by-id`, { id });
+      if (getCv.data.statusCode === 200) {
+        setCv(getCv.data.data.cv);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  useEffect(() => {
+    const user = localStorage.getItem('user');
+    if (user) {
+      let userData = JSON.parse(user);
+      if (userData) {
+        const { id } = userData;
+        handleGetCvUser(id);
+      }
+    }
+  }, []);
+
+  const [myCV, setMyCV] = useState();
 
   const HomeContent = (
     <div>
@@ -344,70 +461,82 @@ function JobDetails({ data, BACK_END_PORT }) {
                             >
                               Nộp hồ sơ Online{' '}
                               <Text color='#F8A353' as='span'>
-                                (<Link>Xem</Link>)
+                                (
+                                <Link
+                                  href='http://localhost:3000/candidate/student-profile'
+                                  target='_blank'
+                                >
+                                  Xem
+                                </Link>
+                                )
                               </Text>
                             </Radio>
-                            <Radio
-                              size='lg'
-                              colorScheme='orange'
-                              value='2'
-                              border='1px solid black'
-                            >
-                              CV đã tải lên{' '}
-                              <Text color='#F8A353' as='span'>
-                                (<Link>Xem</Link>)
-                              </Text>
-                            </Radio>
+                            {cv && (
+                              <Radio
+                                size='lg'
+                                colorScheme='orange'
+                                value='2'
+                                border='1px solid black'
+                              >
+                                CV đã tải lên{' '}
+                                <Text color='#F8A353' as='span'>
+                                  (
+                                  <Link href={cv} target={'_blank'}>
+                                    Xem
+                                  </Link>
+                                  )
+                                </Text>
+                              </Radio>
+                            )}
                           </Flex>
                           <Radio size='lg' colorScheme='orange' value='3' border='1px solid black'>
                             CV Tải từ máy tính
                           </Radio>
                         </Stack>
                       </RadioGroup>
-                      {radioValue === '1' ? (
-                        <Stack gap='8px' alignSelf='stretch'>
-                          <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
-                            Mô tả về bản thân
-                          </Text>
-                          <Textarea
-                            placeholder='Mô tả về bản thân...'
-                            p='12px 12px 12px 16px'
-                            h='160px'
-                          />
-                        </Stack>
-                      ) : radioValue === '3' ? (
+                      {radioValue === '1' ? null : radioValue === '3' ? (
                         <Stack gap='8px' alignSelf='stretch'>
                           <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
                             CV của bạn
                           </Text>
-                          <Stack
-                            p='12px'
-                            justifyContent='center'
-                            alignItems='center'
-                            gap='10px'
-                            alignSelf='stretch'
-                            height='160px'
-                            bg='#1311311A'
-                            rounded='12px'
-                          >
-                            <Image
-                              src='/static/images/upload_cloud.png'
-                              width='40'
-                              height='40'
-                            ></Image>
+                          <label for='cv' style={{ cursor: 'pointer' }}>
                             <Stack
+                              p='12px'
                               justifyContent='center'
                               alignItems='center'
-                              fontSize='12px'
-                              fontWeight='700'
-                              lineHeight='20px'
-                              color='#818181'
+                              gap='0px'
+                              alignSelf='stretch'
+                              height='160px'
+                              bg='#1311311A'
+                              rounded='12px'
                             >
-                              <Text>Kéo CV của bạn vào đây hoặc bấm để chọn file CV của bạn</Text>
-                              <Text>Dung lượng file không vượt quá 5MB.</Text>
-                              <Text>(Hỗ trợ tải lên file: PDF)</Text>
-                            </Stack>
-                          </Stack>
+                              <Image
+                                src='/static/images/upload_cloud.png'
+                                width='40'
+                                height='40'
+                              ></Image>
+                              <Input
+                                // hidden
+                                onChange={(e) => setMyCV(e.target.files[0])}
+                                type='file'
+                                // display={'none'}
+                                id='cv'
+                                w='35%'
+                              />
+                              <Stack
+                                justifyContent='center'
+                                alignItems='center'
+                                fontSize='12px'
+                                fontWeight='700'
+                                lineHeight='20px'
+                                color='#818181'
+                              >
+                                <Text>Kéo CV của bạn vào đây hoặc bấm để chọn file CV của bạn</Text>
+                                <Text>Dung lượng file không vượt quá 5MB.</Text>
+                                <Text>(Hỗ trợ tải lên file: PDF)</Text>
+                              </Stack>{' '}
+                            </Stack>{' '}
+                          </label>
                         </Stack>
                       ) : (
                         ''
@@ -420,16 +549,10 @@ function JobDetails({ data, BACK_END_PORT }) {
                         bg='#F8A353'
                         justifyContent='center'
                         alignItems='center'
-                        onClick={onClose}
+                        onClick={handleSubmitCv}
                         cursor='pointer'
                       >
-                        <Text
-                          fontSize='16px'
-                          fontWeight='600'
-                          lineHeight='24px'
-                          color='white'
-                          onClick={handleSubmitCv}
-                        >
+                        <Text fontSize='16px' fontWeight='600' lineHeight='24px' color='white'>
                           Xác nhận{' '}
                         </Text>
                       </Flex>
@@ -711,7 +834,7 @@ export async function getServerSideProps(context) {
   }
   return {
     props: {
-      data: jobData,
+      data: jobData[0],
       BACK_END_PORT,
     }, // will be passed to the page component as props
   };

@@ -148,11 +148,11 @@ module.exports = {
       },
       description: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       created_at: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
     });
 
@@ -238,10 +238,6 @@ module.exports = {
           key: 'id',
         },
         onDelete: 'cascade',
-      },
-      educational_detail: {
-        type: Sequelize.STRING(20),
-        allowNull: false,
       },
       major: {
         type: Sequelize.STRING(20),
@@ -593,6 +589,10 @@ module.exports = {
           },
           key: 'id',
         },
+      },
+      cv: {
+        type: Sequelize.STRING(1000),
+        allowNull: false,
       },
       state: {
         type: Sequelize.INTEGER,

@@ -1,6 +1,7 @@
 const db = require('../models');
 const UserLog = db.user_log;
 const Op = db.Sequelize.Op;
+const sequelize = db.sequelize;
 const QueryTypes = db.Sequelize.QueryTypes;
 const responsehandler = require('../handlers/response.handler');
 const validateHandler = require('../handlers/validate.handler');
@@ -31,24 +32,30 @@ module.exports = {
   },
   async createUserLog(req, res) {
     const params = req.body;
-    // if (!validateHandler.validateInput(params)) {
-    //   return responseHandler.badRequest(res, 'Your input is invalid!');
-    // }
-    // if (!validateHandler.validateId(params.user_account_id)) {
-    //   return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
-    // }
     try {
-      params.created_at = new Date();
-      const userLog = await UserLog.create(params);
-      if (userLog) {
+      // Constructing the SQL query
+      const query = `
+            INSERT INTO user_log (user_account_id, description, created_at)
+            VALUES (?, ?, NOW());
+        `;
+
+      // Executing the SQL query - replace 'db' with your actual database querying method
+      const result = await sequelize.query(query, {
+        replacements: [params.user_account_id, params.description],
+        type: QueryTypes.INSERT,
+      });
+
+      if (result) {
         return responsehandler.responseWithData(res, 200, 'Create user log success');
       } else {
         return responsehandler.badRequest(res, 'Can not create user log');
       }
     } catch (err) {
+      console.error(err); // Add this line to log the error details for debugging
       return responsehandler.error(res);
     }
   },
+
   async updateUserLog(req, res) {
     const params = req.body;
     const { user_account_id } = params;
