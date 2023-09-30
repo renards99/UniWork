@@ -235,22 +235,34 @@ module.exports = {
       const params = req.body;
       const { title, job_location, experience, salary } = params;
 
-      let query = `select jp.*, c.company_name from job_post as jp join company as c on c.id = jp.company_id where jp.title like "%${title}%" `;
-      if (salary == 0) {
-        query += `and (jp.salary >= 1000000 and jp.salary <= 5000000) `;
-      } else if (salary == 1) {
-        query += `and (jp.salary >= 5000000 and jp.salary <= 7000000) `;
-      } else if (salary == 2) {
-        query += `and (jp.salary >= 10000000 and jp.salary <= 20000000) `;
-      } else if (salary == 3) {
-        query += `and jp.salary >= 20000000 `;
+      let query = `SELECT jp.*, c.company_name FROM job_post AS jp JOIN company AS c ON c.id = jp.company_id WHERE 1=1 `; // added WHERE 1=1 to make sure the following conditions can be added using AND
+
+      if (title) {
+        query += `AND jp.title LIKE "%${title}%" `;
       }
-      if (experience) {
-        query += `and jp.experience > ${experience} `;
+
+      if (typeof salary !== 'undefined' && salary !== null) {
+        if (salary == 0) {
+          query += `AND ( jp.salary <= 5000000) `;
+        } else if (salary == 1) {
+          query += `AND (jp.salary >= 5000000 AND jp.salary <= 7000000) `;
+        } else if (salary == 2) {
+          query += `AND (jp.salary >= 7000000 AND jp.salary <= 15000000) `;
+        } else if (salary == 3) {
+          query += `AND (jp.salary >= 15000000 AND jp.salary <= 30000000) `;
+        } else if (salary == 3) {
+          query += `AND jp.salary >= 30000000 `;
+        }
       }
+
+      if (typeof experience !== 'undefined' && experience !== null) {
+        query += `AND jp.experience <= ${experience} `;
+      }
+
       if (job_location) {
-        query += `and jp.job_location like "%${job_location}%" `;
+        query += `AND jp.job_location LIKE "%${job_location}%" `;
       }
+      query += `AND jp.is_active =1 and jp.state =2`;
       const getAllPost = await sequelize.query(query, {
         type: QueryTypes.SELECT,
       });

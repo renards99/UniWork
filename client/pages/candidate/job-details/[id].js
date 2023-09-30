@@ -263,11 +263,13 @@ function JobDetails({ data, BACK_END_PORT }) {
                   Mô tả công việc
                 </Text>
                 <Stack>
-                  {data.job_description.split('\n').map((text, index) => (
-                    <Text fontSize='14px' fontWeight='500' key={index}>
-                      -{' ' + text}
-                    </Text>
-                  ))}
+                  {data.job_description && typeof data.job_description === 'string'
+                    ? data.job_description.split('\n').map((text, index) => (
+                        <Text fontSize='14px' fontWeight='500' key={index}>
+                          -{' ' + text}
+                        </Text>
+                      ))
+                    : null}
                 </Stack>
               </Stack>
               <Stack>

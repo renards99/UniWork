@@ -181,6 +181,20 @@ module.exports = {
       return responsehandler.error(res);
     }
   },
+  async banUser(req, res) {
+    const params = req.body;
+    const { id, is_banned } = params;
+    try {
+      const banResponse = await UserAccount.update({ is_banned }, { where: { id } });
+      if (banResponse) {
+        return responsehandler.responseWithData(res, 200, 'Ban success!');
+      } else {
+        return responsehandler.badRequest(res, 'Can not Ban!');
+      }
+    } catch (err) {
+      return responsehandler.error(res);
+    }
+  },
   async createAccount(req, res) {
     try {
       const params = req.body;

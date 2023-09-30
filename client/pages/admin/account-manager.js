@@ -34,7 +34,7 @@ const options = {
 export default function AccountManager() {
   const router = useRouter();
 
-  const itemsPerPage = 10;
+  const itemsPerPage = 7;
   const [currentPage, setCurrentPage] = useState(1);
   const changePage = (pageNumber) => setCurrentPage(pageNumber);
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -83,7 +83,7 @@ export default function AccountManager() {
             ? router.push(`/admin/user-profile-employer?id=${item.id}`)
             : item.role_name == 'Ứng viên'
             ? router.push(`/admin/user-profile-student?id=${item.id}`)
-            : router.push('/admin');
+            : console.log('');
         }}
       >
         <Td textAlign={'center'}>{item.id}</Td>
@@ -126,9 +126,9 @@ export default function AccountManager() {
         </Td>
         <Td textAlign={'center'}>
           {item.is_banned ? (
-            <Image src={ShieldCheck} style={{ margin: '0 auto' }} />
-          ) : (
             <Image src={ShieldWarning} style={{ margin: '0 auto' }} />
+          ) : (
+            <Image src={ShieldCheck} style={{ margin: '0 auto' }} />
           )}
         </Td>
       </Tr>

@@ -42,10 +42,16 @@ function PostDetails() {
   const [menuIcon, setMenuIcon] = useState(false);
   const [activeIcon, setActiveIcon] = useState(0);
   const handleApprove = async () => {
+    const currentDate = new Date();
+    const applyDate = new Date(fakeData.applyDate); // replace applyAt with the actual apply date variable
+
+    const isActive = applyDate < currentDate ? 1 : 0;
     const aprrovePost = await axios.put(`${BACK_END_PORT}/job-post/update-job-post`, {
       id: id,
       state: 2,
+      is_active: isActive,
     });
+
     if (aprrovePost.data.statusCode == 200) {
       alert(`update post successfully`);
       window.location.href = 'http://localhost:3000/admin/job-manager';
@@ -58,6 +64,26 @@ function PostDetails() {
     });
     if (denyPost.data.statusCode == 200) {
       alert(`deny post successfully`);
+      window.location.href = 'http://localhost:3000/admin/job-manager';
+    }
+  };
+  const handleHide = async () => {
+    const hidePost = await axios.put(`${BACK_END_PORT}/job-post/update-job-post`, {
+      id: id,
+      state: 5,
+    });
+    if (hidePost.data.statusCode == 200) {
+      alert(`hide post successfully`);
+      window.location.href = 'http://localhost:3000/admin/job-manager';
+    }
+  };
+  const handleShow = async () => {
+    const hidePost = await axios.put(`${BACK_END_PORT}/job-post/update-job-post`, {
+      id: id,
+      state: 2,
+    });
+    if (hidePost.data.statusCode == 200) {
+      alert(`Show post successfully`);
       window.location.href = 'http://localhost:3000/admin/job-manager';
     }
   };
@@ -77,13 +103,15 @@ function PostDetails() {
           salary: totalPriceItemInCart(jobData.salary.toString(), 1),
           experience: jobData.experience + ' năm',
           hiringNumber: `${jobData.hire_number} người`,
-          role: '??????',
+          role: 'Nhân viên',
           workForm: jobData.work_hours ? 'Bán thời gian' : 'Toàn thời gian',
           gender: jobData.gender == 1 ? 'Nam' : jobData.gender == 2 ? 'Nữ' : 'Không yêu cầu',
           description: jobData.job_description,
           requirements: '??????',
           benefits: '??????',
           image: jobData.user_image,
+          state: jobData.state,
+          applyDate: jobData.apply_at,
         });
         setEProfile({
           companyName: jobData.company_name,
@@ -216,23 +244,77 @@ function PostDetails() {
             border='1px solid #666666'
             rounded='12px'
           >
-            <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
-              Trạng thái:
-            </Text>
-            <StatusFrame type='2' text='đã cấm' />
-          </Flex>
-          <Flex
-            gap='20px'
-            p='10px 12px 10px 24px'
-            justifyContent='space-between'
-            alignSelf='stretch'
-            alignItems='center'
-            border='1px solid #666666'
-            rounded='12px'
-          >
-            <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
-              Số lần Vi Phạm: ????? Lần
-            </Text>
+            {fakeData.state == 2 ? (
+              <Box
+                backgroundColor={'#C7F5D9'}
+                w='134px'
+                padding='6px 10px'
+                h='28px'
+                borderRadius={'12px'}
+                margin={'0 auto'}
+                textAlign={'center'}
+              >
+                <Text fontSize={'14px'} fontWeight={'500'} color={'#036000'}>
+                  Đã duyệt
+                </Text>
+              </Box>
+            ) : fakeData.state == 1 ? (
+              <Box
+                backgroundColor={'#D3DFF9'}
+                w='134px'
+                padding='6px 10px'
+                h='28px'
+                borderRadius={'12px'}
+                margin={'0 auto'}
+                textAlign={'center'}
+              >
+                <Text fontSize={'14px'} fontWeight={'500'} color={'#0036AA'}>
+                  Chưa duyệt
+                </Text>
+              </Box>
+            ) : fakeData.state == 3 ? (
+              <Box
+                backgroundColor={'#FFC0C0'}
+                w='134px'
+                padding='6px 10px'
+                h='28px'
+                borderRadius={'12px'}
+                margin={'0 auto'}
+                textAlign={'center'}
+              >
+                <Text fontSize={'14px'} fontWeight={'500'} color={'#BC0000'}>
+                  Hết hạn
+                </Text>
+              </Box>
+            ) : fakeData.state == 4 ? (
+              <Box
+                backgroundColor={'#FFC0C0'}
+                w='134px'
+                padding='6px 10px'
+                h='28px'
+                borderRadius={'12px'}
+                margin={'0 auto'}
+                textAlign={'center'}
+              >
+                <Text fontSize={'14px'} fontWeight={'500'} color={'#BC0000'}>
+                  Từ chối
+                </Text>
+              </Box>
+            ) : (
+              <Box
+                backgroundColor={'#FFC0C0'}
+                w='134px'
+                padding='6px 10px'
+                h='28px'
+                borderRadius={'12px'}
+                margin={'0 auto'}
+                textAlign={'center'}
+              >
+                <Text fontSize={'14px'} fontWeight={'500'} color={'#BC0000'}>
+                  Bài đã ẩn
+                </Text>
+              </Box>
+            )}
           </Flex>
         </Stack>
       </Flex>
@@ -456,44 +538,102 @@ function PostDetails() {
   );
   const buttons = (
     <Flex alignItems='flex-start' gap='20px'>
-      <Flex gap='20px'>
-        <Flex
-          onClick={handleApprove}
-          justifyContent='center'
-          alignItems='center'
-          color='white'
-          bg='#323541'
-          rounded='20px'
-          w='132px'
-          mt='20px'
-          py='8px'
-          px='12px'
-          fontSize='16px'
-          cursor='pointer'
-        >
-          <Text fontSize='14px' fontWeight='600' lineHeight='24px'>
-            Duyệt bài
-          </Text>
+      {(fakeData.state == 1 || fakeData.state == 4) && (
+        <Flex gap='20px'>
+          {/* Duyệt bài Button */}
+          <Flex
+            onClick={handleApprove}
+            justifyContent='center'
+            alignItems='center'
+            color='white'
+            bg='#323541'
+            rounded='20px'
+            w='132px'
+            mt='20px'
+            py='8px'
+            px='12px'
+            fontSize='16px'
+            cursor='pointer'
+          >
+            <Text fontSize='14px' fontWeight='600' lineHeight='24px'>
+              Duyệt bài
+            </Text>
+          </Flex>
+
+          {/* Từ chối Button */}
+          <Flex
+            onClick={handleDeny}
+            justifyContent='center'
+            alignItems='center'
+            color='#323541'
+            bg='white'
+            rounded='20px'
+            w='132px'
+            mt='20px'
+            py='8px'
+            px='12px'
+            fontSize='16px'
+            cursor='pointer'
+            border='1px'
+            borderColor='#323541'
+          >
+            <Text fontSize='14px' fontWeight='600' lineHeight='24px'>
+              Từ chối
+            </Text>
+          </Flex>
         </Flex>
-        <Flex
-          justifyContent='center'
-          alignItems='center'
-          color='#323541'
-          bg='white'
-          rounded='20px'
-          w='132px'
-          mt='20px'
-          py='8px'
-          px='12px'
-          fontSize='16px'
-          cursor='pointer'
-          border='1px'
-          borderColor='#323541'
-          onClick={handleDeny}
-        >
-          Từ chối
+      )}
+
+      {fakeData.state == 2 && (
+        <Flex gap='20px'>
+          {/* Ẩn bài Button */}
+          <Flex
+            onClick={handleHide}
+            justifyContent='center'
+            alignItems='center'
+            color='#323541'
+            bg='white'
+            rounded='20px'
+            w='132px'
+            mt='20px'
+            py='8px'
+            px='12px'
+            fontSize='16px'
+            cursor='pointer'
+            border='1px'
+            borderColor='#323541'
+          >
+            <Text fontSize='14px' fontWeight='600' lineHeight='24px'>
+              Ẩn bài
+            </Text>
+          </Flex>
         </Flex>
-      </Flex>
+      )}
+      {fakeData.state == 5 && (
+        <Flex gap='20px'>
+          {/* Ẩn bài Button */}
+          <Flex
+            onClick={handleShow}
+            justifyContent='center'
+            alignItems='center'
+            color='#323541'
+            bg='white'
+            rounded='20px'
+            w='132px'
+            mt='20px'
+            py='8px'
+            px='12px'
+            fontSize='16px'
+            cursor='pointer'
+            border='1px'
+            borderColor='#323541'
+          >
+            <Text fontSize='14px' fontWeight='600' lineHeight='24px'>
+              Hiển Thị
+            </Text>
+          </Flex>
+        </Flex>
+      )}
     </Flex>
   );
 

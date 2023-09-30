@@ -443,7 +443,7 @@ module.exports = {
         allowNull: false,
       },
       is_active: {
-        type: Sequelize.BOOLEAN,
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
 
