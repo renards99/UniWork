@@ -142,9 +142,17 @@ module.exports = {
     try {
       const params = req.body;
       const { id } = params;
-      const getUser = await sequelize.query(`SELECT * FROM user_account where id = "${id}" `, {
-        type: QueryTypes.SELECT,
-      });
+      const getUser = await sequelize.query(
+        `SELECT ua.*, c.company_name, ua.date_of_birth as dob ,c.tax_code, c.size, c.company_website_url, c.company_location, jt.job_type_name, c.company_description, e.facebook_link, c.company_email, c.company_phone_number, c.id as company_id 
+          FROM user_account as ua
+          left join employer as e on e.user_account_id = ua.id
+          left join company as c on e.company_id = c.id
+          left join job_type as jt on jt.id = e.job_type_id
+          where ua.id = ${id} `,
+        {
+          type: QueryTypes.SELECT,
+        },
+      );
       if (getUser) {
         return responsehandler.responseWithData(res, 200, { user_details: getUser });
       } else {
@@ -316,7 +324,6 @@ module.exports = {
       if (deleteRefreshToken) {
         res.clearCookie('user_account_data');
         res.clearCookie('refreshAccessToken');
-        console.log('dang xuat than hcon');
         return responsehandler.ok(res, 'Logout success!');
       } else {
         return responsehandler.badRequest(
@@ -350,6 +357,31 @@ module.exports = {
       return responsehandler.responseWithData(res, 200, {
         message: 'Upload successful',
         cv_file: downloadURL,
+      });
+    } catch (error) {
+      console.log(error);
+      return responsehandler.error(res);
+    }
+  },
+  async uploadImage(req, res) {
+    initializeApp(firebaseConfig);
+    const storage = getStorage();
+    try {
+      const dateTime = giveCurrentDateTime();
+
+      const storageRef = ref(storage, `images/${req.file.originalname + '-' + dateTime}`);
+
+      const metadata = {
+        contentType: req.file.mimetype,
+      };
+
+      const snapshot = await uploadBytesResumable(storageRef, req.file.buffer, metadata);
+
+      // Grab the public url
+      const downloadURL = await getDownloadURL(snapshot.ref);
+      return responsehandler.responseWithData(res, 200, {
+        message: 'Upload successful',
+        image_file: downloadURL,
       });
     } catch (error) {
       console.log(error);

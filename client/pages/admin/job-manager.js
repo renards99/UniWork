@@ -22,6 +22,7 @@ import Pagination from '../../components/paging';
 import HeaderAdmins from '../../components/layout/header_admin';
 
 import { useCallback, useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
 import axios from 'axios';
 
@@ -32,7 +33,9 @@ const formatDate = (dateString) => {
   const year = date.getFullYear();
   return `${day}/${month}/${year}`;
 };
+
 export default function JobManager() {
+  const router = useRouter();
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
   const changePage = (pageNumber) => setCurrentPage(pageNumber);
@@ -62,15 +65,12 @@ export default function JobManager() {
         });
         if (getListJob.data.statusCode === 200) {
           setJobPostList(getListJob.data.data);
-          console.log('set thanh cong');
-          console.log(getListJob.data.data);
         } else {
         }
       } catch (error) {}
     },
     [param],
   );
-  console.log(search + 'search');
   useEffect(() => {
     getListJob();
   }, []);
@@ -79,8 +79,8 @@ export default function JobManager() {
 
   const TableContent = slicedjobPostList.map((item, index) => {
     return (
-      <Tr>
-        <Td textAlign={'center'}>{item.main_id}</Td>
+      <Tr onClick={() => router.push(`/admin/post-details?id=${item.id}`)} cursor={'pointer'}>
+        <Td textAlign={'center'}>{item.id}</Td>
         <Td>{item.title}</Td>
         <Td>{item.company_name}</Td>
 

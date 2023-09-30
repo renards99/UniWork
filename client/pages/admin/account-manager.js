@@ -80,9 +80,9 @@ export default function AccountManager() {
         cursor={'pointer'}
         onClick={() => {
           item.role_name == 'Nhà tuyển dụng'
-            ? router.push('/admin/user-profile-employer')
-            : item.role_name == 'Ứng viên	'
-            ? router.push('/admin/user-profile-candidate')
+            ? router.push(`/admin/user-profile-employer?id=${item.id}`)
+            : item.role_name == 'Ứng viên'
+            ? router.push(`/admin/user-profile-student?id=${item.id}`)
             : router.push('/admin');
         }}
       >

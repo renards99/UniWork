@@ -79,11 +79,9 @@ function Register() {
       cv: null,
       short_des: null,
     });
-    console.log(createAccountResponse.status);
     if (createAccountResponse.status === 201 && createEmployer.status === 201) {
       try {
         await loginAccount(email, password, 'http://localhost:5000');
-        console.log('Account created and logged in successfully!');
       } catch (error) {
         console.error('Error logging in after account creation:', error);
       }

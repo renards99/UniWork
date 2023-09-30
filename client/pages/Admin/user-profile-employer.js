@@ -26,7 +26,12 @@ import Paging from '../../components/paging';
 import axios from 'axios';
 import DropDownStatus from '../../components/layout/admin/dropDownStatus';
 import StatusFrame from '../../components/layout/admin/statusFrame';
+import { useRouter } from 'next/router';
+import { convertToLocaleDateTime, totalPriceItemInCart } from '../../helper';
+const BACK_END_PORT = 'http://localhost:5000';
+
 function UserProfileEmployer() {
+  const router = useRouter();
   const menuData = {
     roles: ['Giám đốc', 'Nhân viên', 'Trợ lý', 'Quản lý', 'Phó phòng', 'Thực tập sinh'],
     workForm: [
@@ -45,85 +50,29 @@ function UserProfileEmployer() {
     ],
   };
 
-  const eProfile = {
-    companyName: 'Data Management Officer',
-    role: 'Nhà tuyển dụng',
-    subScriptionDate: '11/11/2023',
-    taxCode: '0212730426-018',
-    email: 'Hoang123@gmail.com',
-    phone: '091234567',
-    employees: '125-199',
-    link: 'DMO.vn',
-    address: 'Tòa nhà Toyota Thanh Xuân, 315 Trường Chinh, Thanh Xuân, Hà Nội',
-    description:
-      'Công ty Cổ phần Công nghệ eUp (eUp) là một Công ty Công nghệ hàng đầu tại Việt Nam trong lĩnh vực cung cấp Giải pháp Học tập. Tới nay, eUp đã cho ra mắt nhiều ứng dụng học tập được hàng triệu triệu người dùng tại Việt Nam và trên toàn Thế giới yêu thích và sử dụng hằng ngày như ứng dụng Từ điển tiếng Nhật Mazii; Từ vựng và Ngữ pháp HeyJapanese; Từ điển tiếng Trung Hanzii; Đọc báo TODAI; Luyện thi Migii,… và rất nhiều ứng dụng rất thiết thực dành cho các ngôn ngữ khác như tiếng Pháp; Tây Ban Nha;... Với hơn 7 năm trong ngành Công nghệ Giáo dục, eUp luôn nỗ lực không ngừng để thực hiện sứ mệnh giúp hàng triệu triệu người học tiếp cận với hệ thống giải pháp học tập đơn giản, thông minh và tiện ích hơn bao giờ hết.',
+  const [eProfile, setEProfile] = useState({});
+  const [posts, setPost] = useState([]);
+  const handleGetJobByCompany = async (id) => {
+    try {
+      const getJob = await axios.post(`${BACK_END_PORT}/job-post/get-job-by-company`, {
+        company_id: id,
+      });
+      if (getJob.data.statusCode === 200) {
+        const jobData = getJob.data.data.list_job
+        setPost(
+          jobData.map((job, index) => ({
+            imageUrl: '../../public/static/images/applicationPost.png',
+            title: job.title,
+            salary: totalPriceItemInCart(job?.salary.toString(), 1) + " VND",
+            company: job.company_name,
+            tags: [job.job_location, `${job.experience} năm kinh nghiệm`],
+          })),
+        );
+      }
+    } catch (err) {
+      console.error(err);
+    }
   };
-  const posts = [
-    {
-      imageUrl: '../../public/static/images/applicationPost.png',
-      title: 'Nhân Viên Thiết Kế UI/UX (UI/UX Designer)',
-      salary: '14-20 Triệu',
-      company: 'Công ty Cổ Phần Công nghệ eUp',
-      tags: ['Hà Nội', 'Còn 29 ngày để ứng tuyển', 'Cập nhật 7 giờ trước'],
-    },
-    {
-      imageUrl: '../../public/static/images/applicationPost.png',
-      title: 'Nhân Viên Thiết Kế UI/UX (UI/UX Designer)',
-      salary: '14-20 Triệu',
-      company: 'Công ty Cổ Phần Công nghệ eUp',
-      tags: ['Hà Nội', 'Còn 29 ngày để ứng tuyển', 'Cập nhật 7 giờ trước'],
-    },
-    {
-      imageUrl: '../../public/static/images/applicationPost.png',
-      title: 'Nhân Viên Thiết Kế UI/UX (UI/UX Designer)',
-      salary: '14-20 Triệu',
-      company: 'Công ty Cổ Phần Công nghệ eUp',
-      tags: ['Hà Nội', 'Còn 29 ngày để ứng tuyển', 'Cập nhật 7 giờ trước'],
-    },
-    {
-      imageUrl: '../../public/static/images/applicationPost.png',
-      title: 'Nhân Viên Thiết Kế UI/UX (UI/UX Designer)',
-      salary: '14-20 Triệu',
-      company: 'Công ty Cổ Phần Công nghệ eUp',
-      tags: ['Hà Nội', 'Còn 29 ngày để ứng tuyển', 'Cập nhật 7 giờ trước'],
-    },
-    {
-      imageUrl: '../../public/static/images/applicationPost.png',
-      title: 'Nhân Viên Thiết Kế UI/UX (UI/UX Designer)',
-      salary: '14-20 Triệu',
-      company: 'Công ty Cổ Phần Công nghệ eUp',
-      tags: ['Hà Nội', 'Còn 29 ngày để ứng tuyển', 'Cập nhật 7 giờ trước'],
-    },
-    {
-      imageUrl: '../../public/static/images/applicationPost.png',
-      title: 'Nhân Viên Thiết Kế UI/UX (UI/UX Designer)',
-      salary: '14-20 Triệu',
-      company: 'Công ty Cổ Phần Công nghệ eUp',
-      tags: ['Hà Nội', 'Còn 29 ngày để ứng tuyển', 'Cập nhật 7 giờ trước'],
-    },
-
-    {
-      imageUrl: '../../public/static/images/applicationPost.png',
-      title: 'Nhân Viên Thiết Kế UI/UX (UI/UX Designer)',
-      salary: '14-20 Triệu',
-      company: 'Công ty Cổ Phần Công nghệ eUp',
-      tags: ['Hà Nội', 'Còn 29 ngày để ứng tuyển', 'Cập nhật 7 giờ trước'],
-    },
-    {
-      imageUrl: '../../public/static/images/applicationPost.png',
-      title: 'Nhân Viên Thiết Kế UI/UX (UI/UX Designer)',
-      salary: '14-20 Triệu',
-      company: 'Công ty Cổ Phần Công nghệ eUp',
-      tags: ['Hà Nội', 'Còn 29 ngày để ứng tuyển', 'Cập nhật 7 giờ trước'],
-    },
-    {
-      imageUrl: '../../public/static/images/applicationPost.png',
-      title: 'Nhân Viên Thiết Kế UI/UX (UI/UX Designer)',
-      salary: '14-20 Triệu',
-      company: 'Công ty Cổ Phần Công nghệ eUp',
-      tags: ['Hà Nội', 'Còn 29 ngày để ứng tuyển', 'Cập nhật 7 giờ trước'],
-    },
-  ];
   const [show, setShow] = useState(false);
   //Paging
   const [currentPage, setCurrentPage] = useState(1);
@@ -140,49 +89,55 @@ function UserProfileEmployer() {
   const [param, setParam] = useState({ role_id: 2 });
   const [userData, setUserData] = useState({});
   const [postData, setPostData] = useState([]);
-  // const getAllPost = useCallback(async () => {
-  //   try {
-  //     const getAllPost = await axios.post(`http://localhost:5000/job-post/get-all-job-post`);
-  //     if (getAllPost.data.statusCode === 200) {
-  //       setPostData(getAllPost);
-  //     } else {
-  //     }
-  //   } catch (error) {}
-  // }, [param]);
-  // useEffect(() => {
-  //   getAllPost();
-  // }, []);
-  const getUserAccount = useCallback(async () => {
+ 
+  const getUserAccount = async (id) => {
     try {
       const getUserAccount = await axios.post(`http://localhost:5000/account-details`, {
-        ...param,
+        id,
       });
-      if (getUserAccount.data.statusCode === 200) {
-        setUserData(getUserAccount.data.data.user_details);
+      if (getUserAccount.data.statusCode == 200) {
+        const userData = getUserAccount.data.data.user_details[0];
+        setEProfile({
+          role:
+            userData.role == 1
+              ? 'Quản trị viên'
+              : userData.role == 2
+              ? 'Nhà tuyển dụng'
+              : 'Ứng viên',
+          email: userData.email,
+          phone: userData.mobile_number,
+          employees: userData.size,
+          full_name: userData.full_name,
+          image: userData.user_image,
+          gender: userData.gender,
+          id: userData.id,
+          gender: userData.gender == 1 ? 'Nam' : userData.gender == 2 ? 'Nữ' : 'Không yêu cầu',
+          job_type: userData.job_type_name,
+          facebook_link: userData.facebook_link,
+
+          subScriptionDate: convertToLocaleDateTime(userData.registration_date),
+          taxCode: userData.tax_code,
+          link: userData.company_website_url,
+          address: userData.company_location,
+          companyDescription: userData.company_description,
+          companyName: userData.company_name,
+          companyEmail: userData.company_email,
+          companyPhone: userData.company_phone_number,
+          size: userData.size,
+        });
+        handleGetJobByCompany(userData.company_id);
       } else {
       }
     } catch (error) {}
-  }, [param]);
-  useEffect(() => {
-    getUserAccount();
-  }, []);
-  const data = userData[0];
+  };
 
-  // const getCompany = useCallback(async () => {
-  //   try {
-  //     const getCompany = await axios.post(`http://localhost:5000/company/get-company-by-id`, {
-  //       ...param,
-  //     });
-  //     if (getCompany.data.statusCode === 200) {
-  //       setUserData(getCompany.data.data.user_details);
-  //     } else {
-  //     }
-  //   } catch (error) {}
-  // }, [param]);
-  // useEffect(() => {
-  //   getCompany();
-  // }, []);
-  // console.log(userData);
+  useEffect(() => {
+    const { id } = router.query;
+    if (id) {
+      getUserAccount(id);
+    }
+  }, [router]);
+
   const [tab, setTab] = useState(1);
   const handleTab = (index) => setTab(index);
   return (
@@ -234,10 +189,15 @@ function UserProfileEmployer() {
             >
               <Flex justifyContent='flex-start' alignItems='center' gap='20px'>
                 <Box rounded='full' overflow='hidden'>
-                  <Image src='/static/images/avatar_icon.png' width='100' height='100'></Image>
+                  <img
+                    src={eProfile?.image}
+                    width='100'
+                    height='100'
+                    style={{ borderRadius: '50%', height: '100px' }}
+                  />
                 </Box>
                 <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
-                  Ngô Thanh Toàn
+                  {eProfile?.full_name}
                 </Text>
               </Flex>
 
@@ -249,7 +209,7 @@ function UserProfileEmployer() {
                     </Text>
 
                     <Text fontSize='14px' fontWeight='700' lineHeight='24px'>
-                      hanhfchinh@lechongvien.vn
+                      {eProfile?.email}
                     </Text>
                   </Flex>
                   <Flex gap='12px' alignItems='center'>
@@ -258,7 +218,7 @@ function UserProfileEmployer() {
                     </Text>
 
                     <Text fontSize='14px' fontWeight='700' lineHeight='24px'>
-                      Nam
+                      {eProfile?.gender}
                     </Text>
                   </Flex>
                   <Flex gap='12px' alignItems='center'>
@@ -267,7 +227,7 @@ function UserProfileEmployer() {
                     </Text>
 
                     <Text fontSize='14px' fontWeight='700' lineHeight='24px'>
-                      https://www.facebook.com/nguyenthao404
+                      {eProfile?.facebook_link}
                     </Text>
                   </Flex>
                 </Stack>
@@ -278,7 +238,7 @@ function UserProfileEmployer() {
                     </Text>
 
                     <Text fontSize='14px' fontWeight='700' lineHeight='24px'>
-                      0393958505
+                      {eProfile?.mobile_number}
                     </Text>
                   </Flex>
                   <Flex gap='12px' alignItems='center'>
@@ -287,7 +247,7 @@ function UserProfileEmployer() {
                     </Text>
 
                     <Text fontSize='14px' fontWeight='700' lineHeight='24px'>
-                      Nhân viên
+                      {eProfile?.job_type}
                     </Text>
                   </Flex>
                 </Stack>
@@ -314,7 +274,7 @@ function UserProfileEmployer() {
                       <Collapse startingHeight={94} in={show}>
                         <Text fontSize='16px' fontWeight='semibold' color='#727272'>
                           {' '}
-                          {eProfile.description}
+                          {eProfile.companyDescription}
                         </Text>
                       </Collapse>
                       <Flex
@@ -494,7 +454,7 @@ function UserProfileEmployer() {
                     Ngày đăng ký:{' '}
                     <Text as='span' fontSize='14px' fontWeight='500' lineHeight='24px'>
                       {/* {data.registration_date} */}
-                      09/12/2002
+                      {eProfile.subScriptionDate}
                     </Text>
                   </Text>
                 </Stack>
@@ -530,7 +490,7 @@ function UserProfileEmployer() {
                     </Box>
                     <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
                       Email:
-                      {/* {data.email} */}
+                      {eProfile.companyEmail}
                     </Text>
                   </Flex>
 
@@ -540,7 +500,7 @@ function UserProfileEmployer() {
                     </Box>
                     <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
                       Điện thoại:
-                      {/* {data.mobile_number} */}
+                      {eProfile.companyPhone}
                     </Text>
                   </Flex>
                   <Flex gap='4'>
@@ -548,7 +508,7 @@ function UserProfileEmployer() {
                       <HiOutlineBuildingOffice2 />
                     </Box>
                     <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
-                      {eProfile.employees} nhân viên
+                      {eProfile.size} nhân viên
                     </Text>
                   </Flex>
                   <Flex gap='4'>
