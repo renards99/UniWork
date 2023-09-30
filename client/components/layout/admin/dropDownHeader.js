@@ -24,9 +24,9 @@ export default function DropDownHeader() {
   const handleMenuClick = () => setMenuIcon(!menuIcon);
 
   async function handleLogOut() {
-    console.log(2)
+    console.log(2);
     const id = JSON.parse(localStorage.getItem('user')).id; // Retrieve the logged-in user's email or mobile number
-    console.log(1)
+    console.log(1);
     try {
       const response = await axios.post('http://localhost:5000/logout', {
         id,
@@ -87,7 +87,7 @@ export default function DropDownHeader() {
         p='0px'
       >
         <MenuItem h='48px' bg='#E8E8EB' border='1px solid #1311311A' roundedTop='12px'>
-          <Link href='/candidate/student-profile'>
+          <Link href=''>
             <Text p='12px 20px' fontSize='16px' fontWeight='600' lineHeight='24px'>
               Xem trang cá nhân
             </Text>
@@ -95,21 +95,21 @@ export default function DropDownHeader() {
         </MenuItem>
 
         <MenuItem h='48px' bg='#E8E8EB' border='1px solid #1311311A'>
-          <Link href='/candidate/change-password'>
+          <Link href=''>
             <Text p='12px 20px' fontSize='16px' fontWeight='600' lineHeight='24px'>
               Đổi mật khẩu
             </Text>
           </Link>
         </MenuItem>
         <MenuItem h='48px' bg='#E8E8EB' border='1px solid #1311311A'>
-          <Link href='/candidate/job-apply'>
+          <Link href=''>
             <Text p='12px 20px' fontSize='16px' fontWeight='600' lineHeight='24px'>
               Nhật ký hoạt động
             </Text>
           </Link>
         </MenuItem>
         <MenuItem h='48px' bg='#E8E8EB' border='1px solid #1311311A'>
-          <Link href='/candidate/report'>
+          <Link href=''>
             <Text p='12px 20px' fontSize='16px' fontWeight='600' lineHeight='24px'>
               Báo cáo/Hỗ trợ
             </Text>

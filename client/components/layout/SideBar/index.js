@@ -94,15 +94,6 @@ export default function SideBarAdmin(props) {
         >
           <SideItem
             navSize={navSize}
-            icon={AiOutlinePieChart}
-            title='Thống kê số liệu'
-            handleSetActiveSideBar={handleSetActiveSideBar}
-            active={sideBarActive == 0 ? true : false}
-            value={0}
-            href={path.revenue}
-          />
-          <SideItem
-            navSize={navSize}
             icon={HiOutlineUsers}
             title='Quản lí tài khoản'
             handleSetActiveSideBar={handleSetActiveSideBar}
