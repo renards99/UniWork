@@ -139,6 +139,17 @@ function CandidateDetails() {
           { user_account_id: userId, job_post_id: jobId, state: state },
         );
         if (acceptCv.data.statusCode === 200) {
+          try {
+            const emailRes = await axios.post(`http://localhost:5000/send-email`, {
+              to: `${profile.email}`, // Replace with the user's email address
+              subject: 'uniwork: Thông Báo Duyệt cv',
+              text: `Chúc mừng! Cv của bạn nộp vào công việc ${companyProfile.title} trên uniwork đã được duyệt thành công bởi ${companyProfile.company_name}`,
+            });
+            console.log('Email sent response:', emailRes.data);
+          } catch (error) {
+            console.error('Error sending email via API:', error);
+          }
+
           window.location.href = 'http://localhost:3000/employer/post-list';
           alert('Đã xử lí cv');
           onClose();
