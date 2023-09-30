@@ -239,10 +239,6 @@ module.exports = {
         },
         onDelete: 'cascade',
       },
-      educational_detail: {
-        type: Sequelize.STRING(20),
-        allowNull: false,
-      },
       major: {
         type: Sequelize.STRING(20),
         allowNull: false,

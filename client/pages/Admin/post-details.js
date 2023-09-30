@@ -44,12 +44,17 @@ function PostDetails() {
   const handleApprove = async () => {
     const currentDate = new Date();
     const applyDate = new Date(fakeData.applyDate); // replace applyAt with the actual apply date variable
-
+    const fullName = JSON.parse(localStorage.getItem('user'))?.full_name;
+    const userId = JSON.parse(localStorage.getItem('user'))?.id;
     const isActive = applyDate < currentDate ? 1 : 0;
     const aprrovePost = await axios.put(`${BACK_END_PORT}/job-post/update-job-post`, {
       id: id,
       state: 2,
       is_active: isActive,
+    });
+    const log = await axios.post(`${BACK_END_PORT}/user-log/create-user-log`, {
+      user_account_id: userId,
+      description: `Quản trị viên ${fullName} đã duyệt bài đăng: ${fakeData.jobName} -id: ${id}`,
     });
 
     if (aprrovePost.data.statusCode == 200) {

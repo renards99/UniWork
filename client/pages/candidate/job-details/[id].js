@@ -90,9 +90,77 @@ function JobDetails({ data, BACK_END_PORT }) {
       ],
     },
   ];
-  const locations = ['Hà Giang', 'Tuyên Quang', 'Hà Nội', '...'];
-  const experiences = ['Không Kinh Nghiệm', 'Trên 1 năm', 'Trên 2 năm', '...'];
-  const salaries = ['1-5 triệu', '5-7 triệu', '20 triệu', '...'];
+  const unSortedLocations = [
+    'An Giang',
+    'Kon Tum',
+    'Bà Rịa – Vũng Tàu',
+    'Lai Châu',
+    'Bắc Giang',
+    'Lâm Đồng',
+    'Bắc Kạn',
+    'Lạng Sơn',
+    'Bạc Liêu',
+    'Lào Cai',
+    'Bắc Ninh',
+    'Long An',
+    'Bến Tre',
+    'Nam Định',
+    'Bình Định',
+    'Nghệ An',
+    'Bình Dương',
+    'Ninh Bình',
+    'Bình Phước',
+    'Ninh Thuận',
+    'Bình Thuận',
+    'Phú Thọ',
+    'Cà Mau',
+    'Phú Yên',
+    'Cần Thơ',
+    'Quảng Bình',
+    'Cao Bằng',
+    'Quảng Nam',
+    'Đà Nẵng',
+    'Quảng Ngãi',
+    'Đắk Lắk',
+    'Quảng Ninh',
+    'Đắk Nông',
+    'Quảng Trị',
+    'Điện Biên',
+    'Sóc Trăng',
+    'Đồng Nai',
+    'Sơn La',
+    'Đồng Tháp',
+    'Tây Ninh',
+    'Gia Lai',
+    'Thái Bình',
+    'Hà Giang',
+    'Thái Nguyên',
+    'Hà Nam',
+    'Thanh Hóa',
+    'Hà Nội',
+    'Thừa Thiên Huế',
+    'Hà Tĩnh',
+    'Tiền Giang',
+    'Hải Dương',
+    'TP Hồ Chí Minh',
+    'Hải Phòng',
+    'Trà Vinh',
+    'Hậu Giang',
+    'Tuyên Quang',
+    'Hòa Bình',
+    'Vĩnh Long',
+    'Hưng Yên',
+    'Vĩnh Phúc',
+    'Khánh Hòa',
+    'Yên Bái',
+    'Kiên Giang',
+  ];
+
+  const locations = unSortedLocations.sort((a, b) =>
+    a.localeCompare(b, 'en', { sensitivity: 'base' }),
+  );
+  const experiences = ['Dưới 1 năm', '1 năm', '2 năm', '3 năm', '4 năm', '5 năm', 'Trên 5 năm'];
+  const salaries = ['dưới 5 triệu', '5-7 triệu', '7-15 triệu', '15-30 triệu', 'Trên 30 triệu'];
 
   const HomeContent = (
     <div>
@@ -434,7 +502,10 @@ function JobDetails({ data, BACK_END_PORT }) {
                 </ModalContent>
               </Modal>
               <Text fontSize='14px' fontWeight='500'>
-                Hạn nộp hồ sơ: {format(new Date(data.expired_at), 'dd-MM-yyyy ')}.
+                Hạn nộp hồ sơ:{' '}
+                {data.expired_at && !isNaN(new Date(data.expired_at).valueOf())
+                  ? format(new Date(data.expired_at), 'dd-MM-yyyy')
+                  : 'N/A'}
               </Text>
             </Stack>
             <Stack gap='24px'>
