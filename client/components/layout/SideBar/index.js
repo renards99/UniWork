@@ -3,6 +3,7 @@ import { Flex, Stack, Text, useToast, Box } from '@chakra-ui/react';
 import { CiLogout } from 'react-icons/ci';
 import { AiOutlineSetting } from 'react-icons/ai';
 import { SlHandbag } from 'react-icons/sl';
+import { BsBriefcase, BsExclamationCircle, BsCart } from 'react-icons/bs';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import { HiOutlineUsers } from 'react-icons/hi';
 import { AiOutlinePieChart } from 'react-icons/ai';
@@ -103,7 +104,7 @@ export default function SideBarAdmin(props) {
           />
           <SideItem
             navSize={navSize}
-            icon={SlHandbag}
+            icon={BsBriefcase}
             title='Quản lí tuyển dụng'
             handleSetActiveSideBar={handleSetActiveSideBar}
             active={sideBarActive == 2 ? true : false}
@@ -121,16 +122,7 @@ export default function SideBarAdmin(props) {
           />
           <SideItem
             navSize={navSize}
-            icon={SlHandbag}
-            title='Hộp thư'
-            handleSetActiveSideBar={handleSetActiveSideBar}
-            active={sideBarActive == 4 ? true : false}
-            value={4}
-            href={path.job}
-          />
-          <SideItem
-            navSize={navSize}
-            icon={AiOutlineSetting}
+            icon={BsExclamationCircle}
             handleSetActiveSideBar={handleSetActiveSideBar}
             title='Báo cáo/Hỗ trợ'
             active={sideBarActive == 5 ? true : false}
@@ -140,7 +132,7 @@ export default function SideBarAdmin(props) {
           />
           <SideItem
             navSize={navSize}
-            icon={SlHandbag}
+            icon={BsCart}
             title='Danh sách hóa đơn'
             handleSetActiveSideBar={handleSetActiveSideBar}
             active={sideBarActive == 6 ? true : false}

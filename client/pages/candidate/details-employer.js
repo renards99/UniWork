@@ -79,7 +79,7 @@ function EmployerDetails() {
   const firstItemIndex = lastItemIndex - itemsPerPage;
   const currentData = fakeData.slice(firstItemIndex, lastItemIndex);
   const employerInfo = (
-    <Stack >
+    <Stack>
       <Box>
         <Stack flexShrink='0' gap='0' w='full' h='335px' pos='relative'>
           <Box
@@ -498,7 +498,7 @@ function EmployerDetails() {
   );
 
   return (
-    <Box >
+    <Box>
       <CandidateHeader />
 
       <Stack alignItems='flex-start' gap='24px' p='28px'>

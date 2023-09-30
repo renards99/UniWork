@@ -97,10 +97,10 @@ function PostDetails() {
     ],
     gender: ['nam', 'nữ', 'không yêu cầu'],
     status: [
-      <StatusFrame text='Chưa duyệt' />,
-      <StatusFrame text='Đã duyệt' />,
-      <StatusFrame text='Không duyệt' />,
-      <StatusFrame text='Hết hạn' />,
+      <StatusFrame type='0' text='Chưa duyệt' />,
+      <StatusFrame type='1' text='Đã duyệt' />,
+      <StatusFrame type='2' text='Không duyệt' />,
+      <StatusFrame type='4' text='Hết hạn' />,
     ],
   };
   const itemFilter = { location: ['Hà Nội', 'Hà Giang', 'Kon tum'] };
@@ -630,7 +630,7 @@ function PostDetails() {
     </GridItem>
   );
   return (
-    <div ml='316px'>
+    <Box ml='316px'>
       {/*Header*/}
       <EmployerHeader />
 
@@ -641,7 +641,7 @@ function PostDetails() {
         {/*Right*/}
         {rightContent}
       </Grid>
-    </div>
+    </Box>
   );
 }
 

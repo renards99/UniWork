@@ -62,8 +62,10 @@ function UserProfileStudent() {
           facebook_link: userData.facebook_link,
           subScriptionDate: convertToLocaleDateTime(userData.registration_date),
           dob: convertToLocaleDateTime(userData.dob),
+
           isVerified: userData.is_verified,
           is_banned: userData.is_banned,
+
         });
         handleGetJobByCompany(userData.company_id);
       } else {

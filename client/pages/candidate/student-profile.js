@@ -226,7 +226,7 @@ function StudentProfile() {
           overflow='hidden'
         ></Avatar>
         <Stack bg='white' roundedBottom='12px'>
-          <Flex gap='98px' pl='20px' py='8px' justifyContent='flex-end'>
+          <Flex gap='98px' pl='20px' py='8px' justifyContent='space-between' ml='200px' p='20px'>
             <Stack>
               <Text fontSize='24px' fontWeight='800' lineHeight='32px'>
                 {eProfile.full_name}
@@ -238,7 +238,7 @@ function StudentProfile() {
               )}
             </Stack>
             <label for='image'>
-              <Box cursor='pointer'>
+              <Flex cursor='pointer'>
                 <Input
                   hidden
                   onChange={(e) => changeAvatar(e.target.files[0])}
@@ -247,11 +247,13 @@ function StudentProfile() {
                   id='image'
                 />
                 <Image src='/static/images/icon/Edit.svg' width='30' height='30'></Image>
-              </Box>
+              </Flex>
             </label>
           </Flex>{' '}
           <Stack px='20px' py='28px'>
+
             {!eProfile.cv ? (
+
               <Flex gap='15px'>
                 <Flex
                   w='200px'
@@ -1169,15 +1171,23 @@ function StudentProfile() {
   };
 
   useEffect(() => {
-    const user = localStorage.getItem('user');
-    if (user) {
-      let userData = JSON.parse(user);
-      if (userData) {
-        const { id } = userData;
-        getUserAccount(id);
+
+    if (router.query.id) {
+      getUserAccount(id);
+    } else {
+      const user = localStorage.getItem('user');
+      if (user) {
+        let userData = JSON.parse(user);
+        if (userData) {
+          const { id, role_id } = userData;
+          if (role_id == 3) {
+            getUserAccount(id);
+          }
+        }
       }
     }
-  }, []);
+  }, [router]);
+
 
   return (
     <Box>

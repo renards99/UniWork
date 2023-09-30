@@ -4,6 +4,7 @@ const multer = require('multer');
 
 const upload = multer({ storage: multer.memoryStorage() });
 
+
 router.post('/login', uc.loginAccount);
 router.post('/create-account', uc.createAccount);
 router.post('/refresh-token', uc.requestRefreshToken);
@@ -16,5 +17,6 @@ router.post('/change-password', uc.changePassword);
 router.post('/upload-cv', upload.single('cv_file'), uc.uploadFile);
 router.post('/upload-image', upload.single('image_file'), uc.uploadImage);
 router.post('/send-email', uc.sendEmail);
+
 
 module.exports = router;

@@ -19,7 +19,7 @@ import { CiSearch } from 'react-icons/ci';
 import { IoIosAddCircleOutline } from 'react-icons/io';
 import { TbEditCircle } from 'react-icons/tb';
 import Pagination from '../../components/paging';
-import HeaderAdmins from '../../components/layout/header_admin';
+import EmployerHeader from '../../components/layout/employer/header';
 
 function CandidateList() {
   const itemsPerPage = 12;
@@ -183,7 +183,7 @@ function CandidateList() {
 
   return (
     <Box ml='316px'>
-      <HeaderAdmins title={'Quản lí tuyển dụng'} />
+      <EmployerHeader />
       {ActionUNW}
 
       {TableUNW}

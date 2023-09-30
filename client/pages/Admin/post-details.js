@@ -57,6 +57,7 @@ function PostDetails() {
     });
 
     if (aprrovePost.data.statusCode == 200) {
+
       try {
         const emailRes = await axios.post(`${BACK_END_PORT}/send-email`, {
           to: `${eProfile.email}`, // Replace with the user's email address
@@ -68,6 +69,7 @@ function PostDetails() {
         console.error('Error sending email via API:', error);
       }
       alert(`update post successfully`);
+
       window.location.href = 'http://localhost:3000/admin/job-manager';
     }
   };

@@ -80,23 +80,45 @@ function PostList() {
     }
   };
 
+  const jobItem = !listJobPost ? (
+    listJobPost.map((item) => (
+      <Flex p='16px' gap='20px' onClick={() => handleSelectedJobId(item.id)} cursor={'pointer'}>
+        <Box w='100px' h='100px' bg='#323541'></Box>
+        <Stack justifyContent='space-between' flex='1 0 0' alignSelf='stretch'>
+          <Stack gap='4px'>
+            <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
+              {item.title}
+            </Text>
+            <Text fontSize='14px' fontWeight='400'>
+              {item.company_name}
+            </Text>
+          </Stack>
+          <StatusFrame
+            type={item?.state == '1' ? '0' : '1'}
+            text={item?.state == '1' ? 'Chưa duyệt' : 'Đã duyệt'}
+          />
 
-  const jobItem = listJobPost.map((item) => (
-    <Flex p='16px' gap='20px' onClick={() => handleSelectedJobId(item.id)} cursor={'pointer'}>
-      <Box w='100px' h='100px' bg='#323541'></Box>
-      <Stack justifyContent='space-between' flex='1 0 0' alignSelf='stretch'>
-        <Stack gap='4px'>
-          <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
-            {item.title}
-          </Text>
-          <Text fontSize='14px' fontWeight='400'>
-            {item.company_name}
-          </Text>
         </Stack>
-        <StatusFrame text={item?.state == '1' ? 'Chưa duyệt' : 'Đã duyệt'} />
-      </Stack>
+      </Flex>
+    ))
+  ) : (
+    <Flex justifyContent='space-between' alignItems='center'>
+      <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
+        Bạn hiện chưa có tin tuyển dụng nào
+      </Text>
+      <Flex>
+        <Link href='/employer/post-upload'>
+          <IconButton
+            icon={<IoIosAddCircleOutline style={{ width: '24px', height: '24px' }} />}
+            borderRadius={'50%'}
+            w={'40px'}
+            h={'40px'}
+            backgroundColor={'#e7e7ea'}
+          />
+        </Link>
+      </Flex>
     </Flex>
-  ));
+  );
 
   useEffect(() => {
     getEmployerById();
@@ -114,6 +136,16 @@ function PostList() {
       }
     }
   }, [router]);
+
+  const handleCandidateDetail = async (userId) => {
+    router.push({
+      pathname: '/employer/candidate-details',
+      query: {
+        jobId: jobPostSelected,
+        userId: userId,
+      },
+    });
+  };
 
   return (
     <Stack gap='26px' ml='316px'>
@@ -199,36 +231,39 @@ function PostList() {
           </Stack>
         </GridItem>
         {/*Right*/}
-        {jobPostSelected && (
-          <GridItem>
-            <Stack gap='24px'>
-              <Box px='24px'>
-                <Flex
-                  px='24px'
-                  pb='8px'
-                  pt='16px'
-                  bg='#323541'
-                  p='12px'
-                  fontSize='18px'
-                  roundedTop='12px'
-                  gap='12px'
-                  alignItems='flex-start'
-                >
-                  <Text color='white' fontSize='16px' fontWeight='500' lineHeight='24px'>
-                    Ứng viên tuyển gần đây
-                  </Text>
-                </Flex>
 
-                <Stack
-                  p='24px'
-                  justifyContent='center'
-                  gap='16px'
-                  border='1px'
-                  borderColor='#D7D7D7'
-                  roundedBottom='20px'
-                >
-                  {listJobPostApplication.map((jobApplication, index) => (
+
+        <GridItem>
+          <Stack gap='24px'>
+            <Box px='24px'>
+              <Flex
+                px='24px'
+                pb='8px'
+                pt='16px'
+                bg='#323541'
+                p='12px'
+                fontSize='18px'
+                roundedTop='12px'
+                gap='12px'
+                alignItems='flex-start'
+              >
+                <Text color='white' fontSize='16px' fontWeight='500' lineHeight='24px'>
+                  Ứng viên tuyển gần đây
+                </Text>
+              </Flex>
+
+              <Stack
+                p='24px'
+                justifyContent='center'
+                gap='16px'
+                border='1px'
+                borderColor='#D7D7D7'
+                roundedBottom='20px'
+              >
+                {jobPostSelected ? (
+                  listJobPostApplication.map((jobApplication, index) => (
                     <Flex p='16px' gap='20px' key={index}>
+
                       <Box w='60px' h='60px' rounded='full' bg='#323541'></Box>
                       <Stack
                         justifyContent='space-between'
@@ -242,7 +277,7 @@ function PostList() {
                               {jobApplication.full_name}
                             </Text>
                             <Text fontSize='14px' fontWeight='400'>
-                              Java-Dev
+                              {/* Java-Dev */}
                             </Text>
                           </Stack>
                           <Text fontSize='14px' fontWeight='600'>
@@ -260,12 +295,18 @@ function PostList() {
                         />
                       </Stack>
                     </Flex>
-                  ))}
-                </Stack>
-              </Box>
-            </Stack>
-          </GridItem>
-        )}
+                  ))
+                ) : (
+                  <Flex>
+                    <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
+                      Chưa có ứng viên gần đây
+                    </Text>
+                  </Flex>
+                )}
+              </Stack>
+            </Box>
+          </Stack>
+        </GridItem>
       </Grid>
     </Stack>
   );
