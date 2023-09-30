@@ -1,17 +1,16 @@
 import { useState } from 'react';
-import {
-  BsChevronDown,
-  BsArrowLeftCircle,
-  BsArrowRightCircle,
-} from 'react-icons/bs';
+import { BsChevronDown, BsArrowLeftCircle, BsArrowRightCircle } from 'react-icons/bs';
+
 import Paging from '../../components/paging';
-import { RxDotFilled } from 'react-icons/rx';
+import { FaLocationDot } from 'react-icons/fa6';
 import { Box, Input, Button, Icon, Text, Stack, Grid, Flex } from '@chakra-ui/react';
 import Image from 'next/image';
 import { Select } from '@chakra-ui/react';
 import CandidateHeader from '../../components/layout/candidate/header';
+
 import DropDown from '../../components/layout/candidate/dropDownLocation';
 import { useRouter } from 'next/router';
+
 
 function JobSearching() {
   const router = useRouter()
@@ -368,7 +367,7 @@ function JobSearching() {
   },[])
 
   const HomeContent = (
-    <div >
+    <div>
       <CandidateHeader />
       <Stack px='150px' justifyContent='space-evenly' alignItems='flex-end' bg='#333333' pt='20px'>
         <Flex bg='transparent' gap='0px'>
@@ -401,6 +400,7 @@ function JobSearching() {
               rounded='none'
               roundedRight='xl'
               fontSize='16px'
+              
             >
               <option selected hidden disabled>
                 Địa Điểm

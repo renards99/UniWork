@@ -158,7 +158,69 @@ function PostDetails() {
           </Flex>
         </Stack>
         <Stack gap='12px' alignItems='flex-start'>
-          <DropDownStatus data={menuData.status} />
+          {/*Status*/}
+          {/*
+          <Menu matchWidth>
+            <MenuButton
+              _hover='none'
+              _focus={{ bg: 'none' }}
+              _expanded={{ bg: 'none' }}
+              bg='none'
+              as={Button}
+              gap='20px'
+              py='22px'
+              pl='24px'
+              pr='12px'
+              justifyContent='space-between'
+              alignSelf='stretch'
+              alignItems='center'
+              border='1px solid #666666'
+              rounded='12px'
+              onClick={handleMenuClick}
+              rightIcon={
+                menuIcon ? (
+                  <Box transition='transform 0.3s ease-in-out' fontSize='24px'>
+                    <HiChevronDown />
+                  </Box>
+                ) : (
+                  <Box
+                    transform='rotate(-180deg)'
+                    transition='transform 0.3s ease-in-out'
+                    fontSize='24px'
+                  >
+                    <HiChevronDown />
+                  </Box>
+                )
+              }
+            >
+              <Flex gap='20px'>
+                <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
+                  Trạng thái:
+                </Text>
+                <StatusFrameGreen text='Đã Duyệt' />
+              </Flex>
+            </MenuButton>
+            <MenuList rounded='10px' border='1px solid #323541'>
+              <MenuItem bg='none'>
+                <StatusFrameGrey text='Chưa Duyệt' />
+              </MenuItem>
+            </MenuList>
+          </Menu>
+            */}
+          <Flex
+            gap='20px'
+            p='10px 12px 10px 24px'
+            justifyContent='space-between'
+            alignSelf='stretch'
+            alignItems='center'
+            border='1px solid #666666'
+            rounded='12px'
+          >
+            <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
+              Trạng thái:
+            </Text>
+            <StatusFrame type='2' text='đã cấm' />
+          </Flex>
           <Flex
             gap='20px'
             p='10px 12px 10px 24px'
@@ -829,7 +891,7 @@ function PostDetails() {
     </GridItem>
   );
   return (
-    <div ml='316px'>
+    <Box ml='316px'>
       {/*Header*/}
       <AdminHeader />
 
@@ -840,7 +902,7 @@ function PostDetails() {
         {/*Right*/}
         {rightContent}
       </Grid>
-    </div>
+    </Box>
   );
 }
 

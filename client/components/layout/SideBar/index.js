@@ -124,8 +124,8 @@ export default function SideBarAdmin(props) {
             icon={SlHandbag}
             title='Quản lí dịch vụ'
             handleSetActiveSideBar={handleSetActiveSideBar}
-            active={sideBarActive == 2 ? true : false}
-            value={2}
+            active={sideBarActive == 3 ? true : false}
+            value={3}
             href={path.job}
           />
           <SideItem
@@ -133,8 +133,8 @@ export default function SideBarAdmin(props) {
             icon={SlHandbag}
             title='Hộp thư'
             handleSetActiveSideBar={handleSetActiveSideBar}
-            active={sideBarActive == 2 ? true : false}
-            value={2}
+            active={sideBarActive == 4 ? true : false}
+            value={4}
             href={path.job}
           />
           <SideItem
@@ -142,8 +142,8 @@ export default function SideBarAdmin(props) {
             icon={AiOutlineSetting}
             handleSetActiveSideBar={handleSetActiveSideBar}
             title='Báo cáo/Hỗ trợ'
-            active={sideBarActive == 3 ? true : false}
-            value={4}
+            active={sideBarActive == 5 ? true : false}
+            value={5}
             sideBarActive={sideBarActive}
             href={path.report}
           />
@@ -152,8 +152,8 @@ export default function SideBarAdmin(props) {
             icon={SlHandbag}
             title='Danh sách hóa đơn'
             handleSetActiveSideBar={handleSetActiveSideBar}
-            active={sideBarActive == 2 ? true : false}
-            value={2}
+            active={sideBarActive == 6 ? true : false}
+            value={6}
             href={path.job}
           />
         </Flex>

@@ -22,6 +22,7 @@ import {
   ModalCloseButton,
   Checkbox,
   Select,
+  Avatar,
 } from '@chakra-ui/react';
 import { HiChevronDown, HiOutlineMail } from 'react-icons/hi';
 import { HiMiniMapPin, HiOutlineMapPin } from 'react-icons/hi2';
@@ -41,10 +42,11 @@ import DropDown from '../../components/layout/employer/dropDown';
 import StatusFrame from '../../components/layout/admin/statusFrame';
 import { IoEllipse } from 'react-icons/io5';
 import PDFViewer from '../../components/pdf';
-
+import { AiFillCamera } from 'react-icons/ai';
 function StudentProfile() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [myCV, setMyCV] = useState();
+  const [avatar, setAvatar] = useState();
   const [isModalEducationOpen, setIsModalEducationOpen] = useState(false);
   const openModalEducation = () => {
     setIsModalEducationOpen(true);
@@ -71,6 +73,7 @@ function StudentProfile() {
     setIsModalShowCVOpen(false);
   };
   const [cvLink, setCvLink] = useState();
+  const [avatarLink, setAvatarLink] = useState();
 
   const closeModalCV = async () => {
     try {
@@ -79,7 +82,22 @@ function StudentProfile() {
       const uploadCV = await axios.post('http://localhost:5000/upload-cv', formData);
       if (uploadCV.data.statusCode === 200) {
         setCvLink(uploadCV.data.data.cv_file);
+        console.log(cvLink);
         setIsModalCVOpen(false);
+      }
+    } catch (e) {
+      setIsModalCVOpen(false);
+    }
+  };
+  const changeAvatar = async (file) => {
+    try {
+      setAvatar(file);
+
+      const formData = new FormData();
+      formData.append('image_file', file);
+      const uploadImage = await axios.post('http://localhost:5000/upload-image', formData);
+      if (uploadImage.data.statusCode === 200) {
+        setAvatarLink(uploadImage.data.data.image_file);
       }
     } catch (e) {}
   };
@@ -133,7 +151,7 @@ function StudentProfile() {
       },
     ],
   };
-  const employerInfo = (
+  const studentInfo = (
     <Stack w='950px' gap='24px'>
       <Stack flexShrink='0' gap='0' pos='relative'>
         <Box
@@ -144,7 +162,26 @@ function StudentProfile() {
           w='full'
           h='231px'
           roundedTop='12px'
-        ></Box>
+        >
+          <Flex
+            w='180px'
+            mx='8px'
+            my='8px'
+            p='8px'
+            bg='#6C6C6C'
+            rounded='12px'
+            justifyContent='space-between'
+            alignItems='center'
+            cursor='pointer'
+          >
+            <Box fontSize='24px'>
+              <AiFillCamera color='white' />
+            </Box>
+            <Text fontSize='16px' fontWeight='700' lineHeight='18px' color='white'>
+              Cập nhật ảnh bìa
+            </Text>
+          </Flex>
+        </Box>
         {/*Avatar here */}
         <Flex
           bg='gray'
@@ -156,6 +193,16 @@ function StudentProfile() {
           left='36px'
           overflow='hidden'
         ></Flex>
+        <Avatar
+          src={avatarLink}
+          rounded='full'
+          w='162px'
+          h='162px'
+          pos='absolute'
+          top='150px'
+          left='36px'
+          overflow='hidden'
+        ></Avatar>
         <Stack bg='white' roundedBottom='12px'>
           <Flex gap='98px' pl='20px' py='8px' justifyContent='flex-end'>
             <Stack>
@@ -170,9 +217,18 @@ function StudentProfile() {
                 </Flex>
               )}
             </Stack>
-            <Box>
-              <Image src='/static/images/icon/Edit.svg' width='30' height='30'></Image>
-            </Box>
+            <label for='image'>
+              <Box cursor='pointer'>
+                <Input
+                  hidden
+                  onChange={(e) => changeAvatar(e.target.files[0])}
+                  type='file'
+                  // display={'none'}
+                  id='image'
+                />
+                <Image src='/static/images/icon/Edit.svg' width='30' height='30'></Image>
+              </Box>
+            </label>
           </Flex>{' '}
           <Stack px='20px' py='28px'>
             {student.cv === '1' ? (
@@ -803,7 +859,6 @@ function StudentProfile() {
                 CV của bạn
               </Text>
             </Flex>
-            {cvLink && <PDFViewer url={cvLink} />}
           </Stack>
         </ModalBody>
       </ModalContent>
@@ -1045,15 +1100,16 @@ function StudentProfile() {
     </Modal>
   );
   return (
-    <Box >
+    <Box>
       <CandidateHeader />
       <Stack gap='24px' p='28px' justifyContent='center' alignItems='center' bg='#F0EAE9'>
-        {employerInfo}
+        {studentInfo}
         {modalEducation}
         {modalExperience}
         {modalCV}
         {modalPersonalInfo}
         {modalShowCV}
+        {cvLink && <PDFViewer url={cvLink} />}
       </Stack>
     </Box>
   );

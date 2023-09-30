@@ -1,24 +1,29 @@
 import { Text, Box, Flex } from '@chakra-ui/react';
 export default function StatusFrame(props) {
   const text = props.text;
+  const type = props.type;
   const tColor =
-    text === 'Chưa duyệt'
-      ? '#818181'
-      : text === 'Đã duyệt'
+    type === '0'
+      ? '#4881FC'
+      : type === '1'
       ? '#048500'
-      : text === 'Không duyệt'
-      ? '#E1000a0'
-      : text === 'Hết hạn'
+      : type === '2'
+      ? '#E10000'
+      : type === '3'
+      ? '#818181'
+      : type === '4'
       ? '#FF7613'
       : '';
   const bgColor =
-    text === 'Chưa duyệt'
-      ? '#1311311A'
-      : text === 'Đã duyệt'
+    type === '0'
+      ? '#E5EBFA'
+      : type === '1'
       ? '#C7F5D9'
-      : text === 'Không duyệt'
-      ? '#FFC0C0'
-      : text === 'Hết hạn'
+      : type === '2'
+      ? '#FFD7D7'
+      : type === '3'
+      ? '#1311311A'
+      : type === '4'
       ? '#FFEACB'
       : '';
   return (

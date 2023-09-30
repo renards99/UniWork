@@ -42,11 +42,11 @@ function UserProfileEmployer() {
     ],
     gender: ['nam', 'nữ', 'không yêu cầu'],
     status: [
-      <StatusFrame text='Đã xác minh' />,
-      <StatusFrame text='Chưa xác minh' />,
-      <StatusFrame text='Đã cấm' />,
-      <StatusFrame text='Không hoạt động' />,
-      <StatusFrame text='Hết hạn' />,
+      <StatusFrame type='0' text='Đã xác minh' />,
+      <StatusFrame type='1' text='Chưa xác minh' />,
+      <StatusFrame type='2' text='Đã cấm' />,
+      <StatusFrame type='3' text='Không hoạt động' />,
+      <StatusFrame type='4' text='Hết hạn' />,
     ],
   };
 
