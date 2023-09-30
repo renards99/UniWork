@@ -176,7 +176,10 @@ function employerDetails() {
     const pattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
     return pattern.test(email);
   };
-
+  const isValidPhoneNumber = (phoneNumber) => {
+    const pattern = /^[0-9]{6,15}$/; // Adjust the range as per your requirements
+    return pattern.test(phoneNumber);
+  };
   const [companyType, setCompanyType] = useState(0);
   const [companyName, setCompanyName] = useState('');
   const [companyEmail, setCompanyEmail] = useState('');
@@ -232,7 +235,10 @@ function employerDetails() {
     } else {
       setEmailError('');
     }
-
+    if (!isValidPhoneNumber(companyPhone)) {
+      alert('Please enter a valid phone number between 6 and 15 digits.');
+      return;
+    }
     if (areAllFieldsFilledCompany()) {
       const companyId = userData.company_id;
 

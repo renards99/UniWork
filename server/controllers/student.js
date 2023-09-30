@@ -7,12 +7,12 @@ const validateHandler = require('../handlers/validate.handler');
 module.exports = {
   async addStudent(req, res) {
     const params = req.body;
-    if (!validateHandler.validateInput(params)) {
-      return responseHandler.badRequest(res, 'Your input is invalid!');
-    }
-    if (!validateHandler.validateId(params.user_account_id)) {
-      return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
-    }
+    // if (!validateHandler.validateInput(params)) {
+    //   return responseHandler.badRequest(res, 'Your input is invalid!');
+    // }
+    // if (!validateHandler.validateId(params.user_account_id)) {
+    //   return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+    // }
     try {
       const createStudent = await Student.create(params);
       if (createStudent) {

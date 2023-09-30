@@ -27,7 +27,7 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
       },
       password: {
-        type: Sequelize.STRING(20),
+        type: Sequelize.STRING(100),
         allowNull: false,
       },
       gender: {
@@ -35,18 +35,17 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: true,
       },
       date_of_birth: {
-        type: Sequelize.STRING(20),
-        allowNull: true,
+        type: Sequelize.STRING,
+        allowNull: false,
       },
       mobile_number: {
-        type: Sequelize.STRING(20),
+        type: Sequelize.STRING(100),
         allowNull: true,
         unique: true,
         validate: {
-          is: /^[0-9]{7,15}$/, // Validate phone number
+          is: /^[0-9]{10,12}$/, // Validate phone number
         },
       },
-
       registration_date: {
         type: Sequelize.DATE,
         allowNull: false,
@@ -61,7 +60,7 @@ module.exports = (sequelize, Sequelize) => {
       },
       user_image: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       refresh_access_token: {
         type: Sequelize.STRING(1000),

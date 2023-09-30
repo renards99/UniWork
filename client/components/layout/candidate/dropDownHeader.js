@@ -24,7 +24,9 @@ export default function DropDownHeader(props) {
   const router = useRouter();
   const data = props.data;
 
+
   // const [selectedMenuItem, setSelectedMenuItem] = useState(data[0]);
+
   const [menuIcon, setMenuIcon] = useState(false);
   async function handleLogOut() {
     const id = JSON.parse(localStorage.getItem('user')).id; // Retrieve the logged-in user's email or mobile number
