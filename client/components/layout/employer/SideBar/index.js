@@ -122,16 +122,6 @@ export default function SideBarAdmin(props) {
             navSize={navSize}
             icon={AiOutlineSetting}
             handleSetActiveSideBar={handleSetActiveSideBar}
-            title='Mua dịch vụ'
-            active={sideBarActive == 3 ? true : false}
-            value={3}
-            sideBarActive={sideBarActive}
-            href={path.job}
-          />
-          <SideItem
-            navSize={navSize}
-            icon={AiOutlineSetting}
-            handleSetActiveSideBar={handleSetActiveSideBar}
             title='Dịch vụ của tôi'
             active={sideBarActive == 4 ? true : false}
             value={4}
