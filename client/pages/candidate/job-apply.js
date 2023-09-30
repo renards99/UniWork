@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   BsChevronCompactLeft,
   BsChevronCompactRight,
@@ -26,35 +26,52 @@ import CandidateHeader from '../../components/layout/candidate/header';
 import backgroundImg from '../../public/static/images/rectangle_33.png';
 import DropDown from '../../components/layout/candidate/dropDown';
 import speakerIcon from '../../public/static/images/icon/speaker.svg';
+import axios from 'axios';
+import { totalPriceItemInCart } from '../../helper';
+const BACK_END_PORT = 'http://localhost:5000';
 
 function JobApply() {
-  const fakeData = [
-    {
-      id: 1,
-      title: 'Nhân viên thiết kế chuyên viên tư vấn thiết kế lĩnh vực kiến trúc',
-      company: 'CÔNG TY ABC CỔ PHẦN VÀ THƯƠNG MẠI GLOBAL ',
-      locations: 'Hà Nội, HCM',
-      remainingDays: 'Còn 30 ngày để ứng tuyển',
-      time: 'Cập nhật 2h trước',
-      salary: '25-30 TRIỆU',
-      tags: [''],
-    },
-    {
-      id: 2,
-      title: 'Nhân viên thiết kế chuyên viên tư vấn thiết kế lĩnh vực kiến trúc',
-      company: 'CÔNG TY ABC CỔ PHẦN VÀ THƯƠNG MẠI GLOBAL ',
-      locations: 'Hà Nội, HCM',
-      remainingDays: 'Còn 30 ngày để ứng tuyển',
-      time: 'Cập nhật 2h trước',
-      salary: '25-30 TRIỆU',
-      tags: [
-        'thu nhập trợ cấp',
-        'được cấp thiết bị làm việc',
-        'Thử việc 100% lương',
-        'thưởng nghỉ lễ , tết',
-      ],
-    },
-  ];
+  const [fakeData, setFakeData] = useState([
+    
+  ]);
+
+  const getListJob = async (id) => {
+    try {
+      const findAllJobPostings = await axios.post(`${BACK_END_PORT}/job-post/get-job-by-user-id`, {
+        id,
+      });
+      if (findAllJobPostings.data.statusCode == 200) {
+        const currentDate = new Date();
+        setFakeData(
+          findAllJobPostings.data.data.list_job.map((job, index) => ({
+            // Replace 'job.expired_at' with the actual field name that contains the expiry date
+            id: job.id,
+            title: job.title,
+            company: job.company_name,
+            locations: job.company_location,
+            remainingDays: 'Còn 30 ngày để ứng tuyển',
+            time: 'Cập nhật 2h trước',
+            salary: totalPriceItemInCart(job.salary.toString(), 1) + ' VND',
+            tags: [''],
+          })),
+        );
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    const data = localStorage.getItem('user');
+    if (data) {
+      const dataUser = JSON.parse(data);
+      if (dataUser) {
+        const { id } = dataUser;
+        getListJob(id);
+      }
+    }
+  }, []);
+
   const locations = ['Hà Giang', 'Tuyên Quang', 'Hà Nội', '...'];
   const experiences = ['Không Kinh Nghiệm', 'Trên 1 năm', 'Trên 2 năm', '...'];
   const salaries = ['1-5 triệu', '5-7 triệu', '20 triệu', '...'];
@@ -62,7 +79,7 @@ function JobApply() {
   //change page
 
   const HomeContent = (
-    <div >
+    <div>
       <CandidateHeader />
 
       <Stack px='80px' py='50px' gap='42px' bg='#F0EAE9'>

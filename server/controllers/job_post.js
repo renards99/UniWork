@@ -296,4 +296,28 @@ module.exports = {
       return responseHandler.error(res);
     }
   },
+
+  async getAllJobPostByCandidateId(req, res) {
+    try {
+      const params = req.body;
+
+      const { id } = params;
+      const getAllPost = await sequelize.query(
+        `select jp.id, jp.title, c.company_name, c.company_location, jp.salary from job_post_application as jpa
+join job_post as jp on jp.id = jpa.job_post_id
+join company as c on c.id = jp.company_id 
+ where jpa.user_account_id = ${id}`,
+        {
+          type: QueryTypes.SELECT,
+        },
+      );
+      if (getAllPost) {
+        return responseHandler.responseWithData(res, 200, { list_job: getAllPost });
+      } else {
+        return responseHandler.badRequest(res, "can't get list user");
+      }
+    } catch (error) {
+      return responseHandler.error(res);
+    }
+  },
 };
