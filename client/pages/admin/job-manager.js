@@ -19,7 +19,7 @@ import { CiSearch } from 'react-icons/ci';
 import { IoIosAddCircleOutline } from 'react-icons/io';
 import { TbEditCircle } from 'react-icons/tb';
 import Pagination from '../../components/paging';
-import HeaderAdmins from '../../components/layout/header_admin';
+import AdminHeader from '../../components/layout/admin/header';
 
 import { useCallback, useEffect, useState } from 'react';
 
@@ -269,7 +269,7 @@ export default function JobManager() {
 
   return (
     <Box ml='316px'>
-      <HeaderAdmins title={'Quản lí tuyển dụng'} />
+      <AdminHeader />
       {ActionUNW}
       {TabUNW}
       {TableUNW}
