@@ -68,8 +68,16 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: true,
       },
       job_description: {
-        type: Sequelize.STRING(10000),
+        type: Sequelize.STRING,
         allowNull: false,
+      },
+      job_requirement: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      job_benefit: {
+        type: Sequelize.STRING,
+        allowNull: true,
       },
       job_location: {
         type: Sequelize.STRING(200),
@@ -81,8 +89,8 @@ module.exports = (sequelize, Sequelize) => {
       },
 
       salary: {
-        type: Sequelize.STRING(100),
-        allowNull: false,
+        type: Sequelize.DOUBLE,
+        defaultValue: 0,
       },
       view: {
         type: Sequelize.INTEGER(50),

@@ -141,7 +141,6 @@ function employerDetails() {
       const getListJobType = await axios.post(`http://localhost:5000/job-type/get-all-job-type`);
       if (getListJobType.data.statusCode === 200) {
         setJobType(getListJobType.data.data.map((item) => item.job_type_name));
-        console.log(getListJobType.data.data);
       } else {
       }
     } catch (error) {}
@@ -151,9 +150,7 @@ function employerDetails() {
   }, []);
   // Define a function to handle the selection change
   const handleGenderChange = (selectedValue) => {
-    console.log('Selected gender:', selectedValue);
     setSelectedGender(selectedValue);
-    console.log(selectedGender);
   };
   const handleJobTypeChange = (selectedValue) => {
     setSelectedJobType(selectedValue);
@@ -179,7 +176,10 @@ function employerDetails() {
     const pattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
     return pattern.test(email);
   };
-
+  const isValidPhoneNumber = (phoneNumber) => {
+    const pattern = /^[0-9]{6,15}$/; // Adjust the range as per your requirements
+    return pattern.test(phoneNumber);
+  };
   const [companyType, setCompanyType] = useState(0);
   const [companyName, setCompanyName] = useState('');
   const [companyEmail, setCompanyEmail] = useState('');
@@ -212,8 +212,6 @@ function employerDetails() {
     setSelectedSize(userData.size);
     setDescription(userData.company_description);
     setCompanyLocation(userData.company_location);
-    setUserImage(userData.user_image);
-    console.log(userData);
   }, [userData]);
 
   const areAllFieldsFilledCompany = () => {
@@ -237,7 +235,10 @@ function employerDetails() {
     } else {
       setEmailError('');
     }
-
+    if (!isValidPhoneNumber(companyPhone)) {
+      alert('Please enter a valid phone number between 6 and 15 digits.');
+      return;
+    }
     if (areAllFieldsFilledCompany()) {
       const companyId = userData.company_id;
 
@@ -258,7 +259,6 @@ function employerDetails() {
         getEmployerById;
 
         const createdCompanyId = createResponse.data.data.id;
-        console.log(createResponse);
 
         await axios.put('http://localhost:5000/employer/update-employer', {
           user_account_id: employerId,

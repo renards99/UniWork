@@ -35,11 +35,8 @@ function ManageAdminActivity() {
       const getAdminLog = await axios.post(`http://localhost:5000/user-log/get-user-log-by-id`, {
         user_account_id: userId,
       });
-      console.log(getAdminLog);
       if (getAdminLog.data.statusCode === 200) {
         setLogList(getAdminLog.data.data);
-        console.log(getAdminLog.data.data);
-        console.log('haha');
       } else {
       }
     } catch (error) {}

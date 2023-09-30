@@ -70,7 +70,7 @@ module.exports = {
       },
       full_name: {
         type: Sequelize.STRING(100),
-        allowNull: false,
+        allowNull: true,
       },
       role_id: {
         type: Sequelize.INTEGER(11),
@@ -101,7 +101,7 @@ module.exports = {
       },
       mobile_number: {
         type: Sequelize.STRING(100),
-        allowNull: false,
+        allowNull: true,
         unique: true,
         validate: {
           is: /^[0-9]{10,12}$/, // Validate phone number
@@ -215,6 +215,10 @@ module.exports = {
       cv: {
         type: Sequelize.STRING(100),
         allowNull: true,
+      },
+      short_des: {
+        type: Sequelize.STRING(1000),
+        allowNull: false,
       },
     });
 
@@ -426,6 +430,14 @@ module.exports = {
         type: Sequelize.STRING(10000),
         allowNull: false,
       },
+      job_requirement: {
+        type: Sequelize.STRING(1000),
+        allowNull: true,
+      },
+      job_benefit: {
+        type: Sequelize.STRING(1000),
+        allowNull: true,
+      },
       job_location: {
         type: Sequelize.STRING(200),
         allowNull: false,
@@ -436,8 +448,8 @@ module.exports = {
       },
 
       salary: {
-        type: Sequelize.STRING(100),
-        allowNull: false,
+        type: Sequelize.DOUBLE,
+        defaultValue: 0,
       },
       view: {
         type: Sequelize.INTEGER(50),

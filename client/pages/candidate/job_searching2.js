@@ -30,9 +30,51 @@ import backgroundImg from '../../public/static/images/rectangle_33.png';
 import DropDown from '../../components/layout/candidate/dropDownLocation';
 import speakerIcon from '../../public/static/images/icon/speaker.svg';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import axios from 'axios';
+import { totalPriceItemInCart } from '../../helper';
+
+const BACK_END_PORT = 'http://localhost:5000';
+
 function JobSearching2() {
+  const [fakeData, setFakeData] = useState([]);
   const router = useRouter();
   const { query, location, experience, salary } = router.query;
+
+  const handleFindJob = async (title, jobLocation, salaries, experience) => {
+    const submitData = {
+      title,
+      job_location: jobLocation,
+      experience,
+      salary: salaries,
+    };
+    try {
+      const findAllJobPostings = await axios.post(
+        `${BACK_END_PORT}/job-post/find-all-job`,
+        submitData,
+      );
+      if (findAllJobPostings.data.statusCode == 200) {
+        setFakeData(
+          findAllJobPostings.data.data.list_user.map((job, index) => ({
+            id: job.id,
+            title: job.title,
+            company: job.company_name,
+            locations: job.job_location,
+            remainingDays: 'Còn 30 ngày để ứng tuyển',
+            time: 'Cập nhật 2h trước',
+            salary: totalPriceItemInCart(job.salary.toString(), 1),
+            tags: [''],
+          })),
+        );
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    handleFindJob(query, location, salary, experience);
+  }, [router]);
 
   const backgroundFooter = '/static/images/footer_background.png';
   const trends = [
@@ -55,33 +97,33 @@ function JobSearching2() {
       tag: 2,
     },
   ];
-  const fakeData = [
-    {
-      id: 1,
-      title: 'Nhân viên thiết kế chuyên viên tư vấn thiết kế lĩnh vực kiến trúc',
-      company: 'CÔNG TY ABC CỔ PHẦN VÀ THƯƠNG MẠI GLOBAL ',
-      locations: 'Hà Nội, HCM',
-      remainingDays: 'Còn 30 ngày để ứng tuyển',
-      time: 'Cập nhật 2h trước',
-      salary: '25-30TRIỆU',
-      tags: [''],
-    },
-    {
-      id: 2,
-      title: 'Nhân viên thiết kế chuyên viên tư vấn thiết kế lĩnh vực kiến trúc',
-      company: 'CÔNG TY ABC CỔ PHẦN VÀ THƯƠNG MẠI GLOBAL ',
-      locations: 'Hà Nội, HCM',
-      remainingDays: 'Còn 30 ngày để ứng tuyển',
-      time: 'Cập nhật 2h trước',
-      salary: '25-30TRIỆU',
-      tags: [
-        'thu nhập trợ cấp',
-        'được cấp thiết bị làm việc',
-        'Thử việc 100% lương',
-        'thưởng nghỉ lễ , tết',
-      ],
-    },
-  ];
+  // const fakeData = [
+  //   {
+  //     id: 1,
+  //     title: 'Nhân viên thiết kế chuyên viên tư vấn thiết kế lĩnh vực kiến trúc',
+  //     company: 'CÔNG TY ABC CỔ PHẦN VÀ THƯƠNG MẠI GLOBAL ',
+  //     locations: 'Hà Nội, HCM',
+  //     remainingDays: 'Còn 30 ngày để ứng tuyển',
+  //     time: 'Cập nhật 2h trước',
+  //     salary: '25-30TRIỆU',
+  //     tags: [''],
+  //   },
+  //   {
+  //     id: 2,
+  //     title: 'Nhân viên thiết kế chuyên viên tư vấn thiết kế lĩnh vực kiến trúc',
+  //     company: 'CÔNG TY ABC CỔ PHẦN VÀ THƯƠNG MẠI GLOBAL ',
+  //     locations: 'Hà Nội, HCM',
+  //     remainingDays: 'Còn 30 ngày để ứng tuyển',
+  //     time: 'Cập nhật 2h trước',
+  //     salary: '25-30TRIỆU',
+  //     tags: [
+  //       'thu nhập trợ cấp',
+  //       'được cấp thiết bị làm việc',
+  //       'Thử việc 100% lương',
+  //       'thưởng nghỉ lễ , tết',
+  //     ],
+  //   },
+  // ];
   const locations = ['Hà Giang', 'Tuyên Quang', 'Hà Nội', '...'];
   const experiences = ['Không Kinh Nghiệm', 'Trên 1 năm', 'Trên 2 năm', '...'];
   const salaries = ['1-5 triệu', '5-7 triệu', '20 triệu', '...'];
@@ -123,6 +165,12 @@ function JobSearching2() {
   //change page
   const changePage = (pageNumber) => setCurrentPage(pageNumber);
   const [value, setValue] = useState('1');
+
+  const handleJobDetail = async (id) => {
+    router.push({
+      pathname: `/candidate/job-details/${id}`,
+    });
+  };
 
   const HomeContent = (
     <div >
@@ -262,7 +310,13 @@ function JobSearching2() {
         <Flex gap='32px'>
           <Stack gap='32px' flex='1 0 0'>
             {fakeData.map((data) => (
-              <Flex rounded='10px' bg='white' justifyContent='space-between'>
+              <Flex
+                cursor={"pointer"}
+                rounded='10px'
+                bg='white'
+                justifyContent='space-between'
+                onClick={() => handleJobDetail(data.id)}
+              >
                 <Flex>
                   <Box>
                     <Image src='/static/images/avatar_icon.png' width='100' height='100'></Image>

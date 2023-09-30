@@ -79,7 +79,7 @@ export default function SideBarAdmin(props) {
       justifyContent='space-between'
       id='bom-side-bar'
       backgroundColor={'#323541'}
-      position='fixed'
+      // position='fixed'
     >
       <Stack>
         <Link href={'/'} style={{ margin: '36px 0 95px' }}>

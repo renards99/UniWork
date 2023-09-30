@@ -22,6 +22,7 @@ import Pagination from '../../components/paging';
 import HeaderAdmins from '../../components/layout/header_admin';
 
 import { useCallback, useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
 import axios from 'axios';
 
@@ -32,7 +33,9 @@ const formatDate = (dateString) => {
   const year = date.getFullYear();
   return `${day}/${month}/${year}`;
 };
+
 export default function JobManager() {
+  const router = useRouter();
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
   const changePage = (pageNumber) => setCurrentPage(pageNumber);
@@ -62,15 +65,12 @@ export default function JobManager() {
         });
         if (getListJob.data.statusCode === 200) {
           setJobPostList(getListJob.data.data);
-          console.log('set thanh cong');
-          console.log(getListJob.data.data);
         } else {
         }
       } catch (error) {}
     },
     [param],
   );
-  console.log(search + 'search');
   useEffect(() => {
     getListJob();
   }, []);
@@ -79,8 +79,8 @@ export default function JobManager() {
 
   const TableContent = slicedjobPostList.map((item, index) => {
     return (
-      <Tr>
-        <Td textAlign={'center'}>{item.main_id}</Td>
+      <Tr onClick={() => router.push(`/admin/post-details?id=${item.id}`)} cursor={'pointer'}>
+        <Td textAlign={'center'}>{item.id}</Td>
         <Td>{item.title}</Td>
         <Td>{item.company_name}</Td>
 
@@ -115,7 +115,7 @@ export default function JobManager() {
                 Chưa duyệt
               </Text>
             </Box>
-          ) : (
+          ) : item.state == 3 ? (
             <Box
               backgroundColor={'#FFC0C0'}
               w='134px'
@@ -127,6 +127,20 @@ export default function JobManager() {
             >
               <Text fontSize={'14px'} fontWeight={'500'} color={'#BC0000'}>
                 Hết hạn
+              </Text>
+            </Box>
+          ) : (
+            <Box
+              backgroundColor={'#FFC0C0'}
+              w='134px'
+              padding='6px 10px'
+              h='28px'
+              borderRadius={'12px'}
+              margin={'0 auto'}
+              textAlign={'center'}
+            >
+              <Text fontSize={'14px'} fontWeight={'500'} color={'#BC0000'}>
+                Từ chối
               </Text>
             </Box>
           )}
@@ -207,6 +221,17 @@ export default function JobManager() {
           }}
         >
           Hết hạn
+        </Tab>
+        <Tab
+          fontSize={'16px'}
+          fontWeight={'600'}
+          color={'#323541'}
+          onClick={() => {
+            changePage(1);
+            handleSearch(search, '4');
+          }}
+        >
+          Từ chối
         </Tab>
       </TabList>
     </Tabs>

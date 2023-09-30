@@ -74,7 +74,6 @@ export default function JobManager() {
   const slicedDataUser = dataUser.slice(startIndex, endIndex);
 
   const TableContent = slicedDataUser.map((item, index) => {
-    console.log(item);
     return (
       <Tr>
         <Td textAlign={'center'}>{item.main_id}</Td>

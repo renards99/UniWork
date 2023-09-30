@@ -80,14 +80,14 @@ export default function AccountManager() {
         cursor={'pointer'}
         onClick={() => {
           item.role_name == 'Nhà tuyển dụng'
-            ? router.push('/admin/user-profile-employer')
-            : item.role_name == 'Ứng viên	'
-            ? router.push('/admin/user-profile-candidate')
+            ? router.push(`/admin/user-profile-employer?id=${item.id}`)
+            : item.role_name == 'Ứng viên'
+            ? router.push(`/admin/user-profile-student?id=${item.id}`)
             : router.push('/admin');
         }}
       >
         <Td textAlign={'center'}>{item.id}</Td>
-        <Td>{item.fullname}</Td>
+        <Td>{item.full_name}</Td>
         <Td>{item.email}</Td>
         <Td>{item.role_name}</Td>
         <Td textAlign={'center'}>

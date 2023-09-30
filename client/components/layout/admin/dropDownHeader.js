@@ -24,9 +24,7 @@ export default function DropDownHeader() {
   const handleMenuClick = () => setMenuIcon(!menuIcon);
 
   async function handleLogOut() {
-    console.log(2)
     const id = JSON.parse(localStorage.getItem('user')).id; // Retrieve the logged-in user's email or mobile number
-    console.log(1)
     try {
       const response = await axios.post('http://localhost:5000/logout', {
         id,
