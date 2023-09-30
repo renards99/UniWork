@@ -36,7 +36,7 @@ const formatDate = (dateString) => {
 
 export default function JobManager() {
   const router = useRouter();
-  const itemsPerPage = 10;
+  const itemsPerPage = 7;
   const [currentPage, setCurrentPage] = useState(1);
   const changePage = (pageNumber) => setCurrentPage(pageNumber);
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -129,7 +129,7 @@ export default function JobManager() {
                 Hết hạn
               </Text>
             </Box>
-          ) : (
+          ) : item.state == 4 ? (
             <Box
               backgroundColor={'#FFC0C0'}
               w='134px'
@@ -141,6 +141,20 @@ export default function JobManager() {
             >
               <Text fontSize={'14px'} fontWeight={'500'} color={'#BC0000'}>
                 Từ chối
+              </Text>
+            </Box>
+          ) : (
+            <Box
+              backgroundColor={'#FFC0C0'}
+              w='134px'
+              padding='6px 10px'
+              h='28px'
+              borderRadius={'12px'}
+              margin={'0 auto'}
+              textAlign={'center'}
+            >
+              <Text fontSize={'14px'} fontWeight={'500'} color={'#BC0000'}>
+                Bài đã ẩn
               </Text>
             </Box>
           )}
@@ -232,6 +246,17 @@ export default function JobManager() {
           }}
         >
           Từ chối
+        </Tab>
+        <Tab
+          fontSize={'16px'}
+          fontWeight={'600'}
+          color={'#323541'}
+          onClick={() => {
+            changePage(1);
+            handleSearch(search, '5');
+          }}
+        >
+          Bài đã ẩn
         </Tab>
       </TabList>
     </Tabs>

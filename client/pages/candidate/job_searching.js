@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BsChevronDown, BsArrowLeftCircle, BsArrowRightCircle } from 'react-icons/bs';
 
 import Paging from '../../components/paging';
@@ -11,9 +11,8 @@ import CandidateHeader from '../../components/layout/candidate/header';
 import DropDown from '../../components/layout/candidate/dropDownLocation';
 import { useRouter } from 'next/router';
 
-
 function JobSearching() {
-  const router = useRouter()
+  const router = useRouter();
   const backgroundFooter = '/static/images/footer_background.png';
   const trends = [
     {
@@ -360,11 +359,9 @@ function JobSearching() {
   //change page
   const changePage = (pageNumber) => setCurrentPage(pageNumber);
 
-  
-
-  useEffect(()=> {
+  useEffect(() => {
     // handleFindJob()
-  },[])
+  }, []);
 
   const HomeContent = (
     <div>
@@ -400,7 +397,6 @@ function JobSearching() {
               rounded='none'
               roundedRight='xl'
               fontSize='16px'
-              
             >
               <option selected hidden disabled>
                 Địa Điểm

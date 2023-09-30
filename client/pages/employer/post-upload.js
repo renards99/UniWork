@@ -114,12 +114,21 @@ function PostUpload() {
     if (!jobLocation.trim()) emptyFields.push('Job Location');
     if (!salary.trim()) emptyFields.push('Salary');
     if (!gender) emptyFields.push('Gender');
+    if (!startDate) emptyFields.push('Start Date');
+    if (!endDate) emptyFields.push('End Date');
 
     if (emptyFields.length > 0) {
       alert(`The following fields are empty: ${emptyFields.join(', ')}`);
       return;
     }
-
+    if (new Date(startDate) >= new Date(endDate)) {
+      alert('End Date must be greater than Start Date');
+      return;
+    }
+    if (isNaN(parseFloat(salary))) {
+      alert('Salary must be a number');
+      return;
+    }
     // Logic to save data goes here
     // console.log('Data saved:', {
     //   title,
@@ -143,7 +152,7 @@ function PostUpload() {
       company_id: companyId,
       hire_number: hireNumber,
       job_location: jobLocation,
-      is_active: 'false',
+      is_active: 0,
       salary: salary,
       view: 0,
       gender: gender,
@@ -233,7 +242,7 @@ function PostUpload() {
                 </Stack>
                 <Stack gap='8px' p='0px'>
                   <Text fontSize='14px' fontWeight='500' lineHeight='24px'>
-                    Mức lương:
+                    Mức lương(VND):
                   </Text>
                   <Input
                     p='24px 20px'
