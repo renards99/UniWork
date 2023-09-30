@@ -102,15 +102,7 @@ export default function SideBarAdmin(props) {
             value={1}
             href={path.revenue}
           />
-          <SideItem
-            navSize={navSize}
-            icon={HiOutlineUsers}
-            title='Quản lí CV'
-            handleSetActiveSideBar={handleSetActiveSideBar}
-            active={sideBarActive == 2 ? true : false}
-            value={2}
-            href={path.account}
-          />
+
           <SideItem
             navSize={navSize}
             icon={BsExclamationCircle}

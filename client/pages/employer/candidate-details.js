@@ -344,6 +344,7 @@ function CandidateDetails() {
             </Stack>
           </Box>
           <Box>
+
             {!status?.cv ? (
               <Grid templateColumns='repeat(2, 1fr)' gap={6}>
                 <GridItem border='1px' borderColor='#D7D7D7' rounded='12px'>
