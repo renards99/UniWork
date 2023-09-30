@@ -18,6 +18,7 @@ import {
   useDisclosure,
   Link,
   Textarea,
+  ExternalLinkIcon,
 } from '@chakra-ui/react';
 import { MdOpenInNew } from 'react-icons/md';
 import { HiOutlineMapPin } from 'react-icons/hi2';
@@ -597,14 +598,16 @@ function JobDetails({ data, BACK_END_PORT }) {
                       </Text>
                     </Flex>
                   </Stack>
-                  <Flex gap='4px' alignItems='center' justifyContent='center' color=''>
-                    <Text fontSize='20px' fontWeight='600' lineHeight='18px' color='#727272'>
-                      Xem trang công ty
-                    </Text>
-                    <Box fontSize='18px'>
-                      <MdOpenInNew />
-                    </Box>
-                  </Flex>
+                  <Link href='' isExternal>
+                    <Flex gap='4px' alignItems='center' justifyContent='center' color='#E76F00'>
+                      <Text fontSize='20px' fontWeight='600'>
+                        Xem trang công ty
+                      </Text>
+                      <Box fontSize='18px'>
+                        <MdOpenInNew />
+                      </Box>
+                    </Flex>
+                  </Link>
                 </Stack>
                 <Stack gap='24px'>
                   <Text fontSize='24px' fontWeight='700'>
