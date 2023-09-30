@@ -9,6 +9,7 @@ import speakerIcon from '../../public/static/images/icon/speaker.svg';
 import axios from 'axios';
 import Pagination from '../../components/paging';
 import { useRouter } from 'next/router';
+import { totalPriceItemInCart } from '../../helper';
 
 const BACK_END_PORT = 'http://localhost:5000';
 
@@ -189,12 +190,12 @@ function LandingPage() {
         <Flex gap='8px'>
           <Flex rounded='12px' bg='#F4F5F5' p=' 10px 20px'>
             <Text fontSize='16px' fontWeight='600' lineHeight='10px' letterSpacing='0.2px'>
-              {trend.salary}
+              {totalPriceItemInCart(trend?.salary.toString(), 1)} VND
             </Text>
           </Flex>
           <Flex rounded='12px' bg='#F4F5F5' p=' 10px 20px'>
             <Text fontSize='16px' fontWeight='600' lineHeight='10px' letterSpacing='0.2px'>
-              {trend.job_location}
+              {trend?.job_location}
             </Text>
           </Flex>
         </Flex>
@@ -202,17 +203,6 @@ function LandingPage() {
     );
   });
   const slicedData = TrendContent.slice(startIndex, endIndex);
-
-  const handleFindJob = async (title, jobLocation, salaries, experience) => {
-    const submitData = {
-      title,
-      job_location: jobLocation,
-      experience,
-      salary: salaries,
-    };
-
-    const findAllJobPostings = await axios.post(`${BACK_END_PORT}//`)
-  }
 
   const HomeContent = (
     <div>
@@ -284,8 +274,8 @@ function LandingPage() {
               <option value='' hidden disabled>
                 Kinh Nghiệm
               </option>
-              {experiences.map((exp) => (
-                <option key={exp} value={exp}>
+              {experiences.map((exp, index) => (
+                <option key={exp} value={index}>
                   {exp}
                 </option>
               ))}
@@ -304,8 +294,8 @@ function LandingPage() {
               <option value='' hidden disabled>
                 Mức Lương
               </option>
-              {salaries.map((sal) => (
-                <option key={sal} value={sal}>
+              {salaries.map((sal, index) => (
+                <option key={sal} value={index}>
                   {sal}
                 </option>
               ))}
@@ -582,7 +572,6 @@ function LandingPage() {
     getListTrendingJob();
   }, []);
 
-  console.log(trends);
   return <div>{HomeContent}</div>;
 }
 

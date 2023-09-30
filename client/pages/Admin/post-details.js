@@ -5,28 +5,12 @@ import {
   Stack,
   Grid,
   GridItem,
-  Collapse,
-  Menu,
-  MenuButton,
-  Button,
-  MenuList,
-  MenuItem,
-  List,
   ListItem,
-  ListIcon,
-  OrderedList,
   UnorderedList,
   Input,
   Textarea,
-  MenuDivider,
 } from '@chakra-ui/react';
-import {
-  HiChevronDown,
-  HiOutlineMail,
-  HiChevronUp,
-  HiOutlineCurrencyDollar,
-  HiBriefcase,
-} from 'react-icons/hi';
+import { HiOutlineMail, HiOutlineCurrencyDollar, HiBriefcase } from 'react-icons/hi';
 import DropDown from '../../components/layout/admin/dropDown';
 import { HiOutlineMapPin, HiOutlineBuildingOffice2 } from 'react-icons/hi2';
 import { GiPlayerTime } from 'react-icons/gi';
@@ -39,51 +23,76 @@ import {
   BsGenderAmbiguous,
 } from 'react-icons/bs';
 import { FiPhone } from 'react-icons/fi';
-import AdminPage from '.';
 import DatePicker from '../../components/layout/admin/datePicker';
 import Image from 'next/image';
 import TempAvatar from '../../public/static/images/temporary_avatar.png';
 import AdminHeader from '../../components/layout/admin/header';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import StatusFrame from '../../components/layout/admin/statusFrame';
 import DropDownStatus from '../../components/layout/admin/dropDownStatus';
+import axios from 'axios';
+import { useRouter } from 'next/router';
+import { totalPriceItemInCart, convertToLocaleDateTime } from '../../helper';
+
+const BACK_END_PORT = 'http://localhost:5000';
+
 function PostDetails() {
+  const router = useRouter();
   const [menuIcon, setMenuIcon] = useState(false);
   const [activeIcon, setActiveIcon] = useState(0);
   const handleActiveIcon = (value) => setActiveIcon(value);
   const handleMenuClick = () => setMenuIcon(!menuIcon);
   const [edit, setEdit] = useState(false);
   const handleEditClick = () => setEdit(!edit);
-  const eProfile = {
-    companyName: 'Data Management Officer',
-    role: 'Nhà tuyển dụng',
-    subScriptionDate: '11/11/2023',
-    taxCode: '0212730426-018',
-    email: 'Hoang123@gmail.com',
-    phone: '091234567',
-    employees: '125-199',
-    link: 'DMO.vn',
-    address: 'Tòa nhà Toyota Thanh Xuân, 315 Trường Chinh, Thanh Xuân, Hà Nội',
-    description:
-      'Công ty Cổ phần Công nghệ eUp (eUp) là một Công ty Công nghệ hàng đầu tại Việt Nam trong lĩnh vực cung cấp Giải pháp Học tập. Tới nay, eUp đã cho ra mắt nhiều ứng dụng học tập được hàng triệu triệu người dùng tại Việt Nam và trên toàn Thế giới yêu thích và sử dụng hằng ngày như ứng dụng Từ điển tiếng Nhật Mazii; Từ vựng và Ngữ pháp HeyJapanese; Từ điển tiếng Trung Hanzii; Đọc báo TODAI; Luyện thi Migii,… và rất nhiều ứng dụng rất thiết thực dành cho các ngôn ngữ khác như tiếng Pháp; Tây Ban Nha;... Với hơn 7 năm trong ngành Công nghệ Giáo dục, eUp luôn nỗ lực không ngừng để thực hiện sứ mệnh giúp hàng triệu triệu người học tiếp cận với hệ thống giải pháp học tập đơn giản, thông minh và tiện ích hơn bao giờ hết.',
+  const [fakeData, setFakeData] = useState({});
+  const [eProfile, setEProfile] = useState({});
+
+  const handleJobPost = async (id) => {
+    try {
+      const getJobDetail = await axios.post(`${BACK_END_PORT}/job-post/get-job-post-by-id`, { id });
+      if (getJobDetail.data.statusCode == 200) {
+        const jobData = getJobDetail.data.data[0];
+        setFakeData({
+          applied: jobData.apply_at,
+          expired: jobData.expired_at,
+          jobName: jobData.title,
+          salary: totalPriceItemInCart(jobData.salary.toString(), 1),
+          experience: jobData.experience + ' năm',
+          hiringNumber: `${jobData.hire_number} người`,
+          role: '??????',
+          workForm: jobData.work_hours ? 'Bán thời gian' : 'Toàn thời gian',
+          gender: jobData.gender == 1 ? 'Nam' : jobData.gender == 2 ? 'Nữ' : 'Không yêu cầu',
+          description: jobData.job_description,
+          requirements: '??????',
+          benefits: '??????',
+          image: jobData.user_image,
+        });
+        setEProfile({
+          companyName: jobData.company_name,
+          role:
+            jobData.role == 1 ? 'Quản trị viên' : jobData.role == 2 ? 'Nhà tuyển dụng' : 'Ứng viên',
+          subScriptionDate: convertToLocaleDateTime(jobData.registration_date),
+          taxCode: jobData.tax_code,
+          email: jobData.email,
+          phone: jobData.mobile_number,
+          employees: jobData.size,
+          link: jobData.company_website_url,
+          address: jobData.company_location,
+          description: jobData.job_description,
+        });
+      }
+    } catch (e) {
+      console.log(e);
+    }
   };
 
-  const fakeData = {
-    jobName: 'IT Comtor (Intern/Fresher)',
-    salary: 'Tới 25 triệu',
-    experience: 'Trên 2 năm',
-    hiringNumber: '10 người',
-    role: 'Nhân viên',
-    workForm: 'Bán thời gian',
-    gender: 'Không yêu cầu',
-    description:
-      ' Là cầu nối giữa khách hàng và team phát triển, tham gia cùng nhóm: phân tích, thực hiện,... các yêu cầu của dự án Biên dịch tài liệu tiếng Nhật cho các dự án phát triển phần mềm Phiên dịch các cuộc họp, truyền tải nội dung giữa team dự án và khách hàng Tham gia quản lý dự án, theo dõi và báo cáo tiến độ, điều hòa công việc giữa team dự án và khách hàng, đảm bảo sự hài hòa giúp dự án tiến hành thuận lợi.',
-    requirements:
-      'Tốt nghiệp đại học chuyên ngành liên quan Tiếng Nhật N1, giao tiếp thành thạo Không yêu cầu kinh nghiệm Làm việc có trách nhiệm, có tinh thần học hỏi cao Có kỹ năng đọc hiểu tài liệu Ý thức và thái độ tốt trong làm việc nhóm (teamwork) cũng như khi làm việc độc lập  Đi làm được fulltime.',
-    benefits:
-      'Thời gian làm việc: từ thứ 2 đến thứ 6 (checkin linh hoạt từ 8:00 - 9:00) Training on job, có mentor kèm cặp Cơ hội trở thành nhân viên chính thức sau thời gian thực tập Chế độ nghỉ Tết (DL, Nguyên đán), các ngày Lễ (30/4, 1/5, 2/9..) theo quy định của Nhà nước Thưởng các ngày lễ tết  Chế độ sinh nhật Chế độ du lịch, teambuilding hàng năm Môi trường trẻ trung thân thiện, career path rõ ràng Miễn phí trà, cafe, bánh kẹo tại pantry Công ty.',
-    location: 'Hà Nội:  Tòa nhà Toyota Thanh Xuân, 315 Trường Chinh, Thanh Xuân, Hà Nội',
-  };
+  useEffect(() => {
+    const { id } = router.query;
+    if (id) {
+      handleJobPost(id);
+    }
+  }, [router]);
+
   const menuData = {
     roles: ['Giám đốc', 'Nhân viên', 'Trợ lý', 'Quản lý', 'Phó phòng', 'Thực tập sinh'],
     workForm: [
@@ -119,7 +128,7 @@ function PostDetails() {
               Ngày khởi tạo:
             </Text>
             <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
-              24/01/2022
+              {convertToLocaleDateTime(fakeData?.applied)}
             </Text>
           </Flex>
           <Flex alignItems='center' gap='12px'>
@@ -127,60 +136,11 @@ function PostDetails() {
               Ngày kết thúc:
             </Text>
             <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
-              24/02/2022
+              {convertToLocaleDateTime(fakeData?.expired)}
             </Text>
           </Flex>
         </Stack>
         <Stack gap='12px' alignItems='flex-start'>
-          {/*Status*/}
-          {/*
-          <Menu matchWidth>
-            <MenuButton
-              _hover='none'
-              _focus={{ bg: 'none' }}
-              _expanded={{ bg: 'none' }}
-              bg='none'
-              as={Button}
-              gap='20px'
-              py='22px'
-              pl='24px'
-              pr='12px'
-              justifyContent='space-between'
-              alignSelf='stretch'
-              alignItems='center'
-              border='1px solid #666666'
-              rounded='12px'
-              onClick={handleMenuClick}
-              rightIcon={
-                menuIcon ? (
-                  <Box transition='transform 0.3s ease-in-out' fontSize='24px'>
-                    <HiChevronDown />
-                  </Box>
-                ) : (
-                  <Box
-                    transform='rotate(-180deg)'
-                    transition='transform 0.3s ease-in-out'
-                    fontSize='24px'
-                  >
-                    <HiChevronDown />
-                  </Box>
-                )
-              }
-            >
-              <Flex gap='20px'>
-                <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
-                  Trạng thái:
-                </Text>
-                <StatusFrameGreen text='Đã Duyệt' />
-              </Flex>
-            </MenuButton>
-            <MenuList rounded='10px' border='1px solid #323541'>
-              <MenuItem bg='none'>
-                <StatusFrameGrey text='Chưa Duyệt' />
-              </MenuItem>
-            </MenuList>
-          </Menu>
-            */}
           <DropDownStatus data={menuData.status} />
           <Flex
             gap='20px'
@@ -192,7 +152,7 @@ function PostDetails() {
             rounded='12px'
           >
             <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
-              Số lần Vi Phạm: 0 Lần
+              Số lần Vi Phạm: ????? Lần
             </Text>
           </Flex>
         </Stack>
@@ -339,23 +299,26 @@ function PostDetails() {
           </Text>
           <Flex pl='0px' gap='10px' alignSelf='stretch' alignItems='flex-start'>
             <UnorderedList fontSize='14px' fontWeight='500' lineHeight='24px' pl='8px'>
-              <ListItem>
-                Là cầu nối giữa khách hàng và team phát triển, tham gia cùng nhóm: phân tích, thực
-                hiện,... các yêu cầu của dự án
-              </ListItem>
-              <ListItem>Biên dịch tài liệu tiếng Nhật cho các dự án phát triển phần mềm</ListItem>
+              {fakeData?.description &&
+                fakeData?.description.split('.').map((item, index) => {
+                  if (index + 1 != fakeData?.description.split('.').length)
+                    return <ListItem>{item}</ListItem>;
+                })}
+
+              {/* <ListItem>Biên dịch tài liệu tiếng Nhật cho các dự án phát triển phần mềm</ListItem>
               <ListItem>
                 Phiên dịch các cuộc họp, truyền tải nội dung giữa team dự án và khách hàng
               </ListItem>
               <ListItem>
                 Tham gia quản lý dự án, theo dõi và báo cáo tiến độ, điều hòa công việc giữa team dự
                 án và khách hàng, đảm bảo sự hài hòa giúp dự án tiến hành thuận lợi.
-              </ListItem>
+              </ListItem> */}
             </UnorderedList>
           </Flex>
         </Stack>
         {/*Candidate requirements*/}
-        <Stack gap='8px' alignItems='flex-start' alignSelf='stretch'>
+
+        {/* <Stack gap='8px' alignItems='flex-start' alignSelf='stretch'>
           <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
             Yêu cầu ứng viên
           </Text>
@@ -372,9 +335,11 @@ function PostDetails() {
               <ListItem>Đi làm được fulltime.</ListItem>
             </UnorderedList>
           </Flex>
-        </Stack>
+        </Stack> */}
+
         {/*Benefits*/}
-        <Stack gap='8px' alignItems='flex-start' alignSelf='stretch'>
+
+        {/* <Stack gap='8px' alignItems='flex-start' alignSelf='stretch'>
           <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
             Quyền lợi
           </Text>
@@ -394,7 +359,8 @@ function PostDetails() {
               <ListItem>Miễn phí trà, cafe, bánh kẹo tại pantry Công ty.</ListItem>
             </UnorderedList>
           </Flex>
-        </Stack>
+        </Stack> */}
+
         {/*Location*/}
         <Stack gap='8px' alignItems='flex-start' alignSelf='stretch'>
           <Text fontSize='16px' fontWeight='500' lineHeight='24px'>
@@ -402,9 +368,7 @@ function PostDetails() {
           </Text>
           <Flex pl='0px' gap='10px' alignSelf='stretch' alignItems='flex-start'>
             <UnorderedList fontSize='14px' fontWeight='500' lineHeight='24px' pl='8px'>
-              <ListItem>
-                Hà Nội: Tòa nhà Toyota Thanh Xuân, 315 Trường Chinh, Thanh Xuân, Hà Nội
-              </ListItem>
+              <ListItem>{eProfile?.address}</ListItem>
             </UnorderedList>
           </Flex>
         </Stack>
@@ -780,7 +744,7 @@ function PostDetails() {
         <Stack gap='40px'>
           <Stack p='12px' justifyContent='center' alignItems='center' fontWeight='semibold'>
             <Box overflow='hidden' rounded='full'>
-              <Image src={TempAvatar} width='160' height='160'></Image>
+              <img src={fakeData?.image} width='160' height='160' style={{borderRadius: "50%", height: "160px"}}/>
             </Box>
             <Text fontSize='24px' fontWeight='800' lineHeight='32px'>
               {eProfile.companyName}

@@ -107,7 +107,6 @@ function CandidateHeader(props) {
   useEffect(() => {
     setUserId(JSON.parse(localStorage.getItem('user'))?.id);
   });
-  console.log(userId);
 
   const [forgetPassword, setForgetPassword] = useState(false);
   const [user, setUser] = useState('');

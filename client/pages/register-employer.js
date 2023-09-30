@@ -49,7 +49,6 @@ function RegisterEmployer() {
       const getListJobType = await axios.post(`http://localhost:5000/job-type/get-all-job-type`);
       if (getListJobType.data.statusCode === 200) {
         setJobType(getListJobType.data.data.map((item) => item.job_type_name));
-        console.log(getListJobType.data.data);
       } else {
       }
     } catch (error) {}
@@ -69,7 +68,6 @@ function RegisterEmployer() {
   };
   const handleJobTypeChange = (selectedValue) => {
     setSelectedJobType(selectedValue);
-    console.log(selectedValue + 'selectedvalue');
   };
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -154,11 +152,9 @@ function RegisterEmployer() {
         license: null,
         other_document: null,
       });
-      console.log(createAccountResponse.status);
       if (createAccountResponse.status === 201 && createEmployer.status === 201) {
         try {
           await loginAccount(email, password, 'http://localhost:5000');
-          console.log('Account created and logged in successfully!');
         } catch (error) {
           console.error('Error logging in after account creation:', error);
         }

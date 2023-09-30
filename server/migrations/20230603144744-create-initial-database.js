@@ -440,8 +440,8 @@ module.exports = {
       },
 
       salary: {
-        type: Sequelize.STRING(100),
-        allowNull: false,
+        type: Sequelize.DOUBLE,
+        defaultValue: 0,
       },
       view: {
         type: Sequelize.INTEGER(50),

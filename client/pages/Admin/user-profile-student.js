@@ -8,8 +8,16 @@ import { FiPhone } from 'react-icons/fi';
 import Image from 'next/image';
 import TempAvatar from '../../public/static/images/temporary_avatar.png';
 import PdfImage from '../../public/static/images/pdf.png';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { convertToLocaleDateTime, totalPriceItemInCart } from '../../helper';
+import axios from 'axios';
+
+const BACK_END_PORT = 'http://localhost:5000';
 
 function UserProfileStudent() {
+  const [eProfile, setEProfile] = useState({});
+  const router = useRouter();
   const profile = {
     university: 'FPT University',
     specialized: 'Kỹ Thuật Phần Mềm',
@@ -24,6 +32,46 @@ function UserProfileStudent() {
     birthDate: '10/10/1999',
     male: true,
   };
+
+  const getUserAccount = async (id) => {
+    try {
+      const getUserAccount = await axios.post(`http://localhost:5000/account-details`, {
+        id,
+      });
+      if (getUserAccount.data.statusCode == 200) {
+        const userData = getUserAccount.data.data.user_details[0];
+        setEProfile({
+          role:
+            userData.role == 1
+              ? 'Quản trị viên'
+              : userData.role == 2
+              ? 'Nhà tuyển dụng'
+              : 'Ứng viên',
+          email: userData.email,
+          phone: userData.mobile_number,
+          full_name: userData.full_name,
+          image: userData.user_image,
+          gender: userData.gender,
+          id: userData.id,
+          gender: userData.gender == 1 ? 'Nam' : userData.gender == 2 ? 'Nữ' : 'Không yêu cầu',
+          job_type: userData.job_type_name,
+          facebook_link: userData.facebook_link,
+          subScriptionDate: convertToLocaleDateTime(userData.registration_date),
+          dob: convertToLocaleDateTime(userData.dob)
+        });
+        handleGetJobByCompany(userData.company_id);
+      } else {
+      }
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    const { id } = router.query;
+    if (id) {
+      getUserAccount(id);
+    }
+  }, [router]);
+
   return (
     <div>
       {/*Header*/}
@@ -35,7 +83,7 @@ function UserProfileStudent() {
         <GridItem colSpan='2' border='1px' borderColor='#D7D7D7'>
           {/*Left */}
           <Grid templateColumns='repeat(2, 1fr)' gap={6} px='16px' py='24px'>
-            <GridItem border='1px' borderColor='#D7D7D7' rounded='12px'>
+            {/* <GridItem border='1px' borderColor='#D7D7D7' rounded='12px'>
               <Stack pt='16px' pb='20px' px='20px' gap='12px'>
                 <Text fontSize='20px' fontWeight='600' lineHeight='28px' letterSpacing='0.2px'>
                   Học vấn
@@ -76,7 +124,7 @@ function UserProfileStudent() {
                   {profile.description}
                 </Text>
               </Stack>
-            </GridItem>
+            </GridItem> */}
             <GridItem colSpan='2'>
               <Flex
                 px='24px'
@@ -152,15 +200,15 @@ function UserProfileStudent() {
                   <Image src={TempAvatar} width='160' height='160'></Image>
                 </Box>
                 <Text fontSize='24px' fontWeight='800' lineHeight='32px'>
-                  Nguyen Van A
+                  {eProfile.full_name}
                 </Text>
                 <Text fontSize='20px' fontWeight='600' lineHeight='28px' letterSpacing='0.2px'>
-                  Ứng Viên
+                  {eProfile.role}
                 </Text>
                 <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
                   Ngày đăng ký:{' '}
                   <Text as='span' fontSize='14px' fontWeight='500' lineHeight='24px'>
-                    11/11/2023
+                    {eProfile.subScriptionDate}
                   </Text>
                 </Text>
               </Stack>
@@ -187,7 +235,7 @@ function UserProfileStudent() {
                     <HiOutlineMail />
                   </Box>
                   <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
-                    Email: {profile.email}
+                    Email: {eProfile.email}
                   </Text>
                 </Flex>
                 <Flex alignItems='center' gap='4'>
@@ -195,7 +243,7 @@ function UserProfileStudent() {
                     <FiPhone />
                   </Box>
                   <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
-                    Điện thoại: {profile.phone}
+                    Điện thoại: {eProfile.mobile_number}
                   </Text>
                 </Flex>
                 <Flex alignItems='center' gap='4'>
@@ -203,13 +251,13 @@ function UserProfileStudent() {
                     <BsCalendar4 />
                   </Box>
                   <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
-                    Ngày sinh: {profile.birthDate}
+                    Ngày sinh: {eProfile.dob}
                   </Text>
                 </Flex>
                 <Flex alignItems='center' gap='4'>
                   <Box fontSize='24px'>{profile.male ? <BsGenderMale /> : <BsGenderFemale />}</Box>
                   <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
-                    Giới tính: {profile.male ? 'Nam' : 'Nữ'}
+                    Giới tính: {eProfile.gender}
                   </Text>
                 </Flex>
               </Stack>

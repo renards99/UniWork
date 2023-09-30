@@ -139,7 +139,6 @@ function employerDetails() {
       const getListJobType = await axios.post(`http://localhost:5000/job-type/get-all-job-type`);
       if (getListJobType.data.statusCode === 200) {
         setJobType(getListJobType.data.data.map((item) => item.job_type_name));
-        console.log(getListJobType.data.data);
       } else {
       }
     } catch (error) {}
@@ -149,9 +148,7 @@ function employerDetails() {
   }, []);
   // Define a function to handle the selection change
   const handleGenderChange = (selectedValue) => {
-    console.log('Selected gender:', selectedValue);
     setSelectedGender(selectedValue);
-    console.log(selectedGender);
   };
   const handleJobTypeChange = (selectedValue) => {
     setSelectedJobType(selectedValue);
@@ -210,7 +207,6 @@ function employerDetails() {
     setSelectedSize(userData.size);
     setDescription(userData.company_description);
     setCompanyLocation(userData.company_location);
-    console.log(userData);
   }, [userData]);
 
   const areAllFieldsFilledCompany = () => {
@@ -255,7 +251,6 @@ function employerDetails() {
         getEmployerById;
 
         const createdCompanyId = createResponse.data.data.id;
-        console.log(createResponse);
 
         await axios.put('http://localhost:5000/employer/update-employer', {
           user_account_id: employerId,

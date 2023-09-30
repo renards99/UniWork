@@ -34,7 +34,6 @@ function ChangePassword() {
         currentPassword,
         newPassword,
       });
-      console.log(response);
       if (response.data.statusCode === 200) {
         alert('Password changed successfully!');
         window.location.href = 'http://localhost:3000/employer';
