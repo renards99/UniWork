@@ -167,8 +167,11 @@ function employerDetails() {
     setEmployerName(userData.full_name);
     setPhoneNumber(userData.mobile_number);
     setSelectedJobType(userData.job_type_id);
+    setUserImage(userData.user_image);
+    setFacebookLink(userData.facebook_link);
   }, [userData]);
 
+  console.log(userData.user_image);
   // phan sua thong tin doanh nghiep
 
   const isValidEmail = (email) => {
@@ -595,7 +598,12 @@ function employerDetails() {
                       transition='0.3s'
                     >
                       <Box flexShrink='0'>
-                        <Image src={PostImage} width='100' height='100'></Image>
+                        <img
+                          src={PostImage}
+                          width='100'
+                          height='100'
+                          style={{ height: '100px', borderRadius: '50%' }}
+                        />
                       </Box>
                       <Stack
                         justifyContent='space-between'
@@ -1196,7 +1204,7 @@ function employerDetails() {
       </Flex>
       <Stack p='24px' justifyContent='center' gap='20px' border='1px solid #818181'>
         <Flex gap='20px' alignItems='center' alignSelf='stretch'>
-          <Image src={userImage} boxSize='100px' rounded='full'></Image>
+          <img src={userImage} style={{ width: '100px', height: '100px', borderRadius: '50%' }} />
           <Flex
             w='132px'
             p='8px 12px'

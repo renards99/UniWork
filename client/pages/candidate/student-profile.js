@@ -1167,15 +1167,21 @@ function StudentProfile() {
   };
 
   useEffect(() => {
-    const user = localStorage.getItem('user');
-    if (user) {
-      let userData = JSON.parse(user);
-      if (userData) {
-        const { id } = userData;
-        getUserAccount(id);
+    if (router.query.id) {
+      getUserAccount(id);
+    } else {
+      const user = localStorage.getItem('user');
+      if (user) {
+        let userData = JSON.parse(user);
+        if (userData) {
+          const { id, role_id } = userData;
+          if (role_id == 3) {
+            getUserAccount(id);
+          }
+        }
       }
     }
-  }, []);
+  }, [router]);
 
   return (
     <Box>

@@ -18,25 +18,31 @@ import {
 
 import { HiChevronDown } from 'react-icons/hi';
 import axios from 'axios';
+import { useRouter } from 'next/router';
+
 export default function DropDownHeader() {
+  const router = useRouter()
   const [menuIcon, setMenuIcon] = useState(false);
 
   const handleMenuClick = () => setMenuIcon(!menuIcon);
 
   async function handleLogOut() {
-    const id = JSON.parse(localStorage.getItem('user')).id; // Retrieve the logged-in user's email or mobile number
-    try {
-      const response = await axios.post('http://localhost:5000/logout', {
-        id,
-      });
-      if (response.data.statusCode == 200) {
-        localStorage.removeItem('user');
-        router.push('/');
-      } else {
-        console.error(`There was an error logging out: ${data.message}`);
+    if (localStorage.getItem('user')) {
+      try {
+        let userData = JSON.parse(localStorage.getItem('user'));
+        const { id } = userData;
+        const response = await axios.post('http://localhost:5000/logout', {
+          id,
+        });
+        if (response.data.statusCode == 200) {
+          localStorage.removeItem('user');
+          router.push('/');
+        } else {
+          console.error(`There was an error logging out: ${data.message}`);
+        }
+      } catch (error) {
+        console.error('Failed to make the logout request:', error);
       }
-    } catch (error) {
-      console.error('Failed to make the logout request:', error);
     }
   }
 
