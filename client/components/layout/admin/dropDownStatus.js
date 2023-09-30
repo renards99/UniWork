@@ -145,7 +145,7 @@ export default function DropDownStatus(props) {
                 onClick={() => handleOpenModal(index, item)}
                 command={
                   <Box p='12px 20px' fontSize='16px' fontWeight='600' lineHeight='24px'>
-                    {index == 2 ? <StatusFrame text='Cấm' /> : item}
+                    {index == 2 ? <StatusFrame type='2' text='Cấm' /> : item}
                   </Box>
                 }
               ></MenuItem>

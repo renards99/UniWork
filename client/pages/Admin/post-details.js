@@ -181,7 +181,20 @@ function PostDetails() {
             </MenuList>
           </Menu>
             */}
-          <DropDownStatus data={menuData.status} />
+          <Flex
+            gap='20px'
+            p='10px 12px 10px 24px'
+            justifyContent='space-between'
+            alignSelf='stretch'
+            alignItems='center'
+            border='1px solid #666666'
+            rounded='12px'
+          >
+            <Text fontSize='16px' fontWeight='600' lineHeight='24px'>
+              Trạng thái:
+            </Text>
+            <StatusFrame type='2' text='đã cấm' />
+          </Flex>
           <Flex
             gap='20px'
             p='10px 12px 10px 24px'
@@ -883,7 +896,7 @@ function PostDetails() {
     </GridItem>
   );
   return (
-    <div ml='316px'>
+    <Box ml='316px'>
       {/*Header*/}
       <AdminHeader />
 
@@ -894,7 +907,7 @@ function PostDetails() {
         {/*Right*/}
         {rightContent}
       </Grid>
-    </div>
+    </Box>
   );
 }
 
