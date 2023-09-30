@@ -53,7 +53,7 @@ function PostDetails() {
     });
 
     if (aprrovePost.data.statusCode == 200) {
-      alert(`update post successfully`);
+      alert(`Đã phê duyệt bài đăng`);
       window.location.href = 'http://localhost:3000/admin/job-manager';
     }
   };

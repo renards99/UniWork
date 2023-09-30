@@ -13,11 +13,21 @@ module.exports = {
       if (!validateHandler.validateInput(params)) {
         return responseHandler.badRequest(res, 'Your input is invalid!');
       }
+      const checkExist = await JopPostApplication.findOne({
+        where: { user_account_id: params.user_account_id, job_post_id: params.job_post_id },
+      });
+      console.log(checkExist);
+      if (checkExist)
+        return responseHandler.responseWithData(
+          res,
+          200,
+          'Sinh viên đã nộp vào công việc này rồi, hãy thử công việc khác',
+        );
       const create_job_post_application = await JopPostApplication.create(params);
       if (create_job_post_application) {
-        return responseHandler.responseWithData(res, 200, 'Create job type successfully!');
+        return responseHandler.responseWithData(res, 200, 'Ứng tuyển thành công');
       } else {
-        return responseHandler.badRequest(res, 'Can not create job type , try again!');
+        return responseHandler.badRequest(res, 'Ứng tuyển thất bại');
       }
     } catch (e) {
       console.log(e);
@@ -49,23 +59,13 @@ module.exports = {
   async updateJobType(req, res) {
     const params = req.body;
     try {
-      const job_type_name = params.job_type_name;
-      const job_type_id = params.id;
-      if (!validateHandler.validateId(job_type_id)) {
-        return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
-      }
-
-      const getJobType = await Job_type.findOne({
-        where: {
-          id: job_type_id,
-        },
-      });
-      if (!getJobType) return responseHandler.badRequest(res, 'Job type does not exist!');
-      const updateJobType = await Job_type.update(
-        { job_type_name },
+      const { user_account_id, job_post_id, state } = params;
+      const updateJobType = await JopPostApplication.update(
+        { state },
         {
           where: {
-            id: job_type_id,
+            user_account_id,
+            job_post_id,
           },
         },
       );
@@ -93,11 +93,27 @@ module.exports = {
           type: QueryTypes.SELECT,
         },
       );
-      console.log(2)
+      console.log(2);
       if (getJobType) return responseHandler.responseWithData(res, 200, getJobType);
       else return responseHandler.badRequest(res, 'Can not get job type!');
     } catch (e) {}
   },
+
+  async getJobApplicationByCandidateId(req, res) {
+    const params = req.body;
+    try {
+      const { user_account_id, job_post_id } = params;
+      const getJobType = await sequelize.query(
+        `SELECT * from job_post_application as jpa where jpa.user_account_id= ${user_account_id} and jpa.job_post_id = ${job_post_id}`,
+        {
+          type: QueryTypes.SELECT,
+        },
+      );
+      if (getJobType) return responseHandler.responseWithData(res, 200, getJobType);
+      else return responseHandler.badRequest(res, 'Can not get job type!');
+    } catch (e) {}
+  },
+
   async getAllJobType(req, res) {
     try {
       const get_all_job_type = await Job_type.findAll();

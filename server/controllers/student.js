@@ -47,16 +47,17 @@ module.exports = {
     const params = req.body;
     const id = params.id;
     if (!validateHandler.validateId(params.id)) {
-      return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+      return responsehandler.badRequest(res, 'Id must be integer ! Try again!');
     }
     try {
-      const student = await Student.update(params, { where: { id } });
+      const student = await Student.update({ cv: params.cv }, { where: { user_account_id: id } });
       if (student) {
         return responsehandler.responseWithData(res, 200, 'Student profile update successfully');
       } else {
         return responsehandler.badRequest(res, 'Can not update student profile');
       }
     } catch (e) {
+      console.error(e);
       return responsehandler.error(res);
     }
   },
@@ -64,13 +65,13 @@ module.exports = {
     const params = req.body;
     const id = params.id;
     if (!validateHandler.validateId(id)) {
-      return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+      return responsehandler.badRequest(res, 'Id must be integer ! Try again!');
     }
 
     try {
-      const student = await Student.findOne({ where: { id } });
+      const student = await Student.findOne({ where: { user_account_id: id } });
       if (student) {
-        return responsehandler.responseWithData(res, 200, Student);
+        return responsehandler.responseWithData(res, 200, student);
       } else {
         return responsehandler.badRequest(res, 'Can not get student profile');
       }
@@ -83,7 +84,7 @@ module.exports = {
     const user_account_id = params.user_account_id;
 
     if (!validateHandler.validateId(user_account_id)) {
-      return responseHandler.badRequest(res, 'Id must be integer ! Try again!');
+      return responsehandler.badRequest(res, 'Id must be integer ! Try again!');
     }
 
     try {

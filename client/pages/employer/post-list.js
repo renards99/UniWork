@@ -80,7 +80,6 @@ function PostList() {
     }
   };
 
-
   const jobItem = listJobPost.map((item) => (
     <Flex p='16px' gap='20px' onClick={() => handleSelectedJobId(item.id)} cursor={'pointer'}>
       <Box w='100px' h='100px' bg='#323541'></Box>
@@ -114,6 +113,16 @@ function PostList() {
       }
     }
   }, [router]);
+
+  const handleCandidateDetail = async (userId) => {
+    router.push({
+      pathname: '/employer/candidate-details',
+      query: {
+        jobId: jobPostSelected,
+        userId: userId,
+      },
+    });
+  };
 
   return (
     <Stack gap='26px' ml='316px'>
@@ -228,7 +237,13 @@ function PostList() {
                   roundedBottom='20px'
                 >
                   {listJobPostApplication.map((jobApplication, index) => (
-                    <Flex p='16px' gap='20px' key={index}>
+                    <Flex
+                      p='16px'
+                      gap='20px'
+                      cursor={'pointer'}
+                      key={index}
+                      onClick={() => handleCandidateDetail(jobApplication.id)}
+                    >
                       <Box w='60px' h='60px' rounded='full' bg='#323541'></Box>
                       <Stack
                         justifyContent='space-between'
@@ -242,7 +257,7 @@ function PostList() {
                               {jobApplication.full_name}
                             </Text>
                             <Text fontSize='14px' fontWeight='400'>
-                              Java-Dev
+                              {/* Java-Dev */}
                             </Text>
                           </Stack>
                           <Text fontSize='14px' fontWeight='600'>

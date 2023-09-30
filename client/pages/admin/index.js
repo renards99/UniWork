@@ -264,7 +264,7 @@ export default function AdminPage(props) {
 }
 
 export async function getServerSideProps() {
-  const BACK_END_PORT = 'http://localhost:5000';
+  const BACK_END_PORT = 'http://localhost:5000'
 
   return { props: { port: BACK_END_PORT } };
 }
