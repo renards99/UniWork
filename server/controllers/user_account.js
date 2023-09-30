@@ -11,6 +11,7 @@ const { getAnalytics } = require('firebase/analytics');
 const { getStorage, ref, getDownloadURL, uploadBytesResumable } = require('firebase/storage');
 const { firebaseConfig } = require('../config/firebase_config');
 const multer = require('multer');
+const nodemailer = require('nodemailer');
 
 const giveCurrentDateTime = () => {
   const today = new Date();
