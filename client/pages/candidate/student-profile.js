@@ -204,10 +204,10 @@ function StudentProfile() {
           overflow='hidden'
         ></Avatar>
         <Stack bg='white' roundedBottom='12px'>
-          <Flex gap='98px' pl='20px' py='8px' justifyContent='flex-end'>
+          <Flex gap='98px' pl='20px' py='8px' justifyContent='space-between' ml='200px' p='20px'>
             <Stack>
               <Text fontSize='24px' fontWeight='800' lineHeight='32px'>
-                CÔNG TY CỔ PHẦN MODERN LIGHT VIỆT NAM
+                ABC
               </Text>
               {student.title === null ? (
                 ''
@@ -218,7 +218,7 @@ function StudentProfile() {
               )}
             </Stack>
             <label for='image'>
-              <Box cursor='pointer'>
+              <Flex cursor='pointer'>
                 <Input
                   hidden
                   onChange={(e) => changeAvatar(e.target.files[0])}
@@ -227,7 +227,7 @@ function StudentProfile() {
                   id='image'
                 />
                 <Image src='/static/images/icon/Edit.svg' width='30' height='30'></Image>
-              </Box>
+              </Flex>
             </label>
           </Flex>{' '}
           <Stack px='20px' py='28px'>

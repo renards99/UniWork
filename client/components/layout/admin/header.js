@@ -40,7 +40,7 @@ function AdminHeader() {
         >
           <LuBellDot />
         </Flex> */}
-        <Notifications />
+
         <DropDownHeader />
       </Flex>
     </Flex>

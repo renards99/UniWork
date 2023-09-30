@@ -87,21 +87,6 @@ export default function DropDownHeader() {
         <MenuItem h='48px' bg='#E8E8EB' border='1px solid #1311311A' roundedTop='12px'>
           <Link href=''>
             <Text p='12px 20px' fontSize='16px' fontWeight='600' lineHeight='24px'>
-              Xem trang cá nhân
-            </Text>
-          </Link>
-        </MenuItem>
-
-        <MenuItem h='48px' bg='#E8E8EB' border='1px solid #1311311A'>
-          <Link href=''>
-            <Text p='12px 20px' fontSize='16px' fontWeight='600' lineHeight='24px'>
-              Đổi mật khẩu
-            </Text>
-          </Link>
-        </MenuItem>
-        <MenuItem h='48px' bg='#E8E8EB' border='1px solid #1311311A'>
-          <Link href=''>
-            <Text p='12px 20px' fontSize='16px' fontWeight='600' lineHeight='24px'>
               Nhật ký hoạt động
             </Text>
           </Link>
