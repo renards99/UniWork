@@ -31,9 +31,7 @@ import { totalPriceItemInCart } from '../../helper';
 const BACK_END_PORT = 'http://localhost:5000';
 
 function JobApply() {
-  const [fakeData, setFakeData] = useState([
-    
-  ]);
+  const [fakeData, setFakeData] = useState([]);
 
   const getListJob = async (id) => {
     try {
@@ -172,6 +170,9 @@ function JobApply() {
                 px='20px'
                 bg='#FF6B00'
                 rounded='12px'
+                onClick={() => {
+                  window.location.href = 'http://localhost:3000/candidate/';
+                }}
               >
                 <Text fontSize='16px' fontWeight='600' color='white'>
                   Tìm việc ngay
